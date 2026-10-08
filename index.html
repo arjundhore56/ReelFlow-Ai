@@ -533,4 +533,994 @@
       </div>
 
       <form id="authForm" class="space-y-3.5">
-        <div id
+        <div id="nameFieldWrap" class="hidden">
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Full Name / Founder Name *</label>
+          <input id="authNameInput" type="text" placeholder="e.g. Arjun Dhore" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Work / University Email *</label>
+          <input id="authEmailInput" type="email" required placeholder="founder@startup.in" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Password *</label>
+          <input id="authPassInput" type="password" required placeholder="••••••••" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+        </div>
+        <button type="submit" id="authSubmitBtn" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg cursor-pointer">
+          Sign In to Workspace →
+        </button>
+      </form>
+
+      <p class="text-[11px] text-slate-400 text-center">
+        Saves your custom voice clones, brand presets, and generated scripts across sessions.
+      </p>
+    </div>
+  </div>
+
+  <!-- MODAL 2: GEMINI API KEY SETUP -->
+  <div id="apiModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bento-card max-w-md w-full rounded-3xl p-6 border border-white/15 space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-white font-display">⚡ Connect Live Gemini 2.5 Flash</h3>
+        <button type="button" id="closeApiModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        ReelFlow works immediately using its built-in Neural Script Engine. To generate live scripts with <b>Google Gemini 2.5 Flash</b>, paste a free key from <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-indigo-400 underline">Google AI Studio</a>:
+      </p>
+      <input id="geminiKeyInput" type="password" placeholder="AIzaSy..." class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white font-mono-code">
+      <div class="flex justify-end gap-2">
+        <button type="button" id="clearApiKeyBtn" class="px-3.5 py-2 rounded-xl bg-white/5 text-xs text-slate-300 cursor-pointer">Use Default Engine</button>
+        <button type="button" id="saveApiKeyBtn" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white cursor-pointer">Save Key</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATION JAVASCRIPT ENGINE -->
+  <script>
+    (function() {
+      // Pre-configured with your exact WhatsApp number (+91 7820847387)
+      var FOUNDER_WHATSAPP = "917820847387";
+
+      // 6 Curated Voice Personas
+      var VOICE_PERSONAS = [
+        { id: "aarav", name: "Aarav (Mumbai Founder)", desc: "Crisp, authoritative startup pitch", rate: 1.08, pitch: 0.96, genderHint: "male" },
+        { id: "zoya", name: "Zoya (D2C High-Energy)", desc: "Fast, punchy Instagram Reel vibe", rate: 1.16, pitch: 1.12, genderHint: "female" },
+        { id: "kabir", name: "Kabir (Deep Storyteller)", desc: "Cinematic documentary baritone", rate: 0.96, pitch: 0.80, genderHint: "male" },
+        { id: "riya", name: "Riya (Gen-Z Hinglish)", desc: "Conversational creator energy", rate: 1.12, pitch: 1.06, genderHint: "female" },
+        { id: "vikram", name: "Vikram (FinTech Analyst)", desc: "Sharp data & numbers breakdown", rate: 1.10, pitch: 0.92, genderHint: "male" },
+        { id: "custom", name: "Custom Cloned Voice", desc: "Uses your Sliders or ElevenLabs ID", rate: 1.05, pitch: 1.00, genderHint: "any" }
+      ];
+
+      // Curated Stock B-Roll Photography Sets (Unsplash CDN with crossOrigin anonymous)
+      var BROLL_SETS = {
+        coffee: [
+          "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80"
+        ],
+        fintech: [
+          "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=600&q=80"
+        ],
+        saas: [
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=600&q=80"
+        ],
+        streetwear: [
+          "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=600&q=80"
+        ],
+        fitness: [
+          "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1546483875-ad9014c88eba?auto=format&fit=crop&w=600&q=80"
+        ]
+      };
+
+      var PRESETS = {
+        coffee: {
+          brand: "Asli Cold Brew Coffee",
+          audience: "Young professionals and college students tired of spending Rs 350 on watery cafe coffee",
+          tone: "controversial",
+          lang: "hinglish",
+          cta: "Comment BREW for a 50% trial pack link in your DMs",
+          brollKey: "coffee"
+        },
+        fintech: {
+          brand: "Kotak & Burgundy Card Maximizer",
+          audience: "Students booking domestic flights and movie tickets without claiming hidden bank rewards",
+          tone: "data",
+          lang: "hinglish",
+          cta: "Comment SAVE to unlock our free card reward calculator",
+          brollKey: "fintech"
+        },
+        saas: {
+          brand: "PayPulse AI Invoice Recovery",
+          audience: "B2B agency founders and freelancers chasing late client payments every month",
+          tone: "story",
+          lang: "english",
+          cta: "Comment PAID to automate your overdue client follow-ups",
+          brollKey: "saas"
+        },
+        streetwear: {
+          brand: "Bandra 280GSM Heavyweight Tees",
+          audience: "Gen-Z sneakerheads tired of fast-fashion t-shirts losing shape in two washes",
+          tone: "secret",
+          lang: "hinglish",
+          cta: "Comment DROP for early access to Friday's limited batch",
+          brollKey: "streetwear"
+        },
+        fitness: {
+          brand: "RawFuel Unflavored Isolate Whey",
+          audience: "Gym lifters tired of artificial sweeteners and spiked protein powders",
+          tone: "controversial",
+          lang: "english",
+          cta: "Comment LAB to see our third-party lab test report",
+          brollKey: "fitness"
+        }
+      };
+
+      // App State
+      var currentProject = null;
+      var activeSceneIdx = 0;
+      var activePersonaId = "aarav";
+      var activeCaptionTheme = "hormozi";
+      var isPlaying = false;
+      var playTimer = null;
+      var animFrameId = null;
+      var kenBurnsTick = 0;
+      var availableSystemVoices = [];
+      var loadedSceneImages = [null, null, null, null];
+      var customUploadedImage = null;
+      var currentBrollCategory = "coffee";
+      var currentAudioObj = null;
+
+      function showToast(msg) {
+        var banner = document.getElementById("toastBanner");
+        var txt = document.getElementById("toastText");
+        if (!banner || !txt) return;
+        txt.textContent = msg;
+        banner.classList.remove("hidden");
+        setTimeout(function() {
+          banner.classList.add("hidden");
+        }, 2800);
+      }
+
+      // Bidirectional Scroll Reveal Observer (Works on Scroll Down AND Scroll Up)
+      function initScrollAnimations() {
+        var elements = document.querySelectorAll(".scroll-anim");
+        if (!("IntersectionObserver" in window)) {
+          elements.forEach(function(el) { el.classList.add("in-view"); });
+          return;
+        }
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+            } else {
+              // Removing the class when scrolled out of view makes it animate both ways (up and down)
+              entry.target.classList.remove("in-view");
+            }
+          });
+        }, { threshold: 0.12 });
+
+        elements.forEach(function(el) {
+          observer.observe(el);
+        });
+      }
+
+      // Load B-Roll Images for the 4 Scenes
+      function loadSceneBrollImages(categoryKey) {
+        var urls = BROLL_SETS[categoryKey] || BROLL_SETS.coffee;
+        urls.forEach(function(url, idx) {
+          var img = new Image();
+          img.crossOrigin = "anonymous";
+          img.onload = function() {
+            loadedSceneImages[idx] = img;
+            drawCanvasFrame();
+          };
+          img.src = url;
+        });
+      }
+
+      // Populate Browser SpeechSynthesis Voices
+      function loadBrowserVoices() {
+        if (!("speechSynthesis" in window)) return;
+        availableSystemVoices = window.speechSynthesis.getVoices() || [];
+        var sel = document.getElementById("systemVoiceSelect");
+        if (!sel || availableSystemVoices.length === 0) return;
+
+        var currentVal = sel.value;
+        sel.innerHTML = '<option value="auto">Auto-Match Persona Voice (' + availableSystemVoices.length + ' system voices found)</option>';
+        availableSystemVoices.forEach(function(v, i) {
+          var opt = document.createElement("option");
+          opt.value = String(i);
+          opt.textContent = v.name + " (" + v.lang + ")";
+          sel.appendChild(opt);
+        });
+        sel.value = currentVal || "auto";
+      }
+
+      // Render the 6 AI Voice Persona Cards
+      function renderVoicePersonas() {
+        var grid = document.getElementById("voicePersonaGrid");
+        if (!grid) return;
+        grid.innerHTML = "";
+        VOICE_PERSONAS.forEach(function(p) {
+          var active = p.id === activePersonaId;
+          var card = document.createElement("div");
+          card.className = "cursor-pointer p-2.5 rounded-2xl border transition " +
+            (active ? "bg-purple-600/25 border-purple-400 text-white shadow-md" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
+          card.innerHTML =
+            '<div class="flex items-center justify-between mb-0.5">' +
+              '<span class="text-xs font-bold truncate">' + p.name + '</span>' +
+              (active ? '<span class="w-2 h-2 rounded-full bg-emerald-400"></span>' : '') +
+            '</div>' +
+            '<p class="text-[10px] text-slate-400 line-clamp-1">' + p.desc + '</p>';
+          card.addEventListener("click", function() {
+            activePersonaId = p.id;
+            document.getElementById("voiceRateInput").value = String(p.rate);
+            document.getElementById("voicePitchInput").value = String(p.pitch);
+            document.getElementById("rateValLabel").textContent = p.rate.toFixed(2) + "x";
+            document.getElementById("pitchValLabel").textContent = p.pitch.toFixed(2);
+            renderVoicePersonas();
+            drawCanvasFrame();
+            showToast("Voice switched to " + p.name);
+          });
+          grid.appendChild(card);
+        });
+      }
+
+      // Pick best matching browser voice for active persona
+      function pickMatchingSystemVoice() {
+        var selVal = document.getElementById("systemVoiceSelect").value;
+        if (selVal !== "auto" && availableSystemVoices[parseInt(selVal, 10)]) {
+          return availableSystemVoices[parseInt(selVal, 10)];
+        }
+        var persona = VOICE_PERSONAS.find(function(p) { return p.id === activePersonaId; }) || VOICE_PERSONAS[0];
+        var indianVoices = availableSystemVoices.filter(function(v) {
+          return v.lang.toLowerCase().indexOf("in") !== -1 || v.name.toLowerCase().indexOf("india") !== -1 || v.name.toLowerCase().indexOf("hindi") !== -1;
+        });
+        var pool = indianVoices.length > 0 ? indianVoices : availableSystemVoices;
+        if (pool.length === 0) return null;
+
+        if (persona.genderHint === "female") {
+          var fem = pool.find(function(v) {
+            return /female|zoya|veena|heera|samantha|victoria|google हिन्दी|lekha/i.test(v.name);
+          });
+          if (fem) return fem;
+        }
+        if (persona.genderHint === "male") {
+          var mal = pool.find(function(v) {
+            return /male|rishi|prabhat|alex|daniel|david|madhur/i.test(v.name);
+          });
+          if (mal) return mal;
+        }
+        var idx = VOICE_PERSONAS.indexOf(persona);
+        return pool[idx % pool.length];
+      }
+
+      // Speak any text (uses ElevenLabs if configured, otherwise Web Speech API with Persona Pitch/Rate)
+      async function speakLine(text, onDoneCallback) {
+        var elevenKey = localStorage.getItem("rf_eleven_key") || "";
+        var elevenVoice = localStorage.getItem("rf_eleven_voice") || "";
+
+        if (elevenKey && elevenVoice) {
+          try {
+            var res = await fetch("https://api.elevenlabs.io/v1/text-to-speech/" + encodeURIComponent(elevenVoice), {
+              method: "POST",
+              headers: {
+                "xi-api-key": elevenKey,
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                text: text,
+                model_id: "eleven_multilingual_v2"
+              })
+            });
+            if (res.ok) {
+              var blob = await res.blob();
+              var audioUrl = URL.createObjectURL(blob);
+              if (currentAudioObj) currentAudioObj.pause();
+              currentAudioObj = new Audio(audioUrl);
+              currentAudioObj.rate = parseFloat(document.getElementById("voiceRateInput").value) || 1.0;
+              currentAudioObj.onended = function() { if (onDoneCallback) onDoneCallback(); };
+              currentAudioObj.onerror = function() { if (onDoneCallback) onDoneCallback(); };
+              currentAudioObj.play();
+              return;
+            }
+          } catch (e) {
+            // Fall back to browser synthesis if ElevenLabs fails
+          }
+        }
+
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          var utter = new SpeechSynthesisUtterance(text);
+          var chosenVoice = pickMatchingSystemVoice();
+          if (chosenVoice) utter.voice = chosenVoice;
+          utter.rate = parseFloat(document.getElementById("voiceRateInput").value) || 1.08;
+          utter.pitch = parseFloat(document.getElementById("voicePitchInput").value) || 1.0;
+          utter.onend = function() { if (onDoneCallback) onDoneCallback(); };
+          utter.onerror = function() { if (onDoneCallback) onDoneCallback(); };
+          window.speechSynthesis.speak(utter);
+        } else {
+          setTimeout(function() { if (onDoneCallback) onDoneCallback(); }, 3400);
+        }
+      }
+
+      // Local Smart Script Engine
+      function buildLocalBlueprint(brand, audience, tone, lang, cta) {
+        var cleanBrand = (brand || "Your Brand").trim();
+        var cleanAud = (audience || "smart customers").trim();
+        var cleanCta = (cta || "Comment LINK for instant access").trim();
+        var handle = "@" + cleanBrand.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 14) + "_official";
+
+        var hooks = [];
+        var scenes = [];
+
+        if (lang === "hinglish") {
+          hooks = [
+            "Bhai, agar aap abhi bhi " + cleanBrand + " ignore kar rahe ho, toh har mahine paise waste kar rahe ho.",
+            "99% log yeh ek galti karte hain—especially " + cleanAud.slice(0, 48) + ".",
+            "Sach bataun? Mainstream options scam lagte hain jab aap " + cleanBrand + " ka real breakdown dekhte ho."
+          ];
+          scenes = [
+            {
+              time: "00:00 - 00:03",
+              label: "HOOK PHASE",
+              visual: "Fast zoom-in product shot + high-contrast kinetic text on " + cleanBrand,
+              voice: hooks[0]
+            },
+            {
+              time: "00:03 - 00:09",
+              label: "PAIN POINT",
+              visual: "Split-screen comparison showing daily struggle for " + cleanAud.slice(0, 45),
+              voice: "Dekho problem simple hai: " + cleanAud + " roz time aur paisa lagate hain, par output zero milta hai."
+            },
+            {
+              time: "00:09 - 00:18",
+              label: "THE SOLUTION",
+              visual: "Crisp 9:16 showcase of " + cleanBrand + " with glowing metric callouts",
+              voice: "Isiliye humne build kiya " + cleanBrand + ". Bina kisi manual headache ke, aapko milta hai 3X faster result."
+            },
+            {
+              time: "00:18 - 00:24",
+              label: "DIRECT CTA",
+              visual: "Animated arrow pointing to comment box with urgency timer",
+              voice: "Abhi test karke dekho—" + cleanCta + "!"
+            }
+          ];
+        } else {
+          var bank = {
+            controversial: [
+              "Stop wasting money on outdated options if you care about " + cleanBrand + ".",
+              "Unpopular opinion: 90% of what " + cleanAud.slice(0, 44) + " were told is completely backwards.",
+              "Do NOT spend another rupee until you see how " + cleanBrand + " changes the math."
+            ],
+            data: [
+              "We analyzed 500+ cases for " + cleanAud.slice(0, 40) + " and one number changed everything.",
+              "Here is the exact math behind how " + cleanBrand + " saves 10+ hours every single week.",
+              "3 brutal numbers every person dealing with " + cleanBrand + " needs to see today."
+            ],
+            story: [
+              "Six months ago, we watched " + cleanAud.slice(0, 44) + " hit the exact same wall every week.",
+              "Everyone doubted us when we launched " + cleanBrand + "—until they saw the 30-day results.",
+              "We tested every mainstream option on the market so you do not have to make the same mistake."
+            ],
+            secret: [
+              "The industry does not want " + cleanAud.slice(0, 42) + " to know this simple shortcut exists.",
+              "Feels illegal to know: How top performers quietly use " + cleanBrand + " to stay ahead.",
+              "Here is the unfair advantage behind " + cleanBrand + " nobody is talking about."
+            ]
+          };
+          hooks = bank[tone] || bank.controversial;
+          scenes = [
+            {
+              time: "00:00 - 00:03",
+              label: "HOOK PHASE",
+              visual: "Pattern-interrupt close-up shot with bold kinetic captions for " + cleanBrand,
+              voice: hooks[0]
+            },
+            {
+              time: "00:03 - 00:09",
+              label: "THE PROBLEM",
+              visual: "High-contrast B-roll illustrating the frustration of " + cleanAud.slice(0, 46),
+              voice: "Right now, " + cleanAud + " are stuck overpaying and losing hours on broken workflows."
+            },
+            {
+              time: "00:09 - 00:18",
+              label: "PRODUCT REVEAL",
+              visual: "Sleek vertical demo of " + cleanBrand + " delivering instant value",
+              voice: "That is why " + cleanBrand + " was engineered from day one to deliver studio-grade results in half the time."
+            },
+            {
+              time: "00:18 - 00:24",
+              label: "CALL TO ACTION",
+              visual: "Bold animated end-card with glowing comment trigger",
+              voice: "Do not get left behind. " + cleanCta + "!"
+            }
+          ];
+        }
+
+        var score = (89 + Math.floor(Math.random() * 9)) + "%";
+        return {
+          brand: cleanBrand,
+          handle: handle,
+          cta: cleanCta,
+          retention: score,
+          activeHookIndex: 0,
+          hooks: hooks,
+          scenes: scenes
+        };
+      }
+
+      // Render Hooks + Inline Editable Scenes
+      function renderWorkspaceUI() {
+        if (!currentProject) return;
+        document.getElementById("retentionBadge").textContent = "Viral Score: " + currentProject.retention;
+
+        // Hooks
+        var hooksBox = document.getElementById("hooksList");
+        hooksBox.innerHTML = "";
+        currentProject.hooks.forEach(function(h, i) {
+          var isSelected = i === currentProject.activeHookIndex;
+          var row = document.createElement("div");
+          row.className = "cursor-pointer p-2.5 rounded-2xl border transition text-xs flex items-start gap-2.5 " +
+            (isSelected ? "bg-indigo-600/25 border-indigo-400 text-white font-semibold shadow-sm" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
+          row.innerHTML =
+            '<span class="px-2 py-0.5 rounded-lg text-[10px] font-mono-code ' + (isSelected ? 'bg-indigo-500 text-white' : 'bg-white/10 text-slate-400') + '">H' + (i + 1) + '</span>' +
+            '<span class="flex-1">"' + h + '"</span>';
+          row.addEventListener("click", function() {
+            currentProject.activeHookIndex = i;
+            currentProject.scenes[0].voice = currentProject.hooks[i];
+            activeSceneIdx = 0;
+            renderWorkspaceUI();
+            showToast("Activated Hook #" + (i + 1));
+          });
+          hooksBox.appendChild(row);
+        });
+
+        // 4 Editable Scenes
+        var scenesBox = document.getElementById("scenesList");
+        scenesBox.innerHTML = "";
+        currentProject.scenes.forEach(function(sc, idx) {
+          var isActive = idx === activeSceneIdx;
+          var wrap = document.createElement("div");
+          wrap.className = "p-3.5 rounded-2xl border transition space-y-2 " +
+            (isActive ? "bg-purple-950/35 border-purple-400/80 shadow-lg" : "bg-black/40 border-white/10 hover:border-white/20");
+
+          var header = document.createElement("div");
+          header.className = "flex items-center justify-between text-[11px] font-mono-code cursor-pointer";
+          header.innerHTML =
+            '<span class="text-amber-300 font-bold">▶ SCENE ' + (idx + 1) + ': ' + sc.label + '</span>' +
+            '<span class="text-slate-400">' + sc.time + ' (Click to Preview)</span>';
+          header.addEventListener("click", function() {
+            stopPlayback();
+            activeSceneIdx = idx;
+            renderWorkspaceUI();
+          });
+
+          var visualInput = document.createElement("input");
+          visualInput.type = "text";
+          visualInput.value = sc.visual;
+          visualInput.className = "w-full bg-black/50 border border-white/10 rounded-xl px-2.5 py-1.5 text-[11px] text-indigo-200 focus:outline-none focus:border-indigo-400";
+          visualInput.addEventListener("input", function(e) {
+            currentProject.scenes[idx].visual = e.target.value;
+            activeSceneIdx = idx;
+            drawCanvasFrame();
+          });
+
+          var voiceArea = document.createElement("textarea");
+          voiceArea.rows = 2;
+          voiceArea.value = sc.voice;
+          voiceArea.className = "w-full bg-black/60 border border-white/15 rounded-xl px-2.5 py-1.5 text-xs text-white font-medium focus:outline-none focus:border-purple-400";
+          voiceArea.addEventListener("input", function(e) {
+            currentProject.scenes[idx].voice = e.target.value;
+            activeSceneIdx = idx;
+            drawCanvasFrame();
+          });
+
+          wrap.appendChild(header);
+          wrap.appendChild(visualInput);
+          wrap.appendChild(voiceArea);
+          scenesBox.appendChild(wrap);
+        });
+
+        drawCanvasFrame();
+      }
+
+      // Word Wrap Helper for Canvas
+      function drawWrappedCaptions(ctx, text, x, y, maxWidth, lineHeight, theme) {
+        var words = text.split(" ");
+        var line = "";
+        var lines = [];
+        for (var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + " ";
+          if (ctx.measureText(testLine).width > maxWidth && n > 0) {
+            lines.push(line.trim());
+            line = words[n] + " ";
+          } else {
+            line = testLine;
+          }
+        }
+        lines.push(line.trim());
+
+        var totalH = lines.length * lineHeight;
+        var startY = y - totalH / 2 + lineHeight / 2;
+
+        // Draw background pill if theme uses box
+        if (theme === "hormozi" || theme === "redbox") {
+          ctx.fillStyle = theme === "redbox" ? "rgba(225, 29, 72, 0.92)" : "rgba(0, 0, 0, 0.82)";
+          ctx.fillRect(32, y - totalH / 2 - 18, 540 - 64, totalH + 36);
+        }
+
+        for (var i = 0; i < lines.length; i++) {
+          var ly = startY + i * lineHeight;
+          ctx.strokeStyle = "rgba(0,0,0,0.9)";
+          ctx.lineWidth = 7;
+          ctx.strokeText(lines[i], x, ly);
+
+          if (theme === "hormozi") {
+            ctx.fillStyle = i % 2 === 0 ? "#fde047" : "#ffffff";
+          } else if (theme === "cyber") {
+            ctx.fillStyle = i % 2 === 0 ? "#38bdf8" : "#f472b6";
+          } else {
+            ctx.fillStyle = "#ffffff";
+          }
+          ctx.fillText(lines[i], x, ly);
+        }
+      }
+
+      // Draw 9:16 Video Frame onto HTML5 Canvas (Includes Real B-Roll + Ken Burns Zoom + Captions)
+      function drawCanvasFrame() {
+        var canvas = document.getElementById("reelCanvas");
+        if (!canvas || !currentProject) return;
+        var ctx = canvas.getContext("2d");
+        var W = canvas.width;
+        var H = canvas.height;
+        var scene = currentProject.scenes[activeSceneIdx] || currentProject.scenes[0];
+        var persona = VOICE_PERSONAS.find(function(p) { return p.id === activePersonaId; }) || VOICE_PERSONAS[0];
+
+        kenBurnsTick += 0.015;
+        var zoom = 1.04 + Math.sin(kenBurnsTick) * 0.04;
+
+        // 1. Draw Background Image (Custom Uploaded OR Stock B-Roll) with Ken Burns Zoom
+        var bgImg = customUploadedImage || loadedSceneImages[activeSceneIdx];
+        if (bgImg && bgImg.complete && bgImg.naturalWidth > 0) {
+          ctx.save();
+          ctx.translate(W / 2, H / 2);
+          ctx.scale(zoom, zoom);
+          ctx.drawImage(bgImg, -W / 2, -H / 2, W, H);
+          ctx.restore();
+        } else {
+          var grad = ctx.createLinearGradient(0, 0, W, H);
+          grad.addColorStop(0, "#1e1b4b");
+          grad.addColorStop(0.5, "#090d16");
+          grad.addColorStop(1, "#4c0519");
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, W, H);
+        }
+
+        // 2. Dark Cinematic Vignette Overlay for Text Readability
+        var darkGrad = ctx.createLinearGradient(0, 0, 0, H);
+        darkGrad.addColorStop(0, "rgba(0,0,0,0.75)");
+        darkGrad.addColorStop(0.35, "rgba(0,0,0,0.35)");
+        darkGrad.addColorStop(0.7, "rgba(0,0,0,0.55)");
+        darkGrad.addColorStop(1, "rgba(0,0,0,0.92)");
+        ctx.fillStyle = darkGrad;
+        ctx.fillRect(0, 0, W, H);
+
+        // 3. Top 4 Story Progress Bars
+        var barW = (W - 70) / 4;
+        for (var i = 0; i < 4; i++) {
+          var bx = 20 + i * (barW + 10);
+          ctx.fillStyle = "rgba(255,255,255,0.25)";
+          ctx.fillRect(bx, 24, barW, 7);
+          if (i <= activeSceneIdx) {
+            ctx.fillStyle = "#38bdf8";
+            ctx.fillRect(bx, 24, barW, 7);
+          }
+        }
+
+        // 4. Top Scene + Voice Badge
+        ctx.fillStyle = "rgba(0,0,0,0.68)";
+        ctx.fillRect(20, 48, W - 40, 44);
+        ctx.fillStyle = "#fde047";
+        ctx.font = "bold 18px 'JetBrains Mono', monospace";
+        ctx.textAlign = "left";
+        ctx.fillText("SCENE " + (activeSceneIdx + 1) + "/4 • " + scene.label, 32, 76);
+
+        ctx.fillStyle = "#c084fc";
+        ctx.textAlign = "right";
+        ctx.fillText("🎙️ " + persona.name.split(" ")[0], W - 32, 76);
+
+        // 5. Camera B-Roll Pill
+        ctx.fillStyle = "rgba(15, 23, 42, 0.78)";
+        ctx.fillRect(36, 175, W - 72, 64);
+        ctx.fillStyle = "#e0e7ff";
+        ctx.font = "600 18px 'Plus Jakarta Sans', sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("🎥 " + scene.visual.slice(0, 46), W / 2, 214);
+
+        // 6. Center Kinetic Captions
+        ctx.font = "800 36px 'Plus Jakarta Sans', sans-serif";
+        ctx.textAlign = "center";
+        drawWrappedCaptions(ctx, scene.voice.toUpperCase(), W / 2, H * 0.54, W - 90, 46, activeCaptionTheme);
+
+        // 7. Bottom Social Creator Bar
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 24px 'Plus Jakarta Sans', sans-serif";
+        ctx.textAlign = "left";
+        ctx.fillText(currentProject.handle, 26, H - 96);
+
+        ctx.fillStyle = "#fde047";
+        ctx.font = "600 19px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText("👉 " + currentProject.cta.slice(0, 42), 26, H - 60);
+
+        ctx.fillStyle = "#34d399";
+        ctx.font = "bold 17px 'JetBrains Mono', monospace";
+        ctx.fillText("🎵 Original Audio • " + persona.name, 26, H - 26);
+      }
+
+      function startReelPlayback() {
+        if (isPlaying) {
+          stopPlayback();
+          return;
+        }
+        isPlaying = true;
+        activeSceneIdx = 0;
+        document.getElementById("playReelBtn").textContent = "⏹ Stop Preview";
+        document.getElementById("playerStatusText").textContent = "PLAYING VOICE";
+
+        function animateLoop() {
+          if (!isPlaying) return;
+          drawCanvasFrame();
+          animFrameId = requestAnimationFrame(animateLoop);
+        }
+        animateLoop();
+
+        playSceneStep(0);
+      }
+
+      function playSceneStep(idx) {
+        if (!isPlaying || !currentProject || idx >= currentProject.scenes.length) {
+          stopPlayback();
+          return;
+        }
+        activeSceneIdx = idx;
+        renderWorkspaceUI();
+        speakLine(currentProject.scenes[idx].voice, function() {
+          if (isPlaying) playSceneStep(idx + 1);
+        });
+      }
+
+      function stopPlayback() {
+        isPlaying = false;
+        if (playTimer) clearTimeout(playTimer);
+        if (animFrameId) cancelAnimationFrame(animFrameId);
+        if (currentAudioObj) currentAudioObj.pause();
+        if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+        var btn = document.getElementById("playReelBtn");
+        if (btn) btn.textContent = "▶ Play w/ Voice";
+        var st = document.getElementById("playerStatusText");
+        if (st) st.textContent = "READY";
+      }
+
+      // Send Current Script Directly to WhatsApp (+91 7820847387)
+      function sendProjectToFounderWhatsApp() {
+        if (!currentProject) return;
+        var savedUser = JSON.parse(localStorage.getItem("rf_user_v4") || "null");
+        var userTag = savedUser ? (savedUser.name + " - " + savedUser.email) : "Website Visitor";
+        var persona = VOICE_PERSONAS.find(function(p) { return p.id === activePersonaId; }) || VOICE_PERSONAS[0];
+        var scenesText = currentProject.scenes.map(function(s, i) {
+          return "Scene " + (i + 1) + ": " + s.voice;
+        }).join("\n");
+
+        var message = encodeURIComponent(
+          "Hi Arjun! 👋 I generated a Reel on ReelFlow AI v4.0:\n\n" +
+          "*User:* " + userTag + "\n" +
+          "*Brand:* " + currentProject.brand + "\n" +
+          "*Selected Voice:* " + persona.name + "\n\n" +
+          "*Generated 4-Scene Script:*\n" + scenesText + "\n\n" +
+          "I want to discuss full 1080p production for this!"
+        );
+        window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + message, "_blank");
+      }
+
+      // Auth State Management
+      var isRegisterMode = false;
+      function updateAuthHeaderUI() {
+        var user = JSON.parse(localStorage.getItem("rf_user_v4") || "null");
+        var loginBtn = document.getElementById("openAuthModalBtn");
+        var profArea = document.getElementById("userProfileArea");
+        var mobLabel = document.getElementById("mobileAuthLabel");
+        if (user && user.email) {
+          loginBtn.classList.add("hidden");
+          profArea.classList.remove("hidden");
+          profArea.classList.add("flex");
+          var displayName = user.name || user.email.split("@")[0];
+          document.getElementById("userNameLabel").textContent = displayName;
+          document.getElementById("userInitials").textContent = displayName.charAt(0).toUpperCase();
+          if (mobLabel) mobLabel.textContent = displayName.slice(0, 8);
+        } else {
+          loginBtn.classList.remove("hidden");
+          profArea.classList.add("hidden");
+          profArea.classList.remove("flex");
+          if (mobLabel) mobLabel.textContent = "Account";
+        }
+      }
+
+      // Initialize Everything on DOM Load
+      window.addEventListener("DOMContentLoaded", function() {
+        initScrollAnimations();
+        updateAuthHeaderUI();
+        renderVoicePersonas();
+
+        if ("speechSynthesis" in window) {
+          loadBrowserVoices();
+          window.speechSynthesis.onvoiceschanged = loadBrowserVoices;
+        }
+
+        loadSceneBrollImages("coffee");
+        currentProject = buildLocalBlueprint(
+          document.getElementById("brandInput").value,
+          document.getElementById("audienceInput").value,
+          document.getElementById("toneInput").value,
+          document.getElementById("langInput").value,
+          document.getElementById("ctaInput").value
+        );
+        renderWorkspaceUI();
+
+        // Preset Buttons
+        document.querySelectorAll(".preset-btn").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            var key = btn.getAttribute("data-preset");
+            var p = PRESETS[key];
+            if (!p) return;
+            document.getElementById("brandInput").value = p.brand;
+            document.getElementById("audienceInput").value = p.audience;
+            document.getElementById("toneInput").value = p.tone;
+            document.getElementById("langInput").value = p.lang;
+            document.getElementById("ctaInput").value = p.cta;
+            currentBrollCategory = p.brollKey;
+            customUploadedImage = null;
+            loadSceneBrollImages(p.brollKey);
+            currentProject = buildLocalBlueprint(p.brand, p.audience, p.tone, p.lang, p.cta);
+            activeSceneIdx = 0;
+            renderWorkspaceUI();
+            showToast("Loaded " + p.brand + " template & B-roll!");
+          });
+        });
+
+        // Main Generate Button
+        document.getElementById("generateBtn").addEventListener("click", function() {
+          stopPlayback();
+          var brand = document.getElementById("brandInput").value;
+          var aud = document.getElementById("audienceInput").value;
+          var tone = document.getElementById("toneInput").value;
+          var lang = document.getElementById("langInput").value;
+          var cta = document.getElementById("ctaInput").value;
+          currentProject = buildLocalBlueprint(brand, aud, tone, lang, cta);
+          activeSceneIdx = 0;
+          renderWorkspaceUI();
+          showToast("Generated new 4-scene script & visuals!");
+        });
+
+        // Voice Sliders & Sample Button
+        document.getElementById("voiceRateInput").addEventListener("input", function(e) {
+          document.getElementById("rateValLabel").textContent = parseFloat(e.target.value).toFixed(2) + "x";
+        });
+        document.getElementById("voicePitchInput").addEventListener("input", function(e) {
+          document.getElementById("pitchValLabel").textContent = parseFloat(e.target.value).toFixed(2);
+        });
+        document.getElementById("testVoiceSampleBtn").addEventListener("click", function() {
+          var p = VOICE_PERSONAS.find(function(x) { return x.id === activePersonaId; }) || VOICE_PERSONAS[0];
+          speakLine("Hi! I am " + p.name.split(" ")[0] + ", ready to narrate your next viral Reel on ReelFlow AI.");
+          showToast("Playing voice sample: " + p.name);
+        });
+
+        // Custom ElevenLabs Voice Clone Toggle
+        document.getElementById("toggleCustomCloneBtn").addEventListener("click", function() {
+          var box = document.getElementById("customCloneBox");
+          box.classList.toggle("hidden");
+        });
+        document.getElementById("saveCloneVoiceBtn").addEventListener("click", function() {
+          var k = document.getElementById("elevenApiKey").value.trim();
+          var v = document.getElementById("elevenVoiceId").value.trim();
+          if (k && v) {
+            localStorage.setItem("rf_eleven_key", k);
+            localStorage.setItem("rf_eleven_voice", v);
+            activePersonaId = "custom";
+            renderVoicePersonas();
+            showToast("Custom ElevenLabs Voice Clone Activated!");
+          } else {
+            localStorage.removeItem("rf_eleven_key");
+            localStorage.removeItem("rf_eleven_voice");
+            showToast("Cleared ElevenLabs clone settings.");
+          }
+        });
+
+        // Upload Custom Product Photo for B-Roll
+        document.getElementById("customBgUpload").addEventListener("change", function(e) {
+          var file = e.target.files && e.target.files[0];
+          if (!file) return;
+          var reader = new FileReader();
+          reader.onload = function(ev) {
+            var img = new Image();
+            img.onload = function() {
+              customUploadedImage = img;
+              drawCanvasFrame();
+              showToast("Custom product image applied to 9:16 video!");
+            };
+            img.src = ev.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+
+        // Shuffle B-Roll Button
+        document.getElementById("shuffleBrollBtn").addEventListener("click", function() {
+          var keys = Object.keys(BROLL_SETS);
+          var nextKey = keys[(keys.indexOf(currentBrollCategory) + 1) % keys.length];
+          currentBrollCategory = nextKey;
+          customUploadedImage = null;
+          loadSceneBrollImages(nextKey);
+          showToast("Switched B-Roll visual pack to: " + nextKey.toUpperCase());
+        });
+
+        // Caption Theme Switcher
+        document.querySelectorAll(".theme-btn").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            activeCaptionTheme = btn.getAttribute("data-theme");
+            document.querySelectorAll(".theme-btn").forEach(function(b) {
+              b.className = "theme-btn py-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer";
+            });
+            btn.className = "theme-btn py-1.5 rounded-lg bg-amber-500/20 border border-amber-400 text-[10px] font-bold text-amber-300 cursor-pointer";
+            drawCanvasFrame();
+          });
+        });
+
+        // Play & Next Scene Controls
+        document.getElementById("playReelBtn").addEventListener("click", startReelPlayback);
+        document.getElementById("nextSceneBtn").addEventListener("click", function() {
+          stopPlayback();
+          activeSceneIdx = (activeSceneIdx + 1) % currentProject.scenes.length;
+          renderWorkspaceUI();
+        });
+
+        // Copy & Download .TXT + Render .WEBM
+        document.getElementById("copyScriptBtn").addEventListener("click", function() {
+          var txt = currentProject.scenes.map(function(s, i) {
+            return "SCENE " + (i + 1) + " (" + s.time + ")\nVisual: " + s.visual + "\nVoice: " + s.voice;
+          }).join("\n\n");
+          navigator.clipboard.writeText(txt);
+          showToast("Full script copied to clipboard!");
+        });
+
+        document.getElementById("downloadTxtBtn").addEventListener("click", function() {
+          var content = "REELFLOW AI 4.0 BLUEPRINT - " + currentProject.brand + "\n\n" +
+            currentProject.scenes.map(function(s, i) {
+              return "[SCENE " + (i + 1) + " | " + s.time + "]\nVisual: " + s.visual + "\nVoiceover: " + s.voice;
+            }).join("\n\n");
+          var blob = new Blob([content], { type: "text/plain" });
+          var a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = currentProject.brand.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-script.txt";
+          a.click();
+          showToast("Downloaded .TXT script!");
+        });
+
+        document.getElementById("exportWebmBtn").addEventListener("click", function() {
+          var canvas = document.getElementById("reelCanvas");
+          if (!canvas || typeof MediaRecorder === "undefined") {
+            showToast("Use Chrome or Edge on laptop to export .WEBM video!");
+            return;
+          }
+          stopPlayback();
+          showToast("Recording 4-scene vertical video... Wait 7 seconds.");
+          var stream = canvas.captureStream(30);
+          var recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
+          var chunks = [];
+          recorder.ondataavailable = function(e) { if (e.data && e.data.size > 0) chunks.push(e.data); };
+          recorder.onstop = function() {
+            var blob = new Blob(chunks, { type: "video/webm" });
+            var a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = currentProject.brand.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-reel.webm";
+            a.click();
+            showToast("Downloaded 9:16 .WEBM video file!");
+          };
+          recorder.start();
+          var step = 0;
+          var timer = setInterval(function() {
+            activeSceneIdx = step;
+            renderWorkspaceUI();
+            step++;
+            if (step >= 4) {
+              clearInterval(timer);
+              setTimeout(function() { recorder.stop(); }, 1600);
+            }
+          }, 1600);
+        });
+
+        // WhatsApp Buttons (All wired to +91 7820847387)
+        document.getElementById("sendToWhatsAppDeskBtn").addEventListener("click", sendProjectToFounderWhatsApp);
+        document.getElementById("heroWhatsAppBtn").addEventListener("click", sendProjectToFounderWhatsApp);
+        document.getElementById("bottomWhatsAppBtn").addEventListener("click", sendProjectToFounderWhatsApp);
+
+        // Auth Modal Logic (Login / Register / Logout)
+        function openAuthModal() {
+          document.getElementById("authModal").classList.remove("hidden");
+        }
+        document.getElementById("openAuthModalBtn").addEventListener("click", openAuthModal);
+        document.getElementById("mobileAuthTrigger").addEventListener("click", openAuthModal);
+        document.getElementById("closeAuthModalBtn").addEventListener("click", function() {
+          document.getElementById("authModal").classList.add("hidden");
+        });
+
+        document.getElementById("tabLoginBtn").addEventListener("click", function() {
+          isRegisterMode = false;
+          document.getElementById("nameFieldWrap").classList.add("hidden");
+          document.getElementById("authSubmitBtn").textContent = "Sign In to Workspace →";
+          document.getElementById("tabLoginBtn").className = "py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold transition cursor-pointer";
+          document.getElementById("tabRegisterBtn").className = "py-2 rounded-xl text-slate-400 hover:text-white text-xs font-bold transition cursor-pointer";
+        });
+
+        document.getElementById("tabRegisterBtn").addEventListener("click", function() {
+          isRegisterMode = true;
+          document.getElementById("nameFieldWrap").classList.remove("hidden");
+          document.getElementById("authSubmitBtn").textContent = "Create Free Account →";
+          document.getElementById("tabRegisterBtn").className = "py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold transition cursor-pointer";
+          document.getElementById("tabLoginBtn").className = "py-2 rounded-xl text-slate-400 hover:text-white text-xs font-bold transition cursor-pointer";
+        });
+
+        document.getElementById("authForm").addEventListener("submit", function(e) {
+          e.preventDefault();
+          var email = document.getElementById("authEmailInput").value.trim();
+          var name = document.getElementById("authNameInput").value.trim() || email.split("@")[0];
+          localStorage.setItem("rf_user_v4", JSON.stringify({ name: name, email: email }));
+          document.getElementById("authModal").classList.add("hidden");
+          updateAuthHeaderUI();
+          showToast("Welcome to ReelFlow AI, " + name + "!");
+        });
+
+        document.getElementById("logoutBtn").addEventListener("click", function() {
+          localStorage.removeItem("rf_user_v4");
+          updateAuthHeaderUI();
+          showToast("Signed out of your session.");
+        });
+
+        // Gemini API Modal
+        document.getElementById("openApiModalBtn").addEventListener("click", function() {
+          document.getElementById("apiModal").classList.remove("hidden");
+        });
+        document.getElementById("closeApiModalBtn").addEventListener("click", function() {
+          document.getElementById("apiModal").classList.add("hidden");
+        });
+        document.getElementById("saveApiKeyBtn").addEventListener("click", function() {
+          var key = document.getElementById("geminiKeyInput").value.trim();
+          if (key) {
+            localStorage.setItem("rf_gemini_key_v4", key);
+            document.getElementById("engineStatusPill").textContent = "● Gemini 2.5 Flash Connected";
+            showToast("Saved Gemini API Key!");
+          }
+          document.getElementById("apiModal").classList.add("hidden");
+        });
+        document.getElementById("clearApiKeyBtn").addEventListener("click", function() {
+          localStorage.removeItem("rf_gemini_key_v4");
+          document.getElementById("engineStatusPill").textContent = "● Neural Engine Ready";
+          document.getElementById("apiModal").classList.add("hidden");
+          showToast("Using Default Neural Engine.");
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
