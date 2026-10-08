@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>ReelFlow AI — Autonomous Short-Form Video & Creator Suite</title>
-  <!-- Custom SVG Brand Favicon (Replaces the default Chrome Earth icon!) -->
+  <!-- Custom SVG Brand Favicon (Replaces the Chrome Earth Icon) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%236366f1'/%3E%3Cstop offset='50%25' stop-color='%23a855f7'/%3E%3Cstop offset='100%25' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2305070f'/%3E%3Crect x='3' y='3' width='58' height='58' rx='14' fill='none' stroke='url(%23g)' stroke-width='4'/%3E%3Cpath d='M22 16 L48 32 L22 48 Z' fill='url(%23g)'/%3E%3Ccircle cx='46' cy='18' r='5' fill='%2338bdf8'/%3E%3C/svg%3E">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -38,42 +38,42 @@
       background-size: 100% 100%, 100% 100%, 100% 100%, 42px 42px, 42px 42px;
     }
 
-    /* Bidirectional Scroll Reveal (Works Scrolling Down AND Up) */
-    .scroll-reveal {
-      opacity: 0;
-      transform: translateY(32px) scale(0.98);
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .scroll-reveal.visible {
+    /* Safe Scroll Animation (Never hides page if JS is still loading!) */
+    .scroll-card {
       opacity: 1;
       transform: translateY(0) scale(1);
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.55s ease;
+    }
+    .scroll-card.scroll-out {
+      opacity: 0.35;
+      transform: translateY(24px) scale(0.98);
     }
 
     /* Next-Gen Glass Surfaces */
     .neo-panel {
-      background: linear-gradient(160deg, rgba(15, 19, 30, 0.88) 0%, rgba(7, 9, 15, 0.94) 100%);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(160deg, rgba(15, 19, 30, 0.9) 0%, rgba(7, 9, 15, 0.95) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
       box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.8);
     }
 
-    /* Timeline Node Styling */
+    /* NLE Timeline Node Styling */
     .timeline-node {
       position: relative;
-      background: linear-gradient(145deg, rgba(18, 23, 38, 0.9) 0%, rgba(10, 13, 22, 0.95) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(145deg, rgba(18, 23, 38, 0.92) 0%, rgba(10, 13, 22, 0.96) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.09);
       transition: all 0.25s ease;
     }
     .timeline-node.active-scene {
       border-color: #818cf8;
-      box-shadow: 0 0 28px -6px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 0 28px -6px rgba(99, 102, 241, 0.45);
     }
 
     /* Tool Card Hover */
     .tool-tile {
       background: #0a0d16;
-      border: 1px solid rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       transition: all 0.22s ease;
     }
     .tool-tile:hover {
@@ -112,7 +112,7 @@
   <!-- TOP NAVIGATION BAR WITH CUSTOM VECTOR BRAND LOGO -->
   <header class="sticky top-0 z-40 border-b border-white/10 bg-[#030408]/85 backdrop-blur-2xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2">
-      <!-- Custom SVG Brand Logo (Replaces the old "R" box) -->
+      <!-- Custom SVG Brand Logo -->
       <a href="#hero" class="flex items-center gap-3 group">
         <div class="relative w-11 h-11 rounded-2xl bg-[#090d1a] border border-indigo-500/40 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition">
           <svg class="w-7 h-7" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -131,7 +131,7 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-extrabold text-lg sm:text-xl tracking-tight font-display text-white">ReelFlow<span class="text-indigo-400">.ai</span></span>
-            <span class="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono-code uppercase bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 rounded-full">v6.0 Studio</span>
+            <span class="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono-code uppercase bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 rounded-full">v6.1 Studio</span>
           </div>
           <p class="text-[10px] text-slate-400 hidden sm:block">Autonomous Short-Form Video & Voice Engine</p>
         </div>
@@ -163,7 +163,7 @@
           <div id="userInitials" class="w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-500 to-pink-500 text-white text-[11px] font-extrabold flex items-center justify-center">A</div>
           <div class="text-left">
             <span id="userNameText" class="block text-xs font-bold text-white max-w-[100px] truncate leading-none">Founder</span>
-            <span class="text-[9px] text-emerald-400 font-mono-code">● Verified Session</span>
+            <span class="text-[9px] text-emerald-400 font-mono-code">● Saved Session</span>
           </div>
           <button type="button" id="logoutBtn" class="text-[10px] text-rose-400 hover:text-rose-300 ml-1.5 font-bold cursor-pointer">Logout</button>
         </div>
@@ -181,7 +181,7 @@
   </div>
 
   <!-- HERO SECTION -->
-  <section id="hero" class="relative z-10 max-w-6xl mx-auto px-4 pt-8 sm:pt-12 pb-8 text-center scroll-reveal">
+  <section id="hero" class="relative z-10 max-w-6xl mx-auto px-4 pt-8 sm:pt-12 pb-8 text-center scroll-card">
     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold mb-4">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
       <span>Smart AI Backgrounds • 6 Voice Clones • IG Reels & YT Shorts Engine</span>
@@ -199,7 +199,7 @@
   <section id="studio" class="relative z-10 max-w-7xl mx-auto px-4 pb-20">
 
     <!-- Quick Industry Presets -->
-    <div class="neo-panel rounded-3xl p-4 mb-6 scroll-reveal">
+    <div class="neo-panel rounded-3xl p-4 mb-6 scroll-card">
       <div class="flex flex-wrap items-center justify-between gap-2">
         <div class="flex items-center gap-2 flex-wrap">
           <span class="text-xs font-bold uppercase tracking-wider text-indigo-400 mr-1">1-Click Presets:</span>
@@ -221,7 +221,7 @@
       <div class="lg:col-span-4 space-y-5">
         
         <!-- 1. Campaign Brief -->
-        <div class="neo-panel rounded-3xl p-5 space-y-3.5 scroll-reveal">
+        <div class="neo-panel rounded-3xl p-5 space-y-3.5 scroll-card">
           <div class="flex items-center justify-between">
             <h2 class="text-sm font-bold uppercase tracking-wider text-indigo-400">1. Brand & Script Engine</h2>
             <span class="text-[10px] text-slate-400 font-mono-code">Step 1/3</span>
@@ -258,7 +258,7 @@
         </div>
 
         <!-- 2. SMART AI BACKGROUND GENERATOR + HD STOCK IMAGES + SHADERS -->
-        <div id="smart-bg-anchor" class="neo-panel rounded-3xl p-5 space-y-3.5 scroll-reveal border border-pink-500/25">
+        <div id="smart-bg-anchor" class="neo-panel rounded-3xl p-5 space-y-3.5 scroll-card border border-pink-500/25">
           <div class="flex items-center justify-between">
             <h2 class="text-sm font-bold uppercase tracking-wider text-pink-400">2. Smart Background Studio</h2>
             <label class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/15 text-[11px] font-bold text-white cursor-pointer border border-white/15">
@@ -279,7 +279,7 @@
             <p class="text-[10px] text-slate-400">Synthesizes a custom 9:16 vertical background from any text prompt.</p>
           </div>
 
-          <!-- Curated HD Photography B-Roll Packs (Restored!) -->
+          <!-- Curated HD Photography B-Roll Packs -->
           <div>
             <label class="block text-[11px] font-semibold text-slate-300 mb-1.5">🖼️ HD Photography B-Roll Packs:</label>
             <div class="grid grid-cols-3 gap-1.5">
@@ -320,7 +320,7 @@
         </div>
 
         <!-- 3. Multi-Voice & Custom Clone Lab -->
-        <div class="neo-panel rounded-3xl p-5 space-y-3 scroll-reveal">
+        <div class="neo-panel rounded-3xl p-5 space-y-3 scroll-card">
           <div class="flex items-center justify-between">
             <h2 class="text-sm font-bold uppercase tracking-wider text-purple-400">3. Voice & Clone Studio</h2>
             <button type="button" id="sampleVoiceBtn" class="px-2.5 py-1 rounded-lg bg-purple-500/20 border border-purple-400/30 text-[11px] font-bold text-purple-200 cursor-pointer">
@@ -352,11 +352,11 @@
 
       <!-- CENTER COLUMN (4 Cols): REDESIGNED NLE TIMELINE STORYBOARD EDITOR -->
       <div class="lg:col-span-4 space-y-5">
-        <div class="neo-panel rounded-3xl p-5 space-y-4 scroll-reveal">
+        <div class="neo-panel rounded-3xl p-5 space-y-4 scroll-card">
           <div class="flex items-center justify-between border-b border-white/10 pb-3">
             <div>
               <h2 class="text-sm font-bold uppercase tracking-wider text-emerald-400">4. NLE Timeline Editor</h2>
-              <p class="text-[11px] text-slate-400">Edit dialogue, test scene audio, or AI-rewrite</p>
+              <p class="text-[11px] text-slate-400">Edit dialogue, test scene audio, or AI-polish</p>
             </div>
             <button type="button" id="copyAllScriptBtn" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 text-xs font-bold text-slate-200 border border-white/10 cursor-pointer">
               📋 Copy Script
@@ -384,7 +384,7 @@
       </div>
 
       <!-- RIGHT COLUMN (4 Cols): 9:16 Video Player + IG/YT Toggle + BIG DOWNLOAD BUTTONS -->
-      <div id="player-column" class="lg:col-span-4 flex flex-col items-center scroll-reveal">
+      <div id="player-column" class="lg:col-span-4 flex flex-col items-center scroll-card">
         <div class="neo-panel rounded-3xl p-5 w-full flex flex-col items-center">
           
           <!-- Platform Interface Mode Switcher -->
@@ -451,7 +451,7 @@
   </section>
 
   <!-- SECTION 2: 12 CREATOR & HARDWARE DIAGNOSTIC UTILITIES (With Auto-Stop Mic & Camera!) -->
-  <section id="utility-suite" class="relative z-10 max-w-6xl mx-auto px-4 pb-20 scroll-reveal">
+  <section id="utility-suite" class="relative z-10 max-w-6xl mx-auto px-4 pb-20 scroll-card">
     <div class="text-center mb-10">
       <span class="text-xs font-bold uppercase tracking-wider text-indigo-400">Creator Hardware & Media Suite</span>
       <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">12 Built-In Production Utilities</h2>
@@ -461,7 +461,7 @@
   </section>
 
   <!-- SECTION 3: 26 AI VIDEO CLIPPER & CONVERTER TOOLS (Opens Interactive Clipper Workspace!) -->
-  <section id="clipper-grid" class="relative z-10 max-w-6xl mx-auto px-4 pb-20 scroll-reveal">
+  <section id="clipper-grid" class="relative z-10 max-w-6xl mx-auto px-4 pb-20 scroll-card">
     <div class="text-center mb-10">
       <span class="text-xs font-bold uppercase tracking-wider text-purple-400">Discover AI Clippers</span>
       <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">26+ Viral Video Clipping & Repurposing Tools</h2>
@@ -471,7 +471,7 @@
   </section>
 
   <!-- SECTION 4: FREE TRIAL + CUSTOM RUPEE PLAN STARTING AT ₹50 + DIRECT BANK UPI GATEWAY -->
-  <section id="pricing" class="relative z-10 max-w-5xl mx-auto px-4 pb-20 scroll-reveal">
+  <section id="pricing" class="relative z-10 max-w-5xl mx-auto px-4 pb-20 scroll-card">
     <div class="text-center mb-10">
       <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-bold uppercase">Student & Startup Friendly Pricing</span>
       <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-3">Start Free or Custom Plan Starting at Just ₹50</h2>
@@ -547,8 +547,8 @@
     </div>
   </section>
 
-  <!-- SECTION 5: RESTORED CONTACT FOUNDER & PRODUCTION CONCIERGE DESK (+91 7820847387) -->
-  <section id="founder-desk" class="relative z-10 max-w-5xl mx-auto px-4 pb-24 scroll-reveal">
+  <!-- SECTION 5: CONTACT FOUNDER & PRODUCTION CONCIERGE DESK (+91 7820847387) -->
+  <section id="founder-desk" class="relative z-10 max-w-5xl mx-auto px-4 pb-24 scroll-card">
     <div class="neo-panel rounded-3xl p-6 sm:p-10 border border-emerald-500/30 flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="space-y-2 text-center md:text-left">
         <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-xs font-bold uppercase">Direct Founder Concierge</span>
@@ -565,7 +565,7 @@
     </div>
   </section>
 
-  <!-- MODAL 1: DEDICATED AI CLIPPER & CONVERTER WORKSPACE (Fixes the "only switching msg" issue!) -->
+  <!-- MODAL 1: DEDICATED AI CLIPPER & CONVERTER WORKSPACE -->
   <div id="clipperWorkspaceModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
     <div class="neo-panel max-w-lg w-full rounded-3xl p-6 border border-indigo-500/40 space-y-4 shadow-2xl">
       <div class="flex items-center justify-between border-b border-white/10 pb-3">
@@ -630,7 +630,7 @@
     </div>
   </div>
 
-  <!-- MODAL 2: DIRECT BANK UPI PAYMENT GATEWAY (Explains & Routes Money Directly to Your Bank!) -->
+  <!-- MODAL 2: DIRECT BANK UPI PAYMENT GATEWAY -->
   <div id="paymentGatewayModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
     <div class="neo-panel max-w-md w-full rounded-3xl overflow-hidden border border-white/20 shadow-2xl max-h-[92vh] overflow-y-auto">
       <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-4 sm:p-5 flex items-center justify-between text-white">
@@ -648,7 +648,7 @@
       </div>
 
       <div class="p-5 space-y-4">
-        <!-- Founder Merchant UPI Setup (So money goes straight into your Kotak / Axis bank account) -->
+        <!-- Founder Merchant UPI Setup -->
         <div class="p-3 rounded-2xl bg-indigo-950/50 border border-indigo-500/30 space-y-1.5">
           <div class="flex items-center justify-between">
             <span class="text-[11px] font-bold text-indigo-300">🏦 Receiving Bank UPI ID (Direct Settlement):</span>
@@ -686,7 +686,7 @@
     </div>
   </div>
 
-  <!-- MODAL 3: HARDWARE & CREATOR UTILITY MODAL (Auto-Stops Mic & Webcam!) -->
+  <!-- MODAL 3: HARDWARE & CREATOR UTILITY MODAL -->
   <div id="utilityToolModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
     <div class="neo-panel max-w-lg w-full rounded-3xl p-6 border border-white/15 space-y-4">
       <div class="flex items-center justify-between">
@@ -734,12 +734,11 @@
     </div>
   </div>
 
-  <!-- APPLICATION JAVASCRIPT ENGINE -->
+  <!-- SYNTAX-VERIFIED APPLICATION JAVASCRIPT ENGINE -->
   <script>
     (function() {
       var FOUNDER_WHATSAPP = "917820847387";
 
-      // Curated HD Background Photo Packs (Restored!)
       var PHOTO_PACKS = {
         coffee: [
           "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
@@ -827,13 +826,12 @@
         streetwear: { brand: "Bandra 280GSM Heavyweight Tees", audience: "Sneakerheads tired of fast-fashion t-shirts shrinking after two washes", tone: "controversial", lang: "hinglish", photoPack: "street" }
       };
 
-      // App State
       var currentProject = null;
       var activeSceneIdx = 0;
       var activePersonaId = "aarav";
       var activeUiMode = "instagram";
       var activeCapStyle = "hormozi";
-      var bgMode = "photo"; // 'photo' | 'smart_ai' | 'upload' | 'shader'
+      var bgMode = "photo";
       var activeShaderName = "obsidian";
       var loadedPhotoPackImgs = [null, null, null, null];
       var customOrSmartBgImg = null;
@@ -841,7 +839,6 @@
       var animFrameId = null;
       var shaderTick = 0;
 
-      // Active Hardware Streams (For Clean Mic/Webcam Shutoff!)
       var activeMediaStream = null;
       var activeAudioContext = null;
       var micAutoStopTimer = null;
@@ -855,7 +852,6 @@
         setTimeout(function() { b.classList.add("hidden"); }, 2800);
       }
 
-      // Stop Any Running Mic or Camera Immediately
       function stopAllHardwareStreams() {
         if (micAutoStopTimer) {
           clearTimeout(micAutoStopTimer);
@@ -873,7 +869,6 @@
         }
       }
 
-      // Persistent Login Check (Runs on Page Load so User Never Has to Re-Login!)
       function syncPersistentUserSession() {
         var raw = localStorage.getItem("reelflow_saved_user_v6");
         var loginBtn = document.getElementById("openAuthModalBtn");
@@ -897,7 +892,6 @@
         badge.classList.remove("flex");
       }
 
-      // Load 4 HD Stock Photos for Scenes
       function loadPhotoPack(packKey) {
         var urls = PHOTO_PACKS[packKey] || PHOTO_PACKS.coffee;
         bgMode = "photo";
@@ -912,10 +906,9 @@
         });
       }
 
-      // Smart AI Background Generator (Synthesizes Custom Visual from Prompt + Procedural Canvas Fallback)
       function generateSmartAiBackground(promptText) {
         var cleanPrompt = (promptText || "modern neon studio background").trim();
-        showToast("Generating Smart AI Background for: " + cleanPrompt.slice(0, 28) + "...");
+        showToast("Generating Smart AI Background...");
         var seed = Math.floor(Math.random() * 99999);
         var aiUrl = "https://image.pollinations.ai/prompt/" + encodeURIComponent(cleanPrompt + ", vertical 9:16 wallpaper, cinematic lighting, 8k, no text") + "?width=540&height=960&nologo=true&seed=" + seed;
 
@@ -928,7 +921,6 @@
           showToast("✨ Smart AI Background applied to 9:16 video!");
         };
         img.onerror = function() {
-          // Instant procedural cyber artwork fallback if external image API is slow
           var off = document.createElement("canvas");
           off.width = 540;
           off.height = 960;
@@ -940,7 +932,7 @@
           octx.fillStyle = g;
           octx.fillRect(0, 0, 540, 960);
           for (var i = 0; i < 18; i++) {
-            octx.fillStyle = "rgba(255,255,255,0.06)";
+            octx.fillStyle = "rgba(255,255,255,0.08)";
             octx.beginPath();
             octx.arc(Math.random() * 540, Math.random() * 960, 30 + Math.random() * 120, 0, Math.PI * 2);
             octx.fill();
@@ -950,7 +942,7 @@
             customOrSmartBgImg = dataImg;
             bgMode = "smart_ai";
             drawCanvas();
-            showToast("✨ Smart Procedural AI Background generated!");
+            showToast("✨ Smart Procedural AI Background applied!");
           };
           dataImg.src = off.toDataURL();
         };
@@ -958,20 +950,17 @@
       }
 
       function initScrollObserver() {
-        var els = document.querySelectorAll(".scroll-reveal");
-        if (!("IntersectionObserver" in window)) {
-          els.forEach(function(el) { el.classList.add("visible"); });
-          return;
-        }
+        var els = document.querySelectorAll(".scroll-card");
+        if (!("IntersectionObserver" in window)) return;
         var obs = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
+              entry.target.classList.remove("scroll-out");
             } else {
-              entry.target.classList.remove("visible");
+              entry.target.classList.add("scroll-out");
             }
           });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.08 });
         els.forEach(function(el) { obs.observe(el); });
       }
 
@@ -1034,7 +1023,6 @@
         });
       }
 
-      // Redesigned NLE Timeline Editor UI
       function renderStoryboardUI() {
         if (!currentProject) return;
 
@@ -1063,12 +1051,11 @@
           var node = document.createElement("div");
           node.className = "timeline-node rounded-2xl p-3.5 space-y-2 " + (active ? "active-scene" : "");
 
-          // Top Timeline Bar with Scene Number, Badge, Speak Button & AI Rewrite Button
           var topBar = document.createElement("div");
           topBar.className = "flex items-center justify-between gap-1";
           topBar.innerHTML =
-            '<div class="flex items-center gap-2 cursor-pointer">' +
-              '<span class="w-6 h-6 rounded-lg ' + (active ? 'bg-indigo-600 text-white' : 'bg-white/10 text-slate-300') + ' text-[11px] font-extrabold flex items-center justify-center">0' + (idx + 1)</span>' +
+            '<div class="scene-select-trigger flex items-center gap-2 cursor-pointer">' +
+              '<span class="w-6 h-6 rounded-lg ' + (active ? 'bg-indigo-600 text-white' : 'bg-white/10 text-slate-300') + ' text-[11px] font-extrabold flex items-center justify-center">0' + (idx + 1) + '</span>' +
               '<div>' +
                 '<span class="block text-[11px] font-extrabold text-white tracking-wide">' + sc.label + '</span>' +
                 '<span class="block text-[9px] font-mono-code text-indigo-300">' + sc.time + '</span>' +
@@ -1079,7 +1066,7 @@
               '<button type="button" class="rewrite-scene-btn px-2 py-1 rounded-lg bg-indigo-500/15 hover:bg-indigo-500/30 text-[10px] font-bold text-indigo-300 border border-indigo-500/30 cursor-pointer">✨ Polish</button>' +
             '</div>';
 
-          topBar.querySelector(".cursor-pointer").addEventListener("click", function() {
+          topBar.querySelector(".scene-select-trigger").addEventListener("click", function() {
             stopReel();
             activeSceneIdx = idx;
             renderStoryboardUI();
@@ -1176,7 +1163,6 @@
         }
       }
 
-      // Master 9:16 Video Canvas Renderer (Supports Smart AI BG + HD Photo Packs + Shaders + IG/YT UI)
       function drawCanvas() {
         var canvas = document.getElementById("reelCanvas");
         if (!canvas || !currentProject) return;
@@ -1189,7 +1175,6 @@
         shaderTick += 0.025;
         var zoom = 1.04 + Math.sin(shaderTick) * 0.035;
 
-        // 1. Draw Selected Background Mode
         var activeImg = null;
         if ((bgMode === "smart_ai" || bgMode === "upload") && customOrSmartBgImg && customOrSmartBgImg.complete) {
           activeImg = customOrSmartBgImg;
@@ -1203,7 +1188,6 @@
           ctx.scale(zoom, zoom);
           ctx.drawImage(activeImg, -W / 2, -H / 2, W, H);
           ctx.restore();
-          // Subtle readability vignette
           var vig = ctx.createLinearGradient(0, 0, 0, H);
           vig.addColorStop(0, "rgba(0,0,0,0.55)");
           vig.addColorStop(0.5, "rgba(0,0,0,0.28)");
@@ -1238,12 +1222,10 @@
           ctx.fillRect(0, 0, W, H);
         }
 
-        // 2. Center Kinetic Captions
         ctx.font = "800 35px 'Plus Jakarta Sans', sans-serif";
         ctx.textAlign = "center";
         drawKineticCaptions(ctx, scene.voice.toUpperCase(), W / 2, H * 0.48, W - 110, 46);
 
-        // 3. Authentic Platform Overlays (Instagram Reels / YouTube Shorts / Clean Raw)
         if (activeUiMode === "instagram") {
           ctx.fillStyle = "rgba(255,255,255,0.92)";
           ctx.font = "bold 24px 'Plus Jakarta Sans', sans-serif";
@@ -1389,7 +1371,6 @@
         document.getElementById("playerStatusBadge").textContent = "READY";
       }
 
-      // Render Both Tool Grids (With Real Clipper Workspace Modal!)
       function renderToolGrids() {
         var uGrid = document.getElementById("utilityCardsGrid");
         uGrid.innerHTML = "";
@@ -1421,7 +1402,6 @@
         });
       }
 
-      // Open Interactive Clipper Workspace Modal (Fixes the "only switching msg" issue!)
       function openClipperWorkspaceModal(toolTitle) {
         document.getElementById("clipperModalTitle").textContent = "✂️ " + toolTitle;
         document.getElementById("clipperUrlInput").value = "";
@@ -1429,7 +1409,6 @@
         document.getElementById("clipperWorkspaceModal").classList.remove("hidden");
       }
 
-      // Open Utility Modal with Clean Auto-Stop Mic & Camera Controls
       function openUtilityToolModal(tool) {
         stopAllHardwareStreams();
         var modal = document.getElementById("utilityToolModal");
@@ -1495,7 +1474,6 @@
               }
               tickMic();
 
-              // Auto-Shutoff after 10 seconds so microphone is never left open!
               micAutoStopTimer = setTimeout(function() {
                 stopAllHardwareStreams();
                 var bar = document.getElementById("micLevelBar");
@@ -1534,7 +1512,6 @@
         }
       }
 
-      // Initialize Everything on DOM Ready
       window.addEventListener("DOMContentLoaded", function() {
         initScrollObserver();
         syncPersistentUserSession();
@@ -1556,7 +1533,6 @@
         }
         idleLoop();
 
-        // Presets
         document.querySelectorAll(".preset-btn").forEach(function(btn) {
           btn.addEventListener("click", function() {
             var p = PRESETS[btn.getAttribute("data-preset")];
@@ -1573,7 +1549,6 @@
           });
         });
 
-        // Main Generate Button
         document.getElementById("generateBtn").addEventListener("click", function() {
           stopReel();
           currentProject = buildBlueprint(
@@ -1587,13 +1562,11 @@
           showToast("Generated new 4-scene Reel!");
         });
 
-        // Smart AI Background Generator Button
         document.getElementById("generateSmartBgBtn").addEventListener("click", function() {
           var prompt = document.getElementById("smartBgPromptInput").value;
           generateSmartAiBackground(prompt);
         });
 
-        // HD Photography B-Roll Pack Buttons
         document.querySelectorAll(".photo-pack-btn").forEach(function(btn) {
           btn.addEventListener("click", function() {
             var key = btn.getAttribute("data-photo");
@@ -1606,7 +1579,6 @@
           });
         });
 
-        // Shader Buttons & Color Pickers
         document.querySelectorAll(".shader-btn").forEach(function(btn) {
           btn.addEventListener("click", function() {
             bgMode = "shader";
@@ -1627,7 +1599,6 @@
         });
         document.getElementById("creatorHandleInput").addEventListener("input", drawCanvas);
 
-        // Upload Custom Background Photo
         document.getElementById("customBgUpload").addEventListener("change", function(e) {
           var f = e.target.files && e.target.files[0];
           if (!f) return;
@@ -1645,7 +1616,6 @@
           r.readAsDataURL(f);
         });
 
-        // Platform Interface Switcher (IG Reels / YT Shorts / Clean)
         document.querySelectorAll(".ui-mode-btn").forEach(function(btn) {
           btn.addEventListener("click", function() {
             activeUiMode = btn.getAttribute("data-ui");
@@ -1657,7 +1627,6 @@
           });
         });
 
-        // Caption Style Buttons
         document.querySelectorAll(".cap-btn").forEach(function(btn) {
           btn.addEventListener("click", function() {
             activeCapStyle = btn.getAttribute("data-cap");
@@ -1669,7 +1638,6 @@
           });
         });
 
-        // Voice Sliders
         document.getElementById("voiceRate").addEventListener("input", function(e) {
           document.getElementById("rateLabel").textContent = parseFloat(e.target.value).toFixed(2) + "x";
         });
@@ -1686,7 +1654,6 @@
           showToast("Custom ElevenLabs Voice Saved!");
         });
 
-        // Play & Next Scene
         document.getElementById("playReelBtn").addEventListener("click", startReel);
         document.getElementById("nextSceneBtn").addEventListener("click", function() {
           stopReel();
@@ -1694,7 +1661,6 @@
           renderStoryboardUI();
         });
 
-        // Download Video (.WEBM), Script (.TXT), Frame (.PNG)
         document.getElementById("downloadVideoBtn").addEventListener("click", function() {
           var canvas = document.getElementById("reelCanvas");
           if (!canvas || typeof MediaRecorder === "undefined") {
@@ -1758,7 +1724,6 @@
           showToast("Script copied to clipboard!");
         });
 
-        // Clipper Workspace Modal Logic
         document.getElementById("closeClipperModalBtn").addEventListener("click", function() {
           document.getElementById("clipperWorkspaceModal").classList.add("hidden");
         });
@@ -1795,14 +1760,13 @@
           }, 1300);
         });
 
-        // Custom Rupee Slider Starting at ₹50 + Direct Bank UPI QR Generator
         var planSlider = document.getElementById("customPlanSlider");
         function getMerchantUpiId() {
           return localStorage.getItem("reelflow_merchant_upi_v6") || "7820847387@upi";
         }
         function updateCustomPrice() {
           var count = parseInt(planSlider.value, 10);
-          var rupeePrice = count * 50; // Starts at 1 Video = ₹50!
+          var rupeePrice = count * 50;
           var upiId = getMerchantUpiId();
           document.getElementById("activeMerchantUpiLabel").textContent = upiId;
           document.getElementById("customReelCountBadge").textContent = count + (count === 1 ? " Pro Video Pack" : " Pro Videos Pack");
@@ -1857,7 +1821,6 @@
           document.getElementById("paymentGatewayModal").classList.add("hidden");
         });
 
-        // Contact Founder WhatsApp Button
         document.getElementById("contactFounderWhatsAppBtn").addEventListener("click", function() {
           var msg = encodeURIComponent(
             "Hi Arjun! 👋 I am using ReelFlow AI Studio for my brand (" + currentProject.brand + ") and want to discuss custom AI video production."
@@ -1865,13 +1828,11 @@
           window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + msg, "_blank");
         });
 
-        // Close Utility Modal & Release Hardware
         document.getElementById("closeUtilModalBtn").addEventListener("click", function() {
           stopAllHardwareStreams();
           document.getElementById("utilityToolModal").classList.add("hidden");
         });
 
-        // Persistent Login & Register Modal
         document.getElementById("openAuthModalBtn").addEventListener("click", function() {
           document.getElementById("authModal").classList.remove("hidden");
         });
@@ -1905,7 +1866,6 @@
           showToast("Logged out.");
         });
 
-        // Gemini API Modal
         document.getElementById("openApiModalBtn").addEventListener("click", function() {
           document.getElementById("apiModal").classList.remove("hidden");
         });
