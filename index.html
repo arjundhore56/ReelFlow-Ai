@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReelFlow AI — Autonomous Short-Form Video Engine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .gradient-text {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-[#0b0f17] text-slate-100 min-h-screen">
+
+  <!-- Navbar -->
+  <header class="border-b border-slate-800 bg-[#0b0f17]/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/30">R</div>
+        <span class="font-bold text-lg tracking-tight">ReelFlow<span class="text-indigo-400">.ai</span></span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="#pricing" class="text-xs font-semibold text-slate-400 hover:text-white transition">Pricing</a>
+        <a href="#demo" class="px-3.5 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-xs font-bold transition shadow-md shadow-indigo-600/30">Launch App</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="max-w-4xl mx-auto px-4 pt-16 pb-12 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold mb-6">
+      <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+      Autonomous Video Engine for Startups & D2C
+    </div>
+    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4">
+      Turn Any Product URL Into <br/>
+      <span class="gradient-text">Viral Short-Form Reels in 60s</span>
+    </h1>
+    <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto mb-8">
+      Zero filming. Zero expensive agency retainers. ReelFlow's AI pipeline writes retention-engineered scripts, generates studio-grade voiceovers, and compiles dynamic vertical video automatically.
+    </p>
+  </section>
+
+  <!-- Interactive MVP / Prototype Section -->
+  <section id="demo" class="max-w-5xl mx-auto px-4 pb-20">
+    <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 md:p-8 backdrop-blur shadow-2xl">
+      <div class="flex items-center justify-between pb-6 border-b border-slate-800 mb-6">
+        <div>
+          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <span>⚡ Working Prototype (MVP)</span>
+          </h2>
+          <p class="text-xs text-slate-400">Select a startup preset or input your brand details to generate a short-form video concept.</p>
+        </div>
+        <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold rounded-md">Live Engine v1.0</span>
+      </div>
+
+      <!-- Presets -->
+      <div class="mb-6">
+        <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">Instant Demo Presets:</label>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="loadPreset('coffee')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 border border-slate-700 hover:border-indigo-500 transition text-slate-200">☕ D2C Cold Brew</button>
+          <button onclick="loadPreset('fintech')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 border border-slate-700 hover:border-indigo-500 transition text-slate-200">💳 Student Credit App</button>
+          <button onclick="loadPreset('saas')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 border border-slate-700 hover:border-indigo-500 transition text-slate-200">📊 B2B Invoice Tracker</button>
+        </div>
+      </div>
+
+      <!-- Generator Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <!-- Input & Script Pane -->
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Target Audience / Niche</label>
+            <input id="inputNiche" type="text" value="Coffee lovers tired of instant powder" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Generated Hook (0:00 - 0:03)</label>
+            <div id="hookDisplay" class="p-3 bg-indigo-950/30 border border-indigo-800/40 rounded-lg text-xs font-medium text-indigo-200">
+              "Stop drinking chemical instant coffee before your 9 AM lectures."
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Automated Storyboard & Voice Script</label>
+            <div id="scriptDisplay" class="p-3 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-300 space-y-2 font-mono h-48 overflow-y-auto">
+              <p><span class="text-amber-400">[Scene 1]</span> Close-up shot of bubbling cold brew concentrate pouring over crystal clear ice.</p>
+              <p><span class="text-indigo-400">[Voiceover]</span> You are spending ₹350 every single morning on watery cafe coffee.</p>
+              <p><span class="text-amber-400">[Scene 2]</span> Split screen comparison: ₹15 home brew vs ₹350 cafe bill.</p>
+              <p><span class="text-indigo-400">[Voiceover]</span> Steeped for 18 hours in Chikmagalur. Tap the link to claim your introductory batch.</p>
+            </div>
+          </div>
+          <button onclick="generateVideo()" class="w-full py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-lg font-bold text-xs shadow-lg shadow-indigo-600/30 transition">
+            ▶ Simulate Reel Compilation
+          </button>
+        </div>
+
+        <!-- 9:16 Mobile Mockup Preview -->
+        <div class="flex flex-col items-center">
+          <div class="relative w-[220px] h-[390px] rounded-[28px] border-4 border-slate-700 bg-slate-950 overflow-hidden shadow-2xl flex flex-col justify-between p-4">
+            <!-- Simulated Video Background -->
+            <div id="phoneBg" class="absolute inset-0 bg-gradient-to-b from-indigo-950 via-slate-900 to-purple-950 opacity-90 transition-all duration-500"></div>
+            
+            <!-- Video UI Elements -->
+            <div class="relative z-10 flex justify-between items-center text-[10px] text-white/70">
+              <span class="font-bold">Reels</span>
+              <span>● REC</span>
+            </div>
+
+            <!-- Dynamic Karaoke Captions -->
+            <div class="relative z-10 text-center my-auto px-2">
+              <div id="karaokeBadge" class="inline-block px-2 py-0.5 bg-black/60 rounded text-[9px] text-amber-300 font-bold mb-2">HOOK PHASE</div>
+              <p id="karaokeText" class="text-sm font-extrabold text-white leading-tight drop-shadow-md">
+                "Stop drinking chemical coffee."
+              </p>
+            </div>
+
+            <!-- Reel Overlay Actions -->
+            <div class="relative z-10 flex justify-between items-end text-[10px]">
+              <div>
+                <p class="font-bold text-white">@reelflow_client</p>
+                <p class="text-white/60 text-[9px]">Original Audio - AI Studio</p>
+              </div>
+              <div class="flex flex-col gap-2 items-center text-white/80">
+                <span>❤️ 14.2k</span>
+                <span>💬 412</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-500 mt-3 text-center">Interactive 9:16 vertical render engine demonstration</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stage 2 Strategy: Pricing Plans -->
+  <section id="pricing" class="max-w-5xl mx-auto px-4 pb-20">
+    <div class="text-center mb-10">
+      <h2 class="text-2xl font-bold text-white mb-2">B2B Commercial Pricing Tiers</h2>
+      <p class="text-xs text-slate-400">Validated against traditional Mumbai agency retainers (₹50k+/mo).</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-5 rounded-xl border border-slate-800 bg-slate-900/40">
+        <h3 class="font-bold text-white text-sm mb-1">Starter Pack</h3>
+        <p class="text-xs text-slate-400 mb-4">For solo founders & testing.</p>
+        <div class="text-2xl font-extrabold text-white mb-4">₹4,999 <span class="text-xs text-slate-400 font-normal">/mo</span></div>
+        <ul class="text-xs text-slate-300 space-y-2 mb-6">
+          <li>✓ 8 AI-generated Reels/Shorts</li>
+          <li>✓ Viral hook optimization</li>
+          <li>✓ 720p Render quality</li>
+        </ul>
+      </div>
+
+      <div class="p-5 rounded-xl border-2 border-indigo-500 bg-indigo-950/20 relative shadow-xl shadow-indigo-500/10">
+        <span class="absolute -top-3 right-4 px-2 py-0.5 bg-indigo-600 text-white font-bold text-[9px] rounded-full uppercase">Most Popular</span>
+        <h3 class="font-bold text-white text-sm mb-1">Growth Engine</h3>
+        <p class="text-xs text-slate-400 mb-4">Daily organic traffic for startups.</p>
+        <div class="text-2xl font-extrabold text-white mb-4">₹11,999 <span class="text-xs text-slate-400 font-normal">/mo</span></div>
+        <ul class="text-xs text-slate-300 space-y-2 mb-6">
+          <li>✓ 20 AI-generated Reels/Shorts</li>
+          <li>✓ Studio voice synthesis (ElevenLabs)</li>
+          <li>✓ Dynamic karaoke captions</li>
+          <li>✓ 1080p Full HD Render</li>
+        </ul>
+      </div>
+
+      <div class="p-5 rounded-xl border border-slate-800 bg-slate-900/40">
+        <h3 class="font-bold text-white text-sm mb-1">Scale / Agency</h3>
+        <p class="text-xs text-slate-400 mb-4">Full content autonomy for brands.</p>
+        <div class="text-2xl font-extrabold text-white mb-4">₹24,999 <span class="text-xs text-slate-400 font-normal">/mo</span></div>
+        <ul class="text-xs text-slate-300 space-y-2 mb-6">
+          <li>✓ 45 Reels/Shorts per month</li>
+          <li>✓ Custom brand-voice cloning</li>
+          <li>✓ Direct social media auto-posting</li>
+          <li>✓ Dedicated account manager</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Script for Prototype Interactivity -->
+  <script>
+    const presets = {
+      coffee: {
+        niche: "Coffee lovers tired of instant powder",
+        hook: "Stop drinking chemical instant coffee before your 9 AM lectures.",
+        script: `<p><span class="text-amber-400">[Scene 1]</span> Close-up shot of bubbling cold brew concentrate pouring over ice.</p><p><span class="text-indigo-400">[Voiceover]</span> You are spending ₹350 every single morning on watery cafe coffee.</p><p><span class="text-amber-400">[Scene 2]</span> ₹15 home brew vs ₹350 cafe bill.</p><p><span class="text-indigo-400">[Voiceover]</span> Steeped for 18 hours in Chikmagalur. Tap the link to claim your introductory batch.</p>`,
+        caption: "Stop drinking chemical coffee.",
+        badge: "HOOK PHASE (0-3s)"
+      },
+      fintech: {
+        niche: "College students missing credit card cashbacks",
+        hook: "You booked flight tickets home and left ₹1,200 on the table.",
+        script: `<p><span class="text-amber-400">[Scene 1]</span> Student staring in shock at an airport ticket counter confirmation screen.</p><p><span class="text-indigo-400">[Voiceover]</span> Most college students don't know student debit tiers unlock 20% off BookMyShow and domestic flights.</p><p><span class="text-amber-400">[Scene 2]</span> App dashboard showing automated cashback calculation.</p><p><span class="text-indigo-400">[Voiceover]</span> Sync your accounts in 30 seconds and stop wasting rewards.</p>`,
+        caption: "You left ₹1,200 on the table.",
+        badge: "PAIN POINT (3-8s)"
+      },
+      saas: {
+        niche: "Creative agencies waiting on late client invoices",
+        hook: "Your agency is not unprofitable; your clients are just 45 days late.",
+        script: `<p><span class="text-amber-400">[Scene 1]</span> Stressed freelancer looking at an overdue invoice ledger.</p><p><span class="text-indigo-400">[Voiceover]</span> Stop sending awkward WhatsApp messages begging for payment.</p><p><span class="text-amber-400">[Scene 2]</span> Automated polite reminder sequence triggering Razorpay links.</p><p><span class="text-indigo-400">[Voiceover]</span> Recover 85% of pending bills automatically within 7 days.</p>`,
+        caption: "Your clients are 45 days late.",
+        badge: "SOLUTION REVEAL (8-15s)"
+      }
+    };
+
+    function loadPreset(key) {
+      const data = presets[key];
+      document.getElementById('inputNiche').value = data.niche;
+      document.getElementById('hookDisplay').innerText = `"${data.hook}"`;
+      document.getElementById('scriptDisplay').innerHTML = data.script;
+      document.getElementById('karaokeText').innerText = `"${data.caption}"`;
+      document.getElementById('karaokeBadge').innerText = data.badge;
+    }
+
+    function generateVideo() {
+      const btn = event.target;
+      btn.innerText = "Generating AI Storyboard...";
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerText = "▶ Simulated Reel Compilation";
+        btn.disabled = false;
+        alert("Simulation Complete! ReelFlow has matched audio timelines and dynamic kinetic captions.");
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
