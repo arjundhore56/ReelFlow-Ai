@@ -2,978 +2,535 @@
 <html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ReelFlow AI — Autonomous Short-Form Video Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>ReelFlow AI 4.0 — Autonomous Short-Form Video & Voice Engine</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-deep: #030407;
+      --accent-1: #6366f1;
+      --accent-2: #a855f7;
+      --accent-3: #ec4899;
+    }
+    * {
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #06070a;
+      background-color: var(--bg-deep);
       color: #f8fafc;
       overflow-x: hidden;
     }
-    h1, h2, h3, .display-font {
-      font-family: 'Space Grotesk', sans-serif;
+    h1, h2, h3, .font-display {
+      font-family: 'Syne', sans-serif;
     }
-    .mono-font {
+    .font-mono-code {
       font-family: 'JetBrains Mono', monospace;
     }
-    .bg-grid {
-      background-size: 36px 36px;
+
+    /* Animated Cyber Grid & Aurora Mesh */
+    .cyber-grid {
+      background-size: 48px 48px;
       background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
     }
-    .glass-card {
-      background: rgba(15, 18, 28, 0.78);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.09);
+    @keyframes floatSlow {
+      0%, 100% { transform: translate(0px, 0px) scale(1); }
+      50% { transform: translate(25px, -25px) scale(1.08); }
     }
-    .gradient-text {
-      background: linear-gradient(135deg, #a5b4fc 0%, #c084fc 45%, #f472b6 100%);
+    .aurora-blob {
+      animation: floatSlow 10s ease-in-out infinite;
+    }
+
+    /* Bidirectional Scroll Animations (Scroll Down + Scroll Up) */
+    .scroll-anim {
+      opacity: 0;
+      transform: translateY(44px) scale(0.97);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .scroll-anim.in-view {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Infinite Ticker Marquee */
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 28s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Ultra Glass Bento Cards */
+    .bento-card {
+      background: linear-gradient(145deg, rgba(17, 20, 32, 0.78) 0%, rgba(9, 11, 19, 0.88) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.7);
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .bento-card:hover {
+      border-color: rgba(139, 92, 246, 0.35);
+    }
+
+    .text-shimmer {
+      background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 35%, #e879f9 70%, #fb7185 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .toast-notify {
-      transition: all 0.3s ease;
-    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #05070e; }
+    ::-webkit-scrollbar-thumb { background: #262b40; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
   </style>
 </head>
-<body class="bg-grid min-h-screen selection:bg-indigo-500 selection:text-white">
+<body class="cyber-grid min-h-screen selection:bg-indigo-500 selection:text-white pb-20 md:pb-0">
 
-  <!-- Live Toast Notification Banner -->
-  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden px-4 py-3 rounded-xl bg-indigo-600 text-white text-xs font-bold shadow-2xl border border-indigo-400 toast-notify">
-    Action completed!
+  <!-- Ambient Aurora Background Glows -->
+  <div class="fixed top-[-180px] left-[10%] w-[520px] h-[420px] bg-indigo-600/20 blur-[150px] pointer-events-none rounded-full aurora-blob z-0"></div>
+  <div class="fixed bottom-[-180px] right-[8%] w-[500px] h-[400px] bg-fuchsia-600/15 blur-[160px] pointer-events-none rounded-full aurora-blob z-0"></div>
+
+  <!-- Toast Notification -->
+  <div id="toastBanner" class="fixed bottom-20 md:bottom-6 right-5 z-50 hidden px-4 py-3 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs font-bold shadow-2xl border border-white/20 flex items-center gap-2">
+    <span class="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
+    <span id="toastText">Action completed!</span>
   </div>
 
-  <!-- Ambient Top Glow -->
-  <div class="fixed top-[-150px] left-1/2 -translate-x-1/2 w-[750px] h-[350px] bg-indigo-600/20 blur-[140px] pointer-events-none rounded-full z-0"></div>
-
-  <!-- Navigation -->
-  <header class="sticky top-0 z-40 border-b border-white/10 bg-[#06070a]/85 backdrop-blur-xl">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/25 display-font text-lg">
+  <!-- Floating Glass Header -->
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-[#030407]/80 backdrop-blur-2xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2">
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-500 to-pink-500 flex items-center justify-center font-extrabold text-white shadow-lg shadow-indigo-500/30 group-hover:rotate-6 transition">
           R
         </div>
         <div>
-          <span class="font-bold text-lg tracking-tight display-font text-white">ReelFlow<span class="text-indigo-400">.ai</span></span>
-          <span class="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-300">Live Engine v3.0</span>
+          <span class="font-bold text-lg sm:text-xl tracking-tight font-display text-white">ReelFlow<span class="text-indigo-400">.ai</span></span>
+          <span class="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-mono-code uppercase bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 rounded-full">v4.0 Ultra</span>
         </div>
-      </div>
+      </a>
 
+      <!-- Center Desktop Nav Links -->
+      <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold text-slate-300">
+        <a href="#studio" class="hover:text-white transition">AI Video Studio</a>
+        <a href="#voicelab" class="hover:text-white transition">Voice Clone Lab</a>
+        <a href="#features" class="hover:text-white transition">Architecture</a>
+        <a href="#whatsapp-desk" class="hover:text-white transition">Production Desk</a>
+      </nav>
+
+      <!-- Right Action Controls (API Key + Auth Profile) -->
       <div class="flex items-center gap-2 sm:gap-3">
-        <div class="px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span id="creditCounter">3 Free Credits</span>
+        <button type="button" id="openApiModalBtn" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-indigo-300 transition cursor-pointer flex items-center gap-1.5">
+          <span>⚡</span>
+          <span class="hidden sm:inline">AI Engine Key</span>
+        </button>
+
+        <!-- Logged Out View -->
+        <button type="button" id="openAuthModalBtn" class="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-95 text-white text-xs font-bold shadow-lg shadow-indigo-500/20 transition cursor-pointer">
+          Login / Sign Up
+        </button>
+
+        <!-- Logged In User Profile Badge (Hidden until login) -->
+        <div id="userProfileArea" class="hidden items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl">
+          <div id="userInitials" class="w-6 h-6 rounded-full bg-indigo-600 text-white text-[11px] font-bold flex items-center justify-center">A</div>
+          <span id="userNameLabel" class="text-xs font-semibold text-white max-w-[100px] truncate">Founder</span>
+          <button type="button" id="logoutBtn" class="text-[10px] text-rose-400 hover:text-rose-300 ml-1 font-bold cursor-pointer">Exit</button>
         </div>
-
-        <button type="button" id="openApiModalBtn" class="px-3 py-1.5 rounded-full bg-indigo-950/70 hover:bg-indigo-900 border border-indigo-500/40 text-xs font-semibold text-indigo-300 transition cursor-pointer">
-          AI API Key
-        </button>
-
-        <a href="#pricing" class="hidden md:inline-block text-xs font-semibold text-slate-300 hover:text-white px-2">Pricing</a>
-
-        <button type="button" id="topUpgradeBtn" class="px-4 py-1.5 rounded-full bg-white text-slate-950 hover:bg-slate-200 text-xs font-bold transition shadow-lg cursor-pointer">
-          Upgrade Pro
-        </button>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="relative z-10 max-w-5xl mx-auto px-4 pt-10 pb-6 text-center">
-    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold mb-4">
-      <span class="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span>
-      Autonomous Short-Form Video Production Engine
+  <!-- Mobile Bottom Navigation Dock (For Phones & Small Tablets) -->
+  <div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#070912]/95 backdrop-blur-xl border-t border-white/10 px-4 py-2 flex justify-around items-center text-[11px] font-semibold text-slate-300">
+    <a href="#studio" class="flex flex-col items-center gap-0.5 text-indigo-400">
+      <span>🎬</span><span>Studio</span>
+    </a>
+    <a href="#voicelab" class="flex flex-col items-center gap-0.5 hover:text-white">
+      <span>🎙️</span><span>Voices</span>
+    </a>
+    <a href="#preview-anchor" class="flex flex-col items-center gap-0.5 hover:text-white">
+      <span>📱</span><span>9:16 Player</span>
+    </a>
+    <button type="button" id="mobileAuthTrigger" class="flex flex-col items-center gap-0.5 hover:text-white cursor-pointer">
+      <span>👤</span><span id="mobileAuthLabel">Account</span>
+    </button>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="relative z-10 max-w-6xl mx-auto px-4 pt-10 sm:pt-16 pb-10 text-center scroll-anim">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-indigo-300 text-xs font-semibold mb-5">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+      <span>Next-Gen Autonomous Content Engine for Founders & Creators</span>
     </div>
-    <h1 class="text-3xl sm:text-5xl font-bold tracking-tight leading-[1.12] mb-3">
-      Type Any Brand or Idea. <br/>
-      <span class="gradient-text">Generate & Download 9:16 Viral Reels.</span>
+
+    <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.06] mb-5">
+      Turn Any Brand Idea Into <br class="hidden sm:inline" />
+      <span class="text-shimmer">Studio 9:16 Reels & Voices.</span>
     </h1>
-    <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto">
-      Instant 3-second viral hooks, 4-scene visual storyboards, synthesized voiceovers, and real-time 9:16 vertical video rendering right in your browser.
+
+    <p class="text-slate-400 text-xs sm:text-base max-w-2xl mx-auto mb-8 leading-relaxed">
+      Engineer 3-second pattern-interrupt hooks, multi-character AI voiceovers, custom product B-roll, and kinetic subtitles inside one unified browser studio.
     </p>
+
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <a href="#studio" class="px-6 py-3.5 rounded-2xl bg-white text-slate-950 hover:bg-slate-200 font-extrabold text-xs sm:text-sm tracking-wide transition shadow-xl">
+        Launch Live Studio ↓
+      </a>
+      <button type="button" id="heroWhatsAppBtn" class="px-6 py-3.5 rounded-2xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 font-bold text-xs sm:text-sm transition cursor-pointer">
+        💬 Talk to Founder on WhatsApp
+      </button>
+    </div>
   </section>
 
-  <!-- Main Studio Workspace -->
-  <section id="studio" class="relative z-10 max-w-7xl mx-auto px-4 pb-20">
-    <div class="glass-card rounded-3xl p-4 sm:p-6 lg:p-8 shadow-2xl">
-      
-      <!-- Preset Bar -->
-      <div class="flex flex-wrap items-center justify-between gap-3 pb-5 mb-6 border-b border-white/10">
+  <!-- INFINITE ANIMATED MARQUEE TICKER -->
+  <div class="relative z-10 border-y border-white/10 bg-black/40 py-3 overflow-hidden mb-12 scroll-anim">
+    <div class="animate-marquee flex items-center gap-8 text-xs font-mono-code text-slate-400">
+      <span>⚡ 3-SECOND VIRAL HOOK GENERATOR</span>
+      <span class="text-indigo-400">•</span>
+      <span>🎙️ 6 NEURAL VOICE PERSONAS + CUSTOM ELEVENLABS CLONING</span>
+      <span class="text-purple-400">•</span>
+      <span>🖼️ REAL STOCK B-ROLL & CUSTOM PRODUCT IMAGE RENDERER</span>
+      <span class="text-pink-400">•</span>
+      <span>🇮🇳 HINGLISH + GLOBAL ENGLISH SCRIPT ENGINE</span>
+      <span class="text-emerald-400">•</span>
+      <span>🎬 DIRECT .WEBM VIDEO RECORDING IN BROWSER</span>
+      <span class="text-indigo-400">•</span>
+      <span>⚡ 3-SECOND VIRAL HOOK GENERATOR</span>
+      <span class="text-indigo-400">•</span>
+      <span>🎙️ 6 NEURAL VOICE PERSONAS + CUSTOM ELEVENLABS CLONING</span>
+      <span class="text-purple-400">•</span>
+      <span>🖼️ REAL STOCK B-ROLL & CUSTOM PRODUCT IMAGE RENDERER</span>
+      <span class="text-pink-400">•</span>
+      <span>🇮🇳 HINGLISH + GLOBAL ENGLISH SCRIPT ENGINE</span>
+    </div>
+  </div>
+
+  <!-- MAIN WORKSPACE STUDIO -->
+  <section id="studio" class="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+    
+    <!-- Quick Industry Presets -->
+    <div class="bento-card rounded-3xl p-4 sm:p-5 mb-6 scroll-anim">
+      <div class="flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-2 flex-wrap">
-          <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 mr-1">1-Click Presets:</span>
-          <button type="button" data-preset="coffee" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400 text-xs font-medium text-slate-200 transition cursor-pointer">
-            D2C Cold Brew
+          <span class="text-xs font-bold uppercase tracking-wider text-indigo-400 mr-1">Instant Templates:</span>
+          <button type="button" data-preset="coffee" class="preset-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400 text-xs font-semibold text-white transition cursor-pointer">
+            ☕ D2C Cold Brew
           </button>
-          <button type="button" data-preset="fintech" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400 text-xs font-medium text-slate-200 transition cursor-pointer">
-            Student Fintech App
+          <button type="button" data-preset="fintech" class="preset-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400 text-xs font-semibold text-white transition cursor-pointer">
+            💳 Student Rewards Fintech
           </button>
-          <button type="button" data-preset="saas" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400 text-xs font-medium text-slate-200 transition cursor-pointer">
-            B2B Invoice SaaS
+          <button type="button" data-preset="saas" class="preset-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400 text-xs font-semibold text-white transition cursor-pointer">
+            📊 B2B Invoice SaaS
           </button>
-          <button type="button" data-preset="streetwear" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400 text-xs font-medium text-slate-200 transition cursor-pointer">
-            Streetwear Drop
+          <button type="button" data-preset="streetwear" class="preset-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400 text-xs font-semibold text-white transition cursor-pointer">
+            👕 Oversized Streetwear
+          </button>
+          <button type="button" data-preset="fitness" class="preset-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400 text-xs font-semibold text-white transition cursor-pointer">
+            🏋️ Clean Whey Protein
           </button>
         </div>
-        <div id="engineBadge" class="mono-font text-[11px] px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300">
-          ● Neural Script & Canvas Engine Active
+        <div id="engineStatusPill" class="font-mono-code text-[11px] px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300">
+          ● Neural Engine Ready
         </div>
       </div>
+    </div>
 
-      <!-- 3-Column Studio Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <!-- 12-Column Responsive Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-        <!-- COLUMN 1: Inputs (4 Cols) -->
-        <div class="lg:col-span-4 space-y-4 bg-slate-950/80 p-5 rounded-2xl border border-white/10">
+      <!-- LEFT COLUMN (4 Cols): Campaign Brief + Voice Studio + B-Roll Upload -->
+      <div class="lg:col-span-4 space-y-6">
+        
+        <!-- Card 1: Campaign Brief -->
+        <div class="bento-card rounded-3xl p-5 sm:p-6 space-y-4 scroll-anim">
           <div class="flex items-center justify-between">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-indigo-400">1. Brand & Campaign Brief</h2>
-            <span class="text-[11px] text-slate-400">Custom Input</span>
+            <h2 class="text-base font-bold text-white font-display flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-xs flex items-center justify-center">1</span>
+              <span>Brand & Hook Brief</span>
+            </h2>
+            <span class="text-[11px] text-slate-400">Any Topic</span>
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Brand Name / Product / Niche *</label>
-            <input id="brandInput" type="text" value="Asli Cold Brew Coffee" placeholder="e.g. Gym Protein, AI Resume Tool, Café" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Brand Name / Product / Idea *</label>
+            <input id="brandInput" type="text" value="Asli Cold Brew Coffee" placeholder="e.g. Gym Protein, Sneaker Brand, AI App" class="w-full bg-black/50 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Target Audience & Main Pain Point *</label>
-            <textarea id="audienceInput" rows="3" placeholder="Who is this for and what problem do they face?" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">Young professionals and college students tired of spending Rs 350 on watery cafe coffee</textarea>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Target Audience & Pain Point *</label>
+            <textarea id="audienceInput" rows="2" placeholder="Who is this for and what frustrates them?" class="w-full bg-black/50 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">Young professionals and college students tired of spending Rs 350 on watery cafe coffee</textarea>
           </div>
 
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Hook Framework</label>
-              <select id="toneInput" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
-                <option value="controversial">Pattern Interrupt</option>
-                <option value="data">Hard Money / Math</option>
-                <option value="story">Founder Confession</option>
-                <option value="secret">Industry Secret</option>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Hook Psychology</label>
+              <select id="toneInput" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+                <option value="controversial">🔥 Pattern Interrupt</option>
+                <option value="data">📊 Hard Math / Proof</option>
+                <option value="story">🎭 Founder Story</option>
+                <option value="secret">🤫 Industry Secret</option>
               </select>
             </div>
             <div>
               <label class="block text-xs font-semibold text-slate-300 mb-1.5">Language Vibe</label>
-              <select id="langInput" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
-                <option value="english">Global English</option>
-                <option value="hinglish">Hinglish (India Viral)</option>
+              <select id="langInput" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+                <option value="hinglish">🇮🇳 Hinglish (Viral)</option>
+                <option value="english">🌐 Global English</option>
               </select>
             </div>
           </div>
 
           <div>
             <label class="block text-xs font-semibold text-slate-300 mb-1.5">Call-To-Action (CTA)</label>
-            <input id="ctaInput" type="text" value="Comment BREW and we will DM you a 50% trial link" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
+            <input id="ctaInput" type="text" value="Comment BREW for a 50% trial pack link in your DMs" class="w-full bg-black/50 border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
           </div>
 
-          <button type="button" id="generateBtn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:opacity-95 active:scale-[0.99] text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-indigo-600/30 transition cursor-pointer">
-            Generate Custom Reel & Script
+          <button type="button" id="generateBtn" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:opacity-95 active:scale-[0.99] text-white font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-indigo-600/25 transition cursor-pointer">
+            ⚡ Generate Custom Script & Video
           </button>
         </div>
 
-        <!-- COLUMN 2: Output Script & Storyboard (5 Cols) -->
-        <div class="lg:col-span-5 space-y-4 bg-slate-950/80 p-5 rounded-2xl border border-white/10">
+        <!-- Card 2: Multi-Voice Studio & Custom Voice Clone Lab -->
+        <div id="voicelab" class="bento-card rounded-3xl p-5 sm:p-6 space-y-4 scroll-anim">
           <div class="flex items-center justify-between">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-purple-400">2. AI Production Blueprint</h2>
+            <h2 class="text-base font-bold text-white font-display flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-purple-500/20 border border-purple-500/40 text-purple-300 text-xs flex items-center justify-center">2</span>
+              <span>AI Voice & Clone Lab</span>
+            </h2>
+            <button type="button" id="testVoiceSampleBtn" class="px-2.5 py-1 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 border border-purple-400/30 text-[11px] font-bold text-purple-200 cursor-pointer">
+              🔊 Sample Voice
+            </button>
+          </div>
+
+          <!-- 6 Persona Selector Cards -->
+          <div>
+            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">Choose AI Voice Persona (6 Profiles):</label>
+            <div id="voicePersonaGrid" class="grid grid-cols-2 gap-2"></div>
+          </div>
+
+          <!-- System Browser Voice Override -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-300 mb-1">Device / Neural Synthesis Engine:</label>
+            <select id="systemVoiceSelect" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-purple-500">
+              <option value="auto">Auto-Match Persona Voice</option>
+            </select>
+          </div>
+
+          <!-- Speed & Pitch Sliders -->
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <div>
+              <div class="flex justify-between text-[11px] text-slate-300 mb-1">
+                <span>Speed</span><span id="rateValLabel" class="font-mono-code text-indigo-300">1.08x</span>
+              </div>
+              <input id="voiceRateInput" type="range" min="0.75" max="1.4" step="0.05" value="1.08" class="w-full accent-indigo-500 cursor-pointer">
+            </div>
+            <div>
+              <div class="flex justify-between text-[11px] text-slate-300 mb-1">
+                <span>Pitch</span><span id="pitchValLabel" class="font-mono-code text-purple-300">1.00</span>
+              </div>
+              <input id="voicePitchInput" type="range" min="0.65" max="1.4" step="0.05" value="1.00" class="w-full accent-purple-500 cursor-pointer">
+            </div>
+          </div>
+
+          <!-- Custom ElevenLabs Voice Clone Expandable -->
+          <div class="pt-3 border-t border-white/10">
+            <button type="button" id="toggleCustomCloneBtn" class="w-full flex items-center justify-between text-xs font-bold text-pink-300 hover:text-pink-200 cursor-pointer">
+              <span>🧬 + Connect Custom Cloned Voice (ElevenLabs)</span>
+              <span id="cloneArrow">▼</span>
+            </button>
+            <div id="customCloneBox" class="hidden mt-3 space-y-2.5 bg-black/50 p-3 rounded-2xl border border-pink-500/25">
+              <p class="text-[11px] text-slate-400">Paste your ElevenLabs API Key and any custom Voice ID to synthesize ultra-realistic cloned voiceovers:</p>
+              <input id="elevenApiKey" type="password" placeholder="ElevenLabs xi-api-key..." class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-xs text-white font-mono-code">
+              <input id="elevenVoiceId" type="text" placeholder="Voice ID (e.g. 21m00Tcm4TlvDq8ikWAM)" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-xs text-white font-mono-code">
+              <button type="button" id="saveCloneVoiceBtn" class="w-full py-2 rounded-xl bg-pink-600 hover:bg-pink-500 text-white text-xs font-bold cursor-pointer">
+                Activate Custom Voice Clone
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CENTER COLUMN (5 Cols): Editable Hooks, 4 Scenes & B-Roll Controls -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="bento-card rounded-3xl p-5 sm:p-6 space-y-5 scroll-anim">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h2 class="text-base font-bold text-white font-display flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-pink-500/20 border border-pink-500/40 text-pink-300 text-xs flex items-center justify-center">3</span>
+              <span>Interactive Script & Timeline</span>
+            </h2>
             <div class="flex items-center gap-2">
-              <span id="retentionScore" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                Retention: 91%
+              <span id="retentionBadge" class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                Viral Score: 92%
               </span>
-              <button type="button" id="copyScriptBtn" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/15 text-[11px] text-slate-200 border border-white/10 transition cursor-pointer">
-                Copy All
+              <button type="button" id="copyScriptBtn" class="px-3 py-1 rounded-xl bg-white/5 hover:bg-white/15 text-xs font-semibold text-slate-200 border border-white/10 cursor-pointer">
+                📋 Copy
               </button>
             </div>
           </div>
 
-          <!-- 3 Viral Hooks -->
+          <!-- Selectable 3-Second Hooks -->
           <div>
-            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">Click Any Hook to Test on Video:</label>
-            <div id="hooksContainer" class="space-y-2"></div>
+            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">3-Second Viral Hook Variations (Click to activate):</label>
+            <div id="hooksList" class="space-y-2"></div>
           </div>
 
-          <!-- 4-Scene Breakdown -->
+          <!-- Custom Background / B-Roll Controls -->
+          <div class="p-3.5 rounded-2xl bg-black/50 border border-white/10 flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <p class="text-xs font-bold text-white">🖼️ Video B-Roll & Product Visuals</p>
+              <p class="text-[11px] text-slate-400">Auto-loads HD stock photos or upload your own product image.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <label class="px-3 py-1.5 rounded-xl bg-indigo-600/30 hover:bg-indigo-600/50 border border-indigo-400/40 text-xs font-bold text-indigo-200 cursor-pointer transition">
+                <span>+ Upload Image</span>
+                <input id="customBgUpload" type="file" accept="image/*" class="hidden">
+              </label>
+              <button type="button" id="shuffleBrollBtn" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-slate-300 cursor-pointer">
+                🔄 New B-Roll
+              </button>
+            </div>
+          </div>
+
+          <!-- 4 Editable Scenes -->
           <div>
             <div class="flex items-center justify-between mb-2">
-              <label class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">4-Scene Visual & Voiceover Timeline (Click a Scene):</label>
-              <span class="text-[10px] text-indigo-400 mono-font">24s Reel</span>
+              <label class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Live Editable 4-Scene Script (Click any text to edit):</label>
+              <span class="text-[10px] font-mono-code text-indigo-300">Auto-syncs to 9:16 Player</span>
             </div>
-            <div id="scenesContainer" class="space-y-2.5 max-h-[310px] overflow-y-auto pr-1"></div>
+            <div id="scenesList" class="space-y-3 max-h-[410px] overflow-y-auto pr-1"></div>
           </div>
 
-          <!-- Export Actions -->
-          <div class="pt-2 border-t border-white/10 grid grid-cols-2 gap-2.5">
-            <button type="button" id="downloadTxtBtn" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-200 transition cursor-pointer">
-              Download Script (.TXT)
+          <!-- Export & Download Bar -->
+          <div class="pt-3 border-t border-white/10 grid grid-cols-2 gap-3">
+            <button type="button" id="downloadTxtBtn" class="py-3 px-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-slate-200 transition cursor-pointer">
+              ⬇️ Download Script (.TXT)
             </button>
-            <button type="button" id="exportVideoFileBtn" class="py-2.5 px-3 rounded-xl bg-indigo-600/25 hover:bg-indigo-600/40 border border-indigo-400/40 text-xs font-bold text-indigo-200 transition cursor-pointer">
-              Render Video (.WEBM)
+            <button type="button" id="exportWebmBtn" class="py-3 px-3 rounded-2xl bg-gradient-to-r from-indigo-600/40 to-purple-600/40 hover:from-indigo-600/60 hover:to-purple-600/60 border border-indigo-400/40 text-xs font-extrabold text-white transition cursor-pointer">
+              🎥 Render Video (.WEBM)
             </button>
           </div>
         </div>
+      </div>
 
-        <!-- COLUMN 3: Real HTML5 Canvas 9:16 Video Renderer (3 Cols) -->
-        <div class="lg:col-span-3 flex flex-col items-center">
-          <div class="w-full flex items-center justify-between mb-2 px-1">
-            <span class="text-xs font-bold uppercase tracking-wider text-pink-400">3. Live 9:16 Video Engine</span>
-            <span id="playerStateLabel" class="text-[10px] mono-font text-emerald-400">READY</span>
+      <!-- RIGHT COLUMN (3 Cols): Live 9:16 Vertical Canvas & Theme Customizer -->
+      <div id="preview-anchor" class="lg:col-span-3 flex flex-col items-center scroll-anim">
+        <div class="bento-card rounded-3xl p-4 sm:p-5 w-full flex flex-col items-center">
+          <div class="w-full flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-pink-400">4. Live 9:16 Preview</span>
+            <span id="playerStatusText" class="text-[10px] font-mono-code px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300">READY</span>
           </div>
 
-          <!-- Real HTML5 Canvas inside Phone Bezel -->
-          <div class="relative w-[260px] h-[462px] rounded-[34px] border-[6px] border-slate-800 bg-black overflow-hidden shadow-2xl">
+          <!-- Caption Theme Switcher -->
+          <div class="w-full grid grid-cols-4 gap-1.5 mb-3">
+            <button type="button" data-theme="hormozi" class="theme-btn py-1.5 rounded-lg bg-amber-500/20 border border-amber-400 text-[10px] font-bold text-amber-300 cursor-pointer">Hormozi</button>
+            <button type="button" data-theme="cyber" class="theme-btn py-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Cyber</button>
+            <button type="button" data-theme="minimal" class="theme-btn py-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Luxe</button>
+            <button type="button" data-theme="redbox" class="theme-btn py-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Viral Red</button>
+          </div>
+
+          <!-- Phone Hardware Frame + HTML5 9:16 Canvas -->
+          <div class="relative w-[256px] sm:w-[268px] h-[455px] sm:h-[476px] rounded-[38px] border-[6px] border-slate-800 bg-black overflow-hidden shadow-2xl">
             <canvas id="reelCanvas" width="540" height="960" class="w-full h-full object-cover"></canvas>
           </div>
 
-          <!-- Playback Controls -->
-          <div class="w-[260px] mt-3 grid grid-cols-2 gap-2">
-            <button type="button" id="playReelBtn" class="py-2.5 px-3 rounded-xl bg-white text-slate-950 hover:bg-slate-200 font-bold text-xs transition shadow-md cursor-pointer">
-              Play w/ Voice
+          <!-- Player Controls -->
+          <div class="w-full mt-4 grid grid-cols-2 gap-2">
+            <button type="button" id="playReelBtn" class="py-3 px-3 rounded-2xl bg-white text-slate-950 hover:bg-slate-200 font-extrabold text-xs transition shadow-lg cursor-pointer">
+              ▶ Play w/ Voice
             </button>
-            <button type="button" id="nextSceneBtn" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-xs transition cursor-pointer">
-              Next Scene
+            <button type="button" id="nextSceneBtn" class="py-3 px-3 rounded-2xl bg-white/5 hover:bg-white/10 text-white border border-white/15 font-bold text-xs transition cursor-pointer">
+              ⏭ Next Scene
             </button>
           </div>
-          <button type="button" id="orderProMp4Btn" class="w-[260px] mt-2 py-2.5 px-3 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 font-bold text-xs transition cursor-pointer">
-            Order Studio 1080p Edit (Rs 299)
+
+          <button type="button" id="sendToWhatsAppDeskBtn" class="w-full mt-2.5 py-3 px-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs transition shadow-lg shadow-emerald-500/20 cursor-pointer">
+            🚀 Send Script to Production Desk
           </button>
         </div>
-
       </div>
+
     </div>
   </section>
 
-  <!-- Commercial Pricing Section -->
-  <section id="pricing" class="relative z-10 max-w-6xl mx-auto px-4 pb-24">
-    <div class="text-center mb-10">
-      <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-semibold uppercase tracking-wider">Commercial Plans</span>
-      <h2 class="text-2xl sm:text-4xl font-bold text-white mt-3 mb-2">Scale Your Brand Content Without Filming</h2>
-      <p class="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">Generate scripts and previews for free, or let our production team deliver studio-edited 1080p MP4 Reels with ElevenLabs voices and B-roll.</p>
+  <!-- BENTO ARCHITECTURE SHOWCASE (Demonstrates Scroll Down & Scroll Up Animations) -->
+  <section id="features" class="relative z-10 max-w-7xl mx-auto px-4 pb-20">
+    <div class="text-center mb-12 scroll-anim">
+      <span class="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-bold uppercase tracking-wider">Why Brands Switch to ReelFlow</span>
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-3">Engineered for High-Retention Vertical Video</h2>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- Plan 1 -->
-      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between border border-white/10">
-        <div>
-          <span class="px-2.5 py-1 rounded-md bg-white/5 text-slate-300 text-[10px] font-bold uppercase">Pay-Per-Reel</span>
-          <h3 class="text-lg font-bold text-white mt-3">Single Pro MP4 Render</h3>
-          <p class="text-xs text-slate-400 mt-1 mb-4">Test 1 commercial-grade Reel for your brand or startup page today.</p>
-          <div class="text-3xl font-extrabold text-white mb-5 display-font">Rs 299 <span class="text-xs text-slate-400 font-normal">/ video</span></div>
-          <ul class="text-xs text-slate-300 space-y-2.5 mb-6">
-            <li>✓ 1080p Full HD 9:16 Final MP4 File</li>
-            <li>✓ Realistic ElevenLabs AI Voiceover</li>
-            <li>✓ Premium B-Roll + Dynamic Captions</li>
-            <li>✓ Delivered via WhatsApp in 2 Hours</li>
-          </ul>
-        </div>
-        <button type="button" data-plan="Single Pro MP4 Render (Rs 299)" class="plan-checkout-btn w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition border border-white/10 cursor-pointer">
-          Order 1 Video Now
-        </button>
+      <div class="bento-card rounded-3xl p-6 scroll-anim">
+        <div class="w-11 h-11 rounded-2xl bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-xl mb-4">🧠</div>
+        <h3 class="text-lg font-bold text-white mb-2">3-Second Pattern Interrupts</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Most videos lose 72% of viewers in the first 3 seconds. Our neural prompt matrix generates controversial, math-backed, and curiosity-gap hooks in both English and Hinglish.
+        </p>
       </div>
 
-      <!-- Plan 2 -->
-      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between border-2 border-indigo-500 relative shadow-2xl shadow-indigo-500/10">
-        <span class="absolute -top-3 right-5 px-3 py-0.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-[10px] font-bold uppercase tracking-wider">Most Popular</span>
-        <div>
-          <span class="px-2.5 py-1 rounded-md bg-indigo-500/20 text-indigo-300 text-[10px] font-bold uppercase">Startup Growth Engine</span>
-          <h3 class="text-lg font-bold text-white mt-3">15 Viral Reels / Month</h3>
-          <p class="text-xs text-slate-400 mt-1 mb-4">Consistent organic reach on Instagram Reels and YouTube Shorts.</p>
-          <div class="text-3xl font-extrabold text-white mb-5 display-font">Rs 8,999 <span class="text-xs text-slate-400 font-normal">/ month</span></div>
-          <ul class="text-xs text-slate-300 space-y-2.5 mb-6">
-            <li>✓ 15 Ready-to-Post 1080p Vertical Videos</li>
-            <li>✓ Unlimited AI Script Studio Access</li>
-            <li>✓ Custom Brand Colors & Typography</li>
-            <li>✓ English + Hinglish Voice Cloning</li>
-          </ul>
-        </div>
-        <button type="button" data-plan="Startup Growth Plan - 15 Reels/mo (Rs 8,999)" class="plan-checkout-btn w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:opacity-95 text-white font-bold text-xs transition shadow-lg cursor-pointer">
-          Start Monthly Plan
-        </button>
+      <div class="bento-card rounded-3xl p-6 scroll-anim">
+        <div class="w-11 h-11 rounded-2xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-xl mb-4">🎙️</div>
+        <h3 class="text-lg font-bold text-white mb-2">Multi-Persona & Cloned Voices</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Switch effortlessly between 6 calibrated voice personas, adjust cadence and pitch, or plug in your custom ElevenLabs voice clone ID for studio-grade narration.
+        </p>
       </div>
 
-      <!-- Plan 3 -->
-      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between border border-white/10">
-        <div>
-          <span class="px-2.5 py-1 rounded-md bg-pink-500/15 text-pink-300 text-[10px] font-bold uppercase">Full Autopilot</span>
-          <h3 class="text-lg font-bold text-white mt-3">30 Daily Reels + Ad Pack</h3>
-          <p class="text-xs text-slate-400 mt-1 mb-4">Replaces a Rs 50,000/mo agency for scaling D2C & B2B brands.</p>
-          <div class="text-3xl font-extrabold text-white mb-5 display-font">Rs 18,999 <span class="text-xs text-slate-400 font-normal">/ month</span></div>
-          <ul class="text-xs text-slate-300 space-y-2.5 mb-6">
-            <li>✓ 30 Daily Reels + Meta Ad Hooks</li>
-            <li>✓ Custom Founder Voice & Avatar Cloning</li>
-            <li>✓ Competitor Hook Spy & Analytics</li>
-            <li>✓ Dedicated WhatsApp Production Desk</li>
-          </ul>
-        </div>
-        <button type="button" data-plan="Full Autopilot - 30 Reels/mo (Rs 18,999)" class="plan-checkout-btn w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition border border-white/10 cursor-pointer">
-          Book Founder Onboarding
+      <div class="bento-card rounded-3xl p-6 scroll-anim">
+        <div class="w-11 h-11 rounded-2xl bg-pink-500/20 border border-pink-500/40 flex items-center justify-center text-xl mb-4">🖼️</div>
+        <h3 class="text-lg font-bold text-white mb-2">Dynamic B-Roll & Kinetic Subtitles</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Automatically pairs your script with Ken Burns animated stock photography or your uploaded product imagery, topped with Hormozi-style kinetic captions.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIRECT WHATSAPP PRODUCTION DESK CTA -->
+  <section id="whatsapp-desk" class="relative z-10 max-w-5xl mx-auto px-4 pb-24 scroll-anim">
+    <div class="bento-card rounded-3xl p-6 sm:p-10 border border-emerald-500/30 text-center space-y-4">
+      <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-xs font-bold uppercase">Direct Founder Concierge</span>
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-white">Want Our Studio Team to Deliver 1080p MP4s?</h2>
+      <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
+        Generate your blueprint above for free, then send it with one click to our WhatsApp production line (+91 7820847387) for custom B-roll grading, voice cloning, and daily posting.
+      </p>
+      <div class="pt-2">
+        <button type="button" id="bottomWhatsAppBtn" class="px-7 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider transition shadow-xl shadow-emerald-500/20 cursor-pointer">
+          💬 Send Current Project to WhatsApp (+91 7820847387)
         </button>
       </div>
     </div>
   </section>
 
-  <!-- MODAL 1: Gemini API Key Setup -->
-  <div id="apiModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="glass-card max-w-md w-full rounded-2xl p-6 border border-white/15 space-y-4">
+  <!-- MODAL 1: LOGIN & REGISTER AUTHENTICATION -->
+  <div id="authModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bento-card max-w-md w-full rounded-3xl p-6 sm:p-8 border border-white/15 space-y-5">
       <div class="flex items-center justify-between">
-        <h3 class="text-base font-bold text-white">Connect Google Gemini API Key (Optional)</h3>
-        <button type="button" id="closeApiModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-500 to-pink-500 flex items-center justify-center font-bold text-white text-sm">R</div>
+          <span class="font-bold text-base text-white font-display">ReelFlow Account</span>
+        </div>
+        <button type="button" id="closeAuthModalBtn" class="text-slate-400 hover:text-white text-base cursor-pointer">✕</button>
       </div>
-      <p class="text-xs text-slate-300 leading-relaxed">
-        ReelFlow works out-of-the-box using its built-in Neural Script Engine. To supercharge it with live <b>Google Gemini 2.5 Flash</b> generations, paste a free API key from <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-indigo-400 underline">Google AI Studio</a>:
-      </p>
-      <input id="geminiKeyInput" type="password" placeholder="AIzaSy..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white mono-font">
-      <div class="flex justify-end gap-2">
-        <button type="button" id="clearApiKeyBtn" class="px-3.5 py-2 rounded-xl bg-slate-800 text-xs text-slate-300 cursor-pointer">Use Default Engine</button>
-        <button type="button" id="saveApiKeyBtn" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white cursor-pointer">Save Key</button>
+
+      <!-- Auth Tabs -->
+      <div class="grid grid-cols-2 gap-2 p-1 rounded-2xl bg-black/60 border border-white/10">
+        <button type="button" id="tabLoginBtn" class="py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold transition cursor-pointer">Sign In</button>
+        <button type="button" id="tabRegisterBtn" class="py-2 rounded-xl text-slate-400 hover:text-white text-xs font-bold transition cursor-pointer">Create Account</button>
       </div>
-    </div>
-  </div>
 
-  <!-- MODAL 2: Lead Capture & WhatsApp Checkout -->
-  <div id="checkoutModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="glass-card max-w-md w-full rounded-2xl p-6 border border-white/15 space-y-4">
-      <div class="flex items-center justify-between">
-        <span class="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-[10px] font-bold uppercase">Direct Production Order</span>
-        <button type="button" id="closeCheckoutModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
-      </div>
-      <h3 id="selectedPlanTitle" class="text-lg font-bold text-white">Single Pro MP4 Render (Rs 299)</h3>
-      <p class="text-xs text-slate-300">
-        Your generated script and scene blueprint are ready! Enter your details below to send this brief directly to our production desk on WhatsApp.
-      </p>
-      <div class="space-y-3">
-        <input id="clientName" type="text" placeholder="Your Name or Brand Name *" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white">
-        <input id="clientPhone" type="text" placeholder="Your WhatsApp Number or Instagram @handle *" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white">
-      </div>
-      <button type="button" id="sendWhatsAppBtn" class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider transition cursor-pointer">
-        Send Script & Order on WhatsApp
-      </button>
-      <p class="text-[10px] text-slate-500 text-center">Pay via UPI only after reviewing your watermarked video sample.</p>
-    </div>
-  </div>
-
-  <!-- PURE ASCII BULLETPROOF JAVASCRIPT ENGINE -->
-  <script>
-    (function() {
-      // Replace 919000000000 with your own 10-digit WhatsApp number (keep 91 in front)
-      var FOUNDER_WHATSAPP = "919000000000";
-
-      var PRESETS = {
-        coffee: {
-          brand: "Asli Cold Brew Coffee",
-          audience: "Young professionals and college students tired of spending Rs 350 on watery cafe coffee",
-          tone: "controversial",
-          lang: "english",
-          cta: "Comment BREW to get our Rs 149 starter pack link in your DMs"
-        },
-        fintech: {
-          brand: "CampusCard Rewards Optimizer",
-          audience: "College students booking domestic flights and movie tickets without claiming bank discounts",
-          tone: "data",
-          lang: "hinglish",
-          cta: "Comment SAVE and unlock our free student card reward calculator"
-        },
-        saas: {
-          brand: "PayPulse AI Invoice Recovery",
-          audience: "B2B agency founders and freelancers chasing late client invoices every month",
-          tone: "story",
-          lang: "english",
-          cta: "Comment PAID to automate your overdue client follow-ups for free"
-        },
-        streetwear: {
-          brand: "KalaGhoda Heavyweight Tees",
-          audience: "Gen-Z streetwear lovers in Mumbai tired of shrinking fast-fashion t-shirts",
-          tone: "secret",
-          lang: "hinglish",
-          cta: "Comment DROP for early access to our 280 GSM limited batch"
-        }
-      };
-
-      var currentProject = null;
-      var activeSceneIdx = 0;
-      var isPlaying = false;
-      var playTimer = null;
-      var animFrameId = null;
-      var pulseTick = 0;
-      var selectedPlan = "Single Pro MP4 Render (Rs 299)";
-      var credits = parseInt(localStorage.getItem("rf_credits_v3") || "3", 10);
-
-      function showToast(msg) {
-        var t = document.getElementById("toastBanner");
-        if (!t) return;
-        t.textContent = msg;
-        t.classList.remove("hidden");
-        setTimeout(function() {
-          t.classList.add("hidden");
-        }, 2600);
-      }
-
-      function updateCreditsDisplay() {
-        var el = document.getElementById("creditCounter");
-        if (el) {
-          el.textContent = Math.max(credits, 0) + " Free Credits";
-        }
-      }
-
-      function generateLocalBlueprint(brand, audience, tone, lang, cta) {
-        var cleanBrand = (brand || "Your Brand").trim();
-        var cleanAud = (audience || "ambitious customers").trim();
-        var cleanCta = (cta || "Follow and comment LINK for instant access").trim();
-        var handle = "@" + cleanBrand.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 14) + "_official";
-
-        var hooks = [];
-        var scenes = [];
-
-        if (lang === "hinglish") {
-          hooks = [
-            "Bhai, agar aap abhi bhi " + cleanBrand + " ignore kar rahe ho, toh har mahine paise waste kar rahe ho.",
-            "99% log yeh ek galti karte hain—especially " + cleanAud.slice(0, 48) + ".",
-            "Sach bataun? Mainstream options scam lagte hain jab aap " + cleanBrand + " ka real math dekhte ho."
-          ];
-          scenes = [
-            {
-              time: "00:00 - 00:03",
-              label: "HOOK PHASE",
-              visual: "Fast zoom-in shot + high-contrast kinetic text on " + cleanBrand,
-              voice: hooks[0]
-            },
-            {
-              time: "00:03 - 00:09",
-              label: "PAIN POINT",
-              visual: "Split-screen showing daily frustration for " + cleanAud.slice(0, 50),
-              voice: "Dekho problem simple hai: " + cleanAud + " roz time aur paisa lagate hain, par output zero milta hai."
-            },
-            {
-              time: "00:09 - 00:18",
-              label: "THE SOLUTION",
-              visual: "Crisp 9:16 product demo of " + cleanBrand + " with glowing metric callouts",
-              voice: "Isiliye humne build kiya " + cleanBrand + ". Bina kisi manual headache ke, aapko milta hai 3X faster result."
-            },
-            {
-              time: "00:18 - 00:24",
-              label: "DIRECT CTA",
-              visual: "Animated arrow pointing to comment box with urgency badge",
-              voice: "Abhi try karke dekho—" + cleanCta + "!"
-            }
-          ];
-        } else {
-          var bank = {
-            controversial: [
-              "Stop wasting money on outdated options if you care about " + cleanBrand + ".",
-              "Unpopular opinion: 90% of what " + cleanAud.slice(0, 44) + " were told is completely backwards.",
-              "Do NOT spend another rupee until you see how " + cleanBrand + " changes the game."
-            ],
-            data: [
-              "We analyzed 500+ cases for " + cleanAud.slice(0, 40) + " and one number changed everything.",
-              "Here is the exact math behind how " + cleanBrand + " saves 10+ hours every single week.",
-              "3 brutal numbers every person dealing with " + cleanBrand + " needs to see today."
-            ],
-            story: [
-              "Six months ago, we watched " + cleanAud.slice(0, 44) + " hit the exact same wall every week.",
-              "Everyone doubted us when we launched " + cleanBrand + "—until they saw the 30-day results.",
-              "We tested every mainstream option on the market so you do not have to make the same mistake."
-            ],
-            secret: [
-              "The industry does not want " + cleanAud.slice(0, 42) + " to know this simple shortcut exists.",
-              "Feels illegal to know: How top performers quietly use " + cleanBrand + " to win.",
-              "Here is the unfair advantage behind " + cleanBrand + " nobody is talking about."
-            ]
-          };
-
-          hooks = bank[tone] || bank.controversial;
-          scenes = [
-            {
-              time: "00:00 - 00:03",
-              label: "HOOK PHASE",
-              visual: "Pattern-interrupt close-up shot with bold kinetic captions for " + cleanBrand,
-              voice: hooks[0]
-            },
-            {
-              time: "00:03 - 00:09",
-              label: "THE PROBLEM",
-              visual: "High-contrast B-roll illustrating the struggle of " + cleanAud.slice(0, 50),
-              voice: "Right now, " + cleanAud + " are stuck overpaying and losing hours on broken workflows."
-            },
-            {
-              time: "00:09 - 00:18",
-              label: "PRODUCT REVEAL",
-              visual: "Sleek vertical showcase of " + cleanBrand + " delivering instant results",
-              voice: "That is why " + cleanBrand + " was engineered from day one to deliver studio-grade results in half the time."
-            },
-            {
-              time: "00:18 - 00:24",
-              label: "CALL TO ACTION",
-              visual: "Bold animated end-card with glowing comment trigger",
-              voice: "Do not get left behind. " + cleanCta + "!"
-            }
-          ];
-        }
-
-        var score = (87 + Math.floor(Math.random() * 10)) + "%";
-        return {
-          brand: cleanBrand,
-          handle: handle,
-          cta: cleanCta,
-          retention: score,
-          activeHookIndex: 0,
-          hooks: hooks,
-          scenes: scenes
-        };
-      }
-
-      async function generateViaGeminiAPI(apiKey, brand, audience, tone, lang, cta) {
-        var prompt = "You are a viral short-form video director. Create a 4-scene vertical Reel script for:\n" +
-          "Brand: " + brand + "\nAudience: " + audience + "\nTone: " + tone + "\nLanguage: " + lang + "\nCTA: " + cta + "\n" +
-          "Return ONLY valid JSON with keys: retention (string like '93%'), hooks (array of 3 strings), and scenes (array of 4 objects with time, label, visual, voice).";
-
-        var response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + encodeURIComponent(apiKey), {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { responseMimeType: "application/json" }
-          })
-        });
-        var json = await response.json();
-        var raw = json.candidates[0].content.parts[0].text;
-        var parsed = JSON.parse(raw);
-        return {
-          brand: brand,
-          handle: "@" + brand.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 14) + "_ai",
-          cta: cta,
-          retention: parsed.retention || "92%",
-          activeHookIndex: 0,
-          hooks: parsed.hooks,
-          scenes: parsed.scenes
-        };
-      }
-
-      function renderUI() {
-        if (!currentProject) return;
-
-        document.getElementById("retentionScore").textContent = "Retention: " + currentProject.retention;
-
-        // Render Hooks
-        var hooksBox = document.getElementById("hooksContainer");
-        hooksBox.innerHTML = "";
-        currentProject.hooks.forEach(function(hookText, idx) {
-          var isSelected = idx === currentProject.activeHookIndex;
-          var btn = document.createElement("div");
-          btn.className = "cursor-pointer p-2.5 rounded-xl border transition text-xs flex items-start gap-2 " +
-            (isSelected ? "bg-indigo-600/25 border-indigo-400 text-white font-semibold" : "bg-slate-900/90 border-white/10 text-slate-300 hover:border-white/30");
-          btn.innerHTML = '<span class="px-1.5 py-0.5 rounded text-[10px] mono-font ' +
-            (isSelected ? 'bg-indigo-500 text-white' : 'bg-slate-800 text-slate-400') + '">H' + (idx + 1) + '</span>' +
-            '<span>"' + hookText + '"</span>';
-          btn.addEventListener("click", function() {
-            currentProject.activeHookIndex = idx;
-            currentProject.scenes[0].voice = currentProject.hooks[idx];
-            activeSceneIdx = 0;
-            renderUI();
-            showToast("Switched active 3-second hook to H" + (idx + 1));
-          });
-          hooksBox.appendChild(btn);
-        });
-
-        // Render 4 Scenes
-        var scenesBox = document.getElementById("scenesContainer");
-        scenesBox.innerHTML = "";
-        currentProject.scenes.forEach(function(sc, idx) {
-          var isActive = idx === activeSceneIdx;
-          var card = document.createElement("div");
-          card.className = "cursor-pointer p-3 rounded-xl border transition " +
-            (isActive ? "bg-purple-950/40 border-purple-400 shadow-md" : "bg-slate-900/75 border-white/10 hover:border-white/25");
-          card.innerHTML =
-            '<div class="flex items-center justify-between text-[10px] mono-font mb-1">' +
-              '<span class="text-amber-300 font-bold">[SCENE ' + (idx + 1) + ': ' + sc.label + ']</span>' +
-              '<span class="text-slate-400">' + sc.time + '</span>' +
-            '</div>' +
-            '<p class="text-[11px] text-indigo-300 mb-1"><b>Visual:</b> ' + sc.visual + '</p>' +
-            '<p class="text-xs text-white font-medium"><b>Voice:</b> "' + sc.voice + '"</p>';
-          card.addEventListener("click", function() {
-            stopPlayback();
-            activeSceneIdx = idx;
-            renderUI();
-          });
-          scenesBox.appendChild(card);
-        });
-
-        drawCanvasFrame();
-      }
-
-      // Word-wrap helper for HTML5 Canvas
-      function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
-        var words = text.split(" ");
-        var line = "";
-        var lines = [];
-        for (var n = 0; n < words.length; n++) {
-          var testLine = line + words[n] + " ";
-          var metrics = ctx.measureText(testLine);
-          if (metrics.width > maxWidth && n > 0) {
-            lines.push(line.trim());
-            line = words[n] + " ";
-          } else {
-            line = testLine;
-          }
-        }
-        lines.push(line.trim());
-
-        var startY = y - ((lines.length - 1) * lineHeight) / 2;
-        for (var i = 0; i < lines.length; i++) {
-          ctx.fillText(lines[i], x, startY + i * lineHeight);
-        }
-      }
-
-      // Draws the 9:16 Vertical Reel directly onto HTML5 Canvas
-      function drawCanvasFrame() {
-        var canvas = document.getElementById("reelCanvas");
-        if (!canvas || !currentProject) return;
-        var ctx = canvas.getContext("2d");
-        var W = canvas.width;
-        var H = canvas.height;
-        var scene = currentProject.scenes[activeSceneIdx] || currentProject.scenes[0];
-
-        pulseTick += 0.04;
-
-        // Dynamic Scene Gradient Palettes
-        var palettes = [
-          ["#1e1b4b", "#090d16", "#3b0764"],
-          ["#3b0764", "#090d16", "#4c0519"],
-          ["#064e3b", "#090d16", "#1e1b4b"],
-          ["#451a03", "#090d16", "#500724"]
-        ];
-        var pal = palettes[activeSceneIdx % palettes.length];
-
-        var grad = ctx.createLinearGradient(0, 0, W, H);
-        grad.addColorStop(0, pal[0]);
-        grad.addColorStop(0.5, pal[1]);
-        grad.addColorStop(1, pal[2]);
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, W, H);
-
-        // Animated glowing orb in background
-        var orbY = H * 0.42 + Math.sin(pulseTick) * 28;
-        var radGrad = ctx.createRadialGradient(W / 2, orbY, 20, W / 2, orbY, 260);
-        radGrad.addColorStop(0, "rgba(129, 140, 248, 0.28)");
-        radGrad.addColorStop(1, "rgba(129, 140, 248, 0)");
-        ctx.fillStyle = radGrad;
-        ctx.fillRect(0, 0, W, H);
-
-        // Top 4 Story Progress Bars
-        var barWidth = (W - 70) / 4;
-        for (var i = 0; i < 4; i++) {
-          var bx = 20 + i * (barWidth + 10);
-          ctx.fillStyle = "rgba(255,255,255,0.22)";
-          ctx.fillRect(bx, 28, barWidth, 8);
-          if (i <= activeSceneIdx) {
-            ctx.fillStyle = "#ffffff";
-            ctx.fillRect(bx, 28, barWidth, 8);
-          }
-        }
-
-        // Scene Badge
-        ctx.fillStyle = "rgba(0,0,0,0.65)";
-        ctx.fillRect(20, 54, 240, 42);
-        ctx.fillStyle = "#fcd34d";
-        ctx.font = "bold 20px 'JetBrains Mono', monospace";
-        ctx.textAlign = "left";
-        ctx.fillText("SCENE " + (activeSceneIdx + 1) + "/4: " + scene.label, 34, 81);
-
-        // Visual Camera Directive Box
-        ctx.fillStyle = "rgba(255,255,255,0.1)";
-        ctx.fillRect(36, 220, W - 72, 95);
-        ctx.fillStyle = "#c7d2fe";
-        ctx.font = "600 21px 'Plus Jakarta Sans', sans-serif";
-        ctx.textAlign = "center";
-        wrapCanvasText(ctx, "B-ROLL: " + scene.visual, W / 2, 268, W - 110, 28);
-
-        // Main Bold Kinetic Karaoke Caption
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "800 38px 'Plus Jakarta Sans', sans-serif";
-        ctx.textAlign = "center";
-        wrapCanvasText(ctx, '"' + scene.voice.toUpperCase() + '"', W / 2, H * 0.56, W - 80, 48);
-
-        // Bottom Handle & CTA Overlay
-        ctx.fillStyle = "rgba(0,0,0,0.65)";
-        ctx.fillRect(0, H - 150, W, 150);
-
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 24px 'Plus Jakarta Sans', sans-serif";
-        ctx.textAlign = "left";
-        ctx.fillText(currentProject.handle, 26, H - 95);
-
-        ctx.fillStyle = "#a5b4fc";
-        ctx.font = "500 20px 'Plus Jakarta Sans', sans-serif";
-        ctx.fillText(currentProject.cta.slice(0, 44), 26, H - 58);
-
-        ctx.fillStyle = "#34d399";
-        ctx.font = "bold 18px 'JetBrains Mono', monospace";
-        ctx.fillText("AI Voiceover • ReelFlow Studio", 26, H - 25);
-      }
-
-      async function handleGenerateClick() {
-        stopPlayback();
-        var btn = document.getElementById("generateBtn");
-        var brand = document.getElementById("brandInput").value;
-        var audience = document.getElementById("audienceInput").value;
-        var tone = document.getElementById("toneInput").value;
-        var lang = document.getElementById("langInput").value;
-        var cta = document.getElementById("ctaInput").value;
-
-        btn.disabled = true;
-        btn.textContent = "Generating Hooks & Scenes...";
-
-        var savedKey = localStorage.getItem("rf_gemini_key_v3");
-        try {
-          if (savedKey) {
-            currentProject = await generateViaGeminiAPI(savedKey, brand, audience, tone, lang, cta);
-          } else {
-            currentProject = generateLocalBlueprint(brand, audience, tone, lang, cta);
-          }
-        } catch (err) {
-          currentProject = generateLocalBlueprint(brand, audience, tone, lang, cta);
-        }
-
-        if (credits > 0) {
-          credits--;
-          localStorage.setItem("rf_credits_v3", String(credits));
-          updateCreditsDisplay();
-        }
-
-        activeSceneIdx = 0;
-        renderUI();
-
-        btn.disabled = false;
-        btn.textContent = "Generate Custom Reel & Script";
-        showToast("Generated new 4-scene Reel for " + currentProject.brand + "!");
-      }
-
-      function startPlayback() {
-        if (isPlaying) {
-          stopPlayback();
-          return;
-        }
-        isPlaying = true;
-        activeSceneIdx = 0;
-        document.getElementById("playReelBtn").textContent = "Stop Preview";
-        document.getElementById("playerStateLabel").textContent = "PLAYING VOICE";
-
-        function loopAnim() {
-          if (!isPlaying) return;
-          drawCanvasFrame();
-          animFrameId = requestAnimationFrame(loopAnim);
-        }
-        loopAnim();
-
-        playSceneVoice(0);
-      }
-
-      function playSceneVoice(idx) {
-        if (!isPlaying || !currentProject || idx >= currentProject.scenes.length) {
-          stopPlayback();
-          return;
-        }
-        activeSceneIdx = idx;
-        renderUI();
-
-        var line = currentProject.scenes[idx].voice;
-        if ("speechSynthesis" in window) {
-          window.speechSynthesis.cancel();
-          var utter = new SpeechSynthesisUtterance(line);
-          utter.rate = 1.05;
-          utter.onend = function() {
-            if (isPlaying) playSceneVoice(idx + 1);
-          };
-          utter.onerror = function() {
-            if (isPlaying) playSceneVoice(idx + 1);
-          };
-          window.speechSynthesis.speak(utter);
-        } else {
-          playTimer = setTimeout(function() {
-            playSceneVoice(idx + 1);
-          }, 3500);
-        }
-      }
-
-      function stopPlayback() {
-        isPlaying = false;
-        if (playTimer) clearTimeout(playTimer);
-        if (animFrameId) cancelAnimationFrame(animFrameId);
-        if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-        var btn = document.getElementById("playReelBtn");
-        if (btn) btn.textContent = "Play w/ Voice";
-        var lbl = document.getElementById("playerStateLabel");
-        if (lbl) lbl.textContent = "READY";
-      }
-
-      // Real Browser Video File Renderer (.webm download)
-      function exportRealVideoWebM() {
-        var canvas = document.getElementById("reelCanvas");
-        if (!canvas || typeof MediaRecorder === "undefined") {
-          showToast("Your browser does not support direct WebM recording. Use Chrome/Edge!");
-          return;
-        }
-        stopPlayback();
-        showToast("Recording 4-scene vertical video... Please wait 8 seconds.");
-        document.getElementById("playerStateLabel").textContent = "RENDERING VIDEO...";
-
-        var stream = canvas.captureStream(30);
-        var recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
-        var chunks = [];
-        recorder.ondataavailable = function(e) {
-          if (e.data && e.data.size > 0) chunks.push(e.data);
-        };
-        recorder.onstop = function() {
-          var blob = new Blob(chunks, { type: "video/webm" });
-          var url = URL.createObjectURL(blob);
-          var a = document.createElement("a");
-          a.href = url;
-          a.download = currentProject.brand.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-reel.webm";
-          a.click();
-          document.getElementById("playerStateLabel").textContent = "READY";
-          showToast("Video file (.webm) downloaded to your laptop!");
-        };
-
-        recorder.start();
-        var step = 0;
-        var recInterval = setInterval(function() {
-          activeSceneIdx = step;
-          renderUI();
-          step++;
-          if (step >= 4) {
-            clearInterval(recInterval);
-            setTimeout(function() {
-              recorder.stop();
-            }, 1800);
-          }
-        }, 1800);
-      }
-
-      function openCheckout(planTitle) {
-        selectedPlan = planTitle;
-        document.getElementById("selectedPlanTitle").textContent = planTitle;
-        document.getElementById("checkoutModal").classList.remove("hidden");
-      }
-
-      // Bind all events safely on DOMContentLoaded
-      window.addEventListener("DOMContentLoaded", function() {
-        updateCreditsDisplay();
-
-        // Initial project load
-        currentProject = generateLocalBlueprint(
-          document.getElementById("brandInput").value,
-          document.getElementById("audienceInput").value,
-          document.getElementById("toneInput").value,
-          document.getElementById("langInput").value,
-          document.getElementById("ctaInput").value
-        );
-        renderUI();
-
-        // Preset buttons
-        var presetBtns = document.querySelectorAll(".preset-btn");
-        presetBtns.forEach(function(btn) {
-          btn.addEventListener("click", function() {
-            var key = btn.getAttribute("data-preset");
-            var p = PRESETS[key];
-            if (!p) return;
-            document.getElementById("brandInput").value = p.brand;
-            document.getElementById("audienceInput").value = p.audience;
-            document.getElementById("toneInput").value = p.tone;
-            document.getElementById("langInput").value = p.lang;
-            document.getElementById("ctaInput").value = p.cta;
-            handleGenerateClick();
-          });
-        });
-
-        // Main Generate Button
-        document.getElementById("generateBtn").addEventListener("click", handleGenerateClick);
-
-        // Play & Next Scene Buttons
-        document.getElementById("playReelBtn").addEventListener("click", startPlayback);
-        document.getElementById("nextSceneBtn").addEventListener("click", function() {
-          stopPlayback();
-          activeSceneIdx = (activeSceneIdx + 1) % currentProject.scenes.length;
-          renderUI();
-        });
-
-        // Copy Script Button
-        document.getElementById("copyScriptBtn").addEventListener("click", function() {
-          var txt = currentProject.scenes.map(function(s, i) {
-            return "SCENE " + (i + 1) + " (" + s.time + " - " + s.label + ")\nVisual: " + s.visual + "\nVoice: " + s.voice;
-          }).join("\n\n");
-          navigator.clipboard.writeText(txt);
-          showToast("Copied full 4-scene script to clipboard!");
-        });
-
-        // Download .TXT Button
-        document.getElementById("downloadTxtBtn").addEventListener("click", function() {
-          var content = "REELFLOW AI BLUEPRINT - " + currentProject.brand + "\nRetention Score: " + currentProject.retention + "\n\n" +
-            currentProject.scenes.map(function(s, i) {
-              return "[SCENE " + (i + 1) + " | " + s.time + " | " + s.label + "]\nVisual: " + s.visual + "\nVoiceover: " + s.voice;
-            }).join("\n\n");
-          var blob = new Blob([content], { type: "text/plain" });
-          var a = document.createElement("a");
-          a.href = URL.createObjectURL(blob);
-          a.download = currentProject.brand.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-script.txt";
-          a.click();
-          showToast("Downloaded script .TXT file!");
-        });
-
-        // Export Real Video (.WEBM) Button
-        document.getElementById("exportVideoFileBtn").addEventListener("click", exportRealVideoWebM);
-
-        // Pricing & Checkout Modal Buttons
-        document.getElementById("topUpgradeBtn").addEventListener("click", function() {
-          openCheckout("Startup Growth Plan - 15 Reels/mo (Rs 8,999)");
-        });
-        document.getElementById("orderProMp4Btn").addEventListener("click", function() {
-          openCheckout("Single Studio 1080p MP4 Edit (Rs 299)");
-        });
-        document.querySelectorAll(".plan-checkout-btn").forEach(function(b) {
-          b.addEventListener("click", function() {
-            openCheckout(b.getAttribute("data-plan"));
-          });
-        });
-        document.getElementById("closeCheckoutModalBtn").addEventListener("click", function() {
-          document.getElementById("checkoutModal").classList.add("hidden");
-        });
-        document.getElementById("sendWhatsAppBtn").addEventListener("click", function() {
-          var name = document.getElementById("clientName").value || "Founder";
-          var phone = document.getElementById("clientPhone").value || "Not provided";
-          var summary = currentProject.scenes.map(function(s, i) { return "S" + (i + 1) + ": " + s.voice; }).join(" | ");
-          var msg = encodeURIComponent(
-            "Hi ReelFlow AI!\n\nOrder Plan: " + selectedPlan +
-            "\nClient: " + name + " (" + phone + ")" +
-            "\nBrand Topic: " + currentProject.brand +
-            "\nGenerated Script: " + summary
-          );
-          window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + msg, "_blank");
-          document.getElementById("checkoutModal").classList.add("hidden");
-        });
-
-        // API Modal Buttons
-        document.getElementById("openApiModalBtn").addEventListener("click", function() {
-          document.getElementById("geminiKeyInput").value = localStorage.getItem("rf_gemini_key_v3") || "";
-          document.getElementById("apiModal").classList.remove("hidden");
-        });
-        document.getElementById("closeApiModalBtn").addEventListener("click", function() {
-          document.getElementById("apiModal").classList.add("hidden");
-        });
-        document.getElementById("saveApiKeyBtn").addEventListener("click", function() {
-          var key = document.getElementById("geminiKeyInput").value.trim();
-          if (key) {
-            localStorage.setItem("rf_gemini_key_v3", key);
-            document.getElementById("engineBadge").textContent = "● Gemini 2.5 Flash Live Connected";
-            showToast("Connected Live Gemini API Key!");
-          }
-          document.getElementById("apiModal").classList.add("hidden");
-        });
-        document.getElementById("clearApiKeyBtn").addEventListener("click", function() {
-          localStorage.removeItem("rf_gemini_key_v3");
-          document.getElementById("engineBadge").textContent = "● Neural Script & Canvas Engine Active";
-          document.getElementById("apiModal").classList.add("hidden");
-          showToast("Switched to Built-In Neural Engine.");
-        });
-      });
-    })();
-  </script>
-</body>
-</html>
+      <form id="authForm" class="space-y-3.5">
+        <div id
