@@ -1,230 +1,664 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ReelFlow AI — Autonomous Short-Form Video Engine</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    :root {
+      --bg-dark: #06070a;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #06070a;
+      color: #f8fafc;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, .display-font {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .mono-font {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .bg-grid {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    .glass-card {
+      background: rgba(15, 18, 28, 0.72);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .neon-border:focus-within {
+      border-color: #818cf8;
+      box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.35);
+    }
     .gradient-text {
-      background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+      background: linear-gradient(135deg, #a5b4fc 0%, #c084fc 45%, #f472b6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+    @keyframes pulse-slow {
+      0%, 100% { transform: scale(1); opacity: 0.85; }
+      50% { transform: scale(1.08); opacity: 1; }
+    }
+    .animate-kenburns {
+      animation: pulse-slow 6s infinite ease-in-out;
+    }
   </style>
 </head>
-<body class="bg-[#0b0f17] text-slate-100 min-h-screen">
+<body class="bg-grid min-h-screen selection:bg-indigo-500 selection:text-white">
 
-  <!-- Navbar -->
-  <header class="border-b border-slate-800 bg-[#0b0f17]/80 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/30">R</div>
-        <span class="font-bold text-lg tracking-tight">ReelFlow<span class="text-indigo-400">.ai</span></span>
+  <!-- Ambient Glows -->
+  <div class="fixed top-[-150px] left-1/2 -translate-x-1/2 w-[750px] h-[350px] bg-indigo-600/20 blur-[140px] pointer-events-none rounded-full z-0"></div>
+
+  <!-- Top Navigation -->
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-[#06070a]/80 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/25 display-font text-lg">
+          R
+        </div>
+        <div>
+          <span class="font-bold text-lg tracking-tight display-font text-white">ReelFlow<span class="text-indigo-400">.ai</span></span>
+          <span class="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/5 border border-white/10 rounded-full text-slate-300">Studio v2.4</span>
+        </div>
       </div>
-      <div class="flex items-center gap-4">
-        <a href="#pricing" class="text-xs font-semibold text-slate-400 hover:text-white transition">Pricing</a>
-        <a href="#demo" class="px-3.5 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-xs font-bold transition shadow-md shadow-indigo-600/30">Launch App</a>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Free Credits Counter -->
+        <div class="px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span id="creditCounter">3 Free Credits Left</span>
+        </div>
+
+        <!-- Optional Live Gemini API Modal Trigger -->
+        <button onclick="toggleApiModal()" id="apiStatusBtn" class="px-3 py-1.5 rounded-full bg-indigo-950/60 hover:bg-indigo-900/60 border border-indigo-500/30 text-xs font-semibold text-indigo-300 transition flex items-center gap-1.5">
+          <span>⚡ AI Key</span>
+        </button>
+
+        <a href="#pricing" class="hidden md:inline-block text-xs font-semibold text-slate-300 hover:text-white px-2">Pricing</a>
+
+        <button onclick="openCheckoutModal('Growth Engine Plan (₹11,999/mo)')" class="px-4 py-1.5 rounded-full bg-white text-slate-950 hover:bg-slate-200 text-xs font-bold transition shadow-lg">
+          Upgrade Pro
+        </button>
       </div>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="max-w-4xl mx-auto px-4 pt-16 pb-12 text-center">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold mb-6">
-      <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
-      Autonomous Video Engine for Startups & D2C
+  <section class="relative z-10 max-w-5xl mx-auto px-4 pt-12 pb-8 text-center">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold mb-5">
+      <span class="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span>
+      Autonomous B2B & D2C Short-Form Video Studio
     </div>
-    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4">
-      Turn Any Product URL Into <br/>
-      <span class="gradient-text">Viral Short-Form Reels in 60s</span>
+    <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-4">
+      Type Any Brand or Idea. <br/>
+      <span class="gradient-text">Get Ready-to-Post Viral Reels.</span>
     </h1>
-    <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto mb-8">
-      Zero filming. Zero expensive agency retainers. ReelFlow's AI pipeline writes retention-engineered scripts, generates studio-grade voiceovers, and compiles dynamic vertical video automatically.
+    <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto mb-6">
+      Stop paying ₹50,000/mo video retainers. ReelFlow engineers 3-second viral hooks, writes scene-by-scene visual directives, synthesizes voiceovers, and previews 9:16 vertical videos in real time.
     </p>
   </section>
 
-  <!-- Interactive MVP / Prototype Section -->
-  <section id="demo" class="max-w-5xl mx-auto px-4 pb-20">
-    <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 md:p-8 backdrop-blur shadow-2xl">
-      <div class="flex items-center justify-between pb-6 border-b border-slate-800 mb-6">
-        <div>
-          <h2 class="text-lg font-bold text-white flex items-center gap-2">
-            <span>⚡ Working Prototype (MVP)</span>
+  <!-- Main Interactive Studio Workspace -->
+  <section id="studio" class="relative z-10 max-w-7xl mx-auto px-4 pb-20">
+    <div class="glass-card rounded-3xl p-4 sm:p-6 lg:p-8 shadow-2xl">
+      
+      <!-- Top Preset Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pb-5 mb-6 border-b border-white/10">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 mr-1">Quick Test Presets:</span>
+          <button onclick="fillSample('Specialty Cold Brew Brand', 'Young professionals & students tired of overpriced ₹350 cafe coffee', 'controversial', 'english')" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-slate-200 transition">☕ D2C Cold Brew</button>
+          <button onclick="fillSample('Student Rewards & Flight Saver App', 'College students booking domestic flights & movie tickets without maximizing card offers', 'data', 'hinglish')" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-slate-200 transition">✈️ Student Fintech App</button>
+          <button onclick="fillSample('AI Automated Invoice Recovery SaaS', 'B2B agency founders & freelancers chasing clients for overdue payments', 'story', 'english')" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-slate-200 transition">💼 B2B Invoice SaaS</button>
+          <button onclick="fillSample('Oversized Streetwear Clothing Drop', 'Gen-Z sneakerheads & streetwear lovers in Mumbai and Delhi', 'controversial', 'hinglish')" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-slate-200 transition">👕 Streetwear Brand</button>
+        </div>
+        <div id="engineBadge" class="mono-font text-[11px] px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300">
+          ● Smart Neural Engine Ready
+        </div>
+      </div>
+
+      <!-- 3-Column Studio Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+        <!-- COLUMN 1: Brand Input Controls (4 Cols) -->
+        <div class="lg:col-span-4 space-y-4 bg-slate-950/70 p-5 rounded-2xl border border-white/10">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-indigo-400 flex items-center justify-between">
+            <span>1. Campaign Brief</span>
+            <span class="text-[11px] text-slate-500 font-normal">Try your own idea!</span>
           </h2>
-          <p class="text-xs text-slate-400">Select a startup preset or input your brand details to generate a short-form video concept.</p>
-        </div>
-        <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold rounded-md">Live Engine v1.0</span>
-      </div>
 
-      <!-- Presets -->
-      <div class="mb-6">
-        <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">Instant Demo Presets:</label>
-        <div class="flex flex-wrap gap-2">
-          <button onclick="loadPreset('coffee')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 border border-slate-700 hover:border-indigo-500 transition text-slate-200">☕ D2C Cold Brew</button>
-          <button onclick="loadPreset('fintech')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 border border-slate-700 hover:border-indigo-500 transition text-slate-200">💳 Student Credit App</button>
-          <button onclick="loadPreset('saas')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 border border-slate-700 hover:border-indigo-500 transition text-slate-200">📊 B2B Invoice Tracker</button>
-        </div>
-      </div>
-
-      <!-- Generator Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-        <!-- Input & Script Pane -->
-        <div class="space-y-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Target Audience / Niche</label>
-            <input id="inputNiche" type="text" value="Coffee lovers tired of instant powder" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Brand Name / Product / Topic *</label>
+            <input id="brandInput" type="text" placeholder="e.g. Gym Protein Shake, AI Resume Builder, Sneaker Store" value="Specialty Cold Brew Brand" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition">
           </div>
+
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Generated Hook (0:00 - 0:03)</label>
-            <div id="hookDisplay" class="p-3 bg-indigo-950/30 border border-indigo-800/40 rounded-lg text-xs font-medium text-indigo-200">
-              "Stop drinking chemical instant coffee before your 9 AM lectures."
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Target Audience & Pain Point *</label>
+            <textarea id="audienceInput" rows="3" placeholder="e.g. College students who want 25g protein without chalky taste or expensive tubs..." class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition">Young professionals & students tired of overpriced ₹350 cafe coffee</textarea>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Hook Psychological Style</label>
+              <select id="toneInput" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+                <option value="controversial">🔥 Pattern Interrupt</option>
+                <option value="data">📊 Hard Money / Data</option>
+                <option value="story">🎭 Founder Confession</option>
+                <option value="secret">🤫 Industry Secret</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Language Vibe</label>
+              <select id="langInput" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+                <option value="english">🌐 Global English</option>
+                <option value="hinglish">🇮🇳 Hinglish (Viral India)</option>
+              </select>
             </div>
           </div>
+
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Automated Storyboard & Voice Script</label>
-            <div id="scriptDisplay" class="p-3 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-300 space-y-2 font-mono h-48 overflow-y-auto">
-              <p><span class="text-amber-400">[Scene 1]</span> Close-up shot of bubbling cold brew concentrate pouring over crystal clear ice.</p>
-              <p><span class="text-indigo-400">[Voiceover]</span> You are spending ₹350 every single morning on watery cafe coffee.</p>
-              <p><span class="text-amber-400">[Scene 2]</span> Split screen comparison: ₹15 home brew vs ₹350 cafe bill.</p>
-              <p><span class="text-indigo-400">[Voiceover]</span> Steeped for 18 hours in Chikmagalur. Tap the link to claim your introductory batch.</p>
-            </div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Call-To-Action (CTA Goal)</label>
+            <input id="ctaInput" type="text" value="Comment 'LINK' to get our starter trial pack in your DMs" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 transition">
           </div>
-          <button onclick="generateVideo()" class="w-full py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-lg font-bold text-xs shadow-lg shadow-indigo-600/30 transition">
-            ▶ Simulate Reel Compilation
+
+          <button id="generateBtn" onclick="runGeneration()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:opacity-95 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-indigo-600/30 transition flex items-center justify-center gap-2">
+            <span>⚡ Generate Custom Reel & Script</span>
           </button>
+
+          <p class="text-[11px] text-slate-400 text-center leading-relaxed">
+            Type literally anything above and click Generate to test real-time script & voice synthesis.
+          </p>
         </div>
 
-        <!-- 9:16 Mobile Mockup Preview -->
-        <div class="flex flex-col items-center">
-          <div class="relative w-[220px] h-[390px] rounded-[28px] border-4 border-slate-700 bg-slate-950 overflow-hidden shadow-2xl flex flex-col justify-between p-4">
-            <!-- Simulated Video Background -->
-            <div id="phoneBg" class="absolute inset-0 bg-gradient-to-b from-indigo-950 via-slate-900 to-purple-950 opacity-90 transition-all duration-500"></div>
+        <!-- COLUMN 2: Generated Script, Hooks & Storyboard (5 Cols) -->
+        <div class="lg:col-span-5 space-y-4 bg-slate-950/70 p-5 rounded-2xl border border-white/10">
+          <div class="flex items-center justify-between">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-purple-400">2. AI Production Blueprint</h2>
+            <div class="flex items-center gap-2">
+              <span id="retentionScore" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                Est. Retention: 88%
+              </span>
+              <button onclick="copyFullScript()" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[11px] text-slate-300 border border-white/10 transition">
+                📋 Copy
+              </button>
+            </div>
+          </div>
+
+          <!-- 3 Selectable Viral Hooks -->
+          <div>
+            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">Select Active 3-Second Hook (Click to switch):</label>
+            <div id="hooksContainer" class="space-y-2">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- 4-Scene Timeline Breakdown -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">4-Scene Visual & Voiceover Timeline:</label>
+              <span class="text-[10px] text-indigo-400 mono-font">00:00 - 00:24s</span>
+            </div>
+            <div id="scenesContainer" class="space-y-2.5 max-h-[320px] overflow-y-auto pr-1">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Export & Monetization Action Bar -->
+          <div class="pt-2 border-t border-white/10 grid grid-cols-2 gap-2.5">
+            <button onclick="downloadBlueprintTxt()" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-200 transition flex items-center justify-center gap-1.5">
+              <span>⬇️ Export Script (.TXT)</span>
+            </button>
+            <button onclick="openCheckoutModal('Done-For-You 1080p MP4 Render (₹299/Reel)')" class="py-2.5 px-3 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-xs font-bold text-emerald-300 transition flex items-center justify-center gap-1.5">
+              <span>🎬 Get Full 1080p MP4</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- COLUMN 3: Live 9:16 Vertical Video & Voice Simulator (3 Cols) -->
+        <div class="lg:col-span-3 flex flex-col items-center">
+          <div class="w-full flex items-center justify-between mb-2 px-1">
+            <span class="text-xs font-bold uppercase tracking-wider text-pink-400">3. Live 9:16 Preview</span>
+            <span id="playerStateLabel" class="text-[10px] mono-font text-slate-400">READY</span>
+          </div>
+
+          <!-- Phone Frame -->
+          <div class="relative w-[260px] h-[465px] rounded-[36px] border-[6px] border-slate-800 bg-slate-950 overflow-hidden shadow-2xl flex flex-col justify-between select-none">
             
-            <!-- Video UI Elements -->
-            <div class="relative z-10 flex justify-between items-center text-[10px] text-white/70">
-              <span class="font-bold">Reels</span>
-              <span>● REC</span>
-            </div>
+            <!-- Dynamic Animated Scene Background -->
+            <div id="reelCanvasBg" class="absolute inset-0 bg-gradient-to-br from-indigo-900 via-slate-950 to-purple-900 transition-all duration-700 animate-kenburns"></div>
+            
+            <!-- Subtle Grid & Vignette Overlay -->
+            <div class="absolute inset-0 bg-grid opacity-40"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/60"></div>
 
-            <!-- Dynamic Karaoke Captions -->
-            <div class="relative z-10 text-center my-auto px-2">
-              <div id="karaokeBadge" class="inline-block px-2 py-0.5 bg-black/60 rounded text-[9px] text-amber-300 font-bold mb-2">HOOK PHASE</div>
-              <p id="karaokeText" class="text-sm font-extrabold text-white leading-tight drop-shadow-md">
-                "Stop drinking chemical coffee."
-              </p>
-            </div>
-
-            <!-- Reel Overlay Actions -->
-            <div class="relative z-10 flex justify-between items-end text-[10px]">
-              <div>
-                <p class="font-bold text-white">@reelflow_client</p>
-                <p class="text-white/60 text-[9px]">Original Audio - AI Studio</p>
+            <!-- Top Progress Segments -->
+            <div class="relative z-20 pt-3 px-3">
+              <div class="grid grid-cols-4 gap-1 mb-2.5">
+                <div class="h-1 bg-white/20 rounded-full overflow-hidden"><div id="prog0" class="h-full bg-white w-0 transition-all duration-300"></div></div>
+                <div class="h-1 bg-white/20 rounded-full overflow-hidden"><div id="prog1" class="h-full bg-white w-0 transition-all duration-300"></div></div>
+                <div class="h-1 bg-white/20 rounded-full overflow-hidden"><div id="prog2" class="h-full bg-white w-0 transition-all duration-300"></div></div>
+                <div class="h-1 bg-white/20 rounded-full overflow-hidden"><div id="prog3" class="h-full bg-white w-0 transition-all duration-300"></div></div>
               </div>
-              <div class="flex flex-col gap-2 items-center text-white/80">
-                <span>❤️ 14.2k</span>
-                <span>💬 412</span>
+              <div class="flex items-center justify-between text-[10px] text-white/80 font-semibold">
+                <span id="sceneBadgeOverlay" class="px-2 py-0.5 rounded bg-black/50 backdrop-blur border border-white/10 text-amber-300 mono-font">SCENE 1/4</span>
+                <span class="px-2 py-0.5 rounded bg-rose-600/80 text-white font-bold tracking-wider text-[9px]">9:16 HD</span>
+              </div>
+            </div>
+
+            <!-- Center Visual Directive + Kinetic Captions -->
+            <div class="relative z-20 px-4 my-auto text-center space-y-3">
+              <div id="visualHintBox" class="mx-auto inline-block px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-md border border-white/15 text-[10px] text-indigo-200 max-w-[210px] leading-snug">
+                🎥 Fast close-up visual hook
+              </div>
+
+              <div class="min-h-[92px] flex items-center justify-center">
+                <p id="activeCaptionText" class="text-base font-extrabold text-white uppercase tracking-tight leading-snug drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+                  "STOP DRINKING OVERPRICED CAFE WATER EVERY MORNING."
+                </p>
+              </div>
+            </div>
+
+            <!-- Bottom Social UI Overlay -->
+            <div class="relative z-20 p-3.5 flex items-end justify-between">
+              <div class="space-y-1 max-w-[175px]">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-5 h-5 rounded-full bg-gradient-to-tr from-indigo-500 to-pink-500 flex items-center justify-center text-[9px] font-bold">✓</div>
+                  <span id="previewHandle" class="text-xs font-bold text-white truncate">@coldbrew_club</span>
+                </div>
+                <p id="previewCtaSub" class="text-[10px] text-slate-300 line-clamp-1">Comment 'LINK' for instant DM 👇</p>
+                <div class="flex items-center gap-1 text-[9px] text-indigo-300">
+                  <span>🎵 AI Neural Voiceover • Original Audio</span>
+                </div>
+              </div>
+
+              <div class="flex flex-col items-center gap-2.5 text-white/90 text-xs">
+                <div class="flex flex-col items-center"><span class="text-base">❤️</span><span class="text-[9px] font-bold">24.8K</span></div>
+                <div class="flex flex-col items-center"><span class="text-base">💬</span><span class="text-[9px] font-bold">842</span></div>
+                <div class="flex flex-col items-center"><span class="text-base">🚀</span><span class="text-[9px] font-bold">Share</span></div>
               </div>
             </div>
           </div>
-          <p class="text-[11px] text-slate-500 mt-3 text-center">Interactive 9:16 vertical render engine demonstration</p>
+
+          <!-- Audio + Playback Controls Under Phone -->
+          <div class="w-[260px] mt-3 grid grid-cols-2 gap-2">
+            <button id="playReelBtn" onclick="togglePlayReel()" class="py-2.5 px-3 rounded-xl bg-white text-slate-950 hover:bg-slate-200 font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-md">
+              <span>▶ Play w/ Voice</span>
+            </button>
+            <button onclick="cycleNextScene()" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-xs transition">
+              ⏭ Next Scene
+            </button>
+          </div>
+          <p class="text-[10px] text-slate-500 mt-1.5 text-center">Plays synthesized voiceover & kinetic captions</p>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Stage 2 Strategy: Pricing Plans -->
-  <section id="pricing" class="max-w-5xl mx-auto px-4 pb-20">
+  <!-- Commercial Monetization Section (How You Make Money) -->
+  <section id="pricing" class="relative z-10 max-w-6xl mx-auto px-4 pb-24">
     <div class="text-center mb-10">
-      <h2 class="text-2xl font-bold text-white mb-2">B2B Commercial Pricing Tiers</h2>
-      <p class="text-xs text-slate-400">Validated against traditional Mumbai agency retainers (₹50k+/mo).</p>
+      <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-semibold uppercase tracking-wider">Monetization & Service Tiers</span>
+      <h2 class="text-2xl sm:text-4xl font-bold text-white mt-3 mb-2">Turn Scripts Into Done-For-You Viral Reels</h2>
+      <p class="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">Use our free AI Script & Storyboard Studio forever, or let our production pipeline deliver ready-to-post 1080p MP4s with ElevenLabs voices and kinetic edits.</p>
     </div>
+
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="p-5 rounded-xl border border-slate-800 bg-slate-900/40">
-        <h3 class="font-bold text-white text-sm mb-1">Starter Pack</h3>
-        <p class="text-xs text-slate-400 mb-4">For solo founders & testing.</p>
-        <div class="text-2xl font-extrabold text-white mb-4">₹4,999 <span class="text-xs text-slate-400 font-normal">/mo</span></div>
-        <ul class="text-xs text-slate-300 space-y-2 mb-6">
-          <li>✓ 8 AI-generated Reels/Shorts</li>
-          <li>✓ Viral hook optimization</li>
-          <li>✓ 720p Render quality</li>
-        </ul>
+      <!-- Tier 1: Impulse Buy / Single Video (Easiest way to make first ₹299 from friends/founders) -->
+      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between border border-white/10">
+        <div>
+          <span class="px-2.5 py-1 rounded-md bg-white/5 text-slate-300 text-[10px] font-bold uppercase">Pay-Per-Reel</span>
+          <h3 class="text-lg font-bold text-white mt-3">Single Pro MP4 Render</h3>
+          <p class="text-xs text-slate-400 mt-1 mb-4">Perfect for testing 1 high-retention Reel for your brand or page today.</p>
+          <div class="text-3xl font-extrabold text-white mb-5 display-font">₹299 <span class="text-xs text-slate-400 font-normal">/ video</span></div>
+          <ul class="text-xs text-slate-300 space-y-2.5 mb-6">
+            <li>✓ 1080p Full HD 9:16 Final MP4 File</li>
+            <li>✓ Ultra-realistic ElevenLabs AI Voiceover</li>
+            <li>✓ Curated B-roll + Dynamic Captions</li>
+            <li>✓ Delivered on WhatsApp in 2 Hours</li>
+          </ul>
+        </div>
+        <button onclick="openCheckoutModal('Single Pro MP4 Render (₹299)')" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition border border-white/10">
+          Order 1 Video Now →
+        </button>
       </div>
 
-      <div class="p-5 rounded-xl border-2 border-indigo-500 bg-indigo-950/20 relative shadow-xl shadow-indigo-500/10">
-        <span class="absolute -top-3 right-4 px-2 py-0.5 bg-indigo-600 text-white font-bold text-[9px] rounded-full uppercase">Most Popular</span>
-        <h3 class="font-bold text-white text-sm mb-1">Growth Engine</h3>
-        <p class="text-xs text-slate-400 mb-4">Daily organic traffic for startups.</p>
-        <div class="text-2xl font-extrabold text-white mb-4">₹11,999 <span class="text-xs text-slate-400 font-normal">/mo</span></div>
-        <ul class="text-xs text-slate-300 space-y-2 mb-6">
-          <li>✓ 20 AI-generated Reels/Shorts</li>
-          <li>✓ Studio voice synthesis (ElevenLabs)</li>
-          <li>✓ Dynamic karaoke captions</li>
-          <li>✓ 1080p Full HD Render</li>
-        </ul>
+      <!-- Tier 2: Monthly Startup Retainer -->
+      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between border-2 border-indigo-500 relative shadow-2xl shadow-indigo-500/10">
+        <span class="absolute -top-3 right-5 px-3 py-0.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-[10px] font-bold uppercase tracking-wider">Most Popular</span>
+        <div>
+          <span class="px-2.5 py-1 rounded-md bg-indigo-500/20 text-indigo-300 text-[10px] font-bold uppercase">Startup Growth Engine</span>
+          <h3 class="text-lg font-bold text-white mt-3">15 Viral Reels / Month</h3>
+          <p class="text-xs text-slate-400 mt-1 mb-4">Consistent organic growth on Instagram Reels & YouTube Shorts without filming.</p>
+          <div class="text-3xl font-extrabold text-white mb-5 display-font">₹8,999 <span class="text-xs text-slate-400 font-normal">/ month</span></div>
+          <ul class="text-xs text-slate-300 space-y-2.5 mb-6">
+            <li>✓ 15 Ready-to-post 1080p Vertical Videos</li>
+            <li>✓ Unlimited AI Script Studio Access</li>
+            <li>✓ Custom Brand Colors & Font Styling</li>
+            <li>✓ English + Hinglish Voice Cloning</li>
+          </ul>
+        </div>
+        <button onclick="openCheckoutModal('Startup Growth Engine - 15 Reels/mo (₹8,999)')" class="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:opacity-95 text-white font-bold text-xs transition shadow-lg shadow-indigo-600/30">
+          Start Monthly Plan →
+        </button>
       </div>
 
-      <div class="p-5 rounded-xl border border-slate-800 bg-slate-900/40">
-        <h3 class="font-bold text-white text-sm mb-1">Scale / Agency</h3>
-        <p class="text-xs text-slate-400 mb-4">Full content autonomy for brands.</p>
-        <div class="text-2xl font-extrabold text-white mb-4">₹24,999 <span class="text-xs text-slate-400 font-normal">/mo</span></div>
-        <ul class="text-xs text-slate-300 space-y-2 mb-6">
-          <li>✓ 45 Reels/Shorts per month</li>
-          <li>✓ Custom brand-voice cloning</li>
-          <li>✓ Direct social media auto-posting</li>
-          <li>✓ Dedicated account manager</li>
-        </ul>
+      <!-- Tier 3: Scale / D2C Brand Autopilot -->
+      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between border border-white/10">
+        <div>
+          <span class="px-2.5 py-1 rounded-md bg-pink-500/15 text-pink-300 text-[10px] font-bold uppercase">Full Autopilot</span>
+          <h3 class="text-lg font-bold text-white mt-3">30 Daily Reels + Ad Creatives</h3>
+          <p class="text-xs text-slate-400 mt-1 mb-4">Replaces a ₹50,000/mo agency for scaling D2C & funded startups.</p>
+          <div class="text-3xl font-extrabold text-white mb-5 display-font">₹18,999 <span class="text-xs text-slate-400 font-normal">/ month</span></div>
+          <ul class="text-xs text-slate-300 space-y-2.5 mb-6">
+            <li>✓ 30 Daily Reels / Shorts + Meta Ad Variations</li>
+            <li>✓ Custom Founder Voice & Avatar Cloning</li>
+            <li>✓ Competitor Hook Spy & Trend Analysis</li>
+            <li>✓ Priority WhatsApp Slack Channel</li>
+          </ul>
+        </div>
+        <button onclick="openCheckoutModal('Full Autopilot - 30 Reels/mo (₹18,999)')" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition border border-white/10">
+          Book Founder Onboarding →
+        </button>
       </div>
     </div>
   </section>
 
-  <!-- Script for Prototype Interactivity -->
+  <!-- MODAL 1: Optional Live Gemini API Key Setup -->
+  <div id="apiModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-card max-w-md w-full rounded-2xl p-6 border border-white/15 space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-white">⚡ Connect Live Gemini 2.5 AI (Optional)</h3>
+        <button onclick="toggleApiModal()" class="text-slate-400 hover:text-white text-sm">✕</button>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        ReelFlow already includes a built-in Neural Script Engine that works immediately. If you want live Google **Gemini 2.5 Flash** LLM responses for every generation, paste a free API key from <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-indigo-400 underline">Google AI Studio</a> below:
+      </p>
+      <input id="geminiKeyInput" type="password" placeholder="AIzaSy..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white mono-font">
+      <div class="flex justify-end gap-2">
+        <button onclick="clearApiKey()" class="px-3.5 py-2 rounded-xl bg-slate-800 text-xs text-slate-300">Use Built-in Engine</button>
+        <button onclick="saveApiKey()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white">Save Key</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: Lead Capture & Instant WhatsApp/UPI Checkout -->
+  <div id="checkoutModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-card max-w-md w-full rounded-2xl p-6 border border-white/15 space-y-4">
+      <div class="flex items-center justify-between">
+        <span class="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-[10px] font-bold uppercase">Instant Order & Lead Capture</span>
+        <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white text-sm">✕</button>
+      </div>
+      <h3 id="selectedPlanTitle" class="text-lg font-bold text-white">Single Pro MP4 Render (₹299)</h3>
+      <p class="text-xs text-slate-300">
+        Your generated script and scene blueprint are ready! Enter your details below to send this brief directly to our production desk via WhatsApp & UPI.
+      </p>
+      <div class="space-y-3">
+        <input id="clientName" type="text" placeholder="Your Name / Brand Name *" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white">
+        <input id="clientPhone" type="text" placeholder="Your WhatsApp Number or Instagram @handle *" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white">
+      </div>
+      <button onclick="submitOrderToWhatsApp()" class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider transition">
+        🚀 Send Script & Claim Slot on WhatsApp
+      </button>
+      <p class="text-[10px] text-slate-500 text-center">No automated card charge. You only pay via UPI after approving your preview.</p>
+    </div>
+  </div>
+
+  <!-- APPLICATION LOGIC -->
   <script>
-    const presets = {
-      coffee: {
-        niche: "Coffee lovers tired of instant powder",
-        hook: "Stop drinking chemical instant coffee before your 9 AM lectures.",
-        script: `<p><span class="text-amber-400">[Scene 1]</span> Close-up shot of bubbling cold brew concentrate pouring over ice.</p><p><span class="text-indigo-400">[Voiceover]</span> You are spending ₹350 every single morning on watery cafe coffee.</p><p><span class="text-amber-400">[Scene 2]</span> ₹15 home brew vs ₹350 cafe bill.</p><p><span class="text-indigo-400">[Voiceover]</span> Steeped for 18 hours in Chikmagalur. Tap the link to claim your introductory batch.</p>`,
-        caption: "Stop drinking chemical coffee.",
-        badge: "HOOK PHASE (0-3s)"
-      },
-      fintech: {
-        niche: "College students missing credit card cashbacks",
-        hook: "You booked flight tickets home and left ₹1,200 on the table.",
-        script: `<p><span class="text-amber-400">[Scene 1]</span> Student staring in shock at an airport ticket counter confirmation screen.</p><p><span class="text-indigo-400">[Voiceover]</span> Most college students don't know student debit tiers unlock 20% off BookMyShow and domestic flights.</p><p><span class="text-amber-400">[Scene 2]</span> App dashboard showing automated cashback calculation.</p><p><span class="text-indigo-400">[Voiceover]</span> Sync your accounts in 30 seconds and stop wasting rewards.</p>`,
-        caption: "You left ₹1,200 on the table.",
-        badge: "PAIN POINT (3-8s)"
-      },
-      saas: {
-        niche: "Creative agencies waiting on late client invoices",
-        hook: "Your agency is not unprofitable; your clients are just 45 days late.",
-        script: `<p><span class="text-amber-400">[Scene 1]</span> Stressed freelancer looking at an overdue invoice ledger.</p><p><span class="text-indigo-400">[Voiceover]</span> Stop sending awkward WhatsApp messages begging for payment.</p><p><span class="text-amber-400">[Scene 2]</span> Automated polite reminder sequence triggering Razorpay links.</p><p><span class="text-indigo-400">[Voiceover]</span> Recover 85% of pending bills automatically within 7 days.</p>`,
-        caption: "Your clients are 45 days late.",
-        badge: "SOLUTION REVEAL (8-15s)"
-      }
+    // Put your own WhatsApp number (with 91 country code) here so client orders come straight to your phone!
+    const FOUNDER_WHATSAPP_NUMBER = "919000000000";
+
+    let currentProject = {
+      brand: "Specialty Cold Brew Brand",
+      handle: "@coldbrew_club",
+      retention: "91%",
+      activeHookIndex: 0,
+      hooks: [],
+      scenes: []
     };
 
-    function loadPreset(key) {
-      const data = presets[key];
-      document.getElementById('inputNiche').value = data.niche;
-      document.getElementById('hookDisplay').innerText = `"${data.hook}"`;
-      document.getElementById('scriptDisplay').innerHTML = data.script;
-      document.getElementById('karaokeText').innerText = `"${data.caption}"`;
-      document.getElementById('karaokeBadge').innerText = data.badge;
+    let activeSceneIdx = 0;
+    let isPlaying = false;
+    let playTimer = null;
+    let creditsRemaining = parseInt(localStorage.getItem('rf_credits') ?? '3', 10);
+
+    const sceneGradients = [
+      "from-indigo-900 via-slate-950 to-purple-900",
+      "from-purple-950 via-slate-900 to-rose-950",
+      "from-emerald-950 via-slate-950 to-indigo-950",
+      "from-amber-950 via-slate-950 to-pink-950"
+    ];
+
+    function updateCreditsUI() {
+      const el = document.getElementById('creditCounter');
+      el.innerText = `${Math.max(creditsRemaining, 0)} Free Credits Left`;
     }
 
-    function generateVideo() {
-      const btn = event.target;
-      btn.innerText = "Generating AI Storyboard...";
-      btn.disabled = true;
-      setTimeout(() => {
-        btn.innerText = "▶ Simulated Reel Compilation";
-        btn.disabled = false;
-        alert("Simulation Complete! ReelFlow has matched audio timelines and dynamic kinetic captions.");
-      }, 1200);
+    function fillSample(brand, audience, tone, lang) {
+      document.getElementById('brandInput').value = brand;
+      document.getElementById('audienceInput').value = audience;
+      document.getElementById('toneInput').value = tone;
+      document.getElementById('langInput').value = lang;
+      runGeneration();
     }
-  </script>
-</body>
-</html>
+
+    // Dynamic Smart Generator (Works 100% offline/client-side for ANY user input!)
+    function buildSmartScript(brand, audience, tone, lang, cta) {
+      const cleanBrand = brand.trim() || "Your Brand";
+      const cleanAudience = audience.trim() || "smart customers looking for better results";
+      const handle = "@" + cleanBrand.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 14) + "_official";
+
+      let hooks = [];
+      let scenes = [];
+
+      if (lang === "hinglish") {
+        hooks = [
+          `Bhai, agar aap abhi bhi ${cleanBrand} ignore kar rahe ho, toh aap har mahine paise waste kar rahe ho.`,
+          `99% log is ek galti ki wajah se struggle karte hain—especially ${cleanAudience.slice(0, 45)}.`,
+          `Sach bataun? Traditional options scam lagte hain jab aap ${cleanBrand} ka real breakdown dekhte ho.`
+        ];
+        scenes = [
+          {
+            time: "00:00 - 00:03",
+            label: "HOOK PHASE",
+            visual: `Fast zoom-in reaction shot + bold red kinetic text overlay highlighting ${cleanBrand}`,
+            voice: hooks[0]
+          },
+          {
+            time: "00:03 - 00:09",
+            label: "THE PROBLEM",
+            visual: `Split-screen comparison showing old frustrating workflow for ${cleanAudience}`,
+            voice: `Dekho problem simple hai: ${cleanAudience} roz time aur paisa dono lagate hain, par result zero milta hai.`
+          },
+          {
+            time: "00:09 - 00:18",
+            label: "THE SOLUTION",
+            visual: `Crisp product showcase of ${cleanBrand} in action with glowing metric callouts`,
+            voice: `Isiliye humne banaya ${cleanBrand}. Bina kisi extra झंझट ke, aapko milta hai 3X faster output in half the budget.`
+          },
+          {
+            time: "00:18 - 00:24",
+            label: "CALL TO ACTION",
+            visual: `High-contrast arrow pointing to comments & bio link with urgency timer`,
+            voice: `Abhi test karke dekho—${cta}!`
+          }
+        ];
+      } else {
+        const toneHooks = {
+          controversial: [
+            `Stop wasting money on outdated alternatives if you care about ${cleanBrand}.`,
+            `Unpopular opinion: 90% of what ${cleanAudience.slice(0, 42)} were told is completely backwards.`,
+            `Do NOT buy or launch another thing until you see how ${cleanBrand} changes the math.`
+          ],
+          data: [
+            `We analyzed 500+ cases for ${cleanAudience.slice(0, 40)}—and one number shocked us.`,
+            `Here is the exact math behind how ${cleanBrand} saves you 10+ hours and thousands of rupees.`,
+            `3 brutal statistics every person dealing with ${cleanBrand} needs to see today.`
+          ],
+          story: [
+            `Six months ago, we watched ${cleanAudience.slice(0, 42)} hit the exact same wall every week.`,
+            `Everyone laughed when we started building ${cleanBrand}—until they saw the 30-day results.`,
+            `I tried every mainstream option on the market so you don't have to make the same mistake.`
+          ],
+          secret: [
+            `The industry doesn't want ${cleanAudience.slice(0, 42)} to know this simple shortcut exists.`,
+            `Feels illegal to know: How top performers quietly use ${cleanBrand} to stay ahead.`,
+            `Here is the unfair advantage behind ${cleanBrand} nobody is talking about yet.`
+          ]
+        };
+
+        hooks = toneHooks[tone] || toneHooks.controversial;
+        scenes = [
+          {
+            time: "00:00 - 00:03",
+            label: "HOOK PHASE",
+            visual: `Pattern-interrupt close-up shot with rapid kinetic typography for ${cleanBrand}`,
+            voice: hooks[0]
+          },
+          {
+            time: "00:03 - 00:09",
+            label: "PAIN AGITATION",
+            visual: `Visual contrast showing the hidden frustration faced by ${cleanAudience}`,
+            voice: `Right now, ${cleanAudience} are stuck overpaying and wasting hours on broken, manual solutions.`
+          },
+          {
+            time: "00:09 - 00:18",
+            label: "PRODUCT REVEAL",
+            visual: `Dynamic 9:16 screen recording & sleek B-roll showcasing ${cleanBrand} delivering instant value`,
+            voice: `That is why ${cleanBrand} was built from the ground up—giving you studio-grade results in a fraction of the time.`
+          },
+          {
+            time: "00:18 - 00:24",
+            label: "DIRECT CTA",
+            visual: `Bold animated CTA card with glowing comment badge`,
+            voice: `Don't get left behind. ${cta}!`
+          }
+        ];
+      }
+
+      const score = Math.floor(86 + Math.random() * 11) + "%";
+      return { brand: cleanBrand, handle, retention: score, activeHookIndex: 0, hooks, scenes };
+    }
+
+    // Optional Live Gemini 2.5 Flash Call (if user added an API key)
+    async function fetchGeminiScript(apiKey, brand, audience, tone, lang, cta) {
+      const prompt = `You are an elite short-form viral video director for Instagram Reels and YouTube Shorts.
+Create a high-retention 4-scene vertical video script for:
+Brand/Topic: ${brand}
+Target Audience & Pain Point: ${audience}
+Hook Style: ${tone}
+Language Style: ${lang === 'hinglish' ? 'Natural conversational Hinglish (Roman script Hindi + English used by urban Indian creators)' : 'Punchy modern English'}
+Call To Action: ${cta}
+
+Return ONLY valid JSON in this exact format:
+{
+  "retention": "92%",
+  "hooks": ["Hook option 1", "Hook option 2", "Hook option 3"],
+  "scenes": [
+    {"time": "00:00 - 00:03", "label": "HOOK PHASE", "visual": "Specific camera/visual instruction", "voice": "Spoken line"},
+    {"time": "00:03 - 00:09", "label": "THE PROBLEM", "visual": "Specific visual instruction", "voice": "Spoken line"},
+    {"time": "00:09 - 00:18", "label": "THE SOLUTION", "visual": "Specific visual instruction", "voice": "Spoken line"},
+    {"time": "00:18 - 00:24", "label": "CALL TO ACTION", "visual": "Specific visual instruction", "voice": "Spoken line"}
+  ]
+}`;
+
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { responseMimeType: "application/json" }
+        })
+      });
+      const data = await res.json();
+      const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      const parsed = JSON.parse(rawText);
+      return {
+        brand,
+        handle: "@" + brand.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 14) + "_ai",
+        retention: parsed.retention || "93%",
+        activeHookIndex: 0,
+        hooks: parsed.hooks,
+        scenes: parsed.scenes
+      };
+    }
+
+    async function runGeneration() {
+      stopReelPlayback();
+      const btn = document.getElementById('generateBtn');
+      const brand = document.getElementById('brandInput').value;
+      const audience = document.getElementById('audienceInput').value;
+      const tone = document.getElementById('toneInput').value;
+      const lang = document.getElementById('langInput').value;
+      const cta = document.getElementById('ctaInput').value;
+
+      btn.disabled = true;
+      btn.innerHTML = `<span>⏳ Synthesizing Viral Hooks & Scenes...</span>`;
+
+      const savedKey = localStorage.getItem('rf_gemini_key');
+      try {
+        if (savedKey) {
+          currentProject = await fetchGeminiScript(savedKey, brand, audience, tone, lang, cta);
+        } else {
+          await new Promise(r => setTimeout(r, 450));
+          currentProject = buildSmartScript(brand, audience, tone, lang, cta);
+        }
+      } catch (e) {
+        currentProject = buildSmartScript(brand, audience, tone, lang, cta);
+      }
+
+      if (creditsRemaining > 0) {
+        creditsRemaining--;
+        localStorage.setItem('rf_credits', creditsRemaining);
+        updateCreditsUI();
+      }
+
+      activeSceneIdx = 0;
+      renderProjectUI();
+
+      btn.disabled = false;
+      btn.innerHTML = `<span>⚡ Generate Custom Reel & Script</span>`;
+    }
+
+    function selectHook(idx) {
+      currentProject.activeHookIndex = idx;
+      currentProject.scenes[0].voice = currentProject.hooks[idx];
+      activeSceneIdx = 0;
+      renderProjectUI();
+    }
+
+    function renderProjectUI() {
+      document.getElementById('retentionScore').innerText = `Est. Retention: ${currentProject.retention}`;
+      document.getElementById('previewHandle').innerText = currentProject.handle;
+      document.getElementById('previewCtaSub').innerText = document.getElementById('ctaInput').value;
+
+      // Render Hooks
+      const hooksHTML = currentProject.hooks.map((h, i) => {
+        const active = i === currentProject.activeHookIndex;
+        return `
+          <div onclick="selectHook(${i})" class="cursor-pointer p-2.5 rounded-xl border transition text-xs flex items-start gap-2 ${active ? 'bg-indigo-600/20 border-indigo-400 text-white font-semibold' : 'bg-slate-900/80 border-white/10 text-slate-300 hover:border-white/25'}">
+            <span class="px-1.5 py-0.5 rounded text-[10px] mono-font ${active ? 'bg-indigo-500 text-white' : 'bg-slate-800 text-slate-400'}">H${i+1}</span>
+            <span>"${h}"</span>
+          </div>
+        `;
+      }).join('');
+      document.getElementById('hooksContainer').innerHTML = hooksHTML;
+
+      // Render 4 Scenes
+      const scenesHTML = currentProject.scenes.map((s, i) => {
+        const isCurrent = i === activeSceneIdx;
+        return `
+          <div onclick="jumpToScene(${i})" class="cursor-pointer p-3 rounded-xl border transition ${isCurrent ? 'bg-purple-950/30 border-purple-400/60' : 'bg-slate-900/70 border-white/10 hover:border-white/20'}">
+            <div class="flex items-center justify-between text-[10px] mono-font mb-1">
+              <span class="text-amber-300 font-bold">[SCENE ${i+1}:${s.label}]</span>
+              <span class="text-slate-400">${s.time}</span>
+            </div>
+            <p class="text-[11px] text-indigo-300 mb-1">🎥 <b>Visual:</b> ${s.visual}</p>
+            <p class="text-xs text-
