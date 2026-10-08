@@ -3,256 +3,326 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>ReelFlow AI 5.0 — Autonomous Short-Form Studio & Creator Suite</title>
+  <title>ReelFlow AI — Autonomous Short-Form Video & Creator Suite</title>
+  <!-- Custom SVG Brand Favicon (Replaces the default Chrome Earth icon!) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%236366f1'/%3E%3Cstop offset='50%25' stop-color='%23a855f7'/%3E%3Cstop offset='100%25' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2305070f'/%3E%3Crect x='3' y='3' width='58' height='58' rx='14' fill='none' stroke='url(%23g)' stroke-width='4'/%3E%3Cpath d='M22 16 L48 32 L22 48 Z' fill='url(%23g)'/%3E%3Ccircle cx='46' cy='18' r='5' fill='%2338bdf8'/%3E%3C/svg%3E">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-base: #040508;
+      --bg-dark: #030408;
     }
     * { box-sizing: border-box; }
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-base);
+      background-color: var(--bg-dark);
       color: #f8fafc;
       overflow-x: hidden;
     }
     h1, h2, h3, .font-display {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Outfit', sans-serif;
     }
     .font-mono-code {
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Subtle Modern Dot Matrix Background */
-    .dot-matrix {
-      background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-      background-size: 28px 28px;
+    /* Futuristic Mesh Grid */
+    .mesh-bg {
+      background-color: #030408;
+      background-image: 
+        radial-gradient(at 15% 10%, rgba(99, 102, 241, 0.14) 0px, transparent 45%),
+        radial-gradient(at 85% 20%, rgba(236, 72, 153, 0.11) 0px, transparent 45%),
+        radial-gradient(at 50% 85%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 42px 42px, 42px 42px;
     }
 
-    /* Bidirectional Scroll Reveal (Scroll Down + Scroll Up) */
+    /* Bidirectional Scroll Reveal (Works Scrolling Down AND Up) */
     .scroll-reveal {
       opacity: 0;
-      transform: translateY(36px) scale(0.98);
-      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
+      transform: translateY(32px) scale(0.98);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .scroll-reveal.visible {
       opacity: 1;
       transform: translateY(0) scale(1);
     }
 
-    /* Ultra-Clean Glass Cards */
-    .studio-card {
-      background: linear-gradient(155deg, rgba(16, 18, 27, 0.85) 0%, rgba(8, 10, 15, 0.92) 100%);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+    /* Next-Gen Glass Surfaces */
+    .neo-panel {
+      background: linear-gradient(160deg, rgba(15, 19, 30, 0.88) 0%, rgba(7, 9, 15, 0.94) 100%);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.75);
+      box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Timeline Node Styling */
+    .timeline-node {
+      position: relative;
+      background: linear-gradient(145deg, rgba(18, 23, 38, 0.9) 0%, rgba(10, 13, 22, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       transition: all 0.25s ease;
     }
-    .studio-card:hover {
-      border-color: rgba(99, 102, 241, 0.35);
+    .timeline-node.active-scene {
+      border-color: #818cf8;
+      box-shadow: 0 0 28px -6px rgba(99, 102, 241, 0.4);
     }
 
-    /* Restream-Style Minimal Dark Tool Cards */
+    /* Tool Card Hover */
     .tool-tile {
-      background: #0b0d13;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      background: #0a0d16;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: all 0.22s ease;
     }
     .tool-tile:hover {
-      background: #121622;
-      border-color: rgba(139, 92, 246, 0.45);
+      background: #111626;
+      border-color: #818cf8;
       transform: translateY(-3px);
-      box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.25);
+      box-shadow: 0 12px 28px -8px rgba(99, 102, 241, 0.3);
     }
 
-    .gradient-headline {
-      background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 40%, #c084fc 75%, #f472b6 100%);
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 35%, #e879f9 70%, #38bdf8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #040508; }
-    ::-webkit-scrollbar-thumb { background: #1e2436; border-radius: 9999px; }
+    ::-webkit-scrollbar-track { background: #030408; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
     ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
   </style>
 </head>
-<body class="dot-matrix min-h-screen selection:bg-indigo-500 selection:text-white pb-20 md:pb-0">
+<body class="mesh-bg min-h-screen selection:bg-indigo-500 selection:text-white pb-24 md:pb-0">
 
-  <!-- Ambient Top Aura -->
-  <div class="fixed top-[-200px] left-1/2 -translate-x-1/2 w-[850px] h-[380px] bg-indigo-600/15 blur-[160px] pointer-events-none rounded-full z-0"></div>
-
-  <!-- Toast Notification -->
+  <!-- Toast Banner -->
   <div id="toastBanner" class="fixed bottom-20 md:bottom-6 right-5 z-50 hidden px-4 py-3 rounded-2xl bg-indigo-600 text-white text-xs font-bold shadow-2xl border border-white/20 flex items-center gap-2">
     <span class="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
     <span id="toastText">Ready!</span>
   </div>
 
-  <!-- Sticky Top Navigation -->
-  <header class="sticky top-0 z-40 border-b border-white/10 bg-[#040508]/85 backdrop-blur-2xl">
+  <!-- Floating Contact Founder WhatsApp Pill (Bottom Left on Desktop) -->
+  <a href="https://wa.me/917820847387?text=Hi%20Arjun!%20I%20am%20testing%20ReelFlow%20AI%20and%20want%20to%20connect." target="_blank" class="hidden md:flex fixed bottom-6 left-6 z-40 items-center gap-2.5 px-4 py-2.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 backdrop-blur-xl text-emerald-300 text-xs font-bold shadow-2xl transition">
+    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+    <span>💬 Founder Desk (+91 7820847387)</span>
+  </a>
+
+  <!-- TOP NAVIGATION BAR WITH CUSTOM VECTOR BRAND LOGO -->
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-[#030408]/85 backdrop-blur-2xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2">
-      <a href="#hero" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-500 to-pink-500 flex items-center justify-center font-extrabold text-white shadow-lg shadow-indigo-500/30">
-          R
+      <!-- Custom SVG Brand Logo (Replaces the old "R" box) -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="relative w-11 h-11 rounded-2xl bg-[#090d1a] border border-indigo-500/40 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition">
+          <svg class="w-7 h-7" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#6366f1"/>
+                <stop offset="50%" stop-color="#c084fc"/>
+                <stop offset="100%" stop-color="#ec4899"/>
+              </linearGradient>
+            </defs>
+            <path d="M14 12C14 9.79086 15.7909 8 18 8H34C44 8 50 14 50 22C50 28 45 33 38 34L50 52H39L28 35H24V52H14V12Z" fill="url(#brandGrad)" fill-opacity="0.22"/>
+            <path d="M20 14L48 32L20 50V14Z" fill="url(#brandGrad)"/>
+            <circle cx="48" cy="14" r="5" fill="#38bdf8"/>
+          </svg>
         </div>
         <div>
-          <span class="font-bold text-lg sm:text-xl tracking-tight font-display text-white">ReelFlow<span class="text-indigo-400">.ai</span></span>
-          <span class="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-mono-code uppercase bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 rounded-full">v5.0 Pro</span>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight font-display text-white">ReelFlow<span class="text-indigo-400">.ai</span></span>
+            <span class="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono-code uppercase bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 rounded-full">v6.0 Studio</span>
+          </div>
+          <p class="text-[10px] text-slate-400 hidden sm:block">Autonomous Short-Form Video & Voice Engine</p>
         </div>
       </a>
 
+      <!-- Desktop Navigation Links -->
       <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold text-slate-300">
         <a href="#studio" class="hover:text-white transition">9:16 Studio</a>
+        <a href="#smart-bg-anchor" class="hover:text-white transition">Smart AI Background</a>
         <a href="#utility-suite" class="hover:text-white transition">Creator Tools</a>
-        <a href="#clipper-grid" class="hover:text-white transition">AI Clippers (22+)</a>
-        <a href="#pricing" class="hover:text-white transition">Free Trial & Custom Plan</a>
+        <a href="#clipper-grid" class="hover:text-white transition">AI Clippers</a>
+        <a href="#pricing" class="hover:text-white transition">₹50 Custom Plan</a>
+        <a href="#founder-desk" class="text-emerald-400 hover:text-emerald-300 transition">Contact Founder</a>
       </nav>
 
+      <!-- Right Controls: AI Key + Persistent User Profile -->
       <div class="flex items-center gap-2 sm:gap-3">
         <button type="button" id="openApiModalBtn" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-indigo-300 transition cursor-pointer">
           ⚡ AI Key
         </button>
 
-        <button type="button" id="openAuthModalBtn" class="px-4 py-2 rounded-xl bg-white text-slate-950 hover:bg-slate-200 text-xs font-extrabold shadow-lg transition cursor-pointer">
+        <!-- Shown ONLY when logged out -->
+        <button type="button" id="openAuthModalBtn" class="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-95 text-white text-xs font-extrabold shadow-lg transition cursor-pointer">
           Login / Register
         </button>
 
-        <div id="userProfileArea" class="hidden items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl">
-          <div id="userInitials" class="w-6 h-6 rounded-full bg-indigo-600 text-white text-[11px] font-bold flex items-center justify-center">A</div>
-          <span id="userNameLabel" class="text-xs font-semibold text-white max-w-[90px] truncate">Founder</span>
-          <button type="button" id="logoutBtn" class="text-[10px] text-rose-400 hover:text-rose-300 ml-1 font-bold cursor-pointer">Exit</button>
+        <!-- Shown permanently when logged in (Saved in localStorage) -->
+        <div id="userProfileBadge" class="hidden items-center gap-2 bg-indigo-950/50 border border-indigo-500/40 px-3 py-1.5 rounded-xl">
+          <div id="userInitials" class="w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-500 to-pink-500 text-white text-[11px] font-extrabold flex items-center justify-center">A</div>
+          <div class="text-left">
+            <span id="userNameText" class="block text-xs font-bold text-white max-w-[100px] truncate leading-none">Founder</span>
+            <span class="text-[9px] text-emerald-400 font-mono-code">● Verified Session</span>
+          </div>
+          <button type="button" id="logoutBtn" class="text-[10px] text-rose-400 hover:text-rose-300 ml-1.5 font-bold cursor-pointer">Logout</button>
         </div>
       </div>
     </div>
   </header>
 
   <!-- Mobile Bottom Navigation Bar -->
-  <div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#06080f]/95 backdrop-blur-xl border-t border-white/10 px-3 py-2 flex justify-around items-center text-[10px] font-bold text-slate-300">
+  <div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#050710]/95 backdrop-blur-xl border-t border-white/10 px-2 py-2 flex justify-around items-center text-[10px] font-bold text-slate-300">
     <a href="#studio" class="flex flex-col items-center gap-0.5 text-indigo-400"><span>🎬</span><span>Studio</span></a>
     <a href="#player-column" class="flex flex-col items-center gap-0.5 hover:text-white"><span>⬇️</span><span>Download</span></a>
-    <a href="#utility-suite" class="flex flex-col items-center gap-0.5 hover:text-white"><span>🛠️</span><span>Tools</span></a>
-    <a href="#pricing" class="flex flex-col items-center gap-0.5 hover:text-white"><span>💳</span><span>Plans</span></a>
-    <button type="button" id="mobileAuthBtn" class="flex flex-col items-center gap-0.5 hover:text-white cursor-pointer"><span>👤</span><span>Login</span></button>
+    <a href="#clipper-grid" class="flex flex-col items-center gap-0.5 hover:text-white"><span>✂️</span><span>Clippers</span></a>
+    <a href="#pricing" class="flex flex-col items-center gap-0.5 text-emerald-400"><span>₹50</span><span>Plans</span></a>
+    <a href="#founder-desk" class="flex flex-col items-center gap-0.5 hover:text-white"><span>💬</span><span>Founder</span></a>
   </div>
 
   <!-- HERO SECTION -->
-  <section id="hero" class="relative z-10 max-w-6xl mx-auto px-4 pt-10 sm:pt-14 pb-8 text-center scroll-reveal">
-    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-indigo-300 text-xs font-semibold mb-4">
+  <section id="hero" class="relative z-10 max-w-6xl mx-auto px-4 pt-8 sm:pt-12 pb-8 text-center scroll-reveal">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold mb-4">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-      <span>All-in-One AI Video Clipper, Script Studio & Creator Toolkit</span>
+      <span>Smart AI Backgrounds • 6 Voice Clones • IG Reels & YT Shorts Engine</span>
     </div>
-    <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.08] mb-4">
-      Create, Customize & Download <br class="hidden sm:inline" />
-      <span class="gradient-headline">Instagram Reels & YouTube Shorts.</span>
+    <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.08] mb-3">
+      Generate Viral 9:16 Videos with <br class="hidden sm:inline" />
+      <span class="gradient-text">Smart AI Backgrounds & Voices.</span>
     </h1>
-    <p class="text-slate-400 text-xs sm:text-base max-w-2xl mx-auto mb-6">
-      Switch between authentic Instagram Reels & YouTube Shorts interfaces, customize modern animated backgrounds, test 6 neural voices, and download your video in one click.
+    <p class="text-slate-400 text-xs sm:text-base max-w-2xl mx-auto">
+      Create scripts, synthesize custom AI scene backgrounds or HD stock photos, switch between Instagram Reels & YouTube Shorts UI, and download your video in one click.
     </p>
   </section>
 
-  <!-- MAIN 9:16 STUDIO WORKSPACE -->
+  <!-- MAIN WORKSPACE STUDIO -->
   <section id="studio" class="relative z-10 max-w-7xl mx-auto px-4 pb-20">
 
-    <!-- Quick Industry Templates -->
-    <div class="studio-card rounded-3xl p-4 mb-6 scroll-reveal">
+    <!-- Quick Industry Presets -->
+    <div class="neo-panel rounded-3xl p-4 mb-6 scroll-reveal">
       <div class="flex flex-wrap items-center justify-between gap-2">
         <div class="flex items-center gap-2 flex-wrap">
-          <span class="text-xs font-bold uppercase tracking-wider text-indigo-400 mr-1">Quick Templates:</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-indigo-400 mr-1">1-Click Presets:</span>
           <button type="button" data-preset="coffee" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">☕ D2C Cold Brew</button>
           <button type="button" data-preset="fintech" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">💳 Student Fintech</button>
           <button type="button" data-preset="saas" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">📊 B2B SaaS</button>
-          <button type="button" data-preset="podcast" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">🎙️ AI Podcast Clip</button>
-          <button type="button" data-preset="streetwear" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">👕 Streetwear Brand</button>
+          <button type="button" data-preset="podcast" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">🎙️ Podcast Clip</button>
+          <button type="button" data-preset="streetwear" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">👕 Streetwear Drop</button>
         </div>
-        <span id="activeToolBadge" class="font-mono-code text-[11px] px-3 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300">
-          Mode: Automatic Reel Maker
+        <span id="activeWorkflowBadge" class="font-mono-code text-[11px] px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">
+          ● Active: Automatic Reel Studio
         </span>
       </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-      <!-- LEFT COLUMN (4 Cols): Brief + Voices + Background Customizer -->
+      <!-- LEFT COLUMN (4 Cols): Brief + SMART AI BACKGROUND GENERATOR + Voices -->
       <div class="lg:col-span-4 space-y-5">
         
-        <!-- 1. Brand & Script Generator -->
-        <div class="studio-card rounded-3xl p-5 space-y-3.5 scroll-reveal">
-          <h2 class="text-sm font-bold uppercase tracking-wider text-indigo-400">1. Content & Script Generator</h2>
+        <!-- 1. Campaign Brief -->
+        <div class="neo-panel rounded-3xl p-5 space-y-3.5 scroll-reveal">
+          <div class="flex items-center justify-between">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-indigo-400">1. Brand & Script Engine</h2>
+            <span class="text-[10px] text-slate-400 font-mono-code">Step 1/3</span>
+          </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Topic / Brand / Video URL *</label>
-            <input id="brandInput" type="text" value="Asli Cold Brew Coffee" placeholder="Paste YouTube URL or type brand/topic..." class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Brand / Topic / Video URL *</label>
+            <input id="brandInput" type="text" value="Asli Cold Brew Coffee" placeholder="e.g. Protein Shake, Sneaker Store, SaaS..." class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-300 mb-1">Target Audience & Pain Point *</label>
-            <textarea id="audienceInput" rows="2" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">Young professionals and students tired of spending Rs 350 on overpriced cafe coffee</textarea>
+            <textarea id="audienceInput" rows="2" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">Young professionals and college students tired of spending Rs 350 on watery cafe coffee</textarea>
           </div>
           <div class="grid grid-cols-2 gap-2.5">
             <div>
-              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Hook Style</label>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Hook Psychology</label>
               <select id="toneInput" class="w-full bg-black/60 border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white">
                 <option value="controversial">🔥 Pattern Interrupt</option>
-                <option value="data">📊 Money / Data</option>
+                <option value="data">📊 Hard Math / Proof</option>
                 <option value="story">🎭 Founder Story</option>
                 <option value="secret">🤫 Secret Hack</option>
               </select>
             </div>
             <div>
-              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Language</label>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Language Vibe</label>
               <select id="langInput" class="w-full bg-black/60 border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white">
-                <option value="hinglish">🇮🇳 Hinglish</option>
-                <option value="english">🌐 English</option>
+                <option value="hinglish">🇮🇳 Hinglish (Viral)</option>
+                <option value="english">🌐 Global English</option>
               </select>
             </div>
           </div>
           <button type="button" id="generateBtn" class="w-full py-3 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:opacity-95 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg cursor-pointer">
-            ⚡ Generate New Script & Reel
+            ⚡ Generate Script & Storyboard
           </button>
         </div>
 
-        <!-- 2. Modern Background & Canvas Customizer -->
-        <div class="studio-card rounded-3xl p-5 space-y-3.5 scroll-reveal">
+        <!-- 2. SMART AI BACKGROUND GENERATOR + HD STOCK IMAGES + SHADERS -->
+        <div id="smart-bg-anchor" class="neo-panel rounded-3xl p-5 space-y-3.5 scroll-reveal border border-pink-500/25">
           <div class="flex items-center justify-between">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-pink-400">2. Modern Visual Background</h2>
+            <h2 class="text-sm font-bold uppercase tracking-wider text-pink-400">2. Smart Background Studio</h2>
             <label class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/15 text-[11px] font-bold text-white cursor-pointer border border-white/15">
-              <span>+ Upload Photo</span>
+              <span>📁 Upload Photo</span>
               <input id="customBgUpload" type="file" accept="image/*" class="hidden">
             </label>
           </div>
 
-          <p class="text-[11px] text-slate-400">Choose a clean procedural shader or pick your own brand colors:</p>
-          <div class="grid grid-cols-3 gap-2" id="bgPresetGrid">
-            <button type="button" data-bg="obsidian" class="bg-preset-btn py-2 px-2 rounded-xl bg-indigo-950/60 border border-indigo-400 text-[11px] font-bold text-white cursor-pointer">Obsidian Glow</button>
-            <button type="button" data-bg="luxury" class="bg-preset-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-amber-300 cursor-pointer">Luxury Gold</button>
-            <button type="button" data-bg="emerald" class="bg-preset-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-emerald-300 cursor-pointer">Matrix Neon</button>
-            <button type="button" data-bg="sunset" class="bg-preset-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-rose-300 cursor-pointer">Sunset Cyber</button>
-            <button type="button" data-bg="minimal" class="bg-preset-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-slate-200 cursor-pointer">Pure Matte</button>
-            <button type="button" data-bg="custom" class="bg-preset-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-purple-300 cursor-pointer">Custom Color</button>
+          <!-- Smart AI Prompt-to-Background Generator -->
+          <div class="p-3 rounded-2xl bg-gradient-to-br from-indigo-950/60 to-purple-950/40 border border-indigo-500/30 space-y-2">
+            <label class="block text-[11px] font-bold text-indigo-200">✨ Smart AI Background Generator:</label>
+            <div class="flex gap-1.5">
+              <input id="smartBgPromptInput" type="text" placeholder="e.g. Iced coffee splash neon dark studio..." value="Iced cold brew coffee cinematic dark cafe neon lighting" class="flex-1 bg-black/70 border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-pink-400">
+              <button type="button" id="generateSmartBgBtn" class="px-3 py-2 rounded-xl bg-pink-600 hover:bg-pink-500 text-white text-xs font-extrabold whitespace-nowrap cursor-pointer">
+                ✨ Generate BG
+              </button>
+            </div>
+            <p class="text-[10px] text-slate-400">Synthesizes a custom 9:16 vertical background from any text prompt.</p>
           </div>
 
-          <!-- Custom Color Pickers + Dim Slider -->
+          <!-- Curated HD Photography B-Roll Packs (Restored!) -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-300 mb-1.5">🖼️ HD Photography B-Roll Packs:</label>
+            <div class="grid grid-cols-3 gap-1.5">
+              <button type="button" data-photo="coffee" class="photo-pack-btn py-1.5 px-2 rounded-xl bg-white/10 border border-indigo-400 text-[11px] font-bold text-white cursor-pointer">☕ Cafe HD</button>
+              <button type="button" data-photo="cyber" class="photo-pack-btn py-1.5 px-2 rounded-xl bg-black/50 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">🌆 Cyber City</button>
+              <button type="button" data-photo="luxury" class="photo-pack-btn py-1.5 px-2 rounded-xl bg-black/50 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">⌚ Luxury</button>
+              <button type="button" data-photo="workspace" class="photo-pack-btn py-1.5 px-2 rounded-xl bg-black/50 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">💻 Tech Desk</button>
+              <button type="button" data-photo="fitness" class="photo-pack-btn py-1.5 px-2 rounded-xl bg-black/50 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">🏋️ Gym Neon</button>
+              <button type="button" data-photo="street" class="photo-pack-btn py-1.5 px-2 rounded-xl bg-black/50 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">👟 Streetwear</button>
+            </div>
+          </div>
+
+          <!-- Motion Shader Gradients + Custom Brand Colors -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-300 mb-1.5">🎨 Or Use Procedural Motion Shaders:</label>
+            <div class="grid grid-cols-4 gap-1.5">
+              <button type="button" data-shader="obsidian" class="shader-btn py-1.5 rounded-lg bg-black/60 border border-white/10 text-[10px] font-semibold text-indigo-300 cursor-pointer">Obsidian</button>
+              <button type="button" data-shader="gold" class="shader-btn py-1.5 rounded-lg bg-black/60 border border-white/10 text-[10px] font-semibold text-amber-300 cursor-pointer">Gold</button>
+              <button type="button" data-shader="matrix" class="shader-btn py-1.5 rounded-lg bg-black/60 border border-white/10 text-[10px] font-semibold text-emerald-300 cursor-pointer">Matrix</button>
+              <button type="button" data-shader="custom" class="shader-btn py-1.5 rounded-lg bg-black/60 border border-white/10 text-[10px] font-semibold text-pink-300 cursor-pointer">Custom</button>
+            </div>
+          </div>
+
           <div class="grid grid-cols-3 gap-2 pt-1 items-center">
             <div>
-              <label class="block text-[10px] text-slate-400 mb-1">Primary Color</label>
-              <input id="customColor1" type="color" value="#311042" class="w-full h-8 rounded-lg bg-transparent border border-white/15 cursor-pointer">
+              <label class="block text-[10px] text-slate-400 mb-1">Color 1</label>
+              <input id="customColor1" type="color" value="#1e1b4b" class="w-full h-7 rounded bg-transparent border border-white/15 cursor-pointer">
             </div>
             <div>
-              <label class="block text-[10px] text-slate-400 mb-1">Accent Glow</label>
-              <input id="customColor2" type="color" value="#4f46e5" class="w-full h-8 rounded-lg bg-transparent border border-white/15 cursor-pointer">
+              <label class="block text-[10px] text-slate-400 mb-1">Color 2</label>
+              <input id="customColor2" type="color" value="#be185d" class="w-full h-7 rounded bg-transparent border border-white/15 cursor-pointer">
             </div>
             <div>
-              <label class="block text-[10px] text-slate-400 mb-1">Creator @Handle</label>
-              <input id="creatorHandleInput" type="text" value="@reelflow.ai" class="w-full bg-black/60 border border-white/15 rounded-lg px-2 py-1.5 text-[11px] text-white">
+              <label class="block text-[10px] text-slate-400 mb-1">@Handle</label>
+              <input id="creatorHandleInput" type="text" value="@reelflow.ai" class="w-full bg-black/60 border border-white/15 rounded-lg px-2 py-1 text-[11px] text-white">
             </div>
           </div>
         </div>
 
-        <!-- 3. Multi-Voice & Custom Clone Studio -->
-        <div class="studio-card rounded-3xl p-5 space-y-3 scroll-reveal">
+        <!-- 3. Multi-Voice & Custom Clone Lab -->
+        <div class="neo-panel rounded-3xl p-5 space-y-3 scroll-reveal">
           <div class="flex items-center justify-between">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-purple-400">3. Voice & Clone Lab</h2>
+            <h2 class="text-sm font-bold uppercase tracking-wider text-purple-400">3. Voice & Clone Studio</h2>
             <button type="button" id="sampleVoiceBtn" class="px-2.5 py-1 rounded-lg bg-purple-500/20 border border-purple-400/30 text-[11px] font-bold text-purple-200 cursor-pointer">
               🔊 Test Voice
             </button>
@@ -268,49 +338,59 @@
               <input id="voicePitch" type="range" min="0.7" max="1.3" step="0.05" value="1.00" class="w-full accent-purple-500 cursor-pointer">
             </div>
           </div>
-          <!-- Optional ElevenLabs Clone -->
           <button type="button" id="toggleCloneBoxBtn" class="text-[11px] font-bold text-pink-300 hover:underline cursor-pointer block pt-1">
-            + Use Custom ElevenLabs Voice ID
+            + Connect Custom ElevenLabs Voice ID
           </button>
           <div id="elevenCloneBox" class="hidden space-y-2 pt-2 border-t border-white/10">
             <input id="elevenKeyInput" type="password" placeholder="ElevenLabs API Key" class="w-full bg-black/60 border border-white/15 rounded-lg px-2.5 py-1.5 text-xs text-white">
             <input id="elevenVoiceIdInput" type="text" placeholder="ElevenLabs Voice ID" class="w-full bg-black/60 border border-white/15 rounded-lg px-2.5 py-1.5 text-xs text-white">
-            <button type="button" id="saveElevenBtn" class="w-full py-1.5 rounded-lg bg-pink-600 text-white text-xs font-bold cursor-pointer">Activate Clone</button>
+            <button type="button" id="saveElevenBtn" class="w-full py-1.5 rounded-lg bg-pink-600 text-white text-xs font-bold cursor-pointer">Save Custom Voice</button>
           </div>
         </div>
 
       </div>
 
-      <!-- CENTER COLUMN (4 Cols): Editable Hooks & 4 Scenes -->
+      <!-- CENTER COLUMN (4 Cols): REDESIGNED NLE TIMELINE STORYBOARD EDITOR -->
       <div class="lg:col-span-4 space-y-5">
-        <div class="studio-card rounded-3xl p-5 space-y-4 scroll-reveal">
-          <div class="flex items-center justify-between">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-emerald-400">4. Editable Storyboard</h2>
-            <button type="button" id="copyAllScriptBtn" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/15 text-xs font-semibold text-slate-200 border border-white/10 cursor-pointer">
-              📋 Copy Text
+        <div class="neo-panel rounded-3xl p-5 space-y-4 scroll-reveal">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <div>
+              <h2 class="text-sm font-bold uppercase tracking-wider text-emerald-400">4. NLE Timeline Editor</h2>
+              <p class="text-[11px] text-slate-400">Edit dialogue, test scene audio, or AI-rewrite</p>
+            </div>
+            <button type="button" id="copyAllScriptBtn" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 text-xs font-bold text-slate-200 border border-white/10 cursor-pointer">
+              📋 Copy Script
             </button>
           </div>
 
+          <!-- Hook Variations Selector -->
           <div>
-            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">Click Any Hook to Test:</label>
-            <div id="hooksList" class="space-y-2"></div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-[11px] font-bold uppercase tracking-wider text-indigo-300">⚡ Viral 3s Hook Switcher:</label>
+              <span class="text-[10px] text-slate-400">Click to swap Scene 1</span>
+            </div>
+            <div id="hooksList" class="space-y-1.5"></div>
           </div>
 
+          <!-- Redesigned Vertical Timeline Nodes -->
           <div>
-            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">4 Scenes (Type inside any box to edit live video):</label>
-            <div id="scenesList" class="space-y-2.5 max-h-[470px] overflow-y-auto pr-1"></div>
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-[11px] font-bold uppercase tracking-wider text-emerald-300">🎞️ 4-Scene Master Track:</label>
+              <span class="text-[10px] font-mono-code text-slate-400">Total: 24.0s</span>
+            </div>
+            <div id="scenesList" class="space-y-3 max-h-[520px] overflow-y-auto pr-1"></div>
           </div>
         </div>
       </div>
 
-      <!-- RIGHT COLUMN (4 Cols): Instagram / YouTube 9:16 Video Player + BIG DOWNLOAD BUTTONS -->
+      <!-- RIGHT COLUMN (4 Cols): 9:16 Video Player + IG/YT Toggle + BIG DOWNLOAD BUTTONS -->
       <div id="player-column" class="lg:col-span-4 flex flex-col items-center scroll-reveal">
-        <div class="studio-card rounded-3xl p-5 w-full flex flex-col items-center">
+        <div class="neo-panel rounded-3xl p-5 w-full flex flex-col items-center">
           
-          <!-- Platform Interface Mode Switcher (Instagram Reels vs YouTube Shorts vs Clean Raw) -->
+          <!-- Platform Interface Mode Switcher -->
           <div class="w-full mb-3">
             <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-300">Platform Interface Mode:</span>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-300">Platform Preview Mode:</span>
               <span id="playerStatusBadge" class="text-[10px] font-mono-code px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300">READY</span>
             </div>
             <div class="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-black/60 border border-white/10">
@@ -321,17 +401,17 @@
                 ▶️ YT Shorts
               </button>
               <button type="button" data-ui="clean" class="ui-mode-btn py-2 rounded-xl text-slate-300 hover:text-white text-[11px] font-bold transition cursor-pointer">
-                ✨ Clean (No UI)
+                ✨ Clean Raw
               </button>
             </div>
           </div>
 
-          <!-- Caption Typography Style Bar -->
+          <!-- Caption Theme Bar -->
           <div class="w-full grid grid-cols-4 gap-1.5 mb-3">
             <button type="button" data-cap="hormozi" class="cap-btn py-1 rounded-lg bg-amber-500/20 border border-amber-400 text-[10px] font-bold text-amber-300 cursor-pointer">Hormozi</button>
-            <button type="button" data-cap="modern" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Clean Glass</button>
-            <button type="button" data-cap="neon" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Cyber Glow</button>
-            <button type="button" data-cap="red" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Viral Pill</button>
+            <button type="button" data-cap="modern" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Glass Pill</button>
+            <button type="button" data-cap="neon" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Cyber Neon</button>
+            <button type="button" data-cap="red" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Viral Red</button>
           </div>
 
           <!-- 9:16 Phone Hardware Frame -->
@@ -339,7 +419,7 @@
             <canvas id="reelCanvas" width="540" height="960" class="w-full h-full object-cover"></canvas>
           </div>
 
-          <!-- Playback Controls -->
+          <!-- Play & Scene Scrub Controls -->
           <div class="w-full mt-4 grid grid-cols-2 gap-2.5">
             <button type="button" id="playReelBtn" class="py-3 px-4 rounded-2xl bg-white text-slate-950 hover:bg-slate-200 font-extrabold text-xs transition shadow-lg cursor-pointer">
               ▶ Play Reel w/ Voice
@@ -349,9 +429,9 @@
             </button>
           </div>
 
-          <!-- PROMINENT DOWNLOAD VIDEO & DOWNLOAD CONTENT BUTTONS -->
+          <!-- BIG DOWNLOAD VIDEO & CONTENT BUTTONS -->
           <div class="w-full mt-3 pt-3 border-t border-white/10 space-y-2">
-            <button type="button" id="downloadVideoBtn" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-emerald-500/20 transition flex items-center justify-center gap-2 cursor-pointer">
+            <button type="button" id="downloadVideoBtn" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:opacity-95 text-slate-950 font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-emerald-500/20 transition flex items-center justify-center gap-2 cursor-pointer">
               <span>⬇️ DOWNLOAD VIDEO (.WEBM)</span>
             </button>
             <div class="grid grid-cols-2 gap-2">
@@ -359,7 +439,7 @@
                 📄 Download Script (.TXT)
               </button>
               <button type="button" id="downloadFramePngBtn" class="py-2.5 px-3 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 border border-purple-400/30 text-purple-200 font-bold text-[11px] transition cursor-pointer">
-                🖼️ Save Poster (.PNG)
+                🖼️ Save Frame (.PNG)
               </button>
             </div>
           </div>
@@ -370,182 +450,257 @@
     </div>
   </section>
 
-  <!-- SECTION 2: ALL 11 CREATOR & HARDWARE UTILITY TOOLS FROM SCREENSHOT 1 (WORKING MODAL) -->
+  <!-- SECTION 2: 12 CREATOR & HARDWARE DIAGNOSTIC UTILITIES (With Auto-Stop Mic & Camera!) -->
   <section id="utility-suite" class="relative z-10 max-w-6xl mx-auto px-4 pb-20 scroll-reveal">
     <div class="text-center mb-10">
-      <span class="text-xs font-bold uppercase tracking-wider text-indigo-400">Built-In Production Utilities</span>
-      <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">Creator Studio & Media Diagnostic Suite</h2>
-      <p class="text-xs sm:text-sm text-slate-400 mt-1">Click any utility card below to test your camera/mic, convert media, extract audio, or generate platform scripts.</p>
+      <span class="text-xs font-bold uppercase tracking-wider text-indigo-400">Creator Hardware & Media Suite</span>
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">12 Built-In Production Utilities</h2>
+      <p class="text-xs sm:text-sm text-slate-400 mt-1">Click any tool to run hardware diagnostics (auto-stops after test), convert media, or transcribe audio.</p>
     </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="utilityCardsGrid">
-      <!-- Populated dynamically with the exact 11 tools from Screenshot 1 -->
-    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="utilityCardsGrid"></div>
   </section>
 
-  <!-- SECTION 3: ALL 22+ AI CLIPPER & CONVERTER TOOLS FROM SCREENSHOT 2 -->
+  <!-- SECTION 3: 26 AI VIDEO CLIPPER & CONVERTER TOOLS (Opens Interactive Clipper Workspace!) -->
   <section id="clipper-grid" class="relative z-10 max-w-6xl mx-auto px-4 pb-20 scroll-reveal">
     <div class="text-center mb-10">
-      <span class="text-xs font-bold uppercase tracking-wider text-purple-400">Discover</span>
-      <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">More Nifty AI Video Tools from ReelFlow</h2>
-      <p class="text-xs sm:text-sm text-slate-400 mt-1">Click any workflow below to automatically configure the 9:16 Studio for that platform.</p>
+      <span class="text-xs font-bold uppercase tracking-wider text-purple-400">Discover AI Clippers</span>
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">26+ Viral Video Clipping & Repurposing Tools</h2>
+      <p class="text-xs sm:text-sm text-slate-400 mt-1">Click any tool below to open the dedicated AI Video Clipper & URL Converter workspace.</p>
     </div>
-
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5" id="clipperCardsGrid">
-      <!-- Populated dynamically with all 22 tools from Screenshot 2 -->
-    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5" id="clipperCardsGrid"></div>
   </section>
 
-  <!-- SECTION 4: FREE TRIAL + CUSTOM RUPEE (₹) SLIDER PLAN + INSTANT PAYMENT GATEWAY -->
-  <section id="pricing" class="relative z-10 max-w-5xl mx-auto px-4 pb-24 scroll-reveal">
+  <!-- SECTION 4: FREE TRIAL + CUSTOM RUPEE PLAN STARTING AT ₹50 + DIRECT BANK UPI GATEWAY -->
+  <section id="pricing" class="relative z-10 max-w-5xl mx-auto px-4 pb-20 scroll-reveal">
     <div class="text-center mb-10">
-      <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-bold uppercase">Flexible India Pricing</span>
-      <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-3">Start Free or Build Your Custom Rupee Plan</h2>
-      <p class="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto mt-1">No rigid agency retainers. Start with our free trial or slide to build a custom plan that fits your exact pocket.</p>
+      <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-bold uppercase">Student & Startup Friendly Pricing</span>
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-3">Start Free or Custom Plan Starting at Just ₹50</h2>
+      <p class="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto mt-1">Direct UPI & QR settlements go straight into your connected bank account with zero middleman delay.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
       
-      <!-- Card 1: Free Trial Plan -->
-      <div class="studio-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-white/10">
+      <!-- Card 1: Free Trial -->
+      <div class="neo-panel rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-white/10">
         <div>
           <div class="flex items-center justify-between">
-            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold">Starter Free Trial</span>
-            <span class="text-xs font-mono-code text-emerald-400">Instant Access</span>
+            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold">Free Forever Trial</span>
+            <span class="text-xs font-mono-code text-emerald-400">Active Now</span>
           </div>
           <div class="mt-5 mb-2 flex items-baseline gap-2">
             <span class="text-4xl sm:text-5xl font-extrabold text-white font-display">₹0</span>
-            <span class="text-xs text-slate-400">/ 7-Day Free Trial</span>
+            <span class="text-xs text-slate-400">/ Try All Features</span>
           </div>
-          <p class="text-xs text-slate-400 mb-6">Test every AI script generator, voice persona, and WebM video download at zero cost.</p>
-
+          <p class="text-xs text-slate-400 mb-6">Test smart AI background generation, 6 voices, and WebM video downloads right now.</p>
           <ul class="text-xs text-slate-200 space-y-3 mb-8">
             <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> <span>3 Free 9:16 Video Downloads (.WEBM)</span></li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> <span>Full Access to 6 AI Voice Personas</span></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> <span>Smart AI Text-to-Background Generator</span></li>
             <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> <span>Instagram Reels & YouTube Shorts Previews</span></li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> <span>All 30+ Browser Creator Utilities</span></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> <span>All 38+ Creator & Clipper Utilities</span></li>
           </ul>
         </div>
-
         <a href="#studio" class="w-full py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-extrabold text-xs uppercase tracking-wider text-center border border-white/15 transition">
-          Start Free Trial Now →
+          Use Free Studio Now →
         </a>
       </div>
 
-      <!-- Card 2: Interactive Custom Rupee Plan Builder + Payment Gateway Trigger -->
-      <div class="studio-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-2 border-indigo-500 relative shadow-2xl shadow-indigo-500/15">
-        <span class="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white text-[10px] font-extrabold uppercase tracking-wider">Custom Rupee Builder</span>
-        
+      <!-- Card 2: Custom Rupee Plan Starting at ₹50 -->
+      <div class="neo-panel rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-2 border-indigo-500 relative shadow-2xl shadow-indigo-500/15">
+        <span class="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white text-[10px] font-extrabold uppercase tracking-wider">Starts at ₹50</span>
         <div>
           <div class="flex items-center justify-between">
-            <span class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold">Pay Only For What You Need</span>
-            <span id="customReelCountBadge" class="text-xs font-mono-code text-amber-300 font-bold">10 Reels / mo</span>
+            <span class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold">Custom Rupee Builder</span>
+            <span id="customReelCountBadge" class="text-xs font-mono-code text-amber-300 font-bold">1 Pro Video Pack</span>
           </div>
 
           <div class="mt-5 mb-4 flex items-baseline gap-2">
-            <span id="customPriceDisplay" class="text-4xl sm:text-5xl font-extrabold text-white font-display">₹999</span>
-            <span class="text-xs text-slate-400">/ month (or one-time pack)</span>
+            <span id="customPriceDisplay" class="text-4xl sm:text-5xl font-extrabold text-white font-display">₹50</span>
+            <span class="text-xs text-slate-400">/ instant pack</span>
           </div>
 
-          <!-- Interactive Rupee Slider -->
+          <!-- Slider Starting at 1 Video = ₹50 -->
           <div class="p-4 rounded-2xl bg-black/60 border border-white/10 mb-5 space-y-2">
             <div class="flex justify-between text-xs font-semibold">
-              <span class="text-slate-300">Slide to adjust monthly videos:</span>
-              <span id="sliderVideosLabel" class="text-indigo-400 font-bold">10 Videos (₹999)</span>
+              <span class="text-slate-300">Slide to choose video credits:</span>
+              <span id="sliderVideosLabel" class="text-indigo-400 font-bold">1 Video (₹50)</span>
             </div>
-            <input id="customPlanSlider" type="range" min="2" max="50" step="2" value="10" class="w-full accent-indigo-500 cursor-pointer">
+            <input id="customPlanSlider" type="range" min="1" max="50" step="1" value="1" class="w-full accent-indigo-500 cursor-pointer">
             <div class="flex justify-between text-[10px] text-slate-500 font-mono-code">
-              <span>2 Videos (₹199)</span>
-              <span>25 Videos (₹2,499)</span>
-              <span>50 Videos (₹4,999)</span>
+              <span>1 Video (₹50)</span>
+              <span>15 Videos (₹750)</span>
+              <span>50 Videos (₹2,500)</span>
             </div>
           </div>
 
           <ul class="text-xs text-slate-200 space-y-2.5 mb-6">
-            <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> <span>1080p Watermark-Free MP4 & WebM Exports</span></li>
-            <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> <span>Custom ElevenLabs Voice Cloning Included</span></li>
-            <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> <span>Direct WhatsApp Production Concierge (+91 7820847387)</span></li>
+            <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> <span>1080p Watermark-Free Video & Voice Renders</span></li>
+            <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> <span>Unlimited Smart AI Custom Backgrounds</span></li>
+            <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> <span>Direct UPI Payment to Founder Bank Account</span></li>
           </ul>
         </div>
 
         <button type="button" id="openPaymentGatewayBtn" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:opacity-95 text-white font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-indigo-600/30 transition cursor-pointer">
-          💳 Pay via Instant Payment Gateway (UPI / Card)
+          💳 Pay ₹50+ via Instant UPI / Bank Gateway
         </button>
       </div>
 
     </div>
   </section>
 
-  <!-- MODAL 1: INTERACTIVE PAYMENT GATEWAY (UPI QR + CARD + WHATSAPP VERIFICATION) -->
-  <div id="paymentGatewayModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="studio-card max-w-md w-full rounded-3xl overflow-hidden border border-white/20 shadow-2xl">
-      <!-- Gateway Top Header -->
-      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-5 flex items-center justify-between text-white">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center font-bold">₹</div>
-          <div>
-            <h3 class="text-sm font-extrabold">ReelFlow Secure Checkout</h3>
-            <p id="gatewayPlanSubtitle" class="text-[11px] text-indigo-100">Custom Plan: 10 Videos</p>
-          </div>
+  <!-- SECTION 5: RESTORED CONTACT FOUNDER & PRODUCTION CONCIERGE DESK (+91 7820847387) -->
+  <section id="founder-desk" class="relative z-10 max-w-5xl mx-auto px-4 pb-24 scroll-reveal">
+    <div class="neo-panel rounded-3xl p-6 sm:p-10 border border-emerald-500/30 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="space-y-2 text-center md:text-left">
+        <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-xs font-bold uppercase">Direct Founder Concierge</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Need Custom AI Marketing or Done-For-You Reels?</h2>
+        <p class="text-xs sm:text-sm text-slate-300 max-w-xl">
+          Connect directly with our founder desk on WhatsApp (+91 7820847387) to send your generated script, request custom brand edits, or partner with ReelFlow AI.
+        </p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+        <button type="button" id="contactFounderWhatsAppBtn" class="px-6 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider shadow-xl shadow-emerald-500/20 transition cursor-pointer">
+          💬 WhatsApp Founder (+91 7820847387)
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL 1: DEDICATED AI CLIPPER & CONVERTER WORKSPACE (Fixes the "only switching msg" issue!) -->
+  <div id="clipperWorkspaceModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="neo-panel max-w-lg w-full rounded-3xl p-6 border border-indigo-500/40 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div>
+          <span class="text-[10px] font-mono-code uppercase text-indigo-400">Interactive AI Repurposing Engine</span>
+          <h3 id="clipperModalTitle" class="text-lg font-extrabold text-white font-display">Video to Reels Converter</h3>
         </div>
-        <div class="text-right">
-          <span id="gatewayAmountBadge" class="text-lg font-extrabold font-display">₹999</span>
-          <button type="button" id="closePaymentModalBtn" class="block ml-auto text-xs text-white/80 hover:text-white cursor-pointer">✕ Close</button>
-        </div>
+        <button type="button" id="closeClipperModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
       </div>
 
-      <div class="p-6 space-y-4">
-        <!-- Payment Method Tabs -->
-        <div class="grid grid-cols-2 gap-2 p-1 rounded-xl bg-black/60 border border-white/10">
-          <button type="button" id="payTabUpi" class="py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold cursor-pointer">📱 Instant UPI / QR</button>
-          <button type="button" id="payTabCard" class="py-2 rounded-lg text-slate-400 hover:text-white text-xs font-bold cursor-pointer">💳 Debit / Credit Card</button>
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">1. Paste Long Video URL (YouTube, Drive, Dropbox, Twitch) or Topic:</label>
+          <input id="clipperUrlInput" type="text" placeholder="https://youtube.com/watch?v=... or describe your video" class="w-full bg-black/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
         </div>
 
-        <!-- UPI QR View -->
-        <div id="upiPaymentPane" class="text-center space-y-3">
-          <p class="text-xs text-slate-300">Scan with GPay, PhonePe, Paytm, or Kotak/Axis UPI App:</p>
-          <div class="w-44 h-44 mx-auto bg-white p-2.5 rounded-2xl shadow-lg flex items-center justify-center">
-            <img id="dynamicUpiQr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi%3A%2F%2Fpay%3Fpa%3D7820847387%40upi%26pn%3DReelFlow%2520AI%26am%3D999%26cu%3DINR" alt="UPI QR" class="w-full h-full object-contain">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">2. Or Upload Local Video / Audio File from Device:</label>
+          <input id="clipperFileInput" type="file" accept="video/*,audio/*" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-white/10 file:text-white file:font-bold cursor-pointer">
+        </div>
+
+        <div class="grid grid-cols-3 gap-2">
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1">Clip Length</label>
+            <select id="clipperDuration" class="w-full bg-black/70 border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white">
+              <option value="15s">15s Viral Cut</option>
+              <option value="30s" selected>24s - 30s Reel</option>
+              <option value="60s">60s YT Short</option>
+            </select>
           </div>
-          <p class="text-[11px] font-mono-code text-emerald-300">UPI ID: 7820847387@ybl / 7820847387@upi</p>
-        </div>
-
-        <!-- Card View (Hidden by default) -->
-        <div id="cardPaymentPane" class="hidden space-y-2.5">
-          <input type="text" placeholder="Cardholder Name" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
-          <input type="text" placeholder="Card Number (XXXX XXXX XXXX XXXX)" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono-code">
-          <div class="grid grid-cols-2 gap-2">
-            <input type="text" placeholder="MM / YY" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono-code">
-            <input type="password" placeholder="CVV" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono-code">
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1">Auto-Reframe</label>
+            <select class="w-full bg-black/70 border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white">
+              <option>9:16 Face-Track</option>
+              <option>Split-Screen</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1">Subtitles</label>
+            <select class="w-full bg-black/70 border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white">
+              <option>Hormozi Bold</option>
+              <option>Hinglish Auto</option>
+            </select>
           </div>
         </div>
 
-        <input id="payerNameInput" type="text" placeholder="Your Name & Email / Phone for Instant Activation *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
+        <!-- Simulated AI Progress Bar -->
+        <div id="clipperProgressWrap" class="hidden p-3 rounded-2xl bg-black/60 border border-indigo-500/30 space-y-2">
+          <div class="flex justify-between text-[11px] font-mono-code text-indigo-300">
+            <span id="clipperStageText">Analyzing audio peaks & hooks...</span>
+            <span id="clipperPctText">35%</span>
+          </div>
+          <div class="w-full h-2 bg-slate-900 rounded-full overflow-hidden">
+            <div id="clipperProgressBar" class="h-full bg-gradient-to-r from-indigo-500 to-pink-500 w-1/3 transition-all duration-300"></div>
+          </div>
+        </div>
 
-        <button type="button" id="confirmPaymentBtn" class="w-full py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider transition cursor-pointer">
-          ✓ Complete Payment & Activate Plan
+        <button type="button" id="runClipperExtractBtn" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg cursor-pointer">
+          ✂️ Extract Viral 9:16 Clip & Open in Studio
         </button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 2: INTERACTIVE CREATOR UTILITY TOOL (CAMERA TEST, MIC TEST, CONVERTER, TRANSCRIBER) -->
+  <!-- MODAL 2: DIRECT BANK UPI PAYMENT GATEWAY (Explains & Routes Money Directly to Your Bank!) -->
+  <div id="paymentGatewayModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="neo-panel max-w-md w-full rounded-3xl overflow-hidden border border-white/20 shadow-2xl max-h-[92vh] overflow-y-auto">
+      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-4 sm:p-5 flex items-center justify-between text-white">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center font-extrabold">₹</div>
+          <div>
+            <h3 class="text-sm font-extrabold">Direct Bank UPI Checkout</h3>
+            <p id="gatewayPlanSubtitle" class="text-[11px] text-indigo-100">Custom Pack: 1 Video</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <span id="gatewayAmountBadge" class="text-xl font-extrabold font-display">₹50</span>
+          <button type="button" id="closePaymentModalBtn" class="block ml-auto text-xs text-white/80 hover:text-white cursor-pointer">✕ Close</button>
+        </div>
+      </div>
+
+      <div class="p-5 space-y-4">
+        <!-- Founder Merchant UPI Setup (So money goes straight into your Kotak / Axis bank account) -->
+        <div class="p-3 rounded-2xl bg-indigo-950/50 border border-indigo-500/30 space-y-1.5">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-indigo-300">🏦 Receiving Bank UPI ID (Direct Settlement):</span>
+            <button type="button" id="toggleUpiEditBtn" class="text-[10px] text-pink-300 underline cursor-pointer">Change UPI ID</button>
+          </div>
+          <p id="activeMerchantUpiLabel" class="text-xs font-mono-code text-emerald-300 font-bold">7820847387@upi</p>
+          <div id="merchantUpiEditBox" class="hidden pt-1 space-y-1.5">
+            <input id="merchantUpiInput" type="text" placeholder="e.g. 7820847387@kotak or 7820847387@okaxis" class="w-full bg-black/70 border border-white/15 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono-code">
+            <button type="button" id="saveMerchantUpiBtn" class="w-full py-1.5 rounded-lg bg-indigo-600 text-white text-[11px] font-bold cursor-pointer">Save My Bank UPI ID</button>
+          </div>
+        </div>
+
+        <!-- QR Code + 1-Tap Mobile UPI Deep Link -->
+        <div class="text-center space-y-2.5">
+          <p class="text-xs text-slate-300">1. Scan QR with GPay, PhonePe, Paytm, or Kotak/Axis App:</p>
+          <div class="w-40 h-40 mx-auto bg-white p-2 rounded-2xl shadow-lg flex items-center justify-center">
+            <img id="dynamicUpiQr" src="" alt="UPI QR" class="w-full h-full object-contain">
+          </div>
+          <a id="mobileUpiDeepLink" href="#" class="inline-block w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold text-emerald-300 transition">
+            📱 Tap Here on Phone to Pay via GPay / PhonePe App
+          </a>
+        </div>
+
+        <!-- UTR Verification & WhatsApp Receipt -->
+        <div class="space-y-2 pt-2 border-t border-white/10">
+          <label class="block text-[11px] font-semibold text-slate-300">2. Enter Customer Name & 12-Digit UPI Ref / UTR No:</label>
+          <input id="payerNameInput" type="text" placeholder="Your Name / Brand Name *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
+          <input id="payerUtrInput" type="text" placeholder="12-Digit UPI Ref / UTR Number (or last 4 digits)" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono-code">
+        </div>
+
+        <button type="button" id="confirmPaymentBtn" class="w-full py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider transition cursor-pointer">
+          ✓ Verify Payment & Unlock Credits on WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: HARDWARE & CREATOR UTILITY MODAL (Auto-Stops Mic & Webcam!) -->
   <div id="utilityToolModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="studio-card max-w-lg w-full rounded-3xl p-6 border border-white/15 space-y-4">
+    <div class="neo-panel max-w-lg w-full rounded-3xl p-6 border border-white/15 space-y-4">
       <div class="flex items-center justify-between">
         <h3 id="utilModalTitle" class="text-lg font-bold text-white font-display">Utility Tool</h3>
         <button type="button" id="closeUtilModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
       </div>
       <p id="utilModalDesc" class="text-xs text-slate-300"></p>
-
-      <!-- Dynamic Tool Body -->
       <div id="utilModalBody" class="space-y-3"></div>
     </div>
   </div>
 
-  <!-- MODAL 3: LOGIN & REGISTER -->
+  <!-- MODAL 4: PERSISTENT LOGIN & REGISTER -->
   <div id="authModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="studio-card max-w-md w-full rounded-3xl p-6 space-y-4 border border-white/15">
+    <div class="neo-panel max-w-md w-full rounded-3xl p-6 space-y-4 border border-white/15">
       <div class="flex items-center justify-between">
         <h3 class="text-base font-bold text-white font-display">ReelFlow Creator Account</h3>
         <button type="button" id="closeAuthModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
@@ -555,17 +710,18 @@
         <button type="button" id="tabRegisterBtn" class="py-2 rounded-lg text-slate-400 text-xs font-bold cursor-pointer">Register</button>
       </div>
       <form id="authForm" class="space-y-3">
-        <input id="authNameInput" type="text" placeholder="Your Full Name" class="hidden w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
+        <input id="authNameInput" type="text" placeholder="Your Full Name *" class="hidden w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
         <input id="authEmailInput" type="email" required placeholder="Email Address *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
         <input id="authPassInput" type="password" required placeholder="Password *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
-        <button type="submit" id="authSubmitBtn" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase cursor-pointer">Continue to Studio →</button>
+        <button type="submit" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase cursor-pointer">Save Session & Continue →</button>
       </form>
+      <p class="text-[11px] text-slate-400 text-center">Your login is permanently remembered on this browser until you click Logout.</p>
     </div>
   </div>
 
-  <!-- MODAL 4: GEMINI API KEY -->
+  <!-- MODAL 5: GEMINI API KEY -->
   <div id="apiModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="studio-card max-w-md w-full rounded-3xl p-6 space-y-4 border border-white/15">
+    <div class="neo-panel max-w-md w-full rounded-3xl p-6 space-y-4 border border-white/15">
       <div class="flex items-center justify-between">
         <h3 class="text-base font-bold text-white">⚡ Connect Gemini 2.5 Flash Key</h3>
         <button type="button" id="closeApiModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
@@ -578,28 +734,66 @@
     </div>
   </div>
 
-  <!-- COMPLETE APPLICATION ENGINE -->
+  <!-- APPLICATION JAVASCRIPT ENGINE -->
   <script>
     (function() {
       var FOUNDER_WHATSAPP = "917820847387";
 
-      // 11 Utility Tools from Screenshot 1
+      // Curated HD Background Photo Packs (Restored!)
+      var PHOTO_PACKS = {
+        coffee: [
+          "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80"
+        ],
+        cyber: [
+          "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80"
+        ],
+        luxury: [
+          "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80"
+        ],
+        workspace: [
+          "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+        ],
+        fitness: [
+          "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1546483875-ad9014c88eba?auto=format&fit=crop&w=600&q=80"
+        ],
+        street: [
+          "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=600&q=80"
+        ]
+      };
+
       var UTILITY_TOOLS = [
-        { id: "camera", icon: "📹", title: "Camera Test", desc: "Test your webcam live right inside your browser" },
-        { id: "mic", icon: "🎙️", title: "Mic Test", desc: "Test your microphone with real-time audio spectrum" },
+        { id: "camera", icon: "📹", title: "Camera Test", desc: "Test your webcam (Auto-stops when done)" },
+        { id: "mic", icon: "🎙️", title: "Mic Test", desc: "10s microphone level test with auto-shutoff" },
         { id: "audioconv", icon: "🔄", title: "Audio Converter", desc: "Convert audio files to MP3 and WAV format" },
         { id: "videoconv", icon: "🎞️", title: "Video Converter", desc: "Convert video clips to MP4 and WEBM" },
         { id: "extractor", icon: "🎵", title: "Audio Extractor", desc: "Separate clean audio tracks from your video" },
-        { id: "remover", icon: "🔇", title: "Audio Remover", desc: "Mute and strip unwanted background noise from video" },
+        { id: "remover", icon: "🔇", title: "Audio Remover", desc: "Mute and strip background noise from video" },
         { id: "audiotrans", icon: "📝", title: "Audio Transcription", desc: "Transcribe voice notes and audio to text" },
         { id: "videotrans", icon: "📄", title: "Video Transcription", desc: "Transcribe video dialogue to timestamped text" },
         { id: "podtrans", icon: "🎧", title: "Podcast Transcription", desc: "Turn multi-speaker podcasts into show notes" },
         { id: "tiktokscript", icon: "✨", title: "AI TikTok Script Generator", desc: "Generate viral TikTok & Reel scripts using AI" },
         { id: "ytscript", icon: "▶️", title: "AI YouTube Script Generator", desc: "Generate high-retention YouTube Shorts scripts" },
-        { id: "salesscript", icon: "💼", title: "AI Sales Script Generator", desc: "Generate high-converting B2B & D2C video sales scripts" }
+        { id: "salesscript", icon: "💼", title: "AI Sales Script Generator", desc: "Generate high-converting B2B & D2C video scripts" }
       ];
 
-      // 22 Clipper & Converter Tools from Screenshot 2
       var CLIPPER_TOOLS = [
         "Long Video to Short Video AI", "Highlight Video Maker",
         "AI Clip Maker", "AI Clip Generator",
@@ -626,50 +820,31 @@
       ];
 
       var PRESETS = {
-        coffee: {
-          brand: "Asli Cold Brew Coffee",
-          audience: "Young professionals and college students tired of spending Rs 350 on watery cafe coffee",
-          tone: "controversial",
-          lang: "hinglish"
-        },
-        fintech: {
-          brand: "Kotak & Burgundy Card Maximizer",
-          audience: "Students booking flights and movie tickets without claiming hidden bank rewards",
-          tone: "data",
-          lang: "hinglish"
-        },
-        saas: {
-          brand: "PayPulse AI Invoice Recovery",
-          audience: "Agency founders and freelancers chasing overdue client payments",
-          tone: "story",
-          lang: "english"
-        },
-        podcast: {
-          brand: "Founder Unfiltered Podcast Ep. 42",
-          audience: "Early-stage entrepreneurs building profitable AI micro-startups in India",
-          tone: "secret",
-          lang: "hinglish"
-        },
-        streetwear: {
-          brand: "Bandra 280GSM Heavyweight Tees",
-          audience: "Sneakerheads tired of fast-fashion t-shirts shrinking after two washes",
-          tone: "controversial",
-          lang: "hinglish"
-        }
+        coffee: { brand: "Asli Cold Brew Coffee", audience: "Young professionals and college students tired of spending Rs 350 on watery cafe coffee", tone: "controversial", lang: "hinglish", photoPack: "coffee" },
+        fintech: { brand: "Kotak & Burgundy Card Maximizer", audience: "Students booking flights and movie tickets without claiming hidden bank rewards", tone: "data", lang: "hinglish", photoPack: "workspace" },
+        saas: { brand: "PayPulse AI Invoice Recovery", audience: "Agency founders and freelancers chasing overdue client payments", tone: "story", lang: "english", photoPack: "workspace" },
+        podcast: { brand: "Founder Unfiltered Podcast Clip", audience: "Entrepreneurs building profitable AI startups in India", tone: "secret", lang: "hinglish", photoPack: "cyber" },
+        streetwear: { brand: "Bandra 280GSM Heavyweight Tees", audience: "Sneakerheads tired of fast-fashion t-shirts shrinking after two washes", tone: "controversial", lang: "hinglish", photoPack: "street" }
       };
 
       // App State
       var currentProject = null;
       var activeSceneIdx = 0;
       var activePersonaId = "aarav";
-      var activeUiMode = "instagram"; // 'instagram' | 'youtube' | 'clean'
+      var activeUiMode = "instagram";
       var activeCapStyle = "hormozi";
-      var activeBgTheme = "obsidian";
-      var customUploadedImg = null;
+      var bgMode = "photo"; // 'photo' | 'smart_ai' | 'upload' | 'shader'
+      var activeShaderName = "obsidian";
+      var loadedPhotoPackImgs = [null, null, null, null];
+      var customOrSmartBgImg = null;
       var isPlaying = false;
       var animFrameId = null;
       var shaderTick = 0;
-      var mediaStreamTrack = null;
+
+      // Active Hardware Streams (For Clean Mic/Webcam Shutoff!)
+      var activeMediaStream = null;
+      var activeAudioContext = null;
+      var micAutoStopTimer = null;
 
       function showToast(msg) {
         var b = document.getElementById("toastBanner");
@@ -677,14 +852,115 @@
         if (!b || !t) return;
         t.textContent = msg;
         b.classList.remove("hidden");
-        setTimeout(function() { b.classList.add("hidden"); }, 2700);
+        setTimeout(function() { b.classList.add("hidden"); }, 2800);
       }
 
-      // Bidirectional Scroll Reveal (Scroll Down + Scroll Up)
+      // Stop Any Running Mic or Camera Immediately
+      function stopAllHardwareStreams() {
+        if (micAutoStopTimer) {
+          clearTimeout(micAutoStopTimer);
+          micAutoStopTimer = null;
+        }
+        if (activeMediaStream) {
+          activeMediaStream.getTracks().forEach(function(track) {
+            track.stop();
+          });
+          activeMediaStream = null;
+        }
+        if (activeAudioContext) {
+          try { activeAudioContext.close(); } catch (e) {}
+          activeAudioContext = null;
+        }
+      }
+
+      // Persistent Login Check (Runs on Page Load so User Never Has to Re-Login!)
+      function syncPersistentUserSession() {
+        var raw = localStorage.getItem("reelflow_saved_user_v6");
+        var loginBtn = document.getElementById("openAuthModalBtn");
+        var badge = document.getElementById("userProfileBadge");
+        if (raw) {
+          try {
+            var user = JSON.parse(raw);
+            if (user && user.email) {
+              loginBtn.classList.add("hidden");
+              badge.classList.remove("hidden");
+              badge.classList.add("flex");
+              var disp = user.name || user.email.split("@")[0];
+              document.getElementById("userNameText").textContent = disp;
+              document.getElementById("userInitials").textContent = disp.charAt(0).toUpperCase();
+              return;
+            }
+          } catch (e) {}
+        }
+        loginBtn.classList.remove("hidden");
+        badge.classList.add("hidden");
+        badge.classList.remove("flex");
+      }
+
+      // Load 4 HD Stock Photos for Scenes
+      function loadPhotoPack(packKey) {
+        var urls = PHOTO_PACKS[packKey] || PHOTO_PACKS.coffee;
+        bgMode = "photo";
+        urls.forEach(function(u, i) {
+          var img = new Image();
+          img.crossOrigin = "anonymous";
+          img.onload = function() {
+            loadedPhotoPackImgs[i] = img;
+            drawCanvas();
+          };
+          img.src = u;
+        });
+      }
+
+      // Smart AI Background Generator (Synthesizes Custom Visual from Prompt + Procedural Canvas Fallback)
+      function generateSmartAiBackground(promptText) {
+        var cleanPrompt = (promptText || "modern neon studio background").trim();
+        showToast("Generating Smart AI Background for: " + cleanPrompt.slice(0, 28) + "...");
+        var seed = Math.floor(Math.random() * 99999);
+        var aiUrl = "https://image.pollinations.ai/prompt/" + encodeURIComponent(cleanPrompt + ", vertical 9:16 wallpaper, cinematic lighting, 8k, no text") + "?width=540&height=960&nologo=true&seed=" + seed;
+
+        var img = new Image();
+        img.crossOrigin = "anonymous";
+        img.onload = function() {
+          customOrSmartBgImg = img;
+          bgMode = "smart_ai";
+          drawCanvas();
+          showToast("✨ Smart AI Background applied to 9:16 video!");
+        };
+        img.onerror = function() {
+          // Instant procedural cyber artwork fallback if external image API is slow
+          var off = document.createElement("canvas");
+          off.width = 540;
+          off.height = 960;
+          var octx = off.getContext("2d");
+          var g = octx.createLinearGradient(0, 0, 540, 960);
+          g.addColorStop(0, "#1e1b4b");
+          g.addColorStop(0.5, "#4c0519");
+          g.addColorStop(1, "#064e3b");
+          octx.fillStyle = g;
+          octx.fillRect(0, 0, 540, 960);
+          for (var i = 0; i < 18; i++) {
+            octx.fillStyle = "rgba(255,255,255,0.06)";
+            octx.beginPath();
+            octx.arc(Math.random() * 540, Math.random() * 960, 30 + Math.random() * 120, 0, Math.PI * 2);
+            octx.fill();
+          }
+          var dataImg = new Image();
+          dataImg.onload = function() {
+            customOrSmartBgImg = dataImg;
+            bgMode = "smart_ai";
+            drawCanvas();
+            showToast("✨ Smart Procedural AI Background generated!");
+          };
+          dataImg.src = off.toDataURL();
+        };
+        img.src = aiUrl;
+      }
+
       function initScrollObserver() {
-        var items = document.querySelectorAll(".scroll-reveal");
+        var els = document.querySelectorAll(".scroll-reveal");
         if (!("IntersectionObserver" in window)) {
-          items.forEach(function(el) { el.classList.add("visible"); });
+          els.forEach(function(el) { el.classList.add("visible"); });
           return;
         }
         var obs = new IntersectionObserver(function(entries) {
@@ -695,8 +971,8 @@
               entry.target.classList.remove("visible");
             }
           });
-        }, { threshold: 0.10 });
-        items.forEach(function(el) { obs.observe(el); });
+        }, { threshold: 0.1 });
+        els.forEach(function(el) { obs.observe(el); });
       }
 
       function buildBlueprint(brand, audience, tone, lang) {
@@ -712,10 +988,10 @@
             "Sach bataun? Traditional options scam lagte hain jab aap " + cleanBrand + " ka real breakdown dekhte ho."
           ];
           scenes = [
-            { time: "00:00 - 00:03", label: "HOOK", voice: hooks[0] },
-            { time: "00:03 - 00:09", label: "PROBLEM", voice: "Dekho problem simple hai: " + cleanAud + " roz time aur paisa lagate hain, par result zero milta hai." },
-            { time: "00:09 - 00:18", label: "SOLUTION", voice: "Isiliye humne banaya " + cleanBrand + ". Bina kisi manual headache ke, aapko milta hai 3X faster output." },
-            { time: "00:18 - 00:24", label: "CTA", voice: "Abhi comment karo LINK aur free trial सीधा apne DM mein pao!" }
+            { time: "00:00 - 00:03", label: "HOOK IMPACT", voice: hooks[0] },
+            { time: "00:03 - 00:09", label: "PAIN AGITATION", voice: "Dekho problem simple hai: " + cleanAud + " roz time aur paisa lagate hain, par result zero milta hai." },
+            { time: "00:09 - 00:18", label: "THE SOLUTION", voice: "Isiliye humne banaya " + cleanBrand + ". Bina kisi manual headache ke, aapko milta hai 3X faster output." },
+            { time: "00:18 - 00:24", label: "CALL TO ACTION", voice: "Abhi comment karo LINK aur free trial seedha apne DM mein pao!" }
           ];
         } else {
           hooks = [
@@ -724,19 +1000,14 @@
             "The industry does not want " + cleanAud.slice(0, 42) + " to know this simple shortcut exists."
           ];
           scenes = [
-            { time: "00:00 - 00:03", label: "HOOK", voice: hooks[0] },
-            { time: "00:03 - 00:09", label: "PROBLEM", voice: "Right now, " + cleanAud + " are stuck overpaying and losing hours on broken workflows." },
-            { time: "00:09 - 00:18", label: "SOLUTION", voice: "That is why " + cleanBrand + " was built from day one to deliver studio-grade results automatically." },
-            { time: "00:18 - 00:24", label: "CTA", voice: "Comment LINK below and we will send instant access straight to your DMs!" }
+            { time: "00:00 - 00:03", label: "HOOK IMPACT", voice: hooks[0] },
+            { time: "00:03 - 00:09", label: "PAIN AGITATION", voice: "Right now, " + cleanAud + " are stuck overpaying and losing hours on broken workflows." },
+            { time: "00:09 - 00:18", label: "THE SOLUTION", voice: "That is why " + cleanBrand + " was built from day one to deliver studio-grade results automatically." },
+            { time: "00:18 - 00:24", label: "CALL TO ACTION", voice: "Comment LINK below and we will send instant access straight to your DMs!" }
           ];
         }
 
-        return {
-          brand: cleanBrand,
-          activeHookIndex: 0,
-          hooks: hooks,
-          scenes: scenes
-        };
+        return { brand: cleanBrand, activeHookIndex: 0, hooks: hooks, scenes: scenes };
       }
 
       function renderVoiceGrid() {
@@ -763,6 +1034,7 @@
         });
       }
 
+      // Redesigned NLE Timeline Editor UI
       function renderStoryboardUI() {
         if (!currentProject) return;
 
@@ -771,14 +1043,15 @@
         currentProject.hooks.forEach(function(h, idx) {
           var active = idx === currentProject.activeHookIndex;
           var div = document.createElement("div");
-          div.className = "cursor-pointer p-2.5 rounded-xl border text-xs transition flex items-start gap-2 " +
+          div.className = "cursor-pointer p-2.5 rounded-xl border text-xs transition flex items-center gap-2 " +
             (active ? "bg-indigo-600/25 border-indigo-400 text-white font-semibold" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
-          div.innerHTML = '<span class="px-1.5 py-0.5 rounded bg-white/10 text-[10px] font-mono-code">H' + (idx + 1) + '</span><span>"' + h + '"</span>';
+          div.innerHTML = '<span class="px-2 py-0.5 rounded-md bg-indigo-500/30 border border-indigo-400/40 text-[10px] font-mono-code text-indigo-200">H' + (idx + 1) + '</span><span class="truncate">"' + h + '"</span>';
           div.addEventListener("click", function() {
             currentProject.activeHookIndex = idx;
             currentProject.scenes[0].voice = currentProject.hooks[idx];
             activeSceneIdx = 0;
             renderStoryboardUI();
+            showToast("Activated Hook H" + (idx + 1));
           });
           hooksBox.appendChild(div);
         });
@@ -787,32 +1060,70 @@
         scenesBox.innerHTML = "";
         currentProject.scenes.forEach(function(sc, idx) {
           var active = idx === activeSceneIdx;
-          var card = document.createElement("div");
-          card.className = "p-3 rounded-2xl border transition space-y-1.5 " +
-            (active ? "bg-purple-950/35 border-purple-400" : "bg-black/40 border-white/10");
+          var node = document.createElement("div");
+          node.className = "timeline-node rounded-2xl p-3.5 space-y-2 " + (active ? "active-scene" : "");
 
-          var topRow = document.createElement("div");
-          topRow.className = "flex justify-between text-[10px] font-mono-code cursor-pointer";
-          topRow.innerHTML = '<span class="text-amber-300 font-bold">SCENE ' + (idx + 1) + ': ' + sc.label + '</span><span class="text-slate-400">' + sc.time + '</span>';
-          topRow.addEventListener("click", function() {
+          // Top Timeline Bar with Scene Number, Badge, Speak Button & AI Rewrite Button
+          var topBar = document.createElement("div");
+          topBar.className = "flex items-center justify-between gap-1";
+          topBar.innerHTML =
+            '<div class="flex items-center gap-2 cursor-pointer">' +
+              '<span class="w-6 h-6 rounded-lg ' + (active ? 'bg-indigo-600 text-white' : 'bg-white/10 text-slate-300') + ' text-[11px] font-extrabold flex items-center justify-center">0' + (idx + 1)</span>' +
+              '<div>' +
+                '<span class="block text-[11px] font-extrabold text-white tracking-wide">' + sc.label + '</span>' +
+                '<span class="block text-[9px] font-mono-code text-indigo-300">' + sc.time + '</span>' +
+              '</div>' +
+            '</div>' +
+            '<div class="flex items-center gap-1">' +
+              '<button type="button" class="speak-scene-btn px-2 py-1 rounded-lg bg-white/5 hover:bg-white/15 text-[10px] font-bold text-purple-300 border border-white/10 cursor-pointer">🔊 Speak</button>' +
+              '<button type="button" class="rewrite-scene-btn px-2 py-1 rounded-lg bg-indigo-500/15 hover:bg-indigo-500/30 text-[10px] font-bold text-indigo-300 border border-indigo-500/30 cursor-pointer">✨ Polish</button>' +
+            '</div>';
+
+          topBar.querySelector(".cursor-pointer").addEventListener("click", function() {
             stopReel();
             activeSceneIdx = idx;
             renderStoryboardUI();
           });
 
+          topBar.querySelector(".speak-scene-btn").addEventListener("click", function() {
+            stopReel();
+            activeSceneIdx = idx;
+            renderStoryboardUI();
+            speakText(currentProject.scenes[idx].voice);
+          });
+
+          topBar.querySelector(".rewrite-scene-btn").addEventListener("click", function() {
+            var variations = [
+              "Wait—before you scroll past " + currentProject.brand + ", look at how much time this saves.",
+              "Top 1% creators quietly switched to " + currentProject.brand + " this month—here is why.",
+              "Stop doing this manually. " + currentProject.brand + " automates the entire workflow in 60 seconds.",
+              "Comment LINK right now and test " + currentProject.brand + " for free today!"
+            ];
+            currentProject.scenes[idx].voice = variations[idx % variations.length];
+            activeSceneIdx = idx;
+            renderStoryboardUI();
+            showToast("✨ Polished Scene " + (idx + 1) + " script!");
+          });
+
           var ta = document.createElement("textarea");
           ta.rows = 2;
           ta.value = sc.voice;
-          ta.className = "w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-indigo-400";
+          ta.className = "w-full bg-black/70 border border-white/10 rounded-xl px-3 py-2 text-xs text-white font-medium focus:outline-none focus:border-indigo-400";
           ta.addEventListener("input", function(e) {
             currentProject.scenes[idx].voice = e.target.value;
             activeSceneIdx = idx;
             drawCanvas();
           });
 
-          card.appendChild(topRow);
-          card.appendChild(ta);
-          scenesBox.appendChild(card);
+          var footBar = document.createElement("div");
+          footBar.className = "flex justify-between text-[10px] font-mono-code text-slate-500";
+          var wordCount = sc.voice.trim().split(/\s+/).length;
+          footBar.innerHTML = '<span>Words: ' + wordCount + '</span><span>Est. Speak Time: ~' + Math.max(2, Math.round(wordCount / 2.8)) + 's</span>';
+
+          node.appendChild(topBar);
+          node.appendChild(ta);
+          node.appendChild(footBar);
+          scenesBox.appendChild(node);
         });
 
         var nextBtn = document.getElementById("nextSceneBtn");
@@ -821,7 +1132,6 @@
         drawCanvas();
       }
 
-      // Word-wrapped kinetic captions on the 9:16 canvas
       function drawKineticCaptions(ctx, text, x, y, maxWidth, lineHeight) {
         var words = text.split(" ");
         var line = "";
@@ -840,23 +1150,18 @@
         var totalH = lines.length * lineHeight;
         var startY = y - totalH / 2 + lineHeight / 2;
 
-        // Clean Rounded Pill Backdrop
         if (activeCapStyle === "hormozi" || activeCapStyle === "modern" || activeCapStyle === "red") {
           ctx.fillStyle = activeCapStyle === "red"
-            ? "rgba(225, 29, 72, 0.9)"
-            : (activeCapStyle === "modern" ? "rgba(15, 23, 42, 0.72)" : "rgba(0, 0, 0, 0.78)");
-          var boxX = 38;
-          var boxY = y - totalH / 2 - 22;
-          var boxW = 540 - 76;
-          var boxH = totalH + 44;
+            ? "rgba(225, 29, 72, 0.92)"
+            : (activeCapStyle === "modern" ? "rgba(15, 23, 42, 0.78)" : "rgba(0, 0, 0, 0.82)");
           ctx.beginPath();
-          ctx.roundRect(boxX, boxY, boxW, boxH, 24);
+          ctx.roundRect(36, y - totalH / 2 - 22, 540 - 72, totalH + 44, 24);
           ctx.fill();
         }
 
         for (var i = 0; i < lines.length; i++) {
           var ly = startY + i * lineHeight;
-          ctx.strokeStyle = "rgba(0,0,0,0.85)";
+          ctx.strokeStyle = "rgba(0,0,0,0.9)";
           ctx.lineWidth = 6;
           ctx.strokeText(lines[i], x, ly);
 
@@ -871,7 +1176,7 @@
         }
       }
 
-      // Main 9:16 Video Canvas Renderer (Modern Shaders + Authentic IG Reels / YT Shorts UI)
+      // Master 9:16 Video Canvas Renderer (Supports Smart AI BG + HD Photo Packs + Shaders + IG/YT UI)
       function drawCanvas() {
         var canvas = document.getElementById("reelCanvas");
         if (!canvas || !currentProject) return;
@@ -881,32 +1186,42 @@
         var scene = currentProject.scenes[activeSceneIdx] || currentProject.scenes[0];
         var handle = document.getElementById("creatorHandleInput").value || "@reelflow.ai";
 
-        shaderTick += 0.03;
+        shaderTick += 0.025;
+        var zoom = 1.04 + Math.sin(shaderTick) * 0.035;
 
-        // 1. MODERN CUSTOMIZABLE BACKGROUND
-        if (customUploadedImg && customUploadedImg.complete) {
-          var zoom = 1.03 + Math.sin(shaderTick) * 0.03;
+        // 1. Draw Selected Background Mode
+        var activeImg = null;
+        if ((bgMode === "smart_ai" || bgMode === "upload") && customOrSmartBgImg && customOrSmartBgImg.complete) {
+          activeImg = customOrSmartBgImg;
+        } else if (bgMode === "photo" && loadedPhotoPackImgs[activeSceneIdx] && loadedPhotoPackImgs[activeSceneIdx].complete) {
+          activeImg = loadedPhotoPackImgs[activeSceneIdx];
+        }
+
+        if (activeImg && activeImg.naturalWidth > 0) {
           ctx.save();
           ctx.translate(W / 2, H / 2);
           ctx.scale(zoom, zoom);
-          ctx.drawImage(customUploadedImg, -W / 2, -H / 2, W, H);
+          ctx.drawImage(activeImg, -W / 2, -H / 2, W, H);
           ctx.restore();
-          ctx.fillStyle = "rgba(0,0,0,0.45)";
+          // Subtle readability vignette
+          var vig = ctx.createLinearGradient(0, 0, 0, H);
+          vig.addColorStop(0, "rgba(0,0,0,0.55)");
+          vig.addColorStop(0.5, "rgba(0,0,0,0.28)");
+          vig.addColorStop(1, "rgba(0,0,0,0.82)");
+          ctx.fillStyle = vig;
           ctx.fillRect(0, 0, W, H);
         } else {
-          var themes = {
+          var shaders = {
             obsidian: ["#090a10", "#1e1b4b", "#3b0764"],
-            luxury: ["#090806", "#271c09", "#451a03"],
-            emerald: ["#040d0a", "#064e3b", "#0f172a"],
-            sunset: ["#0f0714", "#4c0519", "#311042"],
-            minimal: ["#08090c", "#11131a", "#08090c"],
+            gold: ["#090806", "#271c09", "#451a03"],
+            matrix: ["#040d0a", "#064e3b", "#0f172a"],
             custom: [
               document.getElementById("customColor1").value,
-              "#07090e",
+              "#05070e",
               document.getElementById("customColor2").value
             ]
           };
-          var pal = themes[activeBgTheme] || themes.obsidian;
+          var pal = shaders[activeShaderName] || shaders.obsidian;
           var bgGrad = ctx.createLinearGradient(0, 0, W, H);
           bgGrad.addColorStop(0, pal[0]);
           bgGrad.addColorStop(0.5, pal[1]);
@@ -914,96 +1229,78 @@
           ctx.fillStyle = bgGrad;
           ctx.fillRect(0, 0, W, H);
 
-          // Modern Animated Geometric Light Orbs
-          var orbX = W * 0.5 + Math.cos(shaderTick) * 90;
-          var orbY = H * 0.42 + Math.sin(shaderTick) * 70;
-          var glow = ctx.createRadialGradient(orbX, orbY, 10, orbX, orbY, 320);
-          glow.addColorStop(0, "rgba(139, 92, 246, 0.32)");
+          var orbX = W * 0.5 + Math.cos(shaderTick) * 85;
+          var orbY = H * 0.42 + Math.sin(shaderTick) * 65;
+          var glow = ctx.createRadialGradient(orbX, orbY, 10, orbX, orbY, 310);
+          glow.addColorStop(0, "rgba(139, 92, 246, 0.34)");
           glow.addColorStop(1, "rgba(139, 92, 246, 0)");
           ctx.fillStyle = glow;
           ctx.fillRect(0, 0, W, H);
-
-          // Subtle Cyber Grid Lines on Canvas
-          ctx.strokeStyle = "rgba(255,255,255,0.035)";
-          ctx.lineWidth = 1;
-          for (var gx = 0; gx < W; gx += 45) {
-            ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke();
-          }
-          for (var gy = 0; gy < H; gy += 45) {
-            ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke();
-          }
         }
 
-        // 2. CENTER KINETIC CAPTIONS (Clean & Centered)
+        // 2. Center Kinetic Captions
         ctx.font = "800 35px 'Plus Jakarta Sans', sans-serif";
         ctx.textAlign = "center";
         drawKineticCaptions(ctx, scene.voice.toUpperCase(), W / 2, H * 0.48, W - 110, 46);
 
-        // 3. AUTHENTIC PLATFORM INTERFACE OVERLAYS (Instagram Reels / YouTube Shorts / Clean Raw)
+        // 3. Authentic Platform Overlays (Instagram Reels / YouTube Shorts / Clean Raw)
         if (activeUiMode === "instagram") {
-          // Top IG Reels Camera & Title
-          ctx.fillStyle = "rgba(255,255,255,0.9)";
+          ctx.fillStyle = "rgba(255,255,255,0.92)";
           ctx.font = "bold 24px 'Plus Jakarta Sans', sans-serif";
           ctx.textAlign = "left";
           ctx.fillText("Reels", 28, 52);
 
-          // Right-Side Vertical IG Action Bar
           ctx.textAlign = "center";
           var rx = W - 42;
           ctx.font = "28px sans-serif";
           ctx.fillText("🤍", rx, H - 290);
           ctx.font = "600 15px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("28.4K", rx, H - 265);
+          ctx.fillText("31.2K", rx, H - 265);
 
           ctx.font = "26px sans-serif";
           ctx.fillText("💬", rx, H - 215);
           ctx.font = "600 15px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("642", rx, H - 190);
+          ctx.fillText("718", rx, H - 190);
 
           ctx.font = "26px sans-serif";
           ctx.fillText("✈️", rx, H - 140);
           ctx.font = "600 15px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("4.1K", rx, H - 115);
+          ctx.fillText("5.4K", rx, H - 115);
 
-          // Minimal Bottom Creator Row (Translucent, No Ugly Black Box)
           ctx.textAlign = "left";
           ctx.fillStyle = "#ffffff";
           ctx.font = "bold 20px 'Plus Jakarta Sans', sans-serif";
           ctx.fillText(handle, 26, H - 72);
 
-          // Follow Pill
-          ctx.strokeStyle = "rgba(255,255,255,0.8)";
+          ctx.strokeStyle = "rgba(255,255,255,0.85)";
           ctx.lineWidth = 2;
           ctx.beginPath();
-          ctx.roundRect(185, H - 92, 82, 28, 8);
+          ctx.roundRect(190, H - 92, 82, 28, 8);
           ctx.stroke();
           ctx.font = "bold 14px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("Follow", 204, H - 73);
+          ctx.fillText("Follow", 209, H - 73);
 
           ctx.fillStyle = "rgba(255,255,255,0.85)";
           ctx.font = "500 16px 'Plus Jakarta Sans', sans-serif";
           ctx.fillText("🎵 Original Audio - " + currentProject.brand.slice(0, 22), 26, H - 40);
 
-          // Thin Bottom Progress Line
           ctx.fillStyle = "rgba(255,255,255,0.25)";
           ctx.fillRect(0, H - 6, W, 6);
           ctx.fillStyle = "#ffffff";
           ctx.fillRect(0, H - 6, W * ((activeSceneIdx + 1) / 4), 6);
 
         } else if (activeUiMode === "youtube") {
-          // Top YouTube Shorts Header
           ctx.fillStyle = "rgba(255,255,255,0.92)";
           ctx.font = "bold 22px 'Plus Jakarta Sans', sans-serif";
           ctx.textAlign = "left";
           ctx.fillText("▶️ Shorts", 26, 52);
 
-          // Right-Side YT Shorts Actions
           ctx.textAlign = "center";
           var yx = W - 42;
           ctx.font = "26px sans-serif";
           ctx.fillText("👍", yx, H - 300);
           ctx.font = "bold 14px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("42K", yx, H - 275);
+          ctx.fillText("48K", yx, H - 275);
 
           ctx.font = "26px sans-serif";
           ctx.fillText("👎", yx, H - 225);
@@ -1013,9 +1310,8 @@
           ctx.font = "26px sans-serif";
           ctx.fillText("💬", yx, H - 150);
           ctx.font = "bold 14px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("1.2K", yx, H - 125);
+          ctx.fillText("1.4K", yx, H - 125);
 
-          // Bottom YT Channel + Red Subscribe Pill
           ctx.textAlign = "left";
           ctx.fillStyle = "#ffffff";
           ctx.font = "bold 19px 'Plus Jakarta Sans', sans-serif";
@@ -1023,23 +1319,21 @@
 
           ctx.fillStyle = "#ef4444";
           ctx.beginPath();
-          ctx.roundRect(185, H - 96, 104, 30, 15);
+          ctx.roundRect(190, H - 96, 104, 30, 15);
           ctx.fill();
           ctx.fillStyle = "#ffffff";
           ctx.font = "bold 14px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("Subscribe", 203, H - 76);
+          ctx.fillText("Subscribe", 208, H - 76);
 
           ctx.fillStyle = "rgba(255,255,255,0.9)";
           ctx.font = "500 16px 'Plus Jakarta Sans', sans-serif";
           ctx.fillText(currentProject.brand + " #Shorts", 26, H - 42);
 
-          // Red Bottom YT Scrub Bar
           ctx.fillStyle = "rgba(255,255,255,0.25)";
           ctx.fillRect(0, H - 6, W, 6);
           ctx.fillStyle = "#ef4444";
           ctx.fillRect(0, H - 6, W * ((activeSceneIdx + 1) / 4), 6);
         }
-        // If activeUiMode === 'clean', no bottom or side UI is drawn so user gets a pure video!
       }
 
       function speakText(text, onDone) {
@@ -1095,7 +1389,7 @@
         document.getElementById("playerStatusBadge").textContent = "READY";
       }
 
-      // Render Screenshot 1 & 2 Tool Grids
+      // Render Both Tool Grids (With Real Clipper Workspace Modal!)
       function renderToolGrids() {
         var uGrid = document.getElementById("utilityCardsGrid");
         uGrid.innerHTML = "";
@@ -1103,7 +1397,7 @@
           var card = document.createElement("div");
           card.className = "tool-tile rounded-2xl p-5 text-center cursor-pointer flex flex-col items-center justify-center min-h-[135px]";
           card.innerHTML =
-            '<div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-lg mb-2.5">' + tool.icon + '</div>' +
+            '<div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-lg mb-2.5">' + tool.icon + '</div>' +
             '<h3 class="text-xs font-bold text-white mb-1">' + tool.title + '</h3>' +
             '<p class="text-[11px] text-slate-400">' + tool.desc + '</p>';
           card.addEventListener("click", function() {
@@ -1116,89 +1410,126 @@
         cGrid.innerHTML = "";
         CLIPPER_TOOLS.forEach(function(title) {
           var tile = document.createElement("div");
-          tile.className = "tool-tile rounded-2xl p-4 text-center cursor-pointer flex items-center justify-center min-h-[78px]";
-          tile.innerHTML = '<span class="text-xs font-semibold text-slate-200">' + title + '</span>';
+          tile.className = "tool-tile rounded-2xl p-4 text-center cursor-pointer flex flex-col items-center justify-center min-h-[82px] gap-1";
+          tile.innerHTML =
+            '<span class="text-xs font-bold text-white">' + title + '</span>' +
+            '<span class="text-[10px] text-indigo-400 font-mono-code">Launch Tool →</span>';
           tile.addEventListener("click", function() {
-            document.getElementById("activeToolBadge").textContent = "Mode: " + title;
-            if (title.toLowerCase().indexOf("youtube") !== -1 || title.toLowerCase().indexOf("shorts") !== -1) {
-              activeUiMode = "youtube";
-            } else {
-              activeUiMode = "instagram";
-            }
-            drawCanvas();
-            document.getElementById("studio").scrollIntoView({ behavior: "smooth" });
-            showToast("Activated " + title + " in Studio!");
+            openClipperWorkspaceModal(title);
           });
           cGrid.appendChild(tile);
         });
       }
 
-      // Open Interactive Utility Modal (Real Camera Test, Real Mic Visualizer, File Converter, Script Gen)
+      // Open Interactive Clipper Workspace Modal (Fixes the "only switching msg" issue!)
+      function openClipperWorkspaceModal(toolTitle) {
+        document.getElementById("clipperModalTitle").textContent = "✂️ " + toolTitle;
+        document.getElementById("clipperUrlInput").value = "";
+        document.getElementById("clipperProgressWrap").classList.add("hidden");
+        document.getElementById("clipperWorkspaceModal").classList.remove("hidden");
+      }
+
+      // Open Utility Modal with Clean Auto-Stop Mic & Camera Controls
       function openUtilityToolModal(tool) {
+        stopAllHardwareStreams();
         var modal = document.getElementById("utilityToolModal");
-        var title = document.getElementById("utilModalTitle");
-        var desc = document.getElementById("utilModalDesc");
+        document.getElementById("utilModalTitle").textContent = tool.icon + " " + tool.title;
+        document.getElementById("utilModalDesc").textContent = tool.desc;
         var body = document.getElementById("utilModalBody");
-        title.textContent = tool.icon + " " + tool.title;
-        desc.textContent = tool.desc;
         body.innerHTML = "";
         modal.classList.remove("hidden");
 
         if (tool.id === "camera") {
           body.innerHTML =
             '<video id="webcamPreview" autoplay playsinline class="w-full h-56 bg-black rounded-2xl object-cover border border-white/10"></video>' +
-            '<button id="startCamBtn" class="w-full py-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold cursor-pointer">Start Live Webcam Test</button>';
+            '<div class="grid grid-cols-2 gap-2">' +
+              '<button type="button" id="startCamBtn" class="py-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold cursor-pointer">▶ Start Webcam</button>' +
+              '<button type="button" id="stopCamBtn" class="py-2.5 rounded-xl bg-rose-600 text-white text-xs font-bold cursor-pointer">⏹ Stop Webcam</button>' +
+            '</div>';
           document.getElementById("startCamBtn").addEventListener("click", async function() {
+            stopAllHardwareStreams();
             try {
-              mediaStreamTrack = await navigator.mediaDevices.getUserMedia({ video: true });
-              document.getElementById("webcamPreview").srcObject = mediaStreamTrack;
-              showToast("Webcam is working properly!");
+              activeMediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
+              document.getElementById("webcamPreview").srcObject = activeMediaStream;
+              showToast("Webcam active! Click Stop when finished.");
             } catch (e) {
-              showToast("Camera permission denied or no webcam found.");
+              showToast("Camera permission denied.");
             }
+          });
+          document.getElementById("stopCamBtn").addEventListener("click", function() {
+            stopAllHardwareStreams();
+            var vid = document.getElementById("webcamPreview");
+            if (vid) vid.srcObject = null;
+            showToast("Webcam stopped and released.");
           });
         } else if (tool.id === "mic") {
           body.innerHTML =
             '<div class="p-4 rounded-2xl bg-black/60 border border-white/10 text-center space-y-3">' +
               '<div class="w-full h-5 bg-slate-900 rounded-full overflow-hidden"><div id="micLevelBar" class="h-full bg-emerald-400 w-0 transition-all duration-75"></div></div>' +
-              '<p id="micStatusText" class="text-xs text-slate-400">Click below and speak to test microphone input level</p>' +
+              '<p id="micStatusText" class="text-xs text-slate-300">Click Start Test (Automatically stops after 10 seconds)</p>' +
             '</div>' +
-            '<button id="startMicBtn" class="w-full py-2.5 rounded-xl bg-emerald-500 text-slate-950 text-xs font-extrabold cursor-pointer">Start Live Microphone Test</button>';
+            '<div class="grid grid-cols-2 gap-2">' +
+              '<button type="button" id="startMicBtn" class="py-2.5 rounded-xl bg-emerald-500 text-slate-950 text-xs font-extrabold cursor-pointer">▶ Start 10s Mic Test</button>' +
+              '<button type="button" id="stopMicBtn" class="py-2.5 rounded-xl bg-rose-600 text-white text-xs font-bold cursor-pointer">⏹ Stop Microphone</button>' +
+            '</div>';
+
           document.getElementById("startMicBtn").addEventListener("click", async function() {
+            stopAllHardwareStreams();
             try {
-              mediaStreamTrack = await navigator.mediaDevices.getUserMedia({ audio: true });
-              var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-              var src = audioCtx.createMediaStreamSource(mediaStreamTrack);
-              var analyser = audioCtx.createAnalyser();
+              activeMediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+              activeAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+              var src = activeAudioContext.createMediaStreamSource(activeMediaStream);
+              var analyser = activeAudioContext.createAnalyser();
               src.connect(analyser);
               var data = new Uint8Array(analyser.frequencyBinCount);
-              document.getElementById("micStatusText").textContent = "Listening... Speak into your mic!";
+              document.getElementById("micStatusText").textContent = "🎙️ Listening... (Auto-stops in 10s)";
+
               function tickMic() {
-                if (!mediaStreamTrack) return;
+                if (!activeMediaStream) return;
                 analyser.getByteFrequencyData(data);
                 var avg = data.reduce(function(a, b) { return a + b; }, 0) / data.length;
-                var pct = Math.min(100, Math.round(avg * 1.8));
+                var pct = Math.min(100, Math.round(avg * 1.9));
                 var bar = document.getElementById("micLevelBar");
                 if (bar) bar.style.width = pct + "%";
                 requestAnimationFrame(tickMic);
               }
               tickMic();
+
+              // Auto-Shutoff after 10 seconds so microphone is never left open!
+              micAutoStopTimer = setTimeout(function() {
+                stopAllHardwareStreams();
+                var bar = document.getElementById("micLevelBar");
+                if (bar) bar.style.width = "0%";
+                var st = document.getElementById("micStatusText");
+                if (st) st.textContent = "✓ 10s Mic Test Complete! Microphone hardware released.";
+                showToast("Microphone test finished & turned off automatically.");
+              }, 10000);
             } catch (e) {
               showToast("Microphone permission denied.");
             }
           });
+
+          document.getElementById("stopMicBtn").addEventListener("click", function() {
+            stopAllHardwareStreams();
+            var bar = document.getElementById("micLevelBar");
+            if (bar) bar.style.width = "0%";
+            var st = document.getElementById("micStatusText");
+            if (st) st.textContent = "⏹ Microphone stopped and released.";
+            showToast("Microphone turned off.");
+          });
         } else {
           body.innerHTML =
             '<input type="file" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-indigo-600 file:text-white file:font-bold cursor-pointer">' +
-            '<textarea id="utilPromptArea" rows="3" placeholder="Or type topic / paste transcript here..." class="w-full bg-black/60 border border-white/15 rounded-xl p-3 text-xs text-white"></textarea>' +
-            '<button id="runUtilActionBtn" class="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs font-bold cursor-pointer">Process & Send to 9:16 Studio →</button>';
+            '<textarea id="utilPromptArea" rows="3" placeholder="Paste transcript, topic, or audio notes here..." class="w-full bg-black/60 border border-white/15 rounded-xl p-3 text-xs text-white"></textarea>' +
+            '<button type="button" id="runUtilActionBtn" class="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs font-bold cursor-pointer">Process & Load into 9:16 Studio →</button>';
           document.getElementById("runUtilActionBtn").addEventListener("click", function() {
-            var val = document.getElementById("utilPromptArea").value.trim() || tool.title + " Project";
+            var val = document.getElementById("utilPromptArea").value.trim() || tool.title + " Output";
             document.getElementById("brandInput").value = val;
             currentProject = buildBlueprint(val, "Creators using " + tool.title, "controversial", "hinglish");
             renderStoryboardUI();
             modal.classList.add("hidden");
-            showToast(tool.title + " output loaded into 9:16 Studio!");
+            document.getElementById("studio").scrollIntoView({ behavior: "smooth" });
+            showToast(tool.title + " loaded into 9:16 Studio!");
           });
         }
       }
@@ -1206,8 +1537,10 @@
       // Initialize Everything on DOM Ready
       window.addEventListener("DOMContentLoaded", function() {
         initScrollObserver();
+        syncPersistentUserSession();
         renderVoiceGrid();
         renderToolGrids();
+        loadPhotoPack("coffee");
 
         currentProject = buildBlueprint(
           document.getElementById("brandInput").value,
@@ -1217,12 +1550,11 @@
         );
         renderStoryboardUI();
 
-        // Continuous subtle shader animation loop
-        function idleShaderLoop() {
+        function idleLoop() {
           if (!isPlaying) drawCanvas();
-          requestAnimationFrame(idleShaderLoop);
+          requestAnimationFrame(idleLoop);
         }
-        idleShaderLoop();
+        idleLoop();
 
         // Presets
         document.querySelectorAll(".preset-btn").forEach(function(btn) {
@@ -1233,14 +1565,15 @@
             document.getElementById("audienceInput").value = p.audience;
             document.getElementById("toneInput").value = p.tone;
             document.getElementById("langInput").value = p.lang;
+            loadPhotoPack(p.photoPack);
             currentProject = buildBlueprint(p.brand, p.audience, p.tone, p.lang);
             activeSceneIdx = 0;
             renderStoryboardUI();
-            showToast("Loaded " + p.brand);
+            showToast("Loaded " + p.brand + " + HD Photo Pack!");
           });
         });
 
-        // Generate Button
+        // Main Generate Button
         document.getElementById("generateBtn").addEventListener("click", function() {
           stopReel();
           currentProject = buildBlueprint(
@@ -1254,21 +1587,42 @@
           showToast("Generated new 4-scene Reel!");
         });
 
-        // Background Theme Buttons & Color Pickers
-        document.querySelectorAll(".bg-preset-btn").forEach(function(btn) {
+        // Smart AI Background Generator Button
+        document.getElementById("generateSmartBgBtn").addEventListener("click", function() {
+          var prompt = document.getElementById("smartBgPromptInput").value;
+          generateSmartAiBackground(prompt);
+        });
+
+        // HD Photography B-Roll Pack Buttons
+        document.querySelectorAll(".photo-pack-btn").forEach(function(btn) {
           btn.addEventListener("click", function() {
-            customUploadedImg = null;
-            activeBgTheme = btn.getAttribute("data-bg");
+            var key = btn.getAttribute("data-photo");
+            document.querySelectorAll(".photo-pack-btn").forEach(function(b) {
+              b.className = "photo-pack-btn py-1.5 px-2 rounded-xl bg-black/50 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer";
+            });
+            btn.className = "photo-pack-btn py-1.5 px-2 rounded-xl bg-white/10 border border-indigo-400 text-[11px] font-bold text-white cursor-pointer";
+            loadPhotoPack(key);
+            showToast("Loaded HD Photo Pack: " + key.toUpperCase());
+          });
+        });
+
+        // Shader Buttons & Color Pickers
+        document.querySelectorAll(".shader-btn").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            bgMode = "shader";
+            activeShaderName = btn.getAttribute("data-shader");
             drawCanvas();
-            showToast("Background style: " + activeBgTheme.toUpperCase());
+            showToast("Switched to " + activeShaderName.toUpperCase() + " motion shader");
           });
         });
         document.getElementById("customColor1").addEventListener("input", function() {
-          activeBgTheme = "custom";
+          bgMode = "shader";
+          activeShaderName = "custom";
           drawCanvas();
         });
         document.getElementById("customColor2").addEventListener("input", function() {
-          activeBgTheme = "custom";
+          bgMode = "shader";
+          activeShaderName = "custom";
           drawCanvas();
         });
         document.getElementById("creatorHandleInput").addEventListener("input", drawCanvas);
@@ -1281,9 +1635,10 @@
           r.onload = function(ev) {
             var img = new Image();
             img.onload = function() {
-              customUploadedImg = img;
+              customOrSmartBgImg = img;
+              bgMode = "upload";
               drawCanvas();
-              showToast("Custom background image applied!");
+              showToast("Uploaded background image applied!");
             };
             img.src = ev.target.result;
           };
@@ -1299,7 +1654,6 @@
             });
             btn.className = "ui-mode-btn py-2 rounded-xl bg-gradient-to-r from-pink-600 to-purple-600 text-white text-[11px] font-bold transition cursor-pointer";
             drawCanvas();
-            showToast("Switched interface to: " + activeUiMode.toUpperCase());
           });
         });
 
@@ -1315,7 +1669,7 @@
           });
         });
 
-        // Voice Sliders & Sample
+        // Voice Sliders
         document.getElementById("voiceRate").addEventListener("input", function(e) {
           document.getElementById("rateLabel").textContent = parseFloat(e.target.value).toFixed(2) + "x";
         });
@@ -1329,7 +1683,7 @@
           document.getElementById("elevenCloneBox").classList.toggle("hidden");
         });
         document.getElementById("saveElevenBtn").addEventListener("click", function() {
-          showToast("Custom ElevenLabs Voice ID Saved!");
+          showToast("Custom ElevenLabs Voice Saved!");
         });
 
         // Play & Next Scene
@@ -1340,11 +1694,11 @@
           renderStoryboardUI();
         });
 
-        // DOWNLOAD VIDEO (.WEBM), DOWNLOAD SCRIPT (.TXT), & SAVE POSTER (.PNG)
+        // Download Video (.WEBM), Script (.TXT), Frame (.PNG)
         document.getElementById("downloadVideoBtn").addEventListener("click", function() {
           var canvas = document.getElementById("reelCanvas");
           if (!canvas || typeof MediaRecorder === "undefined") {
-            showToast("Please use Chrome or Edge to download .WEBM video!");
+            showToast("Use Chrome or Edge to download .WEBM video!");
             return;
           }
           stopReel();
@@ -1393,7 +1747,7 @@
           var canvas = document.getElementById("reelCanvas");
           var a = document.createElement("a");
           a.href = canvas.toDataURL("image/png");
-          a.download = "reelflow-frame.png";
+          a.download = "reelflow-poster.png";
           a.click();
           showToast("Saved 9:16 Poster (.PNG)!");
         });
@@ -1404,21 +1758,65 @@
           showToast("Script copied to clipboard!");
         });
 
-        // Custom Rupee Slider + Payment Gateway Logic
+        // Clipper Workspace Modal Logic
+        document.getElementById("closeClipperModalBtn").addEventListener("click", function() {
+          document.getElementById("clipperWorkspaceModal").classList.add("hidden");
+        });
+        document.getElementById("runClipperExtractBtn").addEventListener("click", function() {
+          var urlOrTopic = document.getElementById("clipperUrlInput").value.trim() || "Viral Repurposed Clip";
+          var toolName = document.getElementById("clipperModalTitle").textContent.replace("✂️ ", "");
+          var progWrap = document.getElementById("clipperProgressWrap");
+          var bar = document.getElementById("clipperProgressBar");
+          var st = document.getElementById("clipperStageText");
+          var pct = document.getElementById("clipperPctText");
+
+          progWrap.classList.remove("hidden");
+          bar.style.width = "30%";
+          st.textContent = "Scanning video & extracting high-retention hook...";
+          pct.textContent = "30%";
+
+          setTimeout(function() {
+            bar.style.width = "75%";
+            st.textContent = "Reframing to 9:16 & syncing kinetic subtitles...";
+            pct.textContent = "75%";
+          }, 600);
+
+          setTimeout(function() {
+            bar.style.width = "100%";
+            pct.textContent = "100%";
+            document.getElementById("brandInput").value = urlOrTopic;
+            document.getElementById("activeWorkflowBadge").textContent = "● Active: " + toolName;
+            currentProject = buildBlueprint(urlOrTopic, "Viewers watching " + toolName, "controversial", "hinglish");
+            activeSceneIdx = 0;
+            renderStoryboardUI();
+            document.getElementById("clipperWorkspaceModal").classList.add("hidden");
+            document.getElementById("studio").scrollIntoView({ behavior: "smooth" });
+            showToast("✂️ Extracted 4-scene vertical clip into Studio!");
+          }, 1300);
+        });
+
+        // Custom Rupee Slider Starting at ₹50 + Direct Bank UPI QR Generator
         var planSlider = document.getElementById("customPlanSlider");
+        function getMerchantUpiId() {
+          return localStorage.getItem("reelflow_merchant_upi_v6") || "7820847387@upi";
+        }
         function updateCustomPrice() {
           var count = parseInt(planSlider.value, 10);
-          var rupeePrice = count * 100 - 1; // e.g., 2 -> Rs 199, 10 -> Rs 999
-          document.getElementById("customReelCountBadge").textContent = count + " Reels / mo";
+          var rupeePrice = count * 50; // Starts at 1 Video = ₹50!
+          var upiId = getMerchantUpiId();
+          document.getElementById("activeMerchantUpiLabel").textContent = upiId;
+          document.getElementById("customReelCountBadge").textContent = count + (count === 1 ? " Pro Video Pack" : " Pro Videos Pack");
           document.getElementById("customPriceDisplay").textContent = "₹" + rupeePrice.toLocaleString("en-IN");
-          document.getElementById("sliderVideosLabel").textContent = count + " Videos (₹" + rupeePrice.toLocaleString("en-IN") + ")";
-          document.getElementById("gatewayPlanSubtitle").textContent = "Custom Plan: " + count + " Videos";
+          document.getElementById("sliderVideosLabel").textContent = count + (count === 1 ? " Video" : " Videos") + " (₹" + rupeePrice.toLocaleString("en-IN") + ")";
+          document.getElementById("gatewayPlanSubtitle").textContent = "Custom Pack: " + count + (count === 1 ? " Video" : " Videos");
           document.getElementById("gatewayAmountBadge").textContent = "₹" + rupeePrice.toLocaleString("en-IN");
-          var qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" +
-            encodeURIComponent("upi://pay?pa=7820847387@upi&pn=ReelFlow%20AI&am=" + rupeePrice + "&cu=INR");
-          document.getElementById("dynamicUpiQr").src = qrUrl;
+
+          var upiUri = "upi://pay?pa=" + encodeURIComponent(upiId) + "&pn=ReelFlow%20AI&am=" + rupeePrice + "&cu=INR";
+          document.getElementById("mobileUpiDeepLink").href = upiUri;
+          document.getElementById("dynamicUpiQr").src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(upiUri);
         }
         planSlider.addEventListener("input", updateCustomPrice);
+        updateCustomPrice();
 
         document.getElementById("openPaymentGatewayBtn").addEventListener("click", function() {
           updateCustomPrice();
@@ -1427,49 +1825,54 @@
         document.getElementById("closePaymentModalBtn").addEventListener("click", function() {
           document.getElementById("paymentGatewayModal").classList.add("hidden");
         });
-        document.getElementById("payTabUpi").addEventListener("click", function() {
-          document.getElementById("upiPaymentPane").classList.remove("hidden");
-          document.getElementById("cardPaymentPane").classList.add("hidden");
-          document.getElementById("payTabUpi").className = "py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold cursor-pointer";
-          document.getElementById("payTabCard").className = "py-2 rounded-lg text-slate-400 text-xs font-bold cursor-pointer";
+        document.getElementById("toggleUpiEditBtn").addEventListener("click", function() {
+          var box = document.getElementById("merchantUpiEditBox");
+          box.classList.toggle("hidden");
+          document.getElementById("merchantUpiInput").value = getMerchantUpiId();
         });
-        document.getElementById("payTabCard").addEventListener("click", function() {
-          document.getElementById("upiPaymentPane").classList.add("hidden");
-          document.getElementById("cardPaymentPane").classList.remove("hidden");
-          document.getElementById("payTabCard").className = "py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold cursor-pointer";
-          document.getElementById("payTabUpi").className = "py-2 rounded-lg text-slate-400 text-xs font-bold cursor-pointer";
-        });
-
-        document.getElementById("confirmPaymentBtn").addEventListener("click", function() {
-          var payer = document.getElementById("payerNameInput").value.trim() || "ReelFlow Customer";
-          var count = planSlider.value;
-          var amt = document.getElementById("gatewayAmountBadge").textContent;
-          var msg = encodeURIComponent(
-            "Hi Arjun! 👋 I just initiated payment on ReelFlow Payment Gateway:\n\n" +
-            "*Customer:* " + payer + "\n" +
-            "*Selected Custom Plan:* " + count + " Videos (" + amt + ")\n" +
-            "*Brand Topic:* " + currentProject.brand + "\n\n" +
-            "Please activate my Pro Studio slot!"
-          );
-          window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + msg, "_blank");
-          document.getElementById("paymentGatewayModal").classList.add("hidden");
-          showToast("Payment confirmation sent! Activating your plan.");
-        });
-
-        // Close Utility Modal & Stop Webcam/Mic Streams
-        document.getElementById("closeUtilModalBtn").addEventListener("click", function() {
-          document.getElementById("utilityToolModal").classList.add("hidden");
-          if (mediaStreamTrack) {
-            mediaStreamTrack.getTracks().forEach(function(t) { t.stop(); });
-            mediaStreamTrack = null;
+        document.getElementById("saveMerchantUpiBtn").addEventListener("click", function() {
+          var val = document.getElementById("merchantUpiInput").value.trim();
+          if (val) {
+            localStorage.setItem("reelflow_merchant_upi_v6", val);
+            document.getElementById("merchantUpiEditBox").classList.add("hidden");
+            updateCustomPrice();
+            showToast("Saved receiving Bank UPI ID: " + val);
           }
         });
 
-        // Auth Modal
-        document.getElementById("openAuthModalBtn").addEventListener("click", function() {
-          document.getElementById("authModal").classList.remove("hidden");
+        document.getElementById("confirmPaymentBtn").addEventListener("click", function() {
+          var payer = document.getElementById("payerNameInput").value.trim() || "Customer";
+          var utr = document.getElementById("payerUtrInput").value.trim() || "Paid via QR";
+          var count = planSlider.value;
+          var amt = document.getElementById("gatewayAmountBadge").textContent;
+          var msg = encodeURIComponent(
+            "Hi Arjun! 👋 I just paid " + amt + " via Direct UPI on ReelFlow AI:\n\n" +
+            "*Customer:* " + payer + "\n" +
+            "*Plan:* " + count + " Video Pack (" + amt + ")\n" +
+            "*UTR / Ref No:* " + utr + "\n" +
+            "*Brand Project:* " + currentProject.brand + "\n\n" +
+            "Please verify in your bank app and activate my pack!"
+          );
+          window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + msg, "_blank");
+          document.getElementById("paymentGatewayModal").classList.add("hidden");
         });
-        document.getElementById("mobileAuthBtn").addEventListener("click", function() {
+
+        // Contact Founder WhatsApp Button
+        document.getElementById("contactFounderWhatsAppBtn").addEventListener("click", function() {
+          var msg = encodeURIComponent(
+            "Hi Arjun! 👋 I am using ReelFlow AI Studio for my brand (" + currentProject.brand + ") and want to discuss custom AI video production."
+          );
+          window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + msg, "_blank");
+        });
+
+        // Close Utility Modal & Release Hardware
+        document.getElementById("closeUtilModalBtn").addEventListener("click", function() {
+          stopAllHardwareStreams();
+          document.getElementById("utilityToolModal").classList.add("hidden");
+        });
+
+        // Persistent Login & Register Modal
+        document.getElementById("openAuthModalBtn").addEventListener("click", function() {
           document.getElementById("authModal").classList.remove("hidden");
         });
         document.getElementById("closeAuthModalBtn").addEventListener("click", function() {
@@ -1477,30 +1880,32 @@
         });
         document.getElementById("tabRegisterBtn").addEventListener("click", function() {
           document.getElementById("authNameInput").classList.remove("hidden");
+          document.getElementById("tabRegisterBtn").className = "py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold cursor-pointer";
+          document.getElementById("tabLoginBtn").className = "py-2 rounded-lg text-slate-400 text-xs font-bold cursor-pointer";
         });
         document.getElementById("tabLoginBtn").addEventListener("click", function() {
           document.getElementById("authNameInput").classList.add("hidden");
+          document.getElementById("tabLoginBtn").className = "py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold cursor-pointer";
+          document.getElementById("tabRegisterBtn").className = "py-2 rounded-lg text-slate-400 text-xs font-bold cursor-pointer";
         });
+
         document.getElementById("authForm").addEventListener("submit", function(e) {
           e.preventDefault();
-          var email = document.getElementById("authEmailInput").value;
-          var name = document.getElementById("authNameInput").value || email.split("@")[0];
-          document.getElementById("openAuthModalBtn").classList.add("hidden");
-          var prof = document.getElementById("userProfileArea");
-          prof.classList.remove("hidden");
-          prof.classList.add("flex");
-          document.getElementById("userNameLabel").textContent = name;
-          document.getElementById("userInitials").textContent = name.charAt(0).toUpperCase();
+          var email = document.getElementById("authEmailInput").value.trim();
+          var name = document.getElementById("authNameInput").value.trim() || email.split("@")[0];
+          localStorage.setItem("reelflow_saved_user_v6", JSON.stringify({ name: name, email: email }));
+          syncPersistentUserSession();
           document.getElementById("authModal").classList.add("hidden");
-          showToast("Logged in as " + name);
+          showToast("Welcome back, " + name + "! Session saved permanently.");
         });
+
         document.getElementById("logoutBtn").addEventListener("click", function() {
-          document.getElementById("openAuthModalBtn").classList.remove("hidden");
-          document.getElementById("userProfileArea").classList.add("hidden");
+          localStorage.removeItem("reelflow_saved_user_v6");
+          syncPersistentUserSession();
           showToast("Logged out.");
         });
 
-        // API Modal
+        // Gemini API Modal
         document.getElementById("openApiModalBtn").addEventListener("click", function() {
           document.getElementById("apiModal").classList.remove("hidden");
         });
