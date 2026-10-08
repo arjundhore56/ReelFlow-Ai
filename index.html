@@ -3,22 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>ReelFlow AI 4.0 — Autonomous Short-Form Video & Voice Engine</title>
+  <title>ReelFlow AI 5.0 — Autonomous Short-Form Studio & Creator Suite</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-deep: #030407;
-      --accent-1: #6366f1;
-      --accent-2: #a855f7;
-      --accent-3: #ec4899;
+      --bg-base: #040508;
     }
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-deep);
+      background-color: var(--bg-base);
       color: #f8fafc;
       overflow-x: hidden;
     }
@@ -29,641 +24,637 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Animated Cyber Grid & Aurora Mesh */
-    .cyber-grid {
-      background-size: 48px 48px;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-    }
-    @keyframes floatSlow {
-      0%, 100% { transform: translate(0px, 0px) scale(1); }
-      50% { transform: translate(25px, -25px) scale(1.08); }
-    }
-    .aurora-blob {
-      animation: floatSlow 10s ease-in-out infinite;
+    /* Subtle Modern Dot Matrix Background */
+    .dot-matrix {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
     }
 
-    /* Bidirectional Scroll Animations (Scroll Down + Scroll Up) */
-    .scroll-anim {
+    /* Bidirectional Scroll Reveal (Scroll Down + Scroll Up) */
+    .scroll-reveal {
       opacity: 0;
-      transform: translateY(44px) scale(0.97);
-      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(36px) scale(0.98);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
-    .scroll-anim.in-view {
+    .scroll-reveal.visible {
       opacity: 1;
       transform: translateY(0) scale(1);
     }
 
-    /* Infinite Ticker Marquee */
-    @keyframes marqueeScroll {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
-    }
-    .animate-marquee {
-      display: flex;
-      width: max-content;
-      animation: marqueeScroll 28s linear infinite;
-    }
-    .animate-marquee:hover {
-      animation-play-state: paused;
-    }
-
-    /* Ultra Glass Bento Cards */
-    .bento-card {
-      background: linear-gradient(145deg, rgba(17, 20, 32, 0.78) 0%, rgba(9, 11, 19, 0.88) 100%);
+    /* Ultra-Clean Glass Cards */
+    .studio-card {
+      background: linear-gradient(155deg, rgba(16, 18, 27, 0.85) 0%, rgba(8, 10, 15, 0.92) 100%);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.7);
-      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.75);
+      transition: all 0.25s ease;
     }
-    .bento-card:hover {
-      border-color: rgba(139, 92, 246, 0.35);
+    .studio-card:hover {
+      border-color: rgba(99, 102, 241, 0.35);
     }
 
-    .text-shimmer {
-      background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 35%, #e879f9 70%, #fb7185 100%);
+    /* Restream-Style Minimal Dark Tool Cards */
+    .tool-tile {
+      background: #0b0d13;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tool-tile:hover {
+      background: #121622;
+      border-color: rgba(139, 92, 246, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.25);
+    }
+
+    .gradient-headline {
+      background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 40%, #c084fc 75%, #f472b6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #05070e; }
-    ::-webkit-scrollbar-thumb { background: #262b40; border-radius: 9999px; }
+    ::-webkit-scrollbar-track { background: #040508; }
+    ::-webkit-scrollbar-thumb { background: #1e2436; border-radius: 9999px; }
     ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
   </style>
 </head>
-<body class="cyber-grid min-h-screen selection:bg-indigo-500 selection:text-white pb-20 md:pb-0">
+<body class="dot-matrix min-h-screen selection:bg-indigo-500 selection:text-white pb-20 md:pb-0">
 
-  <!-- Ambient Aurora Background Glows -->
-  <div class="fixed top-[-180px] left-[10%] w-[520px] h-[420px] bg-indigo-600/20 blur-[150px] pointer-events-none rounded-full aurora-blob z-0"></div>
-  <div class="fixed bottom-[-180px] right-[8%] w-[500px] h-[400px] bg-fuchsia-600/15 blur-[160px] pointer-events-none rounded-full aurora-blob z-0"></div>
+  <!-- Ambient Top Aura -->
+  <div class="fixed top-[-200px] left-1/2 -translate-x-1/2 w-[850px] h-[380px] bg-indigo-600/15 blur-[160px] pointer-events-none rounded-full z-0"></div>
 
   <!-- Toast Notification -->
-  <div id="toastBanner" class="fixed bottom-20 md:bottom-6 right-5 z-50 hidden px-4 py-3 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs font-bold shadow-2xl border border-white/20 flex items-center gap-2">
+  <div id="toastBanner" class="fixed bottom-20 md:bottom-6 right-5 z-50 hidden px-4 py-3 rounded-2xl bg-indigo-600 text-white text-xs font-bold shadow-2xl border border-white/20 flex items-center gap-2">
     <span class="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
-    <span id="toastText">Action completed!</span>
+    <span id="toastText">Ready!</span>
   </div>
 
-  <!-- Floating Glass Header -->
-  <header class="sticky top-0 z-40 border-b border-white/10 bg-[#030407]/80 backdrop-blur-2xl">
+  <!-- Sticky Top Navigation -->
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-[#040508]/85 backdrop-blur-2xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2">
-      <!-- Brand Logo -->
-      <a href="#hero" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-500 to-pink-500 flex items-center justify-center font-extrabold text-white shadow-lg shadow-indigo-500/30 group-hover:rotate-6 transition">
+      <a href="#hero" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-500 to-pink-500 flex items-center justify-center font-extrabold text-white shadow-lg shadow-indigo-500/30">
           R
         </div>
         <div>
           <span class="font-bold text-lg sm:text-xl tracking-tight font-display text-white">ReelFlow<span class="text-indigo-400">.ai</span></span>
-          <span class="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-mono-code uppercase bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 rounded-full">v4.0 Ultra</span>
+          <span class="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-mono-code uppercase bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 rounded-full">v5.0 Pro</span>
         </div>
       </a>
 
-      <!-- Center Desktop Nav Links -->
       <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold text-slate-300">
-        <a href="#studio" class="hover:text-white transition">AI Video Studio</a>
-        <a href="#voicelab" class="hover:text-white transition">Voice Clone Lab</a>
-        <a href="#features" class="hover:text-white transition">Architecture</a>
-        <a href="#whatsapp-desk" class="hover:text-white transition">Production Desk</a>
+        <a href="#studio" class="hover:text-white transition">9:16 Studio</a>
+        <a href="#utility-suite" class="hover:text-white transition">Creator Tools</a>
+        <a href="#clipper-grid" class="hover:text-white transition">AI Clippers (22+)</a>
+        <a href="#pricing" class="hover:text-white transition">Free Trial & Custom Plan</a>
       </nav>
 
-      <!-- Right Action Controls (API Key + Auth Profile) -->
       <div class="flex items-center gap-2 sm:gap-3">
-        <button type="button" id="openApiModalBtn" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-indigo-300 transition cursor-pointer flex items-center gap-1.5">
-          <span>⚡</span>
-          <span class="hidden sm:inline">AI Engine Key</span>
+        <button type="button" id="openApiModalBtn" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-indigo-300 transition cursor-pointer">
+          ⚡ AI Key
         </button>
 
-        <!-- Logged Out View -->
-        <button type="button" id="openAuthModalBtn" class="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-95 text-white text-xs font-bold shadow-lg shadow-indigo-500/20 transition cursor-pointer">
-          Login / Sign Up
+        <button type="button" id="openAuthModalBtn" class="px-4 py-2 rounded-xl bg-white text-slate-950 hover:bg-slate-200 text-xs font-extrabold shadow-lg transition cursor-pointer">
+          Login / Register
         </button>
 
-        <!-- Logged In User Profile Badge (Hidden until login) -->
         <div id="userProfileArea" class="hidden items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl">
           <div id="userInitials" class="w-6 h-6 rounded-full bg-indigo-600 text-white text-[11px] font-bold flex items-center justify-center">A</div>
-          <span id="userNameLabel" class="text-xs font-semibold text-white max-w-[100px] truncate">Founder</span>
+          <span id="userNameLabel" class="text-xs font-semibold text-white max-w-[90px] truncate">Founder</span>
           <button type="button" id="logoutBtn" class="text-[10px] text-rose-400 hover:text-rose-300 ml-1 font-bold cursor-pointer">Exit</button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Bottom Navigation Dock (For Phones & Small Tablets) -->
-  <div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#070912]/95 backdrop-blur-xl border-t border-white/10 px-4 py-2 flex justify-around items-center text-[11px] font-semibold text-slate-300">
-    <a href="#studio" class="flex flex-col items-center gap-0.5 text-indigo-400">
-      <span>🎬</span><span>Studio</span>
-    </a>
-    <a href="#voicelab" class="flex flex-col items-center gap-0.5 hover:text-white">
-      <span>🎙️</span><span>Voices</span>
-    </a>
-    <a href="#preview-anchor" class="flex flex-col items-center gap-0.5 hover:text-white">
-      <span>📱</span><span>9:16 Player</span>
-    </a>
-    <button type="button" id="mobileAuthTrigger" class="flex flex-col items-center gap-0.5 hover:text-white cursor-pointer">
-      <span>👤</span><span id="mobileAuthLabel">Account</span>
-    </button>
+  <!-- Mobile Bottom Navigation Bar -->
+  <div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#06080f]/95 backdrop-blur-xl border-t border-white/10 px-3 py-2 flex justify-around items-center text-[10px] font-bold text-slate-300">
+    <a href="#studio" class="flex flex-col items-center gap-0.5 text-indigo-400"><span>🎬</span><span>Studio</span></a>
+    <a href="#player-column" class="flex flex-col items-center gap-0.5 hover:text-white"><span>⬇️</span><span>Download</span></a>
+    <a href="#utility-suite" class="flex flex-col items-center gap-0.5 hover:text-white"><span>🛠️</span><span>Tools</span></a>
+    <a href="#pricing" class="flex flex-col items-center gap-0.5 hover:text-white"><span>💳</span><span>Plans</span></a>
+    <button type="button" id="mobileAuthBtn" class="flex flex-col items-center gap-0.5 hover:text-white cursor-pointer"><span>👤</span><span>Login</span></button>
   </div>
 
   <!-- HERO SECTION -->
-  <section id="hero" class="relative z-10 max-w-6xl mx-auto px-4 pt-10 sm:pt-16 pb-10 text-center scroll-anim">
-    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-indigo-300 text-xs font-semibold mb-5">
+  <section id="hero" class="relative z-10 max-w-6xl mx-auto px-4 pt-10 sm:pt-14 pb-8 text-center scroll-reveal">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-indigo-300 text-xs font-semibold mb-4">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-      <span>Next-Gen Autonomous Content Engine for Founders & Creators</span>
+      <span>All-in-One AI Video Clipper, Script Studio & Creator Toolkit</span>
     </div>
-
-    <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.06] mb-5">
-      Turn Any Brand Idea Into <br class="hidden sm:inline" />
-      <span class="text-shimmer">Studio 9:16 Reels & Voices.</span>
+    <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.08] mb-4">
+      Create, Customize & Download <br class="hidden sm:inline" />
+      <span class="gradient-headline">Instagram Reels & YouTube Shorts.</span>
     </h1>
-
-    <p class="text-slate-400 text-xs sm:text-base max-w-2xl mx-auto mb-8 leading-relaxed">
-      Engineer 3-second pattern-interrupt hooks, multi-character AI voiceovers, custom product B-roll, and kinetic subtitles inside one unified browser studio.
+    <p class="text-slate-400 text-xs sm:text-base max-w-2xl mx-auto mb-6">
+      Switch between authentic Instagram Reels & YouTube Shorts interfaces, customize modern animated backgrounds, test 6 neural voices, and download your video in one click.
     </p>
-
-    <div class="flex flex-wrap items-center justify-center gap-3">
-      <a href="#studio" class="px-6 py-3.5 rounded-2xl bg-white text-slate-950 hover:bg-slate-200 font-extrabold text-xs sm:text-sm tracking-wide transition shadow-xl">
-        Launch Live Studio ↓
-      </a>
-      <button type="button" id="heroWhatsAppBtn" class="px-6 py-3.5 rounded-2xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 font-bold text-xs sm:text-sm transition cursor-pointer">
-        💬 Talk to Founder on WhatsApp
-      </button>
-    </div>
   </section>
 
-  <!-- INFINITE ANIMATED MARQUEE TICKER -->
-  <div class="relative z-10 border-y border-white/10 bg-black/40 py-3 overflow-hidden mb-12 scroll-anim">
-    <div class="animate-marquee flex items-center gap-8 text-xs font-mono-code text-slate-400">
-      <span>⚡ 3-SECOND VIRAL HOOK GENERATOR</span>
-      <span class="text-indigo-400">•</span>
-      <span>🎙️ 6 NEURAL VOICE PERSONAS + CUSTOM ELEVENLABS CLONING</span>
-      <span class="text-purple-400">•</span>
-      <span>🖼️ REAL STOCK B-ROLL & CUSTOM PRODUCT IMAGE RENDERER</span>
-      <span class="text-pink-400">•</span>
-      <span>🇮🇳 HINGLISH + GLOBAL ENGLISH SCRIPT ENGINE</span>
-      <span class="text-emerald-400">•</span>
-      <span>🎬 DIRECT .WEBM VIDEO RECORDING IN BROWSER</span>
-      <span class="text-indigo-400">•</span>
-      <span>⚡ 3-SECOND VIRAL HOOK GENERATOR</span>
-      <span class="text-indigo-400">•</span>
-      <span>🎙️ 6 NEURAL VOICE PERSONAS + CUSTOM ELEVENLABS CLONING</span>
-      <span class="text-purple-400">•</span>
-      <span>🖼️ REAL STOCK B-ROLL & CUSTOM PRODUCT IMAGE RENDERER</span>
-      <span class="text-pink-400">•</span>
-      <span>🇮🇳 HINGLISH + GLOBAL ENGLISH SCRIPT ENGINE</span>
-    </div>
-  </div>
+  <!-- MAIN 9:16 STUDIO WORKSPACE -->
+  <section id="studio" class="relative z-10 max-w-7xl mx-auto px-4 pb-20">
 
-  <!-- MAIN WORKSPACE STUDIO -->
-  <section id="studio" class="relative z-10 max-w-7xl mx-auto px-4 pb-16">
-    
-    <!-- Quick Industry Presets -->
-    <div class="bento-card rounded-3xl p-4 sm:p-5 mb-6 scroll-anim">
-      <div class="flex flex-wrap items-center justify-between gap-3">
+    <!-- Quick Industry Templates -->
+    <div class="studio-card rounded-3xl p-4 mb-6 scroll-reveal">
+      <div class="flex flex-wrap items-center justify-between gap-2">
         <div class="flex items-center gap-2 flex-wrap">
-          <span class="text-xs font-bold uppercase tracking-wider text-indigo-400 mr-1">Instant Templates:</span>
-          <button type="button" data-preset="coffee" class="preset-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400 text-xs font-semibold text-white transition cursor-pointer">
-            ☕ D2C Cold Brew
-          </button>
-          <button type="button" data-preset="fintech" class="preset-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400 text-xs font-semibold text-white transition cursor-pointer">
-            💳 Student Rewards Fintech
-          </button>
-          <button type="button" data-preset="saas" class="preset-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400 text-xs font-semibold text-white transition cursor-pointer">
-            📊 B2B Invoice SaaS
-          </button>
-          <button type="button" data-preset="streetwear" class="preset-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400 text-xs font-semibold text-white transition cursor-pointer">
-            👕 Oversized Streetwear
-          </button>
-          <button type="button" data-preset="fitness" class="preset-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400 text-xs font-semibold text-white transition cursor-pointer">
-            🏋️ Clean Whey Protein
-          </button>
+          <span class="text-xs font-bold uppercase tracking-wider text-indigo-400 mr-1">Quick Templates:</span>
+          <button type="button" data-preset="coffee" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">☕ D2C Cold Brew</button>
+          <button type="button" data-preset="fintech" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">💳 Student Fintech</button>
+          <button type="button" data-preset="saas" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">📊 B2B SaaS</button>
+          <button type="button" data-preset="podcast" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">🎙️ AI Podcast Clip</button>
+          <button type="button" data-preset="streetwear" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">👕 Streetwear Brand</button>
         </div>
-        <div id="engineStatusPill" class="font-mono-code text-[11px] px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300">
-          ● Neural Engine Ready
-        </div>
+        <span id="activeToolBadge" class="font-mono-code text-[11px] px-3 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300">
+          Mode: Automatic Reel Maker
+        </span>
       </div>
     </div>
 
-    <!-- 12-Column Responsive Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-      <!-- LEFT COLUMN (4 Cols): Campaign Brief + Voice Studio + B-Roll Upload -->
-      <div class="lg:col-span-4 space-y-6">
+      <!-- LEFT COLUMN (4 Cols): Brief + Voices + Background Customizer -->
+      <div class="lg:col-span-4 space-y-5">
         
-        <!-- Card 1: Campaign Brief -->
-        <div class="bento-card rounded-3xl p-5 sm:p-6 space-y-4 scroll-anim">
-          <div class="flex items-center justify-between">
-            <h2 class="text-base font-bold text-white font-display flex items-center gap-2">
-              <span class="w-6 h-6 rounded-lg bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-xs flex items-center justify-center">1</span>
-              <span>Brand & Hook Brief</span>
-            </h2>
-            <span class="text-[11px] text-slate-400">Any Topic</span>
-          </div>
-
+        <!-- 1. Brand & Script Generator -->
+        <div class="studio-card rounded-3xl p-5 space-y-3.5 scroll-reveal">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-indigo-400">1. Content & Script Generator</h2>
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Brand Name / Product / Idea *</label>
-            <input id="brandInput" type="text" value="Asli Cold Brew Coffee" placeholder="e.g. Gym Protein, Sneaker Brand, AI App" class="w-full bg-black/50 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Topic / Brand / Video URL *</label>
+            <input id="brandInput" type="text" value="Asli Cold Brew Coffee" placeholder="Paste YouTube URL or type brand/topic..." class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
           </div>
-
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Target Audience & Pain Point *</label>
-            <textarea id="audienceInput" rows="2" placeholder="Who is this for and what frustrates them?" class="w-full bg-black/50 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">Young professionals and college students tired of spending Rs 350 on watery cafe coffee</textarea>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Target Audience & Pain Point *</label>
+            <textarea id="audienceInput" rows="2" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">Young professionals and students tired of spending Rs 350 on overpriced cafe coffee</textarea>
           </div>
-
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-2 gap-2.5">
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Hook Psychology</label>
-              <select id="toneInput" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Hook Style</label>
+              <select id="toneInput" class="w-full bg-black/60 border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white">
                 <option value="controversial">🔥 Pattern Interrupt</option>
-                <option value="data">📊 Hard Math / Proof</option>
+                <option value="data">📊 Money / Data</option>
                 <option value="story">🎭 Founder Story</option>
-                <option value="secret">🤫 Industry Secret</option>
+                <option value="secret">🤫 Secret Hack</option>
               </select>
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Language Vibe</label>
-              <select id="langInput" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
-                <option value="hinglish">🇮🇳 Hinglish (Viral)</option>
-                <option value="english">🌐 Global English</option>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Language</label>
+              <select id="langInput" class="w-full bg-black/60 border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white">
+                <option value="hinglish">🇮🇳 Hinglish</option>
+                <option value="english">🌐 English</option>
               </select>
             </div>
           </div>
-
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Call-To-Action (CTA)</label>
-            <input id="ctaInput" type="text" value="Comment BREW for a 50% trial pack link in your DMs" class="w-full bg-black/50 border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
-          </div>
-
-          <button type="button" id="generateBtn" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:opacity-95 active:scale-[0.99] text-white font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-indigo-600/25 transition cursor-pointer">
-            ⚡ Generate Custom Script & Video
+          <button type="button" id="generateBtn" class="w-full py-3 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:opacity-95 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg cursor-pointer">
+            ⚡ Generate New Script & Reel
           </button>
         </div>
 
-        <!-- Card 2: Multi-Voice Studio & Custom Voice Clone Lab -->
-        <div id="voicelab" class="bento-card rounded-3xl p-5 sm:p-6 space-y-4 scroll-anim">
+        <!-- 2. Modern Background & Canvas Customizer -->
+        <div class="studio-card rounded-3xl p-5 space-y-3.5 scroll-reveal">
           <div class="flex items-center justify-between">
-            <h2 class="text-base font-bold text-white font-display flex items-center gap-2">
-              <span class="w-6 h-6 rounded-lg bg-purple-500/20 border border-purple-500/40 text-purple-300 text-xs flex items-center justify-center">2</span>
-              <span>AI Voice & Clone Lab</span>
-            </h2>
-            <button type="button" id="testVoiceSampleBtn" class="px-2.5 py-1 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 border border-purple-400/30 text-[11px] font-bold text-purple-200 cursor-pointer">
-              🔊 Sample Voice
+            <h2 class="text-sm font-bold uppercase tracking-wider text-pink-400">2. Modern Visual Background</h2>
+            <label class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/15 text-[11px] font-bold text-white cursor-pointer border border-white/15">
+              <span>+ Upload Photo</span>
+              <input id="customBgUpload" type="file" accept="image/*" class="hidden">
+            </label>
+          </div>
+
+          <p class="text-[11px] text-slate-400">Choose a clean procedural shader or pick your own brand colors:</p>
+          <div class="grid grid-cols-3 gap-2" id="bgPresetGrid">
+            <button type="button" data-bg="obsidian" class="bg-preset-btn py-2 px-2 rounded-xl bg-indigo-950/60 border border-indigo-400 text-[11px] font-bold text-white cursor-pointer">Obsidian Glow</button>
+            <button type="button" data-bg="luxury" class="bg-preset-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-amber-300 cursor-pointer">Luxury Gold</button>
+            <button type="button" data-bg="emerald" class="bg-preset-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-emerald-300 cursor-pointer">Matrix Neon</button>
+            <button type="button" data-bg="sunset" class="bg-preset-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-rose-300 cursor-pointer">Sunset Cyber</button>
+            <button type="button" data-bg="minimal" class="bg-preset-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-slate-200 cursor-pointer">Pure Matte</button>
+            <button type="button" data-bg="custom" class="bg-preset-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-purple-300 cursor-pointer">Custom Color</button>
+          </div>
+
+          <!-- Custom Color Pickers + Dim Slider -->
+          <div class="grid grid-cols-3 gap-2 pt-1 items-center">
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">Primary Color</label>
+              <input id="customColor1" type="color" value="#311042" class="w-full h-8 rounded-lg bg-transparent border border-white/15 cursor-pointer">
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">Accent Glow</label>
+              <input id="customColor2" type="color" value="#4f46e5" class="w-full h-8 rounded-lg bg-transparent border border-white/15 cursor-pointer">
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">Creator @Handle</label>
+              <input id="creatorHandleInput" type="text" value="@reelflow.ai" class="w-full bg-black/60 border border-white/15 rounded-lg px-2 py-1.5 text-[11px] text-white">
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Multi-Voice & Custom Clone Studio -->
+        <div class="studio-card rounded-3xl p-5 space-y-3 scroll-reveal">
+          <div class="flex items-center justify-between">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-purple-400">3. Voice & Clone Lab</h2>
+            <button type="button" id="sampleVoiceBtn" class="px-2.5 py-1 rounded-lg bg-purple-500/20 border border-purple-400/30 text-[11px] font-bold text-purple-200 cursor-pointer">
+              🔊 Test Voice
             </button>
           </div>
-
-          <!-- 6 Persona Selector Cards -->
-          <div>
-            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">Choose AI Voice Persona (6 Profiles):</label>
-            <div id="voicePersonaGrid" class="grid grid-cols-2 gap-2"></div>
-          </div>
-
-          <!-- System Browser Voice Override -->
-          <div>
-            <label class="block text-[11px] font-semibold text-slate-300 mb-1">Device / Neural Synthesis Engine:</label>
-            <select id="systemVoiceSelect" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-purple-500">
-              <option value="auto">Auto-Match Persona Voice</option>
-            </select>
-          </div>
-
-          <!-- Speed & Pitch Sliders -->
+          <div id="voicePersonaGrid" class="grid grid-cols-2 gap-2"></div>
           <div class="grid grid-cols-2 gap-3 pt-1">
             <div>
-              <div class="flex justify-between text-[11px] text-slate-300 mb-1">
-                <span>Speed</span><span id="rateValLabel" class="font-mono-code text-indigo-300">1.08x</span>
-              </div>
-              <input id="voiceRateInput" type="range" min="0.75" max="1.4" step="0.05" value="1.08" class="w-full accent-indigo-500 cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-400"><span>Speed</span><span id="rateLabel">1.08x</span></div>
+              <input id="voiceRate" type="range" min="0.75" max="1.35" step="0.05" value="1.08" class="w-full accent-indigo-500 cursor-pointer">
             </div>
             <div>
-              <div class="flex justify-between text-[11px] text-slate-300 mb-1">
-                <span>Pitch</span><span id="pitchValLabel" class="font-mono-code text-purple-300">1.00</span>
-              </div>
-              <input id="voicePitchInput" type="range" min="0.65" max="1.4" step="0.05" value="1.00" class="w-full accent-purple-500 cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-400"><span>Pitch</span><span id="pitchLabel">1.00</span></div>
+              <input id="voicePitch" type="range" min="0.7" max="1.3" step="0.05" value="1.00" class="w-full accent-purple-500 cursor-pointer">
             </div>
           </div>
-
-          <!-- Custom ElevenLabs Voice Clone Expandable -->
-          <div class="pt-3 border-t border-white/10">
-            <button type="button" id="toggleCustomCloneBtn" class="w-full flex items-center justify-between text-xs font-bold text-pink-300 hover:text-pink-200 cursor-pointer">
-              <span>🧬 + Connect Custom Cloned Voice (ElevenLabs)</span>
-              <span id="cloneArrow">▼</span>
-            </button>
-            <div id="customCloneBox" class="hidden mt-3 space-y-2.5 bg-black/50 p-3 rounded-2xl border border-pink-500/25">
-              <p class="text-[11px] text-slate-400">Paste your ElevenLabs API Key and any custom Voice ID to synthesize ultra-realistic cloned voiceovers:</p>
-              <input id="elevenApiKey" type="password" placeholder="ElevenLabs xi-api-key..." class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-xs text-white font-mono-code">
-              <input id="elevenVoiceId" type="text" placeholder="Voice ID (e.g. 21m00Tcm4TlvDq8ikWAM)" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-xs text-white font-mono-code">
-              <button type="button" id="saveCloneVoiceBtn" class="w-full py-2 rounded-xl bg-pink-600 hover:bg-pink-500 text-white text-xs font-bold cursor-pointer">
-                Activate Custom Voice Clone
-              </button>
-            </div>
+          <!-- Optional ElevenLabs Clone -->
+          <button type="button" id="toggleCloneBoxBtn" class="text-[11px] font-bold text-pink-300 hover:underline cursor-pointer block pt-1">
+            + Use Custom ElevenLabs Voice ID
+          </button>
+          <div id="elevenCloneBox" class="hidden space-y-2 pt-2 border-t border-white/10">
+            <input id="elevenKeyInput" type="password" placeholder="ElevenLabs API Key" class="w-full bg-black/60 border border-white/15 rounded-lg px-2.5 py-1.5 text-xs text-white">
+            <input id="elevenVoiceIdInput" type="text" placeholder="ElevenLabs Voice ID" class="w-full bg-black/60 border border-white/15 rounded-lg px-2.5 py-1.5 text-xs text-white">
+            <button type="button" id="saveElevenBtn" class="w-full py-1.5 rounded-lg bg-pink-600 text-white text-xs font-bold cursor-pointer">Activate Clone</button>
           </div>
         </div>
 
       </div>
 
-      <!-- CENTER COLUMN (5 Cols): Editable Hooks, 4 Scenes & B-Roll Controls -->
-      <div class="lg:col-span-5 space-y-6">
-        <div class="bento-card rounded-3xl p-5 sm:p-6 space-y-5 scroll-anim">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <h2 class="text-base font-bold text-white font-display flex items-center gap-2">
-              <span class="w-6 h-6 rounded-lg bg-pink-500/20 border border-pink-500/40 text-pink-300 text-xs flex items-center justify-center">3</span>
-              <span>Interactive Script & Timeline</span>
-            </h2>
-            <div class="flex items-center gap-2">
-              <span id="retentionBadge" class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                Viral Score: 92%
-              </span>
-              <button type="button" id="copyScriptBtn" class="px-3 py-1 rounded-xl bg-white/5 hover:bg-white/15 text-xs font-semibold text-slate-200 border border-white/10 cursor-pointer">
-                📋 Copy
-              </button>
-            </div>
+      <!-- CENTER COLUMN (4 Cols): Editable Hooks & 4 Scenes -->
+      <div class="lg:col-span-4 space-y-5">
+        <div class="studio-card rounded-3xl p-5 space-y-4 scroll-reveal">
+          <div class="flex items-center justify-between">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-emerald-400">4. Editable Storyboard</h2>
+            <button type="button" id="copyAllScriptBtn" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/15 text-xs font-semibold text-slate-200 border border-white/10 cursor-pointer">
+              📋 Copy Text
+            </button>
           </div>
 
-          <!-- Selectable 3-Second Hooks -->
           <div>
-            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">3-Second Viral Hook Variations (Click to activate):</label>
+            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">Click Any Hook to Test:</label>
             <div id="hooksList" class="space-y-2"></div>
           </div>
 
-          <!-- Custom Background / B-Roll Controls -->
-          <div class="p-3.5 rounded-2xl bg-black/50 border border-white/10 flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <p class="text-xs font-bold text-white">🖼️ Video B-Roll & Product Visuals</p>
-              <p class="text-[11px] text-slate-400">Auto-loads HD stock photos or upload your own product image.</p>
+          <div>
+            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">4 Scenes (Type inside any box to edit live video):</label>
+            <div id="scenesList" class="space-y-2.5 max-h-[470px] overflow-y-auto pr-1"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN (4 Cols): Instagram / YouTube 9:16 Video Player + BIG DOWNLOAD BUTTONS -->
+      <div id="player-column" class="lg:col-span-4 flex flex-col items-center scroll-reveal">
+        <div class="studio-card rounded-3xl p-5 w-full flex flex-col items-center">
+          
+          <!-- Platform Interface Mode Switcher (Instagram Reels vs YouTube Shorts vs Clean Raw) -->
+          <div class="w-full mb-3">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-300">Platform Interface Mode:</span>
+              <span id="playerStatusBadge" class="text-[10px] font-mono-code px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300">READY</span>
             </div>
-            <div class="flex items-center gap-2">
-              <label class="px-3 py-1.5 rounded-xl bg-indigo-600/30 hover:bg-indigo-600/50 border border-indigo-400/40 text-xs font-bold text-indigo-200 cursor-pointer transition">
-                <span>+ Upload Image</span>
-                <input id="customBgUpload" type="file" accept="image/*" class="hidden">
-              </label>
-              <button type="button" id="shuffleBrollBtn" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-slate-300 cursor-pointer">
-                🔄 New B-Roll
+            <div class="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-black/60 border border-white/10">
+              <button type="button" data-ui="instagram" class="ui-mode-btn py-2 rounded-xl bg-gradient-to-r from-pink-600 to-purple-600 text-white text-[11px] font-bold transition cursor-pointer">
+                📸 IG Reels
+              </button>
+              <button type="button" data-ui="youtube" class="ui-mode-btn py-2 rounded-xl text-slate-300 hover:text-white text-[11px] font-bold transition cursor-pointer">
+                ▶️ YT Shorts
+              </button>
+              <button type="button" data-ui="clean" class="ui-mode-btn py-2 rounded-xl text-slate-300 hover:text-white text-[11px] font-bold transition cursor-pointer">
+                ✨ Clean (No UI)
               </button>
             </div>
           </div>
 
-          <!-- 4 Editable Scenes -->
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <label class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Live Editable 4-Scene Script (Click any text to edit):</label>
-              <span class="text-[10px] font-mono-code text-indigo-300">Auto-syncs to 9:16 Player</span>
-            </div>
-            <div id="scenesList" class="space-y-3 max-h-[410px] overflow-y-auto pr-1"></div>
-          </div>
-
-          <!-- Export & Download Bar -->
-          <div class="pt-3 border-t border-white/10 grid grid-cols-2 gap-3">
-            <button type="button" id="downloadTxtBtn" class="py-3 px-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-slate-200 transition cursor-pointer">
-              ⬇️ Download Script (.TXT)
-            </button>
-            <button type="button" id="exportWebmBtn" class="py-3 px-3 rounded-2xl bg-gradient-to-r from-indigo-600/40 to-purple-600/40 hover:from-indigo-600/60 hover:to-purple-600/60 border border-indigo-400/40 text-xs font-extrabold text-white transition cursor-pointer">
-              🎥 Render Video (.WEBM)
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT COLUMN (3 Cols): Live 9:16 Vertical Canvas & Theme Customizer -->
-      <div id="preview-anchor" class="lg:col-span-3 flex flex-col items-center scroll-anim">
-        <div class="bento-card rounded-3xl p-4 sm:p-5 w-full flex flex-col items-center">
-          <div class="w-full flex items-center justify-between mb-3">
-            <span class="text-xs font-bold uppercase tracking-wider text-pink-400">4. Live 9:16 Preview</span>
-            <span id="playerStatusText" class="text-[10px] font-mono-code px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300">READY</span>
-          </div>
-
-          <!-- Caption Theme Switcher -->
+          <!-- Caption Typography Style Bar -->
           <div class="w-full grid grid-cols-4 gap-1.5 mb-3">
-            <button type="button" data-theme="hormozi" class="theme-btn py-1.5 rounded-lg bg-amber-500/20 border border-amber-400 text-[10px] font-bold text-amber-300 cursor-pointer">Hormozi</button>
-            <button type="button" data-theme="cyber" class="theme-btn py-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Cyber</button>
-            <button type="button" data-theme="minimal" class="theme-btn py-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Luxe</button>
-            <button type="button" data-theme="redbox" class="theme-btn py-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Viral Red</button>
+            <button type="button" data-cap="hormozi" class="cap-btn py-1 rounded-lg bg-amber-500/20 border border-amber-400 text-[10px] font-bold text-amber-300 cursor-pointer">Hormozi</button>
+            <button type="button" data-cap="modern" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Clean Glass</button>
+            <button type="button" data-cap="neon" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Cyber Glow</button>
+            <button type="button" data-cap="red" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Viral Pill</button>
           </div>
 
-          <!-- Phone Hardware Frame + HTML5 9:16 Canvas -->
-          <div class="relative w-[256px] sm:w-[268px] h-[455px] sm:h-[476px] rounded-[38px] border-[6px] border-slate-800 bg-black overflow-hidden shadow-2xl">
+          <!-- 9:16 Phone Hardware Frame -->
+          <div class="relative w-[268px] h-[476px] rounded-[40px] border-[7px] border-slate-800 bg-black overflow-hidden shadow-2xl">
             <canvas id="reelCanvas" width="540" height="960" class="w-full h-full object-cover"></canvas>
           </div>
 
-          <!-- Player Controls -->
-          <div class="w-full mt-4 grid grid-cols-2 gap-2">
-            <button type="button" id="playReelBtn" class="py-3 px-3 rounded-2xl bg-white text-slate-950 hover:bg-slate-200 font-extrabold text-xs transition shadow-lg cursor-pointer">
-              ▶ Play w/ Voice
+          <!-- Playback Controls -->
+          <div class="w-full mt-4 grid grid-cols-2 gap-2.5">
+            <button type="button" id="playReelBtn" class="py-3 px-4 rounded-2xl bg-white text-slate-950 hover:bg-slate-200 font-extrabold text-xs transition shadow-lg cursor-pointer">
+              ▶ Play Reel w/ Voice
             </button>
-            <button type="button" id="nextSceneBtn" class="py-3 px-3 rounded-2xl bg-white/5 hover:bg-white/10 text-white border border-white/15 font-bold text-xs transition cursor-pointer">
-              ⏭ Next Scene
+            <button type="button" id="nextSceneBtn" class="py-3 px-4 rounded-2xl bg-white/5 hover:bg-white/10 text-white border border-white/15 font-bold text-xs transition cursor-pointer">
+              ⏭ Next Scene (1/4)
             </button>
           </div>
 
-          <button type="button" id="sendToWhatsAppDeskBtn" class="w-full mt-2.5 py-3 px-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs transition shadow-lg shadow-emerald-500/20 cursor-pointer">
-            🚀 Send Script to Production Desk
-          </button>
+          <!-- PROMINENT DOWNLOAD VIDEO & DOWNLOAD CONTENT BUTTONS -->
+          <div class="w-full mt-3 pt-3 border-t border-white/10 space-y-2">
+            <button type="button" id="downloadVideoBtn" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-emerald-500/20 transition flex items-center justify-center gap-2 cursor-pointer">
+              <span>⬇️ DOWNLOAD VIDEO (.WEBM)</span>
+            </button>
+            <div class="grid grid-cols-2 gap-2">
+              <button type="button" id="downloadScriptBtn" class="py-2.5 px-3 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-400/30 text-indigo-200 font-bold text-[11px] transition cursor-pointer">
+                📄 Download Script (.TXT)
+              </button>
+              <button type="button" id="downloadFramePngBtn" class="py-2.5 px-3 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 border border-purple-400/30 text-purple-200 font-bold text-[11px] transition cursor-pointer">
+                🖼️ Save Poster (.PNG)
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- BENTO ARCHITECTURE SHOWCASE (Demonstrates Scroll Down & Scroll Up Animations) -->
-  <section id="features" class="relative z-10 max-w-7xl mx-auto px-4 pb-20">
-    <div class="text-center mb-12 scroll-anim">
-      <span class="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-bold uppercase tracking-wider">Why Brands Switch to ReelFlow</span>
-      <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-3">Engineered for High-Retention Vertical Video</h2>
+  <!-- SECTION 2: ALL 11 CREATOR & HARDWARE UTILITY TOOLS FROM SCREENSHOT 1 (WORKING MODAL) -->
+  <section id="utility-suite" class="relative z-10 max-w-6xl mx-auto px-4 pb-20 scroll-reveal">
+    <div class="text-center mb-10">
+      <span class="text-xs font-bold uppercase tracking-wider text-indigo-400">Built-In Production Utilities</span>
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">Creator Studio & Media Diagnostic Suite</h2>
+      <p class="text-xs sm:text-sm text-slate-400 mt-1">Click any utility card below to test your camera/mic, convert media, extract audio, or generate platform scripts.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bento-card rounded-3xl p-6 scroll-anim">
-        <div class="w-11 h-11 rounded-2xl bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-xl mb-4">🧠</div>
-        <h3 class="text-lg font-bold text-white mb-2">3-Second Pattern Interrupts</h3>
-        <p class="text-xs text-slate-400 leading-relaxed">
-          Most videos lose 72% of viewers in the first 3 seconds. Our neural prompt matrix generates controversial, math-backed, and curiosity-gap hooks in both English and Hinglish.
-        </p>
-      </div>
-
-      <div class="bento-card rounded-3xl p-6 scroll-anim">
-        <div class="w-11 h-11 rounded-2xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-xl mb-4">🎙️</div>
-        <h3 class="text-lg font-bold text-white mb-2">Multi-Persona & Cloned Voices</h3>
-        <p class="text-xs text-slate-400 leading-relaxed">
-          Switch effortlessly between 6 calibrated voice personas, adjust cadence and pitch, or plug in your custom ElevenLabs voice clone ID for studio-grade narration.
-        </p>
-      </div>
-
-      <div class="bento-card rounded-3xl p-6 scroll-anim">
-        <div class="w-11 h-11 rounded-2xl bg-pink-500/20 border border-pink-500/40 flex items-center justify-center text-xl mb-4">🖼️</div>
-        <h3 class="text-lg font-bold text-white mb-2">Dynamic B-Roll & Kinetic Subtitles</h3>
-        <p class="text-xs text-slate-400 leading-relaxed">
-          Automatically pairs your script with Ken Burns animated stock photography or your uploaded product imagery, topped with Hormozi-style kinetic captions.
-        </p>
-      </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="utilityCardsGrid">
+      <!-- Populated dynamically with the exact 11 tools from Screenshot 1 -->
     </div>
   </section>
 
-  <!-- DIRECT WHATSAPP PRODUCTION DESK CTA -->
-  <section id="whatsapp-desk" class="relative z-10 max-w-5xl mx-auto px-4 pb-24 scroll-anim">
-    <div class="bento-card rounded-3xl p-6 sm:p-10 border border-emerald-500/30 text-center space-y-4">
-      <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-xs font-bold uppercase">Direct Founder Concierge</span>
-      <h2 class="text-2xl sm:text-4xl font-extrabold text-white">Want Our Studio Team to Deliver 1080p MP4s?</h2>
-      <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
-        Generate your blueprint above for free, then send it with one click to our WhatsApp production line (+91 7820847387) for custom B-roll grading, voice cloning, and daily posting.
-      </p>
-      <div class="pt-2">
-        <button type="button" id="bottomWhatsAppBtn" class="px-7 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider transition shadow-xl shadow-emerald-500/20 cursor-pointer">
-          💬 Send Current Project to WhatsApp (+91 7820847387)
+  <!-- SECTION 3: ALL 22+ AI CLIPPER & CONVERTER TOOLS FROM SCREENSHOT 2 -->
+  <section id="clipper-grid" class="relative z-10 max-w-6xl mx-auto px-4 pb-20 scroll-reveal">
+    <div class="text-center mb-10">
+      <span class="text-xs font-bold uppercase tracking-wider text-purple-400">Discover</span>
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">More Nifty AI Video Tools from ReelFlow</h2>
+      <p class="text-xs sm:text-sm text-slate-400 mt-1">Click any workflow below to automatically configure the 9:16 Studio for that platform.</p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5" id="clipperCardsGrid">
+      <!-- Populated dynamically with all 22 tools from Screenshot 2 -->
+    </div>
+  </section>
+
+  <!-- SECTION 4: FREE TRIAL + CUSTOM RUPEE (₹) SLIDER PLAN + INSTANT PAYMENT GATEWAY -->
+  <section id="pricing" class="relative z-10 max-w-5xl mx-auto px-4 pb-24 scroll-reveal">
+    <div class="text-center mb-10">
+      <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-bold uppercase">Flexible India Pricing</span>
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-3">Start Free or Build Your Custom Rupee Plan</h2>
+      <p class="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto mt-1">No rigid agency retainers. Start with our free trial or slide to build a custom plan that fits your exact pocket.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+      
+      <!-- Card 1: Free Trial Plan -->
+      <div class="studio-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-white/10">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold">Starter Free Trial</span>
+            <span class="text-xs font-mono-code text-emerald-400">Instant Access</span>
+          </div>
+          <div class="mt-5 mb-2 flex items-baseline gap-2">
+            <span class="text-4xl sm:text-5xl font-extrabold text-white font-display">₹0</span>
+            <span class="text-xs text-slate-400">/ 7-Day Free Trial</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-6">Test every AI script generator, voice persona, and WebM video download at zero cost.</p>
+
+          <ul class="text-xs text-slate-200 space-y-3 mb-8">
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> <span>3 Free 9:16 Video Downloads (.WEBM)</span></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> <span>Full Access to 6 AI Voice Personas</span></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> <span>Instagram Reels & YouTube Shorts Previews</span></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> <span>All 30+ Browser Creator Utilities</span></li>
+          </ul>
+        </div>
+
+        <a href="#studio" class="w-full py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-extrabold text-xs uppercase tracking-wider text-center border border-white/15 transition">
+          Start Free Trial Now →
+        </a>
+      </div>
+
+      <!-- Card 2: Interactive Custom Rupee Plan Builder + Payment Gateway Trigger -->
+      <div class="studio-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-2 border-indigo-500 relative shadow-2xl shadow-indigo-500/15">
+        <span class="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white text-[10px] font-extrabold uppercase tracking-wider">Custom Rupee Builder</span>
+        
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold">Pay Only For What You Need</span>
+            <span id="customReelCountBadge" class="text-xs font-mono-code text-amber-300 font-bold">10 Reels / mo</span>
+          </div>
+
+          <div class="mt-5 mb-4 flex items-baseline gap-2">
+            <span id="customPriceDisplay" class="text-4xl sm:text-5xl font-extrabold text-white font-display">₹999</span>
+            <span class="text-xs text-slate-400">/ month (or one-time pack)</span>
+          </div>
+
+          <!-- Interactive Rupee Slider -->
+          <div class="p-4 rounded-2xl bg-black/60 border border-white/10 mb-5 space-y-2">
+            <div class="flex justify-between text-xs font-semibold">
+              <span class="text-slate-300">Slide to adjust monthly videos:</span>
+              <span id="sliderVideosLabel" class="text-indigo-400 font-bold">10 Videos (₹999)</span>
+            </div>
+            <input id="customPlanSlider" type="range" min="2" max="50" step="2" value="10" class="w-full accent-indigo-500 cursor-pointer">
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono-code">
+              <span>2 Videos (₹199)</span>
+              <span>25 Videos (₹2,499)</span>
+              <span>50 Videos (₹4,999)</span>
+            </div>
+          </div>
+
+          <ul class="text-xs text-slate-200 space-y-2.5 mb-6">
+            <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> <span>1080p Watermark-Free MP4 & WebM Exports</span></li>
+            <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> <span>Custom ElevenLabs Voice Cloning Included</span></li>
+            <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> <span>Direct WhatsApp Production Concierge (+91 7820847387)</span></li>
+          </ul>
+        </div>
+
+        <button type="button" id="openPaymentGatewayBtn" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:opacity-95 text-white font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-indigo-600/30 transition cursor-pointer">
+          💳 Pay via Instant Payment Gateway (UPI / Card)
         </button>
       </div>
+
     </div>
   </section>
 
-  <!-- MODAL 1: LOGIN & REGISTER AUTHENTICATION -->
-  <div id="authModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="bento-card max-w-md w-full rounded-3xl p-6 sm:p-8 border border-white/15 space-y-5">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-500 to-pink-500 flex items-center justify-center font-bold text-white text-sm">R</div>
-          <span class="font-bold text-base text-white font-display">ReelFlow Account</span>
+  <!-- MODAL 1: INTERACTIVE PAYMENT GATEWAY (UPI QR + CARD + WHATSAPP VERIFICATION) -->
+  <div id="paymentGatewayModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="studio-card max-w-md w-full rounded-3xl overflow-hidden border border-white/20 shadow-2xl">
+      <!-- Gateway Top Header -->
+      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-5 flex items-center justify-between text-white">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center font-bold">₹</div>
+          <div>
+            <h3 class="text-sm font-extrabold">ReelFlow Secure Checkout</h3>
+            <p id="gatewayPlanSubtitle" class="text-[11px] text-indigo-100">Custom Plan: 10 Videos</p>
+          </div>
         </div>
-        <button type="button" id="closeAuthModalBtn" class="text-slate-400 hover:text-white text-base cursor-pointer">✕</button>
+        <div class="text-right">
+          <span id="gatewayAmountBadge" class="text-lg font-extrabold font-display">₹999</span>
+          <button type="button" id="closePaymentModalBtn" class="block ml-auto text-xs text-white/80 hover:text-white cursor-pointer">✕ Close</button>
+        </div>
       </div>
 
-      <!-- Auth Tabs -->
-      <div class="grid grid-cols-2 gap-2 p-1 rounded-2xl bg-black/60 border border-white/10">
-        <button type="button" id="tabLoginBtn" class="py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold transition cursor-pointer">Sign In</button>
-        <button type="button" id="tabRegisterBtn" class="py-2 rounded-xl text-slate-400 hover:text-white text-xs font-bold transition cursor-pointer">Create Account</button>
-      </div>
+      <div class="p-6 space-y-4">
+        <!-- Payment Method Tabs -->
+        <div class="grid grid-cols-2 gap-2 p-1 rounded-xl bg-black/60 border border-white/10">
+          <button type="button" id="payTabUpi" class="py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold cursor-pointer">📱 Instant UPI / QR</button>
+          <button type="button" id="payTabCard" class="py-2 rounded-lg text-slate-400 hover:text-white text-xs font-bold cursor-pointer">💳 Debit / Credit Card</button>
+        </div>
 
-      <form id="authForm" class="space-y-3.5">
-        <div id="nameFieldWrap" class="hidden">
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Full Name / Founder Name *</label>
-          <input id="authNameInput" type="text" placeholder="e.g. Arjun Dhore" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+        <!-- UPI QR View -->
+        <div id="upiPaymentPane" class="text-center space-y-3">
+          <p class="text-xs text-slate-300">Scan with GPay, PhonePe, Paytm, or Kotak/Axis UPI App:</p>
+          <div class="w-44 h-44 mx-auto bg-white p-2.5 rounded-2xl shadow-lg flex items-center justify-center">
+            <img id="dynamicUpiQr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi%3A%2F%2Fpay%3Fpa%3D7820847387%40upi%26pn%3DReelFlow%2520AI%26am%3D999%26cu%3DINR" alt="UPI QR" class="w-full h-full object-contain">
+          </div>
+          <p class="text-[11px] font-mono-code text-emerald-300">UPI ID: 7820847387@ybl / 7820847387@upi</p>
         </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Work / University Email *</label>
-          <input id="authEmailInput" type="email" required placeholder="founder@startup.in" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+
+        <!-- Card View (Hidden by default) -->
+        <div id="cardPaymentPane" class="hidden space-y-2.5">
+          <input type="text" placeholder="Cardholder Name" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" placeholder="Card Number (XXXX XXXX XXXX XXXX)" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono-code">
+          <div class="grid grid-cols-2 gap-2">
+            <input type="text" placeholder="MM / YY" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono-code">
+            <input type="password" placeholder="CVV" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono-code">
+          </div>
         </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Password *</label>
-          <input id="authPassInput" type="password" required placeholder="••••••••" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
-        </div>
-        <button type="submit" id="authSubmitBtn" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg cursor-pointer">
-          Sign In to Workspace →
+
+        <input id="payerNameInput" type="text" placeholder="Your Name & Email / Phone for Instant Activation *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
+
+        <button type="button" id="confirmPaymentBtn" class="w-full py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider transition cursor-pointer">
+          ✓ Complete Payment & Activate Plan
         </button>
-      </form>
-
-      <p class="text-[11px] text-slate-400 text-center">
-        Saves your custom voice clones, brand presets, and generated scripts across sessions.
-      </p>
+      </div>
     </div>
   </div>
 
-  <!-- MODAL 2: GEMINI API KEY SETUP -->
-  <div id="apiModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="bento-card max-w-md w-full rounded-3xl p-6 border border-white/15 space-y-4">
+  <!-- MODAL 2: INTERACTIVE CREATOR UTILITY TOOL (CAMERA TEST, MIC TEST, CONVERTER, TRANSCRIBER) -->
+  <div id="utilityToolModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="studio-card max-w-lg w-full rounded-3xl p-6 border border-white/15 space-y-4">
       <div class="flex items-center justify-between">
-        <h3 class="text-base font-bold text-white font-display">⚡ Connect Live Gemini 2.5 Flash</h3>
+        <h3 id="utilModalTitle" class="text-lg font-bold text-white font-display">Utility Tool</h3>
+        <button type="button" id="closeUtilModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
+      </div>
+      <p id="utilModalDesc" class="text-xs text-slate-300"></p>
+
+      <!-- Dynamic Tool Body -->
+      <div id="utilModalBody" class="space-y-3"></div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: LOGIN & REGISTER -->
+  <div id="authModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="studio-card max-w-md w-full rounded-3xl p-6 space-y-4 border border-white/15">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-white font-display">ReelFlow Creator Account</h3>
+        <button type="button" id="closeAuthModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
+      </div>
+      <div class="grid grid-cols-2 gap-2 p-1 rounded-xl bg-black/60 border border-white/10">
+        <button type="button" id="tabLoginBtn" class="py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold cursor-pointer">Login</button>
+        <button type="button" id="tabRegisterBtn" class="py-2 rounded-lg text-slate-400 text-xs font-bold cursor-pointer">Register</button>
+      </div>
+      <form id="authForm" class="space-y-3">
+        <input id="authNameInput" type="text" placeholder="Your Full Name" class="hidden w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
+        <input id="authEmailInput" type="email" required placeholder="Email Address *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
+        <input id="authPassInput" type="password" required placeholder="Password *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
+        <button type="submit" id="authSubmitBtn" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase cursor-pointer">Continue to Studio →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 4: GEMINI API KEY -->
+  <div id="apiModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="studio-card max-w-md w-full rounded-3xl p-6 space-y-4 border border-white/15">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-white">⚡ Connect Gemini 2.5 Flash Key</h3>
         <button type="button" id="closeApiModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
       </div>
-      <p class="text-xs text-slate-300 leading-relaxed">
-        ReelFlow works immediately using its built-in Neural Script Engine. To generate live scripts with <b>Google Gemini 2.5 Flash</b>, paste a free key from <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-indigo-400 underline">Google AI Studio</a>:
-      </p>
+      <p class="text-xs text-slate-300">Paste a free API key from Google AI Studio for live LLM script generation:</p>
       <input id="geminiKeyInput" type="password" placeholder="AIzaSy..." class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white font-mono-code">
       <div class="flex justify-end gap-2">
-        <button type="button" id="clearApiKeyBtn" class="px-3.5 py-2 rounded-xl bg-white/5 text-xs text-slate-300 cursor-pointer">Use Default Engine</button>
-        <button type="button" id="saveApiKeyBtn" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white cursor-pointer">Save Key</button>
+        <button type="button" id="saveApiKeyBtn" class="px-4 py-2 rounded-xl bg-indigo-600 text-xs font-bold text-white cursor-pointer">Save Key</button>
       </div>
     </div>
   </div>
 
-  <!-- APPLICATION JAVASCRIPT ENGINE -->
+  <!-- COMPLETE APPLICATION ENGINE -->
   <script>
     (function() {
-      // Pre-configured with your exact WhatsApp number (+91 7820847387)
       var FOUNDER_WHATSAPP = "917820847387";
 
-      // 6 Curated Voice Personas
-      var VOICE_PERSONAS = [
-        { id: "aarav", name: "Aarav (Mumbai Founder)", desc: "Crisp, authoritative startup pitch", rate: 1.08, pitch: 0.96, genderHint: "male" },
-        { id: "zoya", name: "Zoya (D2C High-Energy)", desc: "Fast, punchy Instagram Reel vibe", rate: 1.16, pitch: 1.12, genderHint: "female" },
-        { id: "kabir", name: "Kabir (Deep Storyteller)", desc: "Cinematic documentary baritone", rate: 0.96, pitch: 0.80, genderHint: "male" },
-        { id: "riya", name: "Riya (Gen-Z Hinglish)", desc: "Conversational creator energy", rate: 1.12, pitch: 1.06, genderHint: "female" },
-        { id: "vikram", name: "Vikram (FinTech Analyst)", desc: "Sharp data & numbers breakdown", rate: 1.10, pitch: 0.92, genderHint: "male" },
-        { id: "custom", name: "Custom Cloned Voice", desc: "Uses your Sliders or ElevenLabs ID", rate: 1.05, pitch: 1.00, genderHint: "any" }
+      // 11 Utility Tools from Screenshot 1
+      var UTILITY_TOOLS = [
+        { id: "camera", icon: "📹", title: "Camera Test", desc: "Test your webcam live right inside your browser" },
+        { id: "mic", icon: "🎙️", title: "Mic Test", desc: "Test your microphone with real-time audio spectrum" },
+        { id: "audioconv", icon: "🔄", title: "Audio Converter", desc: "Convert audio files to MP3 and WAV format" },
+        { id: "videoconv", icon: "🎞️", title: "Video Converter", desc: "Convert video clips to MP4 and WEBM" },
+        { id: "extractor", icon: "🎵", title: "Audio Extractor", desc: "Separate clean audio tracks from your video" },
+        { id: "remover", icon: "🔇", title: "Audio Remover", desc: "Mute and strip unwanted background noise from video" },
+        { id: "audiotrans", icon: "📝", title: "Audio Transcription", desc: "Transcribe voice notes and audio to text" },
+        { id: "videotrans", icon: "📄", title: "Video Transcription", desc: "Transcribe video dialogue to timestamped text" },
+        { id: "podtrans", icon: "🎧", title: "Podcast Transcription", desc: "Turn multi-speaker podcasts into show notes" },
+        { id: "tiktokscript", icon: "✨", title: "AI TikTok Script Generator", desc: "Generate viral TikTok & Reel scripts using AI" },
+        { id: "ytscript", icon: "▶️", title: "AI YouTube Script Generator", desc: "Generate high-retention YouTube Shorts scripts" },
+        { id: "salesscript", icon: "💼", title: "AI Sales Script Generator", desc: "Generate high-converting B2B & D2C video sales scripts" }
       ];
 
-      // Curated Stock B-Roll Photography Sets (Unsplash CDN with crossOrigin anonymous)
-      var BROLL_SETS = {
-        coffee: [
-          "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80"
-        ],
-        fintech: [
-          "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=600&q=80"
-        ],
-        saas: [
-          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=600&q=80"
-        ],
-        streetwear: [
-          "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=600&q=80"
-        ],
-        fitness: [
-          "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1546483875-ad9014c88eba?auto=format&fit=crop&w=600&q=80"
-        ]
-      };
+      // 22 Clipper & Converter Tools from Screenshot 2
+      var CLIPPER_TOOLS = [
+        "Long Video to Short Video AI", "Highlight Video Maker",
+        "AI Clip Maker", "AI Clip Generator",
+        "Video Clipper", "Auto Clip Maker",
+        "AI Video Clipping Tool", "AI Video Cutter",
+        "Repurpose Video", "YouTube Clip Maker",
+        "Video to Shorts Converter", "TikTok Clip Maker",
+        "AI Podcast Clip Maker", "AI Podcast to Shorts Converter",
+        "Short Video Maker", "Automatic Reel Maker",
+        "YouTube Shorts Maker", "Facebook Reels Maker",
+        "Instagram Reels Maker", "LinkedIn Video Maker",
+        "Twitch Clip Maker", "Video to TikTok Converter",
+        "Video to Reels Converter", "Google Drive to Clips",
+        "Dropbox to Clips", "OneDrive to Clips"
+      ];
+
+      var VOICE_PERSONAS = [
+        { id: "aarav", name: "Aarav (Founder)", rate: 1.08, pitch: 0.96 },
+        { id: "zoya", name: "Zoya (Viral D2C)", rate: 1.15, pitch: 1.12 },
+        { id: "kabir", name: "Kabir (Deep Bass)", rate: 0.96, pitch: 0.82 },
+        { id: "riya", name: "Riya (Hinglish)", rate: 1.12, pitch: 1.06 },
+        { id: "vikram", name: "Vikram (Analyst)", rate: 1.10, pitch: 0.92 },
+        { id: "custom", name: "Custom Clone", rate: 1.05, pitch: 1.00 }
+      ];
 
       var PRESETS = {
         coffee: {
           brand: "Asli Cold Brew Coffee",
           audience: "Young professionals and college students tired of spending Rs 350 on watery cafe coffee",
           tone: "controversial",
-          lang: "hinglish",
-          cta: "Comment BREW for a 50% trial pack link in your DMs",
-          brollKey: "coffee"
+          lang: "hinglish"
         },
         fintech: {
           brand: "Kotak & Burgundy Card Maximizer",
-          audience: "Students booking domestic flights and movie tickets without claiming hidden bank rewards",
+          audience: "Students booking flights and movie tickets without claiming hidden bank rewards",
           tone: "data",
-          lang: "hinglish",
-          cta: "Comment SAVE to unlock our free card reward calculator",
-          brollKey: "fintech"
+          lang: "hinglish"
         },
         saas: {
           brand: "PayPulse AI Invoice Recovery",
-          audience: "B2B agency founders and freelancers chasing late client payments every month",
+          audience: "Agency founders and freelancers chasing overdue client payments",
           tone: "story",
-          lang: "english",
-          cta: "Comment PAID to automate your overdue client follow-ups",
-          brollKey: "saas"
+          lang: "english"
+        },
+        podcast: {
+          brand: "Founder Unfiltered Podcast Ep. 42",
+          audience: "Early-stage entrepreneurs building profitable AI micro-startups in India",
+          tone: "secret",
+          lang: "hinglish"
         },
         streetwear: {
           brand: "Bandra 280GSM Heavyweight Tees",
-          audience: "Gen-Z sneakerheads tired of fast-fashion t-shirts losing shape in two washes",
-          tone: "secret",
-          lang: "hinglish",
-          cta: "Comment DROP for early access to Friday's limited batch",
-          brollKey: "streetwear"
-        },
-        fitness: {
-          brand: "RawFuel Unflavored Isolate Whey",
-          audience: "Gym lifters tired of artificial sweeteners and spiked protein powders",
+          audience: "Sneakerheads tired of fast-fashion t-shirts shrinking after two washes",
           tone: "controversial",
-          lang: "english",
-          cta: "Comment LAB to see our third-party lab test report",
-          brollKey: "fitness"
+          lang: "hinglish"
         }
       };
 
@@ -671,374 +662,167 @@
       var currentProject = null;
       var activeSceneIdx = 0;
       var activePersonaId = "aarav";
-      var activeCaptionTheme = "hormozi";
+      var activeUiMode = "instagram"; // 'instagram' | 'youtube' | 'clean'
+      var activeCapStyle = "hormozi";
+      var activeBgTheme = "obsidian";
+      var customUploadedImg = null;
       var isPlaying = false;
-      var playTimer = null;
       var animFrameId = null;
-      var kenBurnsTick = 0;
-      var availableSystemVoices = [];
-      var loadedSceneImages = [null, null, null, null];
-      var customUploadedImage = null;
-      var currentBrollCategory = "coffee";
-      var currentAudioObj = null;
+      var shaderTick = 0;
+      var mediaStreamTrack = null;
 
       function showToast(msg) {
-        var banner = document.getElementById("toastBanner");
-        var txt = document.getElementById("toastText");
-        if (!banner || !txt) return;
-        txt.textContent = msg;
-        banner.classList.remove("hidden");
-        setTimeout(function() {
-          banner.classList.add("hidden");
-        }, 2800);
+        var b = document.getElementById("toastBanner");
+        var t = document.getElementById("toastText");
+        if (!b || !t) return;
+        t.textContent = msg;
+        b.classList.remove("hidden");
+        setTimeout(function() { b.classList.add("hidden"); }, 2700);
       }
 
-      // Bidirectional Scroll Reveal Observer (Works on Scroll Down AND Scroll Up)
-      function initScrollAnimations() {
-        var elements = document.querySelectorAll(".scroll-anim");
+      // Bidirectional Scroll Reveal (Scroll Down + Scroll Up)
+      function initScrollObserver() {
+        var items = document.querySelectorAll(".scroll-reveal");
         if (!("IntersectionObserver" in window)) {
-          elements.forEach(function(el) { el.classList.add("in-view"); });
+          items.forEach(function(el) { el.classList.add("visible"); });
           return;
         }
-        var observer = new IntersectionObserver(function(entries) {
+        var obs = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (entry.isIntersecting) {
-              entry.target.classList.add("in-view");
+              entry.target.classList.add("visible");
             } else {
-              // Removing the class when scrolled out of view makes it animate both ways (up and down)
-              entry.target.classList.remove("in-view");
+              entry.target.classList.remove("visible");
             }
           });
-        }, { threshold: 0.12 });
-
-        elements.forEach(function(el) {
-          observer.observe(el);
-        });
+        }, { threshold: 0.10 });
+        items.forEach(function(el) { obs.observe(el); });
       }
 
-      // Load B-Roll Images for the 4 Scenes
-      function loadSceneBrollImages(categoryKey) {
-        var urls = BROLL_SETS[categoryKey] || BROLL_SETS.coffee;
-        urls.forEach(function(url, idx) {
-          var img = new Image();
-          img.crossOrigin = "anonymous";
-          img.onload = function() {
-            loadedSceneImages[idx] = img;
-            drawCanvasFrame();
-          };
-          img.src = url;
-        });
-      }
-
-      // Populate Browser SpeechSynthesis Voices
-      function loadBrowserVoices() {
-        if (!("speechSynthesis" in window)) return;
-        availableSystemVoices = window.speechSynthesis.getVoices() || [];
-        var sel = document.getElementById("systemVoiceSelect");
-        if (!sel || availableSystemVoices.length === 0) return;
-
-        var currentVal = sel.value;
-        sel.innerHTML = '<option value="auto">Auto-Match Persona Voice (' + availableSystemVoices.length + ' system voices found)</option>';
-        availableSystemVoices.forEach(function(v, i) {
-          var opt = document.createElement("option");
-          opt.value = String(i);
-          opt.textContent = v.name + " (" + v.lang + ")";
-          sel.appendChild(opt);
-        });
-        sel.value = currentVal || "auto";
-      }
-
-      // Render the 6 AI Voice Persona Cards
-      function renderVoicePersonas() {
-        var grid = document.getElementById("voicePersonaGrid");
-        if (!grid) return;
-        grid.innerHTML = "";
-        VOICE_PERSONAS.forEach(function(p) {
-          var active = p.id === activePersonaId;
-          var card = document.createElement("div");
-          card.className = "cursor-pointer p-2.5 rounded-2xl border transition " +
-            (active ? "bg-purple-600/25 border-purple-400 text-white shadow-md" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
-          card.innerHTML =
-            '<div class="flex items-center justify-between mb-0.5">' +
-              '<span class="text-xs font-bold truncate">' + p.name + '</span>' +
-              (active ? '<span class="w-2 h-2 rounded-full bg-emerald-400"></span>' : '') +
-            '</div>' +
-            '<p class="text-[10px] text-slate-400 line-clamp-1">' + p.desc + '</p>';
-          card.addEventListener("click", function() {
-            activePersonaId = p.id;
-            document.getElementById("voiceRateInput").value = String(p.rate);
-            document.getElementById("voicePitchInput").value = String(p.pitch);
-            document.getElementById("rateValLabel").textContent = p.rate.toFixed(2) + "x";
-            document.getElementById("pitchValLabel").textContent = p.pitch.toFixed(2);
-            renderVoicePersonas();
-            drawCanvasFrame();
-            showToast("Voice switched to " + p.name);
-          });
-          grid.appendChild(card);
-        });
-      }
-
-      // Pick best matching browser voice for active persona
-      function pickMatchingSystemVoice() {
-        var selVal = document.getElementById("systemVoiceSelect").value;
-        if (selVal !== "auto" && availableSystemVoices[parseInt(selVal, 10)]) {
-          return availableSystemVoices[parseInt(selVal, 10)];
-        }
-        var persona = VOICE_PERSONAS.find(function(p) { return p.id === activePersonaId; }) || VOICE_PERSONAS[0];
-        var indianVoices = availableSystemVoices.filter(function(v) {
-          return v.lang.toLowerCase().indexOf("in") !== -1 || v.name.toLowerCase().indexOf("india") !== -1 || v.name.toLowerCase().indexOf("hindi") !== -1;
-        });
-        var pool = indianVoices.length > 0 ? indianVoices : availableSystemVoices;
-        if (pool.length === 0) return null;
-
-        if (persona.genderHint === "female") {
-          var fem = pool.find(function(v) {
-            return /female|zoya|veena|heera|samantha|victoria|google हिन्दी|lekha/i.test(v.name);
-          });
-          if (fem) return fem;
-        }
-        if (persona.genderHint === "male") {
-          var mal = pool.find(function(v) {
-            return /male|rishi|prabhat|alex|daniel|david|madhur/i.test(v.name);
-          });
-          if (mal) return mal;
-        }
-        var idx = VOICE_PERSONAS.indexOf(persona);
-        return pool[idx % pool.length];
-      }
-
-      // Speak any text (uses ElevenLabs if configured, otherwise Web Speech API with Persona Pitch/Rate)
-      async function speakLine(text, onDoneCallback) {
-        var elevenKey = localStorage.getItem("rf_eleven_key") || "";
-        var elevenVoice = localStorage.getItem("rf_eleven_voice") || "";
-
-        if (elevenKey && elevenVoice) {
-          try {
-            var res = await fetch("https://api.elevenlabs.io/v1/text-to-speech/" + encodeURIComponent(elevenVoice), {
-              method: "POST",
-              headers: {
-                "xi-api-key": elevenKey,
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                text: text,
-                model_id: "eleven_multilingual_v2"
-              })
-            });
-            if (res.ok) {
-              var blob = await res.blob();
-              var audioUrl = URL.createObjectURL(blob);
-              if (currentAudioObj) currentAudioObj.pause();
-              currentAudioObj = new Audio(audioUrl);
-              currentAudioObj.rate = parseFloat(document.getElementById("voiceRateInput").value) || 1.0;
-              currentAudioObj.onended = function() { if (onDoneCallback) onDoneCallback(); };
-              currentAudioObj.onerror = function() { if (onDoneCallback) onDoneCallback(); };
-              currentAudioObj.play();
-              return;
-            }
-          } catch (e) {
-            // Fall back to browser synthesis if ElevenLabs fails
-          }
-        }
-
-        if ("speechSynthesis" in window) {
-          window.speechSynthesis.cancel();
-          var utter = new SpeechSynthesisUtterance(text);
-          var chosenVoice = pickMatchingSystemVoice();
-          if (chosenVoice) utter.voice = chosenVoice;
-          utter.rate = parseFloat(document.getElementById("voiceRateInput").value) || 1.08;
-          utter.pitch = parseFloat(document.getElementById("voicePitchInput").value) || 1.0;
-          utter.onend = function() { if (onDoneCallback) onDoneCallback(); };
-          utter.onerror = function() { if (onDoneCallback) onDoneCallback(); };
-          window.speechSynthesis.speak(utter);
-        } else {
-          setTimeout(function() { if (onDoneCallback) onDoneCallback(); }, 3400);
-        }
-      }
-
-      // Local Smart Script Engine
-      function buildLocalBlueprint(brand, audience, tone, lang, cta) {
+      function buildBlueprint(brand, audience, tone, lang) {
         var cleanBrand = (brand || "Your Brand").trim();
-        var cleanAud = (audience || "smart customers").trim();
-        var cleanCta = (cta || "Comment LINK for instant access").trim();
-        var handle = "@" + cleanBrand.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 14) + "_official";
-
+        var cleanAud = (audience || "smart creators").trim();
         var hooks = [];
         var scenes = [];
 
         if (lang === "hinglish") {
           hooks = [
             "Bhai, agar aap abhi bhi " + cleanBrand + " ignore kar rahe ho, toh har mahine paise waste kar rahe ho.",
-            "99% log yeh ek galti karte hain—especially " + cleanAud.slice(0, 48) + ".",
-            "Sach bataun? Mainstream options scam lagte hain jab aap " + cleanBrand + " ka real breakdown dekhte ho."
+            "99% log yeh ek galti karte hain—especially " + cleanAud.slice(0, 45) + ".",
+            "Sach bataun? Traditional options scam lagte hain jab aap " + cleanBrand + " ka real breakdown dekhte ho."
           ];
           scenes = [
-            {
-              time: "00:00 - 00:03",
-              label: "HOOK PHASE",
-              visual: "Fast zoom-in product shot + high-contrast kinetic text on " + cleanBrand,
-              voice: hooks[0]
-            },
-            {
-              time: "00:03 - 00:09",
-              label: "PAIN POINT",
-              visual: "Split-screen comparison showing daily struggle for " + cleanAud.slice(0, 45),
-              voice: "Dekho problem simple hai: " + cleanAud + " roz time aur paisa lagate hain, par output zero milta hai."
-            },
-            {
-              time: "00:09 - 00:18",
-              label: "THE SOLUTION",
-              visual: "Crisp 9:16 showcase of " + cleanBrand + " with glowing metric callouts",
-              voice: "Isiliye humne build kiya " + cleanBrand + ". Bina kisi manual headache ke, aapko milta hai 3X faster result."
-            },
-            {
-              time: "00:18 - 00:24",
-              label: "DIRECT CTA",
-              visual: "Animated arrow pointing to comment box with urgency timer",
-              voice: "Abhi test karke dekho—" + cleanCta + "!"
-            }
+            { time: "00:00 - 00:03", label: "HOOK", voice: hooks[0] },
+            { time: "00:03 - 00:09", label: "PROBLEM", voice: "Dekho problem simple hai: " + cleanAud + " roz time aur paisa lagate hain, par result zero milta hai." },
+            { time: "00:09 - 00:18", label: "SOLUTION", voice: "Isiliye humne banaya " + cleanBrand + ". Bina kisi manual headache ke, aapko milta hai 3X faster output." },
+            { time: "00:18 - 00:24", label: "CTA", voice: "Abhi comment karo LINK aur free trial सीधा apne DM mein pao!" }
           ];
         } else {
-          var bank = {
-            controversial: [
-              "Stop wasting money on outdated options if you care about " + cleanBrand + ".",
-              "Unpopular opinion: 90% of what " + cleanAud.slice(0, 44) + " were told is completely backwards.",
-              "Do NOT spend another rupee until you see how " + cleanBrand + " changes the math."
-            ],
-            data: [
-              "We analyzed 500+ cases for " + cleanAud.slice(0, 40) + " and one number changed everything.",
-              "Here is the exact math behind how " + cleanBrand + " saves 10+ hours every single week.",
-              "3 brutal numbers every person dealing with " + cleanBrand + " needs to see today."
-            ],
-            story: [
-              "Six months ago, we watched " + cleanAud.slice(0, 44) + " hit the exact same wall every week.",
-              "Everyone doubted us when we launched " + cleanBrand + "—until they saw the 30-day results.",
-              "We tested every mainstream option on the market so you do not have to make the same mistake."
-            ],
-            secret: [
-              "The industry does not want " + cleanAud.slice(0, 42) + " to know this simple shortcut exists.",
-              "Feels illegal to know: How top performers quietly use " + cleanBrand + " to stay ahead.",
-              "Here is the unfair advantage behind " + cleanBrand + " nobody is talking about."
-            ]
-          };
-          hooks = bank[tone] || bank.controversial;
+          hooks = [
+            "Stop wasting money on outdated options if you care about " + cleanBrand + ".",
+            "Here is the exact math behind how " + cleanBrand + " saves you 10+ hours every single week.",
+            "The industry does not want " + cleanAud.slice(0, 42) + " to know this simple shortcut exists."
+          ];
           scenes = [
-            {
-              time: "00:00 - 00:03",
-              label: "HOOK PHASE",
-              visual: "Pattern-interrupt close-up shot with bold kinetic captions for " + cleanBrand,
-              voice: hooks[0]
-            },
-            {
-              time: "00:03 - 00:09",
-              label: "THE PROBLEM",
-              visual: "High-contrast B-roll illustrating the frustration of " + cleanAud.slice(0, 46),
-              voice: "Right now, " + cleanAud + " are stuck overpaying and losing hours on broken workflows."
-            },
-            {
-              time: "00:09 - 00:18",
-              label: "PRODUCT REVEAL",
-              visual: "Sleek vertical demo of " + cleanBrand + " delivering instant value",
-              voice: "That is why " + cleanBrand + " was engineered from day one to deliver studio-grade results in half the time."
-            },
-            {
-              time: "00:18 - 00:24",
-              label: "CALL TO ACTION",
-              visual: "Bold animated end-card with glowing comment trigger",
-              voice: "Do not get left behind. " + cleanCta + "!"
-            }
+            { time: "00:00 - 00:03", label: "HOOK", voice: hooks[0] },
+            { time: "00:03 - 00:09", label: "PROBLEM", voice: "Right now, " + cleanAud + " are stuck overpaying and losing hours on broken workflows." },
+            { time: "00:09 - 00:18", label: "SOLUTION", voice: "That is why " + cleanBrand + " was built from day one to deliver studio-grade results automatically." },
+            { time: "00:18 - 00:24", label: "CTA", voice: "Comment LINK below and we will send instant access straight to your DMs!" }
           ];
         }
 
-        var score = (89 + Math.floor(Math.random() * 9)) + "%";
         return {
           brand: cleanBrand,
-          handle: handle,
-          cta: cleanCta,
-          retention: score,
           activeHookIndex: 0,
           hooks: hooks,
           scenes: scenes
         };
       }
 
-      // Render Hooks + Inline Editable Scenes
-      function renderWorkspaceUI() {
-        if (!currentProject) return;
-        document.getElementById("retentionBadge").textContent = "Viral Score: " + currentProject.retention;
+      function renderVoiceGrid() {
+        var grid = document.getElementById("voicePersonaGrid");
+        if (!grid) return;
+        grid.innerHTML = "";
+        VOICE_PERSONAS.forEach(function(p) {
+          var active = p.id === activePersonaId;
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "p-2 rounded-xl border text-left transition cursor-pointer " +
+            (active ? "bg-purple-600/30 border-purple-400 text-white font-bold" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
+          btn.innerHTML = '<div class="text-xs truncate">🎙️ ' + p.name + '</div>';
+          btn.addEventListener("click", function() {
+            activePersonaId = p.id;
+            document.getElementById("voiceRate").value = String(p.rate);
+            document.getElementById("voicePitch").value = String(p.pitch);
+            document.getElementById("rateLabel").textContent = p.rate.toFixed(2) + "x";
+            document.getElementById("pitchLabel").textContent = p.pitch.toFixed(2);
+            renderVoiceGrid();
+            drawCanvas();
+          });
+          grid.appendChild(btn);
+        });
+      }
 
-        // Hooks
+      function renderStoryboardUI() {
+        if (!currentProject) return;
+
         var hooksBox = document.getElementById("hooksList");
         hooksBox.innerHTML = "";
-        currentProject.hooks.forEach(function(h, i) {
-          var isSelected = i === currentProject.activeHookIndex;
-          var row = document.createElement("div");
-          row.className = "cursor-pointer p-2.5 rounded-2xl border transition text-xs flex items-start gap-2.5 " +
-            (isSelected ? "bg-indigo-600/25 border-indigo-400 text-white font-semibold shadow-sm" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
-          row.innerHTML =
-            '<span class="px-2 py-0.5 rounded-lg text-[10px] font-mono-code ' + (isSelected ? 'bg-indigo-500 text-white' : 'bg-white/10 text-slate-400') + '">H' + (i + 1) + '</span>' +
-            '<span class="flex-1">"' + h + '"</span>';
-          row.addEventListener("click", function() {
-            currentProject.activeHookIndex = i;
-            currentProject.scenes[0].voice = currentProject.hooks[i];
+        currentProject.hooks.forEach(function(h, idx) {
+          var active = idx === currentProject.activeHookIndex;
+          var div = document.createElement("div");
+          div.className = "cursor-pointer p-2.5 rounded-xl border text-xs transition flex items-start gap-2 " +
+            (active ? "bg-indigo-600/25 border-indigo-400 text-white font-semibold" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
+          div.innerHTML = '<span class="px-1.5 py-0.5 rounded bg-white/10 text-[10px] font-mono-code">H' + (idx + 1) + '</span><span>"' + h + '"</span>';
+          div.addEventListener("click", function() {
+            currentProject.activeHookIndex = idx;
+            currentProject.scenes[0].voice = currentProject.hooks[idx];
             activeSceneIdx = 0;
-            renderWorkspaceUI();
-            showToast("Activated Hook #" + (i + 1));
+            renderStoryboardUI();
           });
-          hooksBox.appendChild(row);
+          hooksBox.appendChild(div);
         });
 
-        // 4 Editable Scenes
         var scenesBox = document.getElementById("scenesList");
         scenesBox.innerHTML = "";
         currentProject.scenes.forEach(function(sc, idx) {
-          var isActive = idx === activeSceneIdx;
-          var wrap = document.createElement("div");
-          wrap.className = "p-3.5 rounded-2xl border transition space-y-2 " +
-            (isActive ? "bg-purple-950/35 border-purple-400/80 shadow-lg" : "bg-black/40 border-white/10 hover:border-white/20");
+          var active = idx === activeSceneIdx;
+          var card = document.createElement("div");
+          card.className = "p-3 rounded-2xl border transition space-y-1.5 " +
+            (active ? "bg-purple-950/35 border-purple-400" : "bg-black/40 border-white/10");
 
-          var header = document.createElement("div");
-          header.className = "flex items-center justify-between text-[11px] font-mono-code cursor-pointer";
-          header.innerHTML =
-            '<span class="text-amber-300 font-bold">▶ SCENE ' + (idx + 1) + ': ' + sc.label + '</span>' +
-            '<span class="text-slate-400">' + sc.time + ' (Click to Preview)</span>';
-          header.addEventListener("click", function() {
-            stopPlayback();
+          var topRow = document.createElement("div");
+          topRow.className = "flex justify-between text-[10px] font-mono-code cursor-pointer";
+          topRow.innerHTML = '<span class="text-amber-300 font-bold">SCENE ' + (idx + 1) + ': ' + sc.label + '</span><span class="text-slate-400">' + sc.time + '</span>';
+          topRow.addEventListener("click", function() {
+            stopReel();
             activeSceneIdx = idx;
-            renderWorkspaceUI();
+            renderStoryboardUI();
           });
 
-          var visualInput = document.createElement("input");
-          visualInput.type = "text";
-          visualInput.value = sc.visual;
-          visualInput.className = "w-full bg-black/50 border border-white/10 rounded-xl px-2.5 py-1.5 text-[11px] text-indigo-200 focus:outline-none focus:border-indigo-400";
-          visualInput.addEventListener("input", function(e) {
-            currentProject.scenes[idx].visual = e.target.value;
-            activeSceneIdx = idx;
-            drawCanvasFrame();
-          });
-
-          var voiceArea = document.createElement("textarea");
-          voiceArea.rows = 2;
-          voiceArea.value = sc.voice;
-          voiceArea.className = "w-full bg-black/60 border border-white/15 rounded-xl px-2.5 py-1.5 text-xs text-white font-medium focus:outline-none focus:border-purple-400";
-          voiceArea.addEventListener("input", function(e) {
+          var ta = document.createElement("textarea");
+          ta.rows = 2;
+          ta.value = sc.voice;
+          ta.className = "w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-indigo-400";
+          ta.addEventListener("input", function(e) {
             currentProject.scenes[idx].voice = e.target.value;
             activeSceneIdx = idx;
-            drawCanvasFrame();
+            drawCanvas();
           });
 
-          wrap.appendChild(header);
-          wrap.appendChild(visualInput);
-          wrap.appendChild(voiceArea);
-          scenesBox.appendChild(wrap);
+          card.appendChild(topRow);
+          card.appendChild(ta);
+          scenesBox.appendChild(card);
         });
 
-        drawCanvasFrame();
+        var nextBtn = document.getElementById("nextSceneBtn");
+        if (nextBtn) nextBtn.textContent = "⏭ Next Scene (" + (activeSceneIdx + 1) + "/4)";
+
+        drawCanvas();
       }
 
-      // Word Wrap Helper for Canvas
-      function drawWrappedCaptions(ctx, text, x, y, maxWidth, lineHeight, theme) {
+      // Word-wrapped kinetic captions on the 9:16 canvas
+      function drawKineticCaptions(ctx, text, x, y, maxWidth, lineHeight) {
         var words = text.split(" ");
         var line = "";
         var lines = [];
@@ -1056,21 +840,29 @@
         var totalH = lines.length * lineHeight;
         var startY = y - totalH / 2 + lineHeight / 2;
 
-        // Draw background pill if theme uses box
-        if (theme === "hormozi" || theme === "redbox") {
-          ctx.fillStyle = theme === "redbox" ? "rgba(225, 29, 72, 0.92)" : "rgba(0, 0, 0, 0.82)";
-          ctx.fillRect(32, y - totalH / 2 - 18, 540 - 64, totalH + 36);
+        // Clean Rounded Pill Backdrop
+        if (activeCapStyle === "hormozi" || activeCapStyle === "modern" || activeCapStyle === "red") {
+          ctx.fillStyle = activeCapStyle === "red"
+            ? "rgba(225, 29, 72, 0.9)"
+            : (activeCapStyle === "modern" ? "rgba(15, 23, 42, 0.72)" : "rgba(0, 0, 0, 0.78)");
+          var boxX = 38;
+          var boxY = y - totalH / 2 - 22;
+          var boxW = 540 - 76;
+          var boxH = totalH + 44;
+          ctx.beginPath();
+          ctx.roundRect(boxX, boxY, boxW, boxH, 24);
+          ctx.fill();
         }
 
         for (var i = 0; i < lines.length; i++) {
           var ly = startY + i * lineHeight;
-          ctx.strokeStyle = "rgba(0,0,0,0.9)";
-          ctx.lineWidth = 7;
+          ctx.strokeStyle = "rgba(0,0,0,0.85)";
+          ctx.lineWidth = 6;
           ctx.strokeText(lines[i], x, ly);
 
-          if (theme === "hormozi") {
+          if (activeCapStyle === "hormozi") {
             ctx.fillStyle = i % 2 === 0 ? "#fde047" : "#ffffff";
-          } else if (theme === "cyber") {
+          } else if (activeCapStyle === "neon") {
             ctx.fillStyle = i % 2 === 0 ? "#38bdf8" : "#f472b6";
           } else {
             ctx.fillStyle = "#ffffff";
@@ -1079,352 +871,485 @@
         }
       }
 
-      // Draw 9:16 Video Frame onto HTML5 Canvas (Includes Real B-Roll + Ken Burns Zoom + Captions)
-      function drawCanvasFrame() {
+      // Main 9:16 Video Canvas Renderer (Modern Shaders + Authentic IG Reels / YT Shorts UI)
+      function drawCanvas() {
         var canvas = document.getElementById("reelCanvas");
         if (!canvas || !currentProject) return;
         var ctx = canvas.getContext("2d");
         var W = canvas.width;
         var H = canvas.height;
         var scene = currentProject.scenes[activeSceneIdx] || currentProject.scenes[0];
-        var persona = VOICE_PERSONAS.find(function(p) { return p.id === activePersonaId; }) || VOICE_PERSONAS[0];
+        var handle = document.getElementById("creatorHandleInput").value || "@reelflow.ai";
 
-        kenBurnsTick += 0.015;
-        var zoom = 1.04 + Math.sin(kenBurnsTick) * 0.04;
+        shaderTick += 0.03;
 
-        // 1. Draw Background Image (Custom Uploaded OR Stock B-Roll) with Ken Burns Zoom
-        var bgImg = customUploadedImage || loadedSceneImages[activeSceneIdx];
-        if (bgImg && bgImg.complete && bgImg.naturalWidth > 0) {
+        // 1. MODERN CUSTOMIZABLE BACKGROUND
+        if (customUploadedImg && customUploadedImg.complete) {
+          var zoom = 1.03 + Math.sin(shaderTick) * 0.03;
           ctx.save();
           ctx.translate(W / 2, H / 2);
           ctx.scale(zoom, zoom);
-          ctx.drawImage(bgImg, -W / 2, -H / 2, W, H);
+          ctx.drawImage(customUploadedImg, -W / 2, -H / 2, W, H);
           ctx.restore();
-        } else {
-          var grad = ctx.createLinearGradient(0, 0, W, H);
-          grad.addColorStop(0, "#1e1b4b");
-          grad.addColorStop(0.5, "#090d16");
-          grad.addColorStop(1, "#4c0519");
-          ctx.fillStyle = grad;
+          ctx.fillStyle = "rgba(0,0,0,0.45)";
           ctx.fillRect(0, 0, W, H);
-        }
+        } else {
+          var themes = {
+            obsidian: ["#090a10", "#1e1b4b", "#3b0764"],
+            luxury: ["#090806", "#271c09", "#451a03"],
+            emerald: ["#040d0a", "#064e3b", "#0f172a"],
+            sunset: ["#0f0714", "#4c0519", "#311042"],
+            minimal: ["#08090c", "#11131a", "#08090c"],
+            custom: [
+              document.getElementById("customColor1").value,
+              "#07090e",
+              document.getElementById("customColor2").value
+            ]
+          };
+          var pal = themes[activeBgTheme] || themes.obsidian;
+          var bgGrad = ctx.createLinearGradient(0, 0, W, H);
+          bgGrad.addColorStop(0, pal[0]);
+          bgGrad.addColorStop(0.5, pal[1]);
+          bgGrad.addColorStop(1, pal[2]);
+          ctx.fillStyle = bgGrad;
+          ctx.fillRect(0, 0, W, H);
 
-        // 2. Dark Cinematic Vignette Overlay for Text Readability
-        var darkGrad = ctx.createLinearGradient(0, 0, 0, H);
-        darkGrad.addColorStop(0, "rgba(0,0,0,0.75)");
-        darkGrad.addColorStop(0.35, "rgba(0,0,0,0.35)");
-        darkGrad.addColorStop(0.7, "rgba(0,0,0,0.55)");
-        darkGrad.addColorStop(1, "rgba(0,0,0,0.92)");
-        ctx.fillStyle = darkGrad;
-        ctx.fillRect(0, 0, W, H);
+          // Modern Animated Geometric Light Orbs
+          var orbX = W * 0.5 + Math.cos(shaderTick) * 90;
+          var orbY = H * 0.42 + Math.sin(shaderTick) * 70;
+          var glow = ctx.createRadialGradient(orbX, orbY, 10, orbX, orbY, 320);
+          glow.addColorStop(0, "rgba(139, 92, 246, 0.32)");
+          glow.addColorStop(1, "rgba(139, 92, 246, 0)");
+          ctx.fillStyle = glow;
+          ctx.fillRect(0, 0, W, H);
 
-        // 3. Top 4 Story Progress Bars
-        var barW = (W - 70) / 4;
-        for (var i = 0; i < 4; i++) {
-          var bx = 20 + i * (barW + 10);
-          ctx.fillStyle = "rgba(255,255,255,0.25)";
-          ctx.fillRect(bx, 24, barW, 7);
-          if (i <= activeSceneIdx) {
-            ctx.fillStyle = "#38bdf8";
-            ctx.fillRect(bx, 24, barW, 7);
+          // Subtle Cyber Grid Lines on Canvas
+          ctx.strokeStyle = "rgba(255,255,255,0.035)";
+          ctx.lineWidth = 1;
+          for (var gx = 0; gx < W; gx += 45) {
+            ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke();
+          }
+          for (var gy = 0; gy < H; gy += 45) {
+            ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke();
           }
         }
 
-        // 4. Top Scene + Voice Badge
-        ctx.fillStyle = "rgba(0,0,0,0.68)";
-        ctx.fillRect(20, 48, W - 40, 44);
-        ctx.fillStyle = "#fde047";
-        ctx.font = "bold 18px 'JetBrains Mono', monospace";
-        ctx.textAlign = "left";
-        ctx.fillText("SCENE " + (activeSceneIdx + 1) + "/4 • " + scene.label, 32, 76);
-
-        ctx.fillStyle = "#c084fc";
-        ctx.textAlign = "right";
-        ctx.fillText("🎙️ " + persona.name.split(" ")[0], W - 32, 76);
-
-        // 5. Camera B-Roll Pill
-        ctx.fillStyle = "rgba(15, 23, 42, 0.78)";
-        ctx.fillRect(36, 175, W - 72, 64);
-        ctx.fillStyle = "#e0e7ff";
-        ctx.font = "600 18px 'Plus Jakarta Sans', sans-serif";
+        // 2. CENTER KINETIC CAPTIONS (Clean & Centered)
+        ctx.font = "800 35px 'Plus Jakarta Sans', sans-serif";
         ctx.textAlign = "center";
-        ctx.fillText("🎥 " + scene.visual.slice(0, 46), W / 2, 214);
+        drawKineticCaptions(ctx, scene.voice.toUpperCase(), W / 2, H * 0.48, W - 110, 46);
 
-        // 6. Center Kinetic Captions
-        ctx.font = "800 36px 'Plus Jakarta Sans', sans-serif";
-        ctx.textAlign = "center";
-        drawWrappedCaptions(ctx, scene.voice.toUpperCase(), W / 2, H * 0.54, W - 90, 46, activeCaptionTheme);
+        // 3. AUTHENTIC PLATFORM INTERFACE OVERLAYS (Instagram Reels / YouTube Shorts / Clean Raw)
+        if (activeUiMode === "instagram") {
+          // Top IG Reels Camera & Title
+          ctx.fillStyle = "rgba(255,255,255,0.9)";
+          ctx.font = "bold 24px 'Plus Jakarta Sans', sans-serif";
+          ctx.textAlign = "left";
+          ctx.fillText("Reels", 28, 52);
 
-        // 7. Bottom Social Creator Bar
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 24px 'Plus Jakarta Sans', sans-serif";
-        ctx.textAlign = "left";
-        ctx.fillText(currentProject.handle, 26, H - 96);
+          // Right-Side Vertical IG Action Bar
+          ctx.textAlign = "center";
+          var rx = W - 42;
+          ctx.font = "28px sans-serif";
+          ctx.fillText("🤍", rx, H - 290);
+          ctx.font = "600 15px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText("28.4K", rx, H - 265);
 
-        ctx.fillStyle = "#fde047";
-        ctx.font = "600 19px 'Plus Jakarta Sans', sans-serif";
-        ctx.fillText("👉 " + currentProject.cta.slice(0, 42), 26, H - 60);
+          ctx.font = "26px sans-serif";
+          ctx.fillText("💬", rx, H - 215);
+          ctx.font = "600 15px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText("642", rx, H - 190);
 
-        ctx.fillStyle = "#34d399";
-        ctx.font = "bold 17px 'JetBrains Mono', monospace";
-        ctx.fillText("🎵 Original Audio • " + persona.name, 26, H - 26);
+          ctx.font = "26px sans-serif";
+          ctx.fillText("✈️", rx, H - 140);
+          ctx.font = "600 15px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText("4.1K", rx, H - 115);
+
+          // Minimal Bottom Creator Row (Translucent, No Ugly Black Box)
+          ctx.textAlign = "left";
+          ctx.fillStyle = "#ffffff";
+          ctx.font = "bold 20px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText(handle, 26, H - 72);
+
+          // Follow Pill
+          ctx.strokeStyle = "rgba(255,255,255,0.8)";
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.roundRect(185, H - 92, 82, 28, 8);
+          ctx.stroke();
+          ctx.font = "bold 14px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText("Follow", 204, H - 73);
+
+          ctx.fillStyle = "rgba(255,255,255,0.85)";
+          ctx.font = "500 16px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText("🎵 Original Audio - " + currentProject.brand.slice(0, 22), 26, H - 40);
+
+          // Thin Bottom Progress Line
+          ctx.fillStyle = "rgba(255,255,255,0.25)";
+          ctx.fillRect(0, H - 6, W, 6);
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, H - 6, W * ((activeSceneIdx + 1) / 4), 6);
+
+        } else if (activeUiMode === "youtube") {
+          // Top YouTube Shorts Header
+          ctx.fillStyle = "rgba(255,255,255,0.92)";
+          ctx.font = "bold 22px 'Plus Jakarta Sans', sans-serif";
+          ctx.textAlign = "left";
+          ctx.fillText("▶️ Shorts", 26, 52);
+
+          // Right-Side YT Shorts Actions
+          ctx.textAlign = "center";
+          var yx = W - 42;
+          ctx.font = "26px sans-serif";
+          ctx.fillText("👍", yx, H - 300);
+          ctx.font = "bold 14px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText("42K", yx, H - 275);
+
+          ctx.font = "26px sans-serif";
+          ctx.fillText("👎", yx, H - 225);
+          ctx.font = "bold 14px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText("Dislike", yx, H - 200);
+
+          ctx.font = "26px sans-serif";
+          ctx.fillText("💬", yx, H - 150);
+          ctx.font = "bold 14px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText("1.2K", yx, H - 125);
+
+          // Bottom YT Channel + Red Subscribe Pill
+          ctx.textAlign = "left";
+          ctx.fillStyle = "#ffffff";
+          ctx.font = "bold 19px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText(handle, 26, H - 76);
+
+          ctx.fillStyle = "#ef4444";
+          ctx.beginPath();
+          ctx.roundRect(185, H - 96, 104, 30, 15);
+          ctx.fill();
+          ctx.fillStyle = "#ffffff";
+          ctx.font = "bold 14px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText("Subscribe", 203, H - 76);
+
+          ctx.fillStyle = "rgba(255,255,255,0.9)";
+          ctx.font = "500 16px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText(currentProject.brand + " #Shorts", 26, H - 42);
+
+          // Red Bottom YT Scrub Bar
+          ctx.fillStyle = "rgba(255,255,255,0.25)";
+          ctx.fillRect(0, H - 6, W, 6);
+          ctx.fillStyle = "#ef4444";
+          ctx.fillRect(0, H - 6, W * ((activeSceneIdx + 1) / 4), 6);
+        }
+        // If activeUiMode === 'clean', no bottom or side UI is drawn so user gets a pure video!
       }
 
-      function startReelPlayback() {
+      function speakText(text, onDone) {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          var u = new SpeechSynthesisUtterance(text);
+          u.rate = parseFloat(document.getElementById("voiceRate").value) || 1.08;
+          u.pitch = parseFloat(document.getElementById("voicePitch").value) || 1.0;
+          u.onend = function() { if (onDone) onDone(); };
+          u.onerror = function() { if (onDone) onDone(); };
+          window.speechSynthesis.speak(u);
+        } else {
+          setTimeout(function() { if (onDone) onDone(); }, 3200);
+        }
+      }
+
+      function startReel() {
         if (isPlaying) {
-          stopPlayback();
+          stopReel();
           return;
         }
         isPlaying = true;
         activeSceneIdx = 0;
-        document.getElementById("playReelBtn").textContent = "⏹ Stop Preview";
-        document.getElementById("playerStatusText").textContent = "PLAYING VOICE";
+        document.getElementById("playReelBtn").textContent = "⏹ Stop Reel";
+        document.getElementById("playerStatusBadge").textContent = "PLAYING";
 
-        function animateLoop() {
+        function loop() {
           if (!isPlaying) return;
-          drawCanvasFrame();
-          animFrameId = requestAnimationFrame(animateLoop);
+          drawCanvas();
+          animFrameId = requestAnimationFrame(loop);
         }
-        animateLoop();
-
-        playSceneStep(0);
+        loop();
+        playStep(0);
       }
 
-      function playSceneStep(idx) {
-        if (!isPlaying || !currentProject || idx >= currentProject.scenes.length) {
-          stopPlayback();
+      function playStep(idx) {
+        if (!isPlaying || idx >= currentProject.scenes.length) {
+          stopReel();
           return;
         }
         activeSceneIdx = idx;
-        renderWorkspaceUI();
-        speakLine(currentProject.scenes[idx].voice, function() {
-          if (isPlaying) playSceneStep(idx + 1);
+        renderStoryboardUI();
+        speakText(currentProject.scenes[idx].voice, function() {
+          if (isPlaying) playStep(idx + 1);
         });
       }
 
-      function stopPlayback() {
+      function stopReel() {
         isPlaying = false;
-        if (playTimer) clearTimeout(playTimer);
         if (animFrameId) cancelAnimationFrame(animFrameId);
-        if (currentAudioObj) currentAudioObj.pause();
         if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-        var btn = document.getElementById("playReelBtn");
-        if (btn) btn.textContent = "▶ Play w/ Voice";
-        var st = document.getElementById("playerStatusText");
-        if (st) st.textContent = "READY";
+        document.getElementById("playReelBtn").textContent = "▶ Play Reel w/ Voice";
+        document.getElementById("playerStatusBadge").textContent = "READY";
       }
 
-      // Send Current Script Directly to WhatsApp (+91 7820847387)
-      function sendProjectToFounderWhatsApp() {
-        if (!currentProject) return;
-        var savedUser = JSON.parse(localStorage.getItem("rf_user_v4") || "null");
-        var userTag = savedUser ? (savedUser.name + " - " + savedUser.email) : "Website Visitor";
-        var persona = VOICE_PERSONAS.find(function(p) { return p.id === activePersonaId; }) || VOICE_PERSONAS[0];
-        var scenesText = currentProject.scenes.map(function(s, i) {
-          return "Scene " + (i + 1) + ": " + s.voice;
-        }).join("\n");
+      // Render Screenshot 1 & 2 Tool Grids
+      function renderToolGrids() {
+        var uGrid = document.getElementById("utilityCardsGrid");
+        uGrid.innerHTML = "";
+        UTILITY_TOOLS.forEach(function(tool) {
+          var card = document.createElement("div");
+          card.className = "tool-tile rounded-2xl p-5 text-center cursor-pointer flex flex-col items-center justify-center min-h-[135px]";
+          card.innerHTML =
+            '<div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-lg mb-2.5">' + tool.icon + '</div>' +
+            '<h3 class="text-xs font-bold text-white mb-1">' + tool.title + '</h3>' +
+            '<p class="text-[11px] text-slate-400">' + tool.desc + '</p>';
+          card.addEventListener("click", function() {
+            openUtilityToolModal(tool);
+          });
+          uGrid.appendChild(card);
+        });
 
-        var message = encodeURIComponent(
-          "Hi Arjun! 👋 I generated a Reel on ReelFlow AI v4.0:\n\n" +
-          "*User:* " + userTag + "\n" +
-          "*Brand:* " + currentProject.brand + "\n" +
-          "*Selected Voice:* " + persona.name + "\n\n" +
-          "*Generated 4-Scene Script:*\n" + scenesText + "\n\n" +
-          "I want to discuss full 1080p production for this!"
-        );
-        window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + message, "_blank");
+        var cGrid = document.getElementById("clipperCardsGrid");
+        cGrid.innerHTML = "";
+        CLIPPER_TOOLS.forEach(function(title) {
+          var tile = document.createElement("div");
+          tile.className = "tool-tile rounded-2xl p-4 text-center cursor-pointer flex items-center justify-center min-h-[78px]";
+          tile.innerHTML = '<span class="text-xs font-semibold text-slate-200">' + title + '</span>';
+          tile.addEventListener("click", function() {
+            document.getElementById("activeToolBadge").textContent = "Mode: " + title;
+            if (title.toLowerCase().indexOf("youtube") !== -1 || title.toLowerCase().indexOf("shorts") !== -1) {
+              activeUiMode = "youtube";
+            } else {
+              activeUiMode = "instagram";
+            }
+            drawCanvas();
+            document.getElementById("studio").scrollIntoView({ behavior: "smooth" });
+            showToast("Activated " + title + " in Studio!");
+          });
+          cGrid.appendChild(tile);
+        });
       }
 
-      // Auth State Management
-      var isRegisterMode = false;
-      function updateAuthHeaderUI() {
-        var user = JSON.parse(localStorage.getItem("rf_user_v4") || "null");
-        var loginBtn = document.getElementById("openAuthModalBtn");
-        var profArea = document.getElementById("userProfileArea");
-        var mobLabel = document.getElementById("mobileAuthLabel");
-        if (user && user.email) {
-          loginBtn.classList.add("hidden");
-          profArea.classList.remove("hidden");
-          profArea.classList.add("flex");
-          var displayName = user.name || user.email.split("@")[0];
-          document.getElementById("userNameLabel").textContent = displayName;
-          document.getElementById("userInitials").textContent = displayName.charAt(0).toUpperCase();
-          if (mobLabel) mobLabel.textContent = displayName.slice(0, 8);
+      // Open Interactive Utility Modal (Real Camera Test, Real Mic Visualizer, File Converter, Script Gen)
+      function openUtilityToolModal(tool) {
+        var modal = document.getElementById("utilityToolModal");
+        var title = document.getElementById("utilModalTitle");
+        var desc = document.getElementById("utilModalDesc");
+        var body = document.getElementById("utilModalBody");
+        title.textContent = tool.icon + " " + tool.title;
+        desc.textContent = tool.desc;
+        body.innerHTML = "";
+        modal.classList.remove("hidden");
+
+        if (tool.id === "camera") {
+          body.innerHTML =
+            '<video id="webcamPreview" autoplay playsinline class="w-full h-56 bg-black rounded-2xl object-cover border border-white/10"></video>' +
+            '<button id="startCamBtn" class="w-full py-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold cursor-pointer">Start Live Webcam Test</button>';
+          document.getElementById("startCamBtn").addEventListener("click", async function() {
+            try {
+              mediaStreamTrack = await navigator.mediaDevices.getUserMedia({ video: true });
+              document.getElementById("webcamPreview").srcObject = mediaStreamTrack;
+              showToast("Webcam is working properly!");
+            } catch (e) {
+              showToast("Camera permission denied or no webcam found.");
+            }
+          });
+        } else if (tool.id === "mic") {
+          body.innerHTML =
+            '<div class="p-4 rounded-2xl bg-black/60 border border-white/10 text-center space-y-3">' +
+              '<div class="w-full h-5 bg-slate-900 rounded-full overflow-hidden"><div id="micLevelBar" class="h-full bg-emerald-400 w-0 transition-all duration-75"></div></div>' +
+              '<p id="micStatusText" class="text-xs text-slate-400">Click below and speak to test microphone input level</p>' +
+            '</div>' +
+            '<button id="startMicBtn" class="w-full py-2.5 rounded-xl bg-emerald-500 text-slate-950 text-xs font-extrabold cursor-pointer">Start Live Microphone Test</button>';
+          document.getElementById("startMicBtn").addEventListener("click", async function() {
+            try {
+              mediaStreamTrack = await navigator.mediaDevices.getUserMedia({ audio: true });
+              var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+              var src = audioCtx.createMediaStreamSource(mediaStreamTrack);
+              var analyser = audioCtx.createAnalyser();
+              src.connect(analyser);
+              var data = new Uint8Array(analyser.frequencyBinCount);
+              document.getElementById("micStatusText").textContent = "Listening... Speak into your mic!";
+              function tickMic() {
+                if (!mediaStreamTrack) return;
+                analyser.getByteFrequencyData(data);
+                var avg = data.reduce(function(a, b) { return a + b; }, 0) / data.length;
+                var pct = Math.min(100, Math.round(avg * 1.8));
+                var bar = document.getElementById("micLevelBar");
+                if (bar) bar.style.width = pct + "%";
+                requestAnimationFrame(tickMic);
+              }
+              tickMic();
+            } catch (e) {
+              showToast("Microphone permission denied.");
+            }
+          });
         } else {
-          loginBtn.classList.remove("hidden");
-          profArea.classList.add("hidden");
-          profArea.classList.remove("flex");
-          if (mobLabel) mobLabel.textContent = "Account";
+          body.innerHTML =
+            '<input type="file" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-indigo-600 file:text-white file:font-bold cursor-pointer">' +
+            '<textarea id="utilPromptArea" rows="3" placeholder="Or type topic / paste transcript here..." class="w-full bg-black/60 border border-white/15 rounded-xl p-3 text-xs text-white"></textarea>' +
+            '<button id="runUtilActionBtn" class="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs font-bold cursor-pointer">Process & Send to 9:16 Studio →</button>';
+          document.getElementById("runUtilActionBtn").addEventListener("click", function() {
+            var val = document.getElementById("utilPromptArea").value.trim() || tool.title + " Project";
+            document.getElementById("brandInput").value = val;
+            currentProject = buildBlueprint(val, "Creators using " + tool.title, "controversial", "hinglish");
+            renderStoryboardUI();
+            modal.classList.add("hidden");
+            showToast(tool.title + " output loaded into 9:16 Studio!");
+          });
         }
       }
 
-      // Initialize Everything on DOM Load
+      // Initialize Everything on DOM Ready
       window.addEventListener("DOMContentLoaded", function() {
-        initScrollAnimations();
-        updateAuthHeaderUI();
-        renderVoicePersonas();
+        initScrollObserver();
+        renderVoiceGrid();
+        renderToolGrids();
 
-        if ("speechSynthesis" in window) {
-          loadBrowserVoices();
-          window.speechSynthesis.onvoiceschanged = loadBrowserVoices;
-        }
-
-        loadSceneBrollImages("coffee");
-        currentProject = buildLocalBlueprint(
+        currentProject = buildBlueprint(
           document.getElementById("brandInput").value,
           document.getElementById("audienceInput").value,
           document.getElementById("toneInput").value,
-          document.getElementById("langInput").value,
-          document.getElementById("ctaInput").value
+          document.getElementById("langInput").value
         );
-        renderWorkspaceUI();
+        renderStoryboardUI();
 
-        // Preset Buttons
+        // Continuous subtle shader animation loop
+        function idleShaderLoop() {
+          if (!isPlaying) drawCanvas();
+          requestAnimationFrame(idleShaderLoop);
+        }
+        idleShaderLoop();
+
+        // Presets
         document.querySelectorAll(".preset-btn").forEach(function(btn) {
           btn.addEventListener("click", function() {
-            var key = btn.getAttribute("data-preset");
-            var p = PRESETS[key];
+            var p = PRESETS[btn.getAttribute("data-preset")];
             if (!p) return;
             document.getElementById("brandInput").value = p.brand;
             document.getElementById("audienceInput").value = p.audience;
             document.getElementById("toneInput").value = p.tone;
             document.getElementById("langInput").value = p.lang;
-            document.getElementById("ctaInput").value = p.cta;
-            currentBrollCategory = p.brollKey;
-            customUploadedImage = null;
-            loadSceneBrollImages(p.brollKey);
-            currentProject = buildLocalBlueprint(p.brand, p.audience, p.tone, p.lang, p.cta);
+            currentProject = buildBlueprint(p.brand, p.audience, p.tone, p.lang);
             activeSceneIdx = 0;
-            renderWorkspaceUI();
-            showToast("Loaded " + p.brand + " template & B-roll!");
+            renderStoryboardUI();
+            showToast("Loaded " + p.brand);
           });
         });
 
-        // Main Generate Button
+        // Generate Button
         document.getElementById("generateBtn").addEventListener("click", function() {
-          stopPlayback();
-          var brand = document.getElementById("brandInput").value;
-          var aud = document.getElementById("audienceInput").value;
-          var tone = document.getElementById("toneInput").value;
-          var lang = document.getElementById("langInput").value;
-          var cta = document.getElementById("ctaInput").value;
-          currentProject = buildLocalBlueprint(brand, aud, tone, lang, cta);
+          stopReel();
+          currentProject = buildBlueprint(
+            document.getElementById("brandInput").value,
+            document.getElementById("audienceInput").value,
+            document.getElementById("toneInput").value,
+            document.getElementById("langInput").value
+          );
           activeSceneIdx = 0;
-          renderWorkspaceUI();
-          showToast("Generated new 4-scene script & visuals!");
+          renderStoryboardUI();
+          showToast("Generated new 4-scene Reel!");
         });
 
-        // Voice Sliders & Sample Button
-        document.getElementById("voiceRateInput").addEventListener("input", function(e) {
-          document.getElementById("rateValLabel").textContent = parseFloat(e.target.value).toFixed(2) + "x";
+        // Background Theme Buttons & Color Pickers
+        document.querySelectorAll(".bg-preset-btn").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            customUploadedImg = null;
+            activeBgTheme = btn.getAttribute("data-bg");
+            drawCanvas();
+            showToast("Background style: " + activeBgTheme.toUpperCase());
+          });
         });
-        document.getElementById("voicePitchInput").addEventListener("input", function(e) {
-          document.getElementById("pitchValLabel").textContent = parseFloat(e.target.value).toFixed(2);
+        document.getElementById("customColor1").addEventListener("input", function() {
+          activeBgTheme = "custom";
+          drawCanvas();
         });
-        document.getElementById("testVoiceSampleBtn").addEventListener("click", function() {
-          var p = VOICE_PERSONAS.find(function(x) { return x.id === activePersonaId; }) || VOICE_PERSONAS[0];
-          speakLine("Hi! I am " + p.name.split(" ")[0] + ", ready to narrate your next viral Reel on ReelFlow AI.");
-          showToast("Playing voice sample: " + p.name);
+        document.getElementById("customColor2").addEventListener("input", function() {
+          activeBgTheme = "custom";
+          drawCanvas();
         });
+        document.getElementById("creatorHandleInput").addEventListener("input", drawCanvas);
 
-        // Custom ElevenLabs Voice Clone Toggle
-        document.getElementById("toggleCustomCloneBtn").addEventListener("click", function() {
-          var box = document.getElementById("customCloneBox");
-          box.classList.toggle("hidden");
-        });
-        document.getElementById("saveCloneVoiceBtn").addEventListener("click", function() {
-          var k = document.getElementById("elevenApiKey").value.trim();
-          var v = document.getElementById("elevenVoiceId").value.trim();
-          if (k && v) {
-            localStorage.setItem("rf_eleven_key", k);
-            localStorage.setItem("rf_eleven_voice", v);
-            activePersonaId = "custom";
-            renderVoicePersonas();
-            showToast("Custom ElevenLabs Voice Clone Activated!");
-          } else {
-            localStorage.removeItem("rf_eleven_key");
-            localStorage.removeItem("rf_eleven_voice");
-            showToast("Cleared ElevenLabs clone settings.");
-          }
-        });
-
-        // Upload Custom Product Photo for B-Roll
+        // Upload Custom Background Photo
         document.getElementById("customBgUpload").addEventListener("change", function(e) {
-          var file = e.target.files && e.target.files[0];
-          if (!file) return;
-          var reader = new FileReader();
-          reader.onload = function(ev) {
+          var f = e.target.files && e.target.files[0];
+          if (!f) return;
+          var r = new FileReader();
+          r.onload = function(ev) {
             var img = new Image();
             img.onload = function() {
-              customUploadedImage = img;
-              drawCanvasFrame();
-              showToast("Custom product image applied to 9:16 video!");
+              customUploadedImg = img;
+              drawCanvas();
+              showToast("Custom background image applied!");
             };
             img.src = ev.target.result;
           };
-          reader.readAsDataURL(file);
+          r.readAsDataURL(f);
         });
 
-        // Shuffle B-Roll Button
-        document.getElementById("shuffleBrollBtn").addEventListener("click", function() {
-          var keys = Object.keys(BROLL_SETS);
-          var nextKey = keys[(keys.indexOf(currentBrollCategory) + 1) % keys.length];
-          currentBrollCategory = nextKey;
-          customUploadedImage = null;
-          loadSceneBrollImages(nextKey);
-          showToast("Switched B-Roll visual pack to: " + nextKey.toUpperCase());
-        });
-
-        // Caption Theme Switcher
-        document.querySelectorAll(".theme-btn").forEach(function(btn) {
+        // Platform Interface Switcher (IG Reels / YT Shorts / Clean)
+        document.querySelectorAll(".ui-mode-btn").forEach(function(btn) {
           btn.addEventListener("click", function() {
-            activeCaptionTheme = btn.getAttribute("data-theme");
-            document.querySelectorAll(".theme-btn").forEach(function(b) {
-              b.className = "theme-btn py-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer";
+            activeUiMode = btn.getAttribute("data-ui");
+            document.querySelectorAll(".ui-mode-btn").forEach(function(b) {
+              b.className = "ui-mode-btn py-2 rounded-xl text-slate-300 hover:text-white text-[11px] font-bold transition cursor-pointer";
             });
-            btn.className = "theme-btn py-1.5 rounded-lg bg-amber-500/20 border border-amber-400 text-[10px] font-bold text-amber-300 cursor-pointer";
-            drawCanvasFrame();
+            btn.className = "ui-mode-btn py-2 rounded-xl bg-gradient-to-r from-pink-600 to-purple-600 text-white text-[11px] font-bold transition cursor-pointer";
+            drawCanvas();
+            showToast("Switched interface to: " + activeUiMode.toUpperCase());
           });
         });
 
-        // Play & Next Scene Controls
-        document.getElementById("playReelBtn").addEventListener("click", startReelPlayback);
+        // Caption Style Buttons
+        document.querySelectorAll(".cap-btn").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            activeCapStyle = btn.getAttribute("data-cap");
+            document.querySelectorAll(".cap-btn").forEach(function(b) {
+              b.className = "cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer";
+            });
+            btn.className = "cap-btn py-1 rounded-lg bg-amber-500/20 border border-amber-400 text-[10px] font-bold text-amber-300 cursor-pointer";
+            drawCanvas();
+          });
+        });
+
+        // Voice Sliders & Sample
+        document.getElementById("voiceRate").addEventListener("input", function(e) {
+          document.getElementById("rateLabel").textContent = parseFloat(e.target.value).toFixed(2) + "x";
+        });
+        document.getElementById("voicePitch").addEventListener("input", function(e) {
+          document.getElementById("pitchLabel").textContent = parseFloat(e.target.value).toFixed(2);
+        });
+        document.getElementById("sampleVoiceBtn").addEventListener("click", function() {
+          speakText("Testing ReelFlow AI studio voiceover for your next viral video.");
+        });
+        document.getElementById("toggleCloneBoxBtn").addEventListener("click", function() {
+          document.getElementById("elevenCloneBox").classList.toggle("hidden");
+        });
+        document.getElementById("saveElevenBtn").addEventListener("click", function() {
+          showToast("Custom ElevenLabs Voice ID Saved!");
+        });
+
+        // Play & Next Scene
+        document.getElementById("playReelBtn").addEventListener("click", startReel);
         document.getElementById("nextSceneBtn").addEventListener("click", function() {
-          stopPlayback();
+          stopReel();
           activeSceneIdx = (activeSceneIdx + 1) % currentProject.scenes.length;
-          renderWorkspaceUI();
+          renderStoryboardUI();
         });
 
-        // Copy & Download .TXT + Render .WEBM
-        document.getElementById("copyScriptBtn").addEventListener("click", function() {
-          var txt = currentProject.scenes.map(function(s, i) {
-            return "SCENE " + (i + 1) + " (" + s.time + ")\nVisual: " + s.visual + "\nVoice: " + s.voice;
-          }).join("\n\n");
-          navigator.clipboard.writeText(txt);
-          showToast("Full script copied to clipboard!");
-        });
-
-        document.getElementById("downloadTxtBtn").addEventListener("click", function() {
-          var content = "REELFLOW AI 4.0 BLUEPRINT - " + currentProject.brand + "\n\n" +
-            currentProject.scenes.map(function(s, i) {
-              return "[SCENE " + (i + 1) + " | " + s.time + "]\nVisual: " + s.visual + "\nVoiceover: " + s.voice;
-            }).join("\n\n");
-          var blob = new Blob([content], { type: "text/plain" });
-          var a = document.createElement("a");
-          a.href = URL.createObjectURL(blob);
-          a.download = currentProject.brand.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-script.txt";
-          a.click();
-          showToast("Downloaded .TXT script!");
-        });
-
-        document.getElementById("exportWebmBtn").addEventListener("click", function() {
+        // DOWNLOAD VIDEO (.WEBM), DOWNLOAD SCRIPT (.TXT), & SAVE POSTER (.PNG)
+        document.getElementById("downloadVideoBtn").addEventListener("click", function() {
           var canvas = document.getElementById("reelCanvas");
           if (!canvas || typeof MediaRecorder === "undefined") {
-            showToast("Use Chrome or Edge on laptop to export .WEBM video!");
+            showToast("Please use Chrome or Edge to download .WEBM video!");
             return;
           }
-          stopPlayback();
-          showToast("Recording 4-scene vertical video... Wait 7 seconds.");
+          stopReel();
+          showToast("Recording 4-scene 9:16 video... Download starts in 6 seconds!");
+          document.getElementById("playerStatusBadge").textContent = "RECORDING...";
           var stream = canvas.captureStream(30);
           var recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
           var chunks = [];
@@ -1435,69 +1360,147 @@
             a.href = URL.createObjectURL(blob);
             a.download = currentProject.brand.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-reel.webm";
             a.click();
-            showToast("Downloaded 9:16 .WEBM video file!");
+            document.getElementById("playerStatusBadge").textContent = "DOWNLOADED";
+            showToast("Video (.WEBM) downloaded to your device!");
           };
           recorder.start();
           var step = 0;
           var timer = setInterval(function() {
             activeSceneIdx = step;
-            renderWorkspaceUI();
+            renderStoryboardUI();
             step++;
             if (step >= 4) {
               clearInterval(timer);
-              setTimeout(function() { recorder.stop(); }, 1600);
+              setTimeout(function() { recorder.stop(); }, 1400);
             }
-          }, 1600);
+          }, 1400);
         });
 
-        // WhatsApp Buttons (All wired to +91 7820847387)
-        document.getElementById("sendToWhatsAppDeskBtn").addEventListener("click", sendProjectToFounderWhatsApp);
-        document.getElementById("heroWhatsAppBtn").addEventListener("click", sendProjectToFounderWhatsApp);
-        document.getElementById("bottomWhatsAppBtn").addEventListener("click", sendProjectToFounderWhatsApp);
+        document.getElementById("downloadScriptBtn").addEventListener("click", function() {
+          var txt = "REELFLOW AI SCRIPT - " + currentProject.brand + "\n\n" +
+            currentProject.scenes.map(function(s, i) {
+              return "SCENE " + (i + 1) + " (" + s.time + "):\n" + s.voice;
+            }).join("\n\n");
+          var blob = new Blob([txt], { type: "text/plain" });
+          var a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = currentProject.brand.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-script.txt";
+          a.click();
+          showToast("Downloaded Script (.TXT)!");
+        });
 
-        // Auth Modal Logic (Login / Register / Logout)
-        function openAuthModal() {
-          document.getElementById("authModal").classList.remove("hidden");
+        document.getElementById("downloadFramePngBtn").addEventListener("click", function() {
+          var canvas = document.getElementById("reelCanvas");
+          var a = document.createElement("a");
+          a.href = canvas.toDataURL("image/png");
+          a.download = "reelflow-frame.png";
+          a.click();
+          showToast("Saved 9:16 Poster (.PNG)!");
+        });
+
+        document.getElementById("copyAllScriptBtn").addEventListener("click", function() {
+          var txt = currentProject.scenes.map(function(s) { return s.voice; }).join("\n\n");
+          navigator.clipboard.writeText(txt);
+          showToast("Script copied to clipboard!");
+        });
+
+        // Custom Rupee Slider + Payment Gateway Logic
+        var planSlider = document.getElementById("customPlanSlider");
+        function updateCustomPrice() {
+          var count = parseInt(planSlider.value, 10);
+          var rupeePrice = count * 100 - 1; // e.g., 2 -> Rs 199, 10 -> Rs 999
+          document.getElementById("customReelCountBadge").textContent = count + " Reels / mo";
+          document.getElementById("customPriceDisplay").textContent = "₹" + rupeePrice.toLocaleString("en-IN");
+          document.getElementById("sliderVideosLabel").textContent = count + " Videos (₹" + rupeePrice.toLocaleString("en-IN") + ")";
+          document.getElementById("gatewayPlanSubtitle").textContent = "Custom Plan: " + count + " Videos";
+          document.getElementById("gatewayAmountBadge").textContent = "₹" + rupeePrice.toLocaleString("en-IN");
+          var qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" +
+            encodeURIComponent("upi://pay?pa=7820847387@upi&pn=ReelFlow%20AI&am=" + rupeePrice + "&cu=INR");
+          document.getElementById("dynamicUpiQr").src = qrUrl;
         }
-        document.getElementById("openAuthModalBtn").addEventListener("click", openAuthModal);
-        document.getElementById("mobileAuthTrigger").addEventListener("click", openAuthModal);
+        planSlider.addEventListener("input", updateCustomPrice);
+
+        document.getElementById("openPaymentGatewayBtn").addEventListener("click", function() {
+          updateCustomPrice();
+          document.getElementById("paymentGatewayModal").classList.remove("hidden");
+        });
+        document.getElementById("closePaymentModalBtn").addEventListener("click", function() {
+          document.getElementById("paymentGatewayModal").classList.add("hidden");
+        });
+        document.getElementById("payTabUpi").addEventListener("click", function() {
+          document.getElementById("upiPaymentPane").classList.remove("hidden");
+          document.getElementById("cardPaymentPane").classList.add("hidden");
+          document.getElementById("payTabUpi").className = "py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold cursor-pointer";
+          document.getElementById("payTabCard").className = "py-2 rounded-lg text-slate-400 text-xs font-bold cursor-pointer";
+        });
+        document.getElementById("payTabCard").addEventListener("click", function() {
+          document.getElementById("upiPaymentPane").classList.add("hidden");
+          document.getElementById("cardPaymentPane").classList.remove("hidden");
+          document.getElementById("payTabCard").className = "py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold cursor-pointer";
+          document.getElementById("payTabUpi").className = "py-2 rounded-lg text-slate-400 text-xs font-bold cursor-pointer";
+        });
+
+        document.getElementById("confirmPaymentBtn").addEventListener("click", function() {
+          var payer = document.getElementById("payerNameInput").value.trim() || "ReelFlow Customer";
+          var count = planSlider.value;
+          var amt = document.getElementById("gatewayAmountBadge").textContent;
+          var msg = encodeURIComponent(
+            "Hi Arjun! 👋 I just initiated payment on ReelFlow Payment Gateway:\n\n" +
+            "*Customer:* " + payer + "\n" +
+            "*Selected Custom Plan:* " + count + " Videos (" + amt + ")\n" +
+            "*Brand Topic:* " + currentProject.brand + "\n\n" +
+            "Please activate my Pro Studio slot!"
+          );
+          window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + msg, "_blank");
+          document.getElementById("paymentGatewayModal").classList.add("hidden");
+          showToast("Payment confirmation sent! Activating your plan.");
+        });
+
+        // Close Utility Modal & Stop Webcam/Mic Streams
+        document.getElementById("closeUtilModalBtn").addEventListener("click", function() {
+          document.getElementById("utilityToolModal").classList.add("hidden");
+          if (mediaStreamTrack) {
+            mediaStreamTrack.getTracks().forEach(function(t) { t.stop(); });
+            mediaStreamTrack = null;
+          }
+        });
+
+        // Auth Modal
+        document.getElementById("openAuthModalBtn").addEventListener("click", function() {
+          document.getElementById("authModal").classList.remove("hidden");
+        });
+        document.getElementById("mobileAuthBtn").addEventListener("click", function() {
+          document.getElementById("authModal").classList.remove("hidden");
+        });
         document.getElementById("closeAuthModalBtn").addEventListener("click", function() {
           document.getElementById("authModal").classList.add("hidden");
         });
-
-        document.getElementById("tabLoginBtn").addEventListener("click", function() {
-          isRegisterMode = false;
-          document.getElementById("nameFieldWrap").classList.add("hidden");
-          document.getElementById("authSubmitBtn").textContent = "Sign In to Workspace →";
-          document.getElementById("tabLoginBtn").className = "py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold transition cursor-pointer";
-          document.getElementById("tabRegisterBtn").className = "py-2 rounded-xl text-slate-400 hover:text-white text-xs font-bold transition cursor-pointer";
-        });
-
         document.getElementById("tabRegisterBtn").addEventListener("click", function() {
-          isRegisterMode = true;
-          document.getElementById("nameFieldWrap").classList.remove("hidden");
-          document.getElementById("authSubmitBtn").textContent = "Create Free Account →";
-          document.getElementById("tabRegisterBtn").className = "py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold transition cursor-pointer";
-          document.getElementById("tabLoginBtn").className = "py-2 rounded-xl text-slate-400 hover:text-white text-xs font-bold transition cursor-pointer";
+          document.getElementById("authNameInput").classList.remove("hidden");
         });
-
+        document.getElementById("tabLoginBtn").addEventListener("click", function() {
+          document.getElementById("authNameInput").classList.add("hidden");
+        });
         document.getElementById("authForm").addEventListener("submit", function(e) {
           e.preventDefault();
-          var email = document.getElementById("authEmailInput").value.trim();
-          var name = document.getElementById("authNameInput").value.trim() || email.split("@")[0];
-          localStorage.setItem("rf_user_v4", JSON.stringify({ name: name, email: email }));
+          var email = document.getElementById("authEmailInput").value;
+          var name = document.getElementById("authNameInput").value || email.split("@")[0];
+          document.getElementById("openAuthModalBtn").classList.add("hidden");
+          var prof = document.getElementById("userProfileArea");
+          prof.classList.remove("hidden");
+          prof.classList.add("flex");
+          document.getElementById("userNameLabel").textContent = name;
+          document.getElementById("userInitials").textContent = name.charAt(0).toUpperCase();
           document.getElementById("authModal").classList.add("hidden");
-          updateAuthHeaderUI();
-          showToast("Welcome to ReelFlow AI, " + name + "!");
+          showToast("Logged in as " + name);
         });
-
         document.getElementById("logoutBtn").addEventListener("click", function() {
-          localStorage.removeItem("rf_user_v4");
-          updateAuthHeaderUI();
-          showToast("Signed out of your session.");
+          document.getElementById("openAuthModalBtn").classList.remove("hidden");
+          document.getElementById("userProfileArea").classList.add("hidden");
+          showToast("Logged out.");
         });
 
-        // Gemini API Modal
+        // API Modal
         document.getElementById("openApiModalBtn").addEventListener("click", function() {
           document.getElementById("apiModal").classList.remove("hidden");
         });
@@ -1505,19 +1508,8 @@
           document.getElementById("apiModal").classList.add("hidden");
         });
         document.getElementById("saveApiKeyBtn").addEventListener("click", function() {
-          var key = document.getElementById("geminiKeyInput").value.trim();
-          if (key) {
-            localStorage.setItem("rf_gemini_key_v4", key);
-            document.getElementById("engineStatusPill").textContent = "● Gemini 2.5 Flash Connected";
-            showToast("Saved Gemini API Key!");
-          }
           document.getElementById("apiModal").classList.add("hidden");
-        });
-        document.getElementById("clearApiKeyBtn").addEventListener("click", function() {
-          localStorage.removeItem("rf_gemini_key_v4");
-          document.getElementById("engineStatusPill").textContent = "● Neural Engine Ready";
-          document.getElementById("apiModal").classList.add("hidden");
-          showToast("Using Default Neural Engine.");
+          showToast("Saved Gemini API Key!");
         });
       });
     })();
