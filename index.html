@@ -3,554 +3,527 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>ReelFlow AI — Spatial Short-Form Cinema & Autonomous Studio</title>
-  <!-- Custom Geometric Acid-Lime & Obsidian Brand Favicon (Replaces Chrome Earth Icon) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23050507'/%3E%3Crect x='3' y='3' width='58' height='58' rx='15' fill='none' stroke='%23d4ff33' stroke-width='3.5'/%3E%3Cpath d='M18 16 L48 32 L18 48 Z' fill='%23d4ff33'/%3E%3Ccircle cx='46' cy='16' r='5' fill='%23ff5e36'/%3E%3C/svg%3E">
+  <title>REELFLOW ATELIER — Bespoke Autonomous Cinema & Voice Suite</title>
+  <!-- Bespoke 18k Champagne Gold Guilloche Crest Favicon (Replaces Chrome Earth Icon) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070706'/%3E%3Ccircle cx='32' cy='32' r='26' fill='none' stroke='%23c5a880' stroke-width='1.2' stroke-opacity='0.5'/%3E%3Cpath d='M32 8 L54 32 L32 56 L10 32 Z' fill='none' stroke='%23c5a880' stroke-width='1.8'/%3E%3Cpath d='M32 16 L46 32 L32 48 L18 32 Z' fill='%23c5a880' fill-opacity='0.18' stroke='%23e5d3b3' stroke-width='1.2'/%3E%3Ccircle cx='32' cy='32' r='3.5' fill='%23e5d3b3'/%3E%3C/svg%3E">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-void: #030304;
-      --bg-surface: #0a0b0e;
-      --acid-lime: #d4ff33;
-      --solar-amber: #ff5e36;
-      --champagne: #f4f1ea;
-      --mouse-x: 50%;
-      --mouse-y: 30%;
+      --obsidian: #070706;
+      --espresso: #0e0d0b;
+      --champagne: #c5a880;
+      --champagne-light: #e6d5b8;
+      --alabaster: #f4efe6;
+      --stone: #8c857b;
+      --border-hairline: rgba(197, 168, 128, 0.16);
     }
     * { box-sizing: border-box; }
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-void);
-      color: var(--champagne);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-weight: 300;
+      background-color: var(--obsidian);
+      color: var(--alabaster);
       overflow-x: hidden;
-      letter-spacing: -0.01em;
+      letter-spacing: 0.01em;
     }
-    h1, h2, h3, .font-display {
-      font-family: 'Syne', sans-serif;
-    }
-    .font-editorial {
-      font-family: 'Instrument Serif', serif;
-      font-style: italic;
+    h1, h2, h3, .font-serif-luxury {
+      font-family: 'Cormorant Garamond', Georgia, serif;
       font-weight: 400;
     }
-    .font-mono-code {
-      font-family: 'Space Mono', monospace;
+    .font-mono-luxury {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
     }
 
-    /* Architectural Spatial Background with Cursor Spotlight */
-    .spatial-canvas {
-      background-color: #030304;
+    /* Subtle Ambient Warm Candlelight Vignette */
+    .atelier-backdrop {
+      background-color: #070706;
       background-image:
-        radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(212, 255, 51, 0.055), transparent 40%),
-        radial-gradient(650px circle at 85% 15%, rgba(255, 94, 54, 0.05), transparent 45%),
-        linear-gradient(rgba(244, 241, 234, 0.022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(244, 241, 234, 0.022) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 72px 72px, 72px 72px;
+        radial-gradient(900px circle at 50% 0%, rgba(197, 168, 128, 0.07), transparent 55%),
+        radial-gradient(700px circle at 85% 45%, rgba(197, 168, 128, 0.04), transparent 50%);
       background-attachment: fixed;
     }
 
-    /* Bidirectional 3D Kinetic Scroll Animation (Works Scrolling Down AND Up, Never Blank!) */
-    .kinetic-block {
+    /* Hairline Architectural Borders */
+    .luxury-card {
+      background: linear-gradient(180deg, rgba(17, 16, 14, 0.88) 0%, rgba(10, 9, 8, 0.95) 100%);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--border-hairline);
+      box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.9);
+      transition: border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+    }
+    .luxury-card:hover {
+      border-color: rgba(197, 168, 128, 0.38);
+      box-shadow: 0 40px 90px -20px rgba(0, 0, 0, 0.95);
+    }
+
+    /* Silky Bidirectional Scroll Reveal (Scroll Down & Scroll Up, Never Blank) */
+    .atelier-reveal {
       opacity: 1;
-      transform: perspective(1100px) translateY(0px) rotateX(0deg) scale(1);
-      filter: blur(0px);
+      transform: translateY(0px) scale(1);
       transition:
-        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-        filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: transform, opacity, filter;
+        opacity 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
     }
-    .kinetic-block.out-below {
-      opacity: 0.14;
-      transform: perspective(1100px) translateY(68px) rotateX(6deg) scale(0.95);
-      filter: blur(5px);
+    .atelier-reveal.veil-below {
+      opacity: 0.12;
+      transform: translateY(48px) scale(0.985);
     }
-    .kinetic-block.out-above {
-      opacity: 0.14;
-      transform: perspective(1100px) translateY(-58px) rotateX(-6deg) scale(0.96);
-      filter: blur(4px);
+    .atelier-reveal.veil-above {
+      opacity: 0.12;
+      transform: translateY(-38px) scale(0.99);
     }
 
-    /* Luxury Spatial Glass Pods (Generous Padding & Tactile Borders) */
-    .spatial-pod {
-      background: linear-gradient(165deg, rgba(16, 17, 22, 0.88) 0%, rgba(7, 8, 11, 0.96) 100%);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      border: 1px solid rgba(244, 241, 234, 0.08);
-      border-radius: 32px;
-      box-shadow: 0 32px 80px -20px rgba(0, 0, 0, 0.9), inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
-      transition: border-color 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+    /* Brushed Champagne Gold Button */
+    .btn-champagne {
+      background: linear-gradient(135deg, #d5bc97 0%, #b39367 100%);
+      color: #070706;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .spatial-pod:hover {
-      border-color: rgba(212, 255, 51, 0.32);
-      box-shadow: 0 40px 90px -20px rgba(0, 0, 0, 0.95), 0 0 40px -15px rgba(212, 255, 51, 0.12);
-    }
-
-    /* NLE Timeline Track Cards */
-    .timeline-node {
-      background: rgba(12, 13, 18, 0.92);
-      border: 1px solid rgba(244, 241, 234, 0.08);
-      border-radius: 24px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .timeline-node:hover {
-      border-color: rgba(244, 241, 234, 0.22);
-      transform: translateX(4px);
-    }
-    .timeline-node.active-scene {
-      border-color: var(--acid-lime);
-      background: linear-gradient(135deg, rgba(212, 255, 51, 0.07) 0%, rgba(12, 13, 18, 0.96) 100%);
-      box-shadow: 0 12px 35px -10px rgba(212, 255, 51, 0.22);
-    }
-
-    /* Architectural Bento Tool Tiles */
-    .tool-tile {
-      background: rgba(11, 12, 16, 0.85);
-      border: 1px solid rgba(244, 241, 234, 0.07);
-      border-radius: 26px;
-      transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .tool-tile:hover {
-      background: rgba(19, 21, 28, 0.95);
-      border-color: var(--acid-lime);
-      transform: translateY(-6px) scale(1.015);
-      box-shadow: 0 22px 45px -15px rgba(212, 255, 51, 0.18);
-    }
-
-    /* Acid Lime & Champagne Buttons */
-    .btn-acid {
-      background: var(--acid-lime);
-      color: #050507;
-      font-weight: 800;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .btn-acid:hover {
-      background: #e2ff66;
+    .btn-champagne:hover {
+      background: linear-gradient(135deg, #e6d3b3 0%, #c5a880 100%);
       transform: translateY(-2px);
-      box-shadow: 0 14px 32px -8px rgba(212, 255, 51, 0.45);
+      box-shadow: 0 15px 35px -10px rgba(197, 168, 128, 0.35);
     }
 
-    .text-acid-gradient {
-      background: linear-gradient(135deg, #f4f1ea 0%, #d4ff33 55%, #ff5e36 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .btn-outline-luxury {
+      background: rgba(244, 239, 230, 0.02);
+      border: 1px solid rgba(197, 168, 128, 0.25);
+      color: var(--alabaster);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: all 0.4s ease;
+    }
+    .btn-outline-luxury:hover {
+      background: rgba(197, 168, 128, 0.1);
+      border-color: var(--champagne);
     }
 
-    /* Infinite Editorial Ribbon */
-    @keyframes tickerMove {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
+    /* Minimal Luxury Inputs */
+    .input-atelier {
+      background: rgba(7, 7, 6, 0.75);
+      border: 1px solid rgba(197, 168, 128, 0.18);
+      color: var(--alabaster);
+      transition: border-color 0.35s ease;
     }
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      animation: tickerMove 34s linear infinite;
+    .input-atelier:focus {
+      outline: none;
+      border-color: var(--champagne);
     }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #030304; }
-    ::-webkit-scrollbar-thumb { background: #23252f; border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: #d4ff33; }
+    /* NLE Scene Row */
+    .scene-row {
+      background: rgba(12, 11, 10, 0.85);
+      border-left: 2px solid rgba(197, 168, 128, 0.2);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      border-right: 1px solid rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      transition: all 0.4s ease;
+    }
+    .scene-row.active-scene {
+      border-left: 2px solid var(--champagne);
+      background: linear-gradient(90deg, rgba(197, 168, 128, 0.08) 0%, rgba(12, 11, 10, 0.92) 100%);
+    }
+
+    /* Custom Gold Range Slider */
+    input[type="range"] {
+      accent-color: #c5a880;
+    }
+
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #070706; }
+    ::-webkit-scrollbar-thumb { background: #26231e; }
+    ::-webkit-scrollbar-thumb:hover { background: #c5a880; }
   </style>
 </head>
-<body class="spatial-canvas min-h-screen selection:bg-[#d4ff33] selection:text-black pb-28 md:pb-0">
+<body class="atelier-backdrop min-h-screen selection:bg-[#c5a880] selection:text-black pb-28 md:pb-0">
 
-  <!-- Top Laser Scroll Progress Bar -->
-  <div class="fixed top-0 left-0 right-0 h-[3px] bg-white/5 z-50">
-    <div id="scrollProgressBar" class="h-full bg-gradient-to-r from-[#d4ff33] via-[#ff5e36] to-[#d4ff33] w-0 transition-all duration-75"></div>
+  <!-- Hairline Top Gold Progress Indicator -->
+  <div class="fixed top-0 left-0 right-0 h-[2px] bg-white/[0.03] z-50">
+    <div id="scrollProgressBar" class="h-full bg-[#c5a880] w-0 transition-all duration-100"></div>
   </div>
 
-  <!-- Toast Notification -->
-  <div id="toastBanner" class="fixed bottom-24 md:bottom-8 right-6 z-50 hidden px-5 py-3.5 rounded-2xl bg-[#d4ff33] text-black text-xs font-extrabold shadow-2xl flex items-center gap-2.5">
-    <span class="w-2.5 h-2.5 rounded-full bg-black animate-ping"></span>
-    <span id="toastText">System Ready</span>
+  <!-- Discreet Luxury Toast -->
+  <div id="toastBanner" class="fixed bottom-24 md:bottom-8 right-8 z-50 hidden px-6 py-4 bg-[#12110f] text-[#f4efe6] text-[11px] tracking-[0.18em] uppercase border border-[#c5a880]/50 shadow-2xl flex items-center gap-3">
+    <span class="w-1.5 h-1.5 rounded-full bg-[#c5a880]"></span>
+    <span id="toastText">Atelier Ready</span>
   </div>
 
-  <!-- Floating Founder Concierge Pill (Bottom Left on Desktop) -->
-  <a href="https://wa.me/917820847387?text=Hi%20Arjun!%20I%20am%20testing%20ReelFlow%20AI%20v7.0%20and%20want%20to%20connect." target="_blank" class="hidden md:flex fixed bottom-7 left-7 z-40 items-center gap-3 px-5 py-3 rounded-full bg-[#0b0c10]/90 hover:bg-[#14161d] border border-[#d4ff33]/40 backdrop-blur-2xl text-[#f4f1ea] text-xs font-bold shadow-2xl transition group">
-    <span class="w-2.5 h-2.5 rounded-full bg-[#d4ff33] animate-ping"></span>
-    <span>Founder Concierge</span>
-    <span class="font-mono-code text-[11px] text-[#d4ff33] group-hover:translate-x-0.5 transition">+91 7820847387 →</span>
+  <!-- Floating Private Concierge Link (Bottom Left Desktop) -->
+  <a href="https://wa.me/917820847387?text=Hi%20Arjun,%20I%20am%20exploring%20ReelFlow%20Atelier%20and%20wish%20to%20connect." target="_blank" class="hidden md:flex fixed bottom-8 left-8 z-40 items-center gap-3.5 px-5 py-3 bg-[#0c0b09]/90 hover:bg-[#151310] border border-[#c5a880]/30 backdrop-blur-xl text-[#e6d5b8] text-[10px] tracking-[0.2em] uppercase transition">
+    <span class="w-1.5 h-1.5 rounded-full bg-[#c5a880]"></span>
+    <span>Private Desk • +91 7820847387</span>
   </a>
 
-  <!-- FLOATING SPATIAL ISLAND NAVBAR (Not a boring full-width bar!) -->
-  <header class="sticky top-4 z-40 px-4 sm:px-8">
-    <div class="max-w-7xl mx-auto rounded-full bg-[#08090c]/85 backdrop-blur-2xl border border-white/10 px-4 sm:px-7 h-16 sm:h-20 flex items-center justify-between gap-4 shadow-[0_20px_60px_rgba(0,0,0,0.85)]">
+  <!-- ARCHITECTURAL HAUTE HORLOGERIE HEADER & BESPOKE CREST -->
+  <header class="sticky top-0 z-40 border-b border-[#c5a880]/15 bg-[#070706]/85 backdrop-blur-2xl">
+    <div class="max-w-[1400px] mx-auto px-6 sm:px-12 h-20 sm:h-24 flex items-center justify-between">
       
-      <!-- Custom Geometric Vector Brand Logo -->
-      <a href="#hero" class="flex items-center gap-3.5 group">
-        <div class="relative w-11 h-11 rounded-2xl bg-[#0e1016] border border-[#d4ff33]/40 flex items-center justify-center shadow-lg group-hover:rotate-6 transition">
-          <svg class="w-7 h-7" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="6" y="6" width="52" height="52" rx="14" stroke="#d4ff33" stroke-width="3" stroke-opacity="0.35"/>
-            <path d="M20 15L48 32L20 49V15Z" fill="#d4ff33"/>
-            <circle cx="48" cy="15" r="5.5" fill="#ff5e36"/>
+      <!-- Bespoke Guilloche Diamond & Compass Crest Logo -->
+      <a href="#hero" class="flex items-center gap-4 group">
+        <div class="w-12 h-12 flex items-center justify-center">
+          <svg class="w-11 h-11 transition-transform duration-700 group-hover:rotate-45" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="32" r="29" stroke="#c5a880" stroke-width="0.75" stroke-opacity="0.4"/>
+            <circle cx="32" cy="32" r="24" stroke="#c5a880" stroke-width="0.75" stroke-dasharray="2 3"/>
+            <path d="M32 5 L59 32 L32 59 L5 32 Z" stroke="#c5a880" stroke-width="1.2"/>
+            <path d="M32 14 L50 32 L32 50 L14 32 Z" fill="#c5a880" fill-opacity="0.1" stroke="#e6d5b8" stroke-width="1"/>
+            <line x1="32" y1="5" x2="32" y2="59" stroke="#c5a880" stroke-width="0.6" stroke-opacity="0.4"/>
+            <line x1="5" y1="32" x2="59" y2="32" stroke="#c5a880" stroke-width="0.6" stroke-opacity="0.4"/>
+            <circle cx="32" cy="32" r="3" fill="#e6d5b8"/>
           </svg>
         </div>
         <div>
-          <div class="flex items-center gap-2">
-            <span class="font-extrabold text-lg sm:text-xl tracking-tight font-display text-white">ReelFlow<span class="text-[#d4ff33]">.ai</span></span>
-            <span class="hidden sm:inline-block px-2.5 py-0.5 text-[10px] font-mono-code uppercase bg-[#d4ff33]/10 text-[#d4ff33] border border-[#d4ff33]/30 rounded-full">OS 7.0</span>
-          </div>
-          <p class="text-[10px] text-neutral-400 hidden sm:block font-mono-code">SPATIAL SHORT-FORM ENGINE</p>
+          <span class="block font-serif-luxury text-2xl sm:text-3xl tracking-[0.22em] text-[#f4efe6] uppercase">ReelFlow</span>
+          <span class="block text-[9px] tracking-[0.34em] text-[#c5a880] uppercase mt-0.5">Atelier • Mumbai</span>
         </div>
       </a>
 
-      <!-- Spaced Editorial Nav Links -->
-      <nav class="hidden lg:flex items-center gap-8 text-xs font-semibold text-neutral-300">
-        <a href="#studio" class="hover:text-[#d4ff33] transition">01 / Studio</a>
-        <a href="#smart-bg-anchor" class="hover:text-[#d4ff33] transition">02 / Smart Visuals</a>
-        <a href="#utility-suite" class="hover:text-[#d4ff33] transition">03 / Diagnostics</a>
-        <a href="#clipper-grid" class="hover:text-[#d4ff33] transition">04 / AI Clippers</a>
-        <a href="#pricing" class="hover:text-[#d4ff33] transition">05 / ₹50 Custom Plan</a>
+      <!-- Minimal Wide-Tracked Navigation -->
+      <nav class="hidden xl:flex items-center gap-10 text-[11px] tracking-[0.22em] uppercase text-[#8c857b]">
+        <a href="#studio" class="hover:text-[#f4efe6] transition">I. Screening Room</a>
+        <a href="#smart-bg-anchor" class="hover:text-[#f4efe6] transition">II. Visual Synthesis</a>
+        <a href="#suite-directory" class="hover:text-[#f4efe6] transition">III. Private Suite (38)</a>
+        <a href="#pricing" class="hover:text-[#f4efe6] transition">IV. Patronage</a>
+        <a href="#founder-desk" class="text-[#c5a880] hover:text-[#e6d5b8] transition">V. Concierge</a>
       </nav>
 
-      <!-- Right Controls: API Key + Persistent Login Profile -->
-      <div class="flex items-center gap-2.5 sm:gap-3.5">
-        <button type="button" id="openApiModalBtn" class="px-3.5 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono-code text-neutral-200 transition cursor-pointer">
-          ⚡ LLM KEY
+      <!-- Right Controls: API Key + Persistent Member Pass -->
+      <div class="flex items-center gap-4">
+        <button type="button" id="openApiModalBtn" class="px-4 py-2.5 text-[10px] tracking-[0.2em] uppercase border border-[#c5a880]/25 text-[#c5a880] hover:bg-[#c5a880]/10 transition cursor-pointer">
+          Engine Key
         </button>
 
-        <button type="button" id="openAuthModalBtn" class="btn-acid px-5 py-2.5 rounded-full text-xs uppercase tracking-wider cursor-pointer">
-          Sign In
+        <button type="button" id="openAuthModalBtn" class="btn-champagne px-6 py-2.5 text-[10px] cursor-pointer">
+          Member Access
         </button>
 
-        <!-- Persistent Logged-In Pill -->
-        <div id="userProfileBadge" class="hidden items-center gap-2.5 bg-white/5 border border-[#d4ff33]/40 px-3.5 py-1.5 rounded-full">
-          <div id="userInitials" class="w-6 h-6 rounded-full bg-[#d4ff33] text-black text-[11px] font-extrabold flex items-center justify-center">A</div>
+        <!-- Persistent Logged-In Member Badge -->
+        <div id="userProfileBadge" class="hidden items-center gap-3 border border-[#c5a880]/35 bg-[#11100e] px-4 py-2">
+          <div id="userInitials" class="w-6 h-6 bg-[#c5a880] text-black text-[11px] font-medium flex items-center justify-center font-serif-luxury">A</div>
           <div class="text-left">
-            <span id="userNameText" class="block text-xs font-bold text-white max-w-[95px] truncate leading-none">Founder</span>
-            <span class="text-[9px] text-[#d4ff33] font-mono-code">● ACTIVE</span>
+            <span id="userNameText" class="block text-[11px] tracking-[0.14em] uppercase text-[#f4efe6] max-w-[110px] truncate">Patron</span>
+            <span class="block text-[8px] tracking-[0.2em] text-[#c5a880] uppercase">Private Session</span>
           </div>
-          <button type="button" id="logoutBtn" class="text-[10px] text-[#ff5e36] hover:underline ml-1 font-bold cursor-pointer">Exit</button>
+          <button type="button" id="logoutBtn" class="text-[9px] tracking-[0.15em] uppercase text-[#8c857b] hover:text-white ml-2 cursor-pointer">Exit</button>
         </div>
       </div>
+
     </div>
   </header>
 
-  <!-- Mobile Bottom Floating Dock -->
-  <div class="md:hidden fixed bottom-3 inset-x-4 z-40 rounded-3xl bg-[#0a0b0f]/95 backdrop-blur-2xl border border-white/15 px-3 py-2.5 flex justify-around items-center text-[10px] font-bold text-neutral-300 shadow-2xl">
-    <a href="#studio" class="flex flex-col items-center gap-0.5 text-[#d4ff33]"><span>🎬</span><span>Studio</span></a>
-    <a href="#player-column" class="flex flex-col items-center gap-0.5 hover:text-white"><span>⬇️</span><span>Export</span></a>
-    <a href="#clipper-grid" class="flex flex-col items-center gap-0.5 hover:text-white"><span>✂️</span><span>Clippers</span></a>
-    <a href="#pricing" class="flex flex-col items-center gap-0.5 text-[#ff5e36]"><span>₹50</span><span>Plans</span></a>
-    <a href="#founder-desk" class="flex flex-col items-center gap-0.5 hover:text-white"><span>💬</span><span>Founder</span></a>
+  <!-- Mobile Bottom Bar -->
+  <div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#0a0908]/95 backdrop-blur-2xl border-t border-[#c5a880]/20 px-4 py-3 flex justify-around items-center text-[9px] tracking-[0.18em] uppercase text-[#8c857b]">
+    <a href="#studio" class="text-[#c5a880]">Atelier</a>
+    <a href="#player-column">Monitor</a>
+    <a href="#suite-directory">Suite</a>
+    <a href="#pricing">₹50 Pack</a>
+    <a href="#founder-desk">Concierge</a>
   </div>
 
-  <!-- EDITORIAL SPATIAL HERO SECTION (Generous Whitespace & High-Contrast Typography) -->
-  <section id="hero" class="relative z-10 max-w-6xl mx-auto px-6 pt-16 sm:pt-24 pb-16 sm:pb-24 text-center kinetic-block">
-    <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-neutral-300 text-xs font-mono-code uppercase tracking-widest mb-8">
-      <span class="w-2 h-2 rounded-full bg-[#d4ff33] animate-ping"></span>
-      <span>Spatial Video Synthesis • 2027 Production Architecture</span>
-    </div>
-
-    <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-[82px] font-extrabold tracking-tight leading-[1.02] mb-8">
-      Autonomous <span class="font-editorial font-normal text-[#d4ff33] px-1">vertical cinema</span> <br class="hidden sm:inline" />
-      <span class="text-acid-gradient">engineered in 60 seconds.</span>
-    </h1>
-
-    <p class="text-neutral-400 text-sm sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
-      A non-linear AI production suite combining pattern-interrupt hooks, neural voice cloning, generative 9:16 backgrounds, and native Instagram Reels & YouTube Shorts rendering.
+  <!-- EDITORIAL HERO SECTION (Generous Vertical Breathing Room & Quiet Authority) -->
+  <section id="hero" class="relative z-10 max-w-5xl mx-auto px-6 pt-24 sm:pt-36 pb-24 sm:pb-32 text-center atelier-reveal">
+    <p class="text-[10px] sm:text-[11px] tracking-[0.38em] uppercase text-[#c5a880] mb-8">
+      Bespoke Short-Form Cinema & Acoustic Intelligence
     </p>
 
-    <div class="flex flex-wrap items-center justify-center gap-4">
-      <a href="#studio" class="btn-acid px-8 py-4 rounded-full text-xs sm:text-sm uppercase tracking-wider shadow-xl">
-        Enter Production Studio ↓
+    <h1 class="font-serif-luxury text-4xl sm:text-6xl md:text-7xl lg:text-[84px] text-[#f4efe6] leading-[1.06] tracking-[-0.01em] mb-10">
+      The art of vertical cinema, <br class="hidden sm:inline" />
+      <span class="italic text-[#c5a880]">distilled to sixty seconds.</span>
+    </h1>
+
+    <p class="text-[#8c857b] text-sm sm:text-base max-w-xl mx-auto mb-14 leading-[1.9] font-light">
+      Anprivate production sanctuary for discerning founders and brands. Craft retention-calibrated scripts, bespoke AI scene imagery, and neural voiceovers without agency retainers.
+    </p>
+
+    <div class="flex flex-wrap items-center justify-center gap-6">
+      <a href="#studio" class="btn-champagne px-10 py-4 text-[11px]">
+        Enter The Atelier
       </a>
-      <a href="#clipper-grid" class="px-8 py-4 rounded-full bg-white/[0.04] hover:bg-white/[0.09] border border-white/15 text-white font-bold text-xs sm:text-sm transition">
-        Explore 38+ AI Tools →
+      <a href="#suite-directory" class="btn-outline-luxury px-10 py-4 text-[11px]">
+        Explore 38 Instruments
       </a>
     </div>
   </section>
 
-  <!-- ARCHITECTURAL MARQUEE RIBBON -->
-  <div class="relative z-10 border-y border-white/10 bg-[#07080b]/80 py-4 overflow-hidden mb-20 sm:mb-28">
-    <div class="marquee-track flex items-center gap-12 text-xs font-mono-code tracking-widest text-neutral-400 uppercase">
-      <span>✦ SMART AI SCENE SYNTHESIS</span>
-      <span class="text-[#d4ff33]">///</span>
-      <span>✦ 6 CALIBRATED NEURAL VOICE PERSONAS</span>
-      <span class="text-[#ff5e36]">///</span>
-      <span>✦ NATIVE INSTAGRAM REELS & YOUTUBE SHORTS INTERFACES</span>
-      <span class="text-[#d4ff33]">///</span>
-      <span>✦ DIRECT .WEBM VERTICAL VIDEO RECORDING</span>
-      <span class="text-[#ff5e36]">///</span>
-      <span>✦ INSTANT ₹50 BANK UPI SETTLEMENT</span>
-      <span class="text-[#d4ff33]">///</span>
-      <span>✦ SMART AI SCENE SYNTHESIS</span>
-      <span class="text-[#d4ff33]">///</span>
-      <span>✦ 6 CALIBRATED NEURAL VOICE PERSONAS</span>
-      <span class="text-[#ff5e36]">///</span>
-      <span>✦ NATIVE INSTAGRAM REELS & YOUTUBE SHORTS INTERFACES</span>
+  <!-- SUBTLE HAIRLINE DIVIDER -->
+  <div class="max-w-[1400px] mx-auto px-6 sm:px-12">
+    <div class="border-t border-[#c5a880]/15 py-5 flex flex-wrap justify-between items-center text-[10px] tracking-[0.28em] uppercase text-[#8c857b]">
+      <span>I • Narrative Architecture</span>
+      <span class="hidden sm:inline">II • Generative Scenography</span>
+      <span class="hidden md:inline">III • Acoustic Synthesis</span>
+      <span>IV • 9:16 Master Grade</span>
     </div>
   </div>
 
-  <!-- SECTION 01: MAIN SPATIAL WORKSPACE STUDIO (Massive Breathing Room & Clean Separation) -->
-  <section id="studio" class="relative z-10 max-w-[1380px] mx-auto px-4 sm:px-8 pb-28 sm:pb-36">
+  <!-- SECTION I: ASYMMETRIC PRIVATE SCREENING ROOM (7 COLUMNS LEFT CONTROLS / 5 COLUMNS STICKY MONITOR) -->
+  <section id="studio" class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-12 pt-16 pb-32 sm:pb-44">
 
-    <!-- Section Header + Quick Industry Presets -->
-    <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6 kinetic-block">
+    <!-- Curated Repertoire Bar (Spacious & Refined) -->
+    <div class="mb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8 atelier-reveal">
       <div>
-        <span class="font-mono-code text-xs uppercase tracking-widest text-[#d4ff33] block mb-2">01 // NON-LINEAR WORKSPACE</span>
-        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Interactive <span class="font-editorial text-[#d4ff33]">9:16 Studio</span></h2>
+        <span class="text-[10px] tracking-[0.32em] uppercase text-[#c5a880] block mb-3">Chapter I • Production Desk</span>
+        <h2 class="font-serif-luxury text-3xl sm:text-5xl text-[#f4efe6]">The <span class="italic text-[#c5a880]">Screening Room</span></h2>
       </div>
 
-      <div class="flex flex-wrap items-center gap-2.5">
-        <span class="text-xs font-mono-code uppercase text-neutral-400 mr-1">Load Preset:</span>
-        <button type="button" data-preset="coffee" class="preset-btn px-4 py-2 rounded-full bg-white/[0.04] hover:bg-[#d4ff33] hover:text-black border border-white/10 text-xs font-bold text-white transition cursor-pointer">☕ D2C Cold Brew</button>
-        <button type="button" data-preset="fintech" class="preset-btn px-4 py-2 rounded-full bg-white/[0.04] hover:bg-[#d4ff33] hover:text-black border border-white/10 text-xs font-bold text-white transition cursor-pointer">💳 Student Fintech</button>
-        <button type="button" data-preset="saas" class="preset-btn px-4 py-2 rounded-full bg-white/[0.04] hover:bg-[#d4ff33] hover:text-black border border-white/10 text-xs font-bold text-white transition cursor-pointer">📊 B2B SaaS</button>
-        <button type="button" data-preset="podcast" class="preset-btn px-4 py-2 rounded-full bg-white/[0.04] hover:bg-[#d4ff33] hover:text-black border border-white/10 text-xs font-bold text-white transition cursor-pointer">🎙️ Podcast Clip</button>
-        <button type="button" data-preset="streetwear" class="preset-btn px-4 py-2 rounded-full bg-white/[0.04] hover:bg-[#d4ff33] hover:text-black border border-white/10 text-xs font-bold text-white transition cursor-pointer">👕 Streetwear</button>
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="text-[10px] tracking-[0.22em] uppercase text-[#8c857b] mr-2">Curated Briefs:</span>
+        <button type="button" data-preset="coffee" class="preset-btn px-4 py-2 text-[10px] tracking-[0.16em] uppercase border border-[#c5a880]/30 text-[#f4efe6] hover:bg-[#c5a880] hover:text-black transition cursor-pointer">Artisanal Cold Brew</button>
+        <button type="button" data-preset="fintech" class="preset-btn px-4 py-2 text-[10px] tracking-[0.16em] uppercase border border-white/10 text-[#8c857b] hover:border-[#c5a880] hover:text-[#f4efe6] transition cursor-pointer">Private Wealth & Cards</button>
+        <button type="button" data-preset="saas" class="preset-btn px-4 py-2 text-[10px] tracking-[0.16em] uppercase border border-white/10 text-[#8c857b] hover:border-[#c5a880] hover:text-[#f4efe6] transition cursor-pointer">B2B Enterprise</button>
+        <button type="button" data-preset="podcast" class="preset-btn px-4 py-2 text-[10px] tracking-[0.16em] uppercase border border-white/10 text-[#8c857b] hover:border-[#c5a880] hover:text-[#f4efe6] transition cursor-pointer">Founder Monograph</button>
+        <button type="button" data-preset="streetwear" class="preset-btn px-4 py-2 text-[10px] tracking-[0.16em] uppercase border border-white/10 text-[#8c857b] hover:border-[#c5a880] hover:text-[#f4efe6] transition cursor-pointer">Apparel Atelier</button>
       </div>
     </div>
 
-    <!-- Spaced 12-Column Studio Grid (gap-8 lg:gap-10 so nothing feels cramped!) -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+    <!-- Spacious 12-Column Asymmetric Layout (gap-12 lg:gap-16 so nothing is crowded!) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
-      <!-- LEFT COLUMN (4 Cols): Campaign Brief + Smart Background Studio + Voice Lab -->
-      <div class="lg:col-span-4 space-y-8">
-        
-        <!-- Pod 1: Campaign & Script Brief -->
-        <div class="spatial-pod p-6 sm:p-8 space-y-5 kinetic-block">
-          <div class="flex items-center justify-between border-b border-white/10 pb-4">
+      <!-- LEFT WING (7 COLUMNS): Narrative Brief, Smart Visuals, Acoustic Studio & NLE Script -->
+      <div class="lg:col-span-7 space-y-14">
+
+        <!-- Atelier Module 01: Narrative Brief -->
+        <div class="luxury-card p-8 sm:p-12 space-y-8 atelier-reveal">
+          <div class="flex items-baseline justify-between border-b border-[#c5a880]/15 pb-5">
             <div>
-              <span class="font-mono-code text-[10px] text-[#d4ff33] uppercase">MODULE 01</span>
-              <h3 class="text-lg font-bold text-white">Campaign & Script Engine</h3>
+              <span class="text-[10px] tracking-[0.28em] uppercase text-[#c5a880]">01 / Narrative Commission</span>
+              <h3 class="font-serif-luxury text-2xl sm:text-3xl text-[#f4efe6] mt-1">Brand & Hook Architecture</h3>
             </div>
-            <span id="activeWorkflowBadge" class="font-mono-code text-[10px] px-2.5 py-1 rounded-full bg-[#d4ff33]/10 text-[#d4ff33] border border-[#d4ff33]/30">
-              READY
+            <span id="activeWorkflowBadge" class="font-mono-luxury text-[10px] tracking-[0.18em] uppercase text-[#c5a880]">
+              Bespoke Mode
             </span>
           </div>
 
-          <div class="space-y-4">
-            <div>
-              <label class="block text-xs font-semibold text-neutral-300 mb-2">Brand / Product / Video URL</label>
-              <input id="brandInput" type="text" value="Asli Cold Brew Coffee" placeholder="e.g. Protein Shake, Sneaker Store, SaaS..." class="w-full bg-black/70 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#d4ff33] transition">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="sm:col-span-2">
+              <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2.5">Maison / Product / Source URL</label>
+              <input id="brandInput" type="text" value="Asli Artisanal Cold Brew" class="input-atelier w-full px-4 py-3.5 text-xs">
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2.5">Target Patron & Core Tension</label>
+              <textarea id="audienceInput" rows="2" class="input-atelier w-full px-4 py-3.5 text-xs leading-relaxed">Founders and young professionals fatigued by overpriced ₹350 commercial cafe water</textarea>
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-neutral-300 mb-2">Target Audience & Core Frustration</label>
-              <textarea id="audienceInput" rows="2" class="w-full bg-black/70 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#d4ff33] transition">Young professionals and college students tired of spending Rs 350 on watery cafe coffee</textarea>
+              <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2.5">Rhetorical Posture</label>
+              <select id="toneInput" class="input-atelier w-full px-4 py-3.5 text-xs">
+                <option value="controversial">Pattern Interrupt (Provocative)</option>
+                <option value="data">Empirical Proof & Capital</option>
+                <option value="story">Founder Confession</option>
+                <option value="secret">Private Industry Ledger</option>
+              </select>
             </div>
 
-            <div class="grid grid-cols-2 gap-3">
-              <div>
-                <label class="block text-[11px] font-semibold text-neutral-400 mb-1.5">Hook Psychology</label>
-                <select id="toneInput" class="w-full bg-black/70 border border-white/15 rounded-2xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#d4ff33]">
-                  <option value="controversial">🔥 Pattern Interrupt</option>
-                  <option value="data">📊 Hard Math / Proof</option>
-                  <option value="story">🎭 Founder Story</option>
-                  <option value="secret">🤫 Secret Hack</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-[11px] font-semibold text-neutral-400 mb-1.5">Language Vibe</label>
-                <select id="langInput" class="w-full bg-black/70 border border-white/15 rounded-2xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#d4ff33]">
-                  <option value="hinglish">🇮🇳 Hinglish (Viral)</option>
-                  <option value="english">🌐 Global English</option>
-                </select>
-              </div>
+            <div>
+              <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2.5">Diction & Cadence</label>
+              <select id="langInput" class="input-atelier w-full px-4 py-3.5 text-xs">
+                <option value="hinglish">Urban Hinglish (Mumbai / Delhi)</option>
+                <option value="english">International English</option>
+              </select>
             </div>
-
-            <button type="button" id="generateBtn" class="btn-acid w-full py-4 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
-              ⚡ Synthesize 4-Scene Script
-            </button>
           </div>
+
+          <button type="button" id="generateBtn" class="btn-champagne w-full py-4 text-[11px] cursor-pointer">
+            Compose Four-Act Storyboard
+          </button>
         </div>
 
-        <!-- Pod 2: Smart AI Background Generator + HD Photo Packs + Shaders -->
-        <div id="smart-bg-anchor" class="spatial-pod p-6 sm:p-8 space-y-5 kinetic-block">
-          <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <!-- Atelier Module 02: Smart Scenography & Visual Synthesis -->
+        <div id="smart-bg-anchor" class="luxury-card p-8 sm:p-12 space-y-8 atelier-reveal">
+          <div class="flex items-baseline justify-between border-b border-[#c5a880]/15 pb-5">
             <div>
-              <span class="font-mono-code text-[10px] text-[#ff5e36] uppercase">MODULE 02</span>
-              <h3 class="text-lg font-bold text-white">Smart Visual Canvas</h3>
+              <span class="text-[10px] tracking-[0.28em] uppercase text-[#c5a880]">02 / Generative Scenography</span>
+              <h3 class="font-serif-luxury text-2xl sm:text-3xl text-[#f4efe6] mt-1">Bespoke Background & B-Roll</h3>
             </div>
-            <label class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-[11px] font-bold text-white cursor-pointer border border-white/15 transition">
-              <span>+ Upload Photo</span>
+            <label class="btn-outline-luxury px-4 py-2 text-[10px] cursor-pointer">
+              <span>+ Upload Plate</span>
               <input id="customBgUpload" type="file" accept="image/*" class="hidden">
             </label>
           </div>
 
-          <!-- Smart AI Prompt-to-Background Generator -->
-          <div class="p-4 rounded-2xl bg-black/60 border border-[#d4ff33]/25 space-y-2.5">
-            <label class="block text-xs font-bold text-[#d4ff33]">✨ Smart AI Background Generator</label>
-            <div class="flex gap-2">
-              <input id="smartBgPromptInput" type="text" placeholder="Describe any scene aesthetic..." value="Iced cold brew coffee cinematic dark cafe neon lighting" class="flex-1 bg-black border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#d4ff33]">
-              <button type="button" id="generateSmartBgBtn" class="px-4 py-2.5 rounded-xl bg-[#ff5e36] hover:bg-[#ff7452] text-white text-xs font-extrabold whitespace-nowrap cursor-pointer transition">
-                Generate
+          <!-- Smart AI Scene Prompt -->
+          <div class="p-6 bg-[#070706]/90 border border-[#c5a880]/25 space-y-3">
+            <label class="block text-[10px] tracking-[0.22em] uppercase text-[#e6d5b8]">Smart AI Scene Synthesizer</label>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <input id="smartBgPromptInput" type="text" value="Dark architectural espresso bar, warm tungsten rim light, 35mm film grain" placeholder="Describe the desired visual atmosphere..." class="input-atelier flex-1 px-4 py-3 text-xs">
+              <button type="button" id="generateSmartBgBtn" class="btn-champagne px-6 py-3 text-[10px] whitespace-nowrap cursor-pointer">
+                Synthesize Plate
               </button>
             </div>
-            <p class="text-[11px] text-neutral-400">Generates a bespoke 9:16 vertical visual directly from your prompt.</p>
+            <p class="text-[11px] text-[#8c857b]">Renders a custom 9:16 vertical photographic background tailored to your prompt.</p>
           </div>
 
-          <!-- Curated HD Photography B-Roll Packs -->
+          <!-- Curated Archival Photography Collections -->
           <div>
-            <label class="block text-xs font-semibold text-neutral-300 mb-2.5">HD Photography B-Roll Packs</label>
-            <div class="grid grid-cols-3 gap-2">
-              <button type="button" data-photo="coffee" class="photo-pack-btn py-2 px-2.5 rounded-xl bg-[#d4ff33]/15 border border-[#d4ff33] text-[11px] font-bold text-white cursor-pointer">☕ Cafe HD</button>
-              <button type="button" data-photo="cyber" class="photo-pack-btn py-2 px-2.5 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-neutral-300 cursor-pointer">🌆 Cyber</button>
-              <button type="button" data-photo="luxury" class="photo-pack-btn py-2 px-2.5 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-neutral-300 cursor-pointer">⌚ Luxury</button>
-              <button type="button" data-photo="workspace" class="photo-pack-btn py-2 px-2.5 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-neutral-300 cursor-pointer">💻 Tech</button>
-              <button type="button" data-photo="fitness" class="photo-pack-btn py-2 px-2.5 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-neutral-300 cursor-pointer">🏋️ Gym</button>
-              <button type="button" data-photo="street" class="photo-pack-btn py-2 px-2.5 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-neutral-300 cursor-pointer">👟 Street</button>
+            <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-3">Curated 35mm Archival Photography</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <button type="button" data-photo="coffee" class="photo-pack-btn py-3 px-3 border border-[#c5a880] bg-[#c5a880]/10 text-[10px] tracking-[0.16em] uppercase text-[#f4efe6] cursor-pointer">I. Espresso & Glass</button>
+              <button type="button" data-photo="luxury" class="photo-pack-btn py-3 px-3 border border-white/10 text-[10px] tracking-[0.16em] uppercase text-[#8c857b] hover:border-[#c5a880]/50 cursor-pointer">II. Haute Horlogerie</button>
+              <button type="button" data-photo="workspace" class="photo-pack-btn py-3 px-3 border border-white/10 text-[10px] tracking-[0.16em] uppercase text-[#8c857b] hover:border-[#c5a880]/50 cursor-pointer">III. Executive Study</button>
+              <button type="button" data-photo="cyber" class="photo-pack-btn py-3 px-3 border border-white/10 text-[10px] tracking-[0.16em] uppercase text-[#8c857b] hover:border-[#c5a880]/50 cursor-pointer">IV. Nocturnal Metropolis</button>
+              <button type="button" data-photo="fitness" class="photo-pack-btn py-3 px-3 border border-white/10 text-[10px] tracking-[0.16em] uppercase text-[#8c857b] hover:border-[#c5a880]/50 cursor-pointer">V. Private Club</button>
+              <button type="button" data-photo="street" class="photo-pack-btn py-3 px-3 border border-white/10 text-[10px] tracking-[0.16em] uppercase text-[#8c857b] hover:border-[#c5a880]/50 cursor-pointer">VI. Editorial Drape</button>
             </div>
           </div>
 
-          <!-- Procedural Shaders + Custom Colors -->
-          <div>
-            <label class="block text-xs font-semibold text-neutral-300 mb-2">Procedural Motion Shaders</label>
-            <div class="grid grid-cols-4 gap-2">
-              <button type="button" data-shader="obsidian" class="shader-btn py-2 rounded-xl bg-black/70 border border-white/10 text-[11px] font-semibold text-neutral-200 cursor-pointer">Carbon</button>
-              <button type="button" data-shader="gold" class="shader-btn py-2 rounded-xl bg-black/70 border border-white/10 text-[11px] font-semibold text-amber-300 cursor-pointer">Gold</button>
-              <button type="button" data-shader="matrix" class="shader-btn py-2 rounded-xl bg-black/70 border border-white/10 text-[11px] font-semibold text-[#d4ff33] cursor-pointer">Acid</button>
-              <button type="button" data-shader="custom" class="shader-btn py-2 rounded-xl bg-black/70 border border-white/10 text-[11px] font-semibold text-[#ff5e36] cursor-pointer">Custom</button>
+          <!-- Ambient Tonal Shaders & Custom Signature -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+            <div>
+              <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2.5">Minimalist Tonal Shaders</label>
+              <div class="grid grid-cols-4 gap-2">
+                <button type="button" data-shader="obsidian" class="shader-btn py-2.5 border border-white/10 text-[10px] uppercase tracking-wider text-[#f4efe6] cursor-pointer">Onyx</button>
+                <button type="button" data-shader="gold" class="shader-btn py-2.5 border border-white/10 text-[10px] uppercase tracking-wider text-[#c5a880] cursor-pointer">Aurum</button>
+                <button type="button" data-shader="matrix" class="shader-btn py-2.5 border border-white/10 text-[10px] uppercase tracking-wider text-emerald-300 cursor-pointer">Verde</button>
+                <button type="button" data-shader="custom" class="shader-btn py-2.5 border border-white/10 text-[10px] uppercase tracking-wider text-amber-200 cursor-pointer">Bespoke</button>
+              </div>
             </div>
-          </div>
 
-          <div class="grid grid-cols-3 gap-3 pt-1 items-center">
-            <div>
-              <label class="block text-[10px] text-neutral-400 mb-1">Tone 1</label>
-              <input id="customColor1" type="color" value="#12131a" class="w-full h-8 rounded-lg bg-transparent border border-white/15 cursor-pointer">
-            </div>
-            <div>
-              <label class="block text-[10px] text-neutral-400 mb-1">Tone 2</label>
-              <input id="customColor2" type="color" value="#d4ff33" class="w-full h-8 rounded-lg bg-transparent border border-white/15 cursor-pointer">
-            </div>
-            <div>
-              <label class="block text-[10px] text-neutral-400 mb-1">@Handle</label>
-              <input id="creatorHandleInput" type="text" value="@reelflow.ai" class="w-full bg-black/70 border border-white/15 rounded-xl px-2.5 py-1.5 text-[11px] text-white">
+            <div class="grid grid-cols-3 gap-3 items-end">
+              <div>
+                <label class="block text-[9px] tracking-[0.18em] uppercase text-[#8c857b] mb-1.5">Shadow</label>
+                <input id="customColor1" type="color" value="#0c0b09" class="w-full h-9 bg-transparent border border-white/15 cursor-pointer">
+              </div>
+              <div>
+                <label class="block text-[9px] tracking-[0.18em] uppercase text-[#8c857b] mb-1.5">Luster</label>
+                <input id="customColor2" type="color" value="#c5a880" class="w-full h-9 bg-transparent border border-white/15 cursor-pointer">
+              </div>
+              <div>
+                <label class="block text-[9px] tracking-[0.18em] uppercase text-[#8c857b] mb-1.5">Imprint</label>
+                <input id="creatorHandleInput" type="text" value="@reelflow.atelier" class="input-atelier w-full px-2.5 py-2 text-[11px]">
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Pod 3: Neural Voice & Clone Studio -->
-        <div class="spatial-pod p-6 sm:p-8 space-y-5 kinetic-block">
-          <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <!-- Atelier Module 03: Acoustic Voice & Clone Conservatory -->
+        <div class="luxury-card p-8 sm:p-12 space-y-8 atelier-reveal">
+          <div class="flex items-baseline justify-between border-b border-[#c5a880]/15 pb-5">
             <div>
-              <span class="font-mono-code text-[10px] text-[#d4ff33] uppercase">MODULE 03</span>
-              <h3 class="text-lg font-bold text-white">Neural Voice Lab</h3>
+              <span class="text-[10px] tracking-[0.28em] uppercase text-[#c5a880]">03 / Acoustic Conservatory</span>
+              <h3 class="font-serif-luxury text-2xl sm:text-3xl text-[#f4efe6] mt-1">Neural Voice & Custom Timbre</h3>
             </div>
-            <button type="button" id="sampleVoiceBtn" class="px-3.5 py-1.5 rounded-full bg-[#d4ff33]/15 border border-[#d4ff33]/40 text-xs font-bold text-[#d4ff33] cursor-pointer">
-              🔊 Audition
+            <button type="button" id="sampleVoiceBtn" class="btn-outline-luxury px-4 py-2 text-[10px] cursor-pointer">
+              Audition Voice
             </button>
           </div>
 
-          <div id="voicePersonaGrid" class="grid grid-cols-2 gap-2.5"></div>
+          <div id="voicePersonaGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
 
-          <div class="grid grid-cols-2 gap-4 pt-2">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-2">
             <div>
-              <div class="flex justify-between text-xs text-neutral-400 mb-1"><span>Cadence</span><span id="rateLabel" class="font-mono-code text-white">1.08x</span></div>
-              <input id="voiceRate" type="range" min="0.75" max="1.35" step="0.05" value="1.08" class="w-full accent-[#d4ff33] cursor-pointer">
+              <div class="flex justify-between text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2">
+                <span>Pacing Cadence</span><span id="rateLabel" class="font-mono-luxury text-[#e6d5b8]">1.05x</span>
+              </div>
+              <input id="voiceRate" type="range" min="0.75" max="1.35" step="0.05" value="1.05" class="w-full cursor-pointer">
             </div>
             <div>
-              <div class="flex justify-between text-xs text-neutral-400 mb-1"><span>Timbre</span><span id="pitchLabel" class="font-mono-code text-white">1.00</span></div>
-              <input id="voicePitch" type="range" min="0.7" max="1.3" step="0.05" value="1.00" class="w-full accent-[#ff5e36] cursor-pointer">
+              <div class="flex justify-between text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2">
+                <span>Resonance Pitch</span><span id="pitchLabel" class="font-mono-luxury text-[#e6d5b8]">1.00</span>
+              </div>
+              <input id="voicePitch" type="range" min="0.7" max="1.3" step="0.05" value="1.00" class="w-full cursor-pointer">
             </div>
           </div>
 
-          <button type="button" id="toggleCloneBoxBtn" class="text-xs font-bold text-[#ff5e36] hover:underline cursor-pointer block pt-1">
-            + Connect Custom ElevenLabs Voice Clone ID
-          </button>
-          <div id="elevenCloneBox" class="hidden space-y-2.5 pt-3 border-t border-white/10">
-            <input id="elevenKeyInput" type="password" placeholder="ElevenLabs API Key" class="w-full bg-black/70 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
-            <input id="elevenVoiceIdInput" type="text" placeholder="ElevenLabs Voice ID" class="w-full bg-black/70 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
-            <button type="button" id="saveElevenBtn" class="btn-acid w-full py-2 rounded-xl text-xs cursor-pointer">Activate Voice Clone</button>
+          <div class="pt-2">
+            <button type="button" id="toggleCloneBoxBtn" class="text-[10px] tracking-[0.22em] uppercase text-[#c5a880] hover:underline cursor-pointer">
+              + Pair Bespoke ElevenLabs Voice Clone ID
+            </button>
+            <div id="elevenCloneBox" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 mt-4 border-t border-white/10">
+              <input id="elevenKeyInput" type="password" placeholder="ElevenLabs xi-api-key" class="input-atelier px-3.5 py-2.5 text-xs">
+              <input id="elevenVoiceIdInput" type="text" placeholder="Voice ID" class="input-atelier px-3.5 py-2.5 text-xs">
+              <button type="button" id="saveElevenBtn" class="btn-champagne py-2.5 text-[10px] cursor-pointer">Bind Voice</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Atelier Module 04: Four-Act NLE Manuscript & Timeline -->
+        <div class="luxury-card p-8 sm:p-12 space-y-8 atelier-reveal">
+          <div class="flex items-baseline justify-between border-b border-[#c5a880]/15 pb-5">
+            <div>
+              <span class="text-[10px] tracking-[0.28em] uppercase text-[#c5a880]">04 / Non-Linear Manuscript</span>
+              <h3 class="font-serif-luxury text-2xl sm:text-3xl text-[#f4efe6] mt-1">Four-Act Timecode Score</h3>
+            </div>
+            <button type="button" id="copyAllScriptBtn" class="btn-outline-luxury px-4 py-2 text-[10px] cursor-pointer">
+              Copy Manuscript
+            </button>
+          </div>
+
+          <div>
+            <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-3">Select Opening Hook Variation (00:00 - 00:03)</label>
+            <div id="hooksList" class="space-y-3"></div>
+          </div>
+
+          <div>
+            <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-3">Master Scene Score (Click any act to preview & edit live)</label>
+            <div id="scenesList" class="space-y-5"></div>
           </div>
         </div>
 
       </div>
 
-      <!-- CENTER COLUMN (4 Cols): SPATIAL NLE TIMELINE EDITOR -->
-      <div class="lg:col-span-4 space-y-8">
-        <div class="spatial-pod p-6 sm:p-8 space-y-6 kinetic-block">
-          <div class="flex items-center justify-between border-b border-white/10 pb-4">
-            <div>
-              <span class="font-mono-code text-[10px] text-[#d4ff33] uppercase">MODULE 04</span>
-              <h3 class="text-lg font-bold text-white">NLE Storyboard Track</h3>
-            </div>
-            <button type="button" id="copyAllScriptBtn" class="px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/15 text-xs font-bold text-neutral-200 border border-white/10 cursor-pointer">
-              📋 Copy All
-            </button>
-          </div>
-
-          <!-- 3s Hook Switcher -->
-          <div>
-            <div class="flex items-center justify-between mb-2.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-neutral-300">⚡ 3-Second Pattern Interrupts</label>
-              <span class="text-[10px] font-mono-code text-neutral-500">Tap to Swap</span>
-            </div>
-            <div id="hooksList" class="space-y-2.5"></div>
-          </div>
-
-          <!-- 4-Scene Master Timeline -->
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <label class="text-xs font-bold uppercase tracking-wider text-neutral-300">🎞️ Master Scene Sequence</label>
-              <span class="text-[10px] font-mono-code text-[#d4ff33]">24.0s VERTICAL</span>
-            </div>
-            <div id="scenesList" class="space-y-4 max-h-[580px] overflow-y-auto pr-1"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT COLUMN (4 Cols): 9:16 CINEMA MONITOR + IG/YT SWITCHER + DOWNLOAD SUITE -->
-      <div id="player-column" class="lg:col-span-4 flex flex-col items-center kinetic-block">
-        <div class="spatial-pod p-6 sm:p-8 w-full flex flex-col items-center space-y-5">
+      <!-- RIGHT WING (5 COLUMNS, STICKY): ANODIZED TITANIUM 9:16 MONITOR & MASTER EXPORT -->
+      <div id="player-column" class="lg:col-span-5 lg:sticky lg:top-32 flex flex-col items-center atelier-reveal">
+        <div class="luxury-card p-8 sm:p-10 w-full flex flex-col items-center space-y-7">
           
-          <!-- Platform Interface Mode Switcher -->
-          <div class="w-full">
-            <div class="flex items-center justify-between mb-2">
-              <span class="font-mono-code text-[10px] uppercase tracking-wider text-neutral-400">MODULE 05 // MONITOR UI</span>
-              <span id="playerStatusBadge" class="text-[10px] font-mono-code px-2.5 py-0.5 rounded-full bg-[#d4ff33]/15 text-[#d4ff33]">STANDBY</span>
+          <!-- Monitor Header & Platform Overlay Toggle -->
+          <div class="w-full space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] tracking-[0.26em] uppercase text-[#c5a880]">Reference Monitor</span>
+              <span id="playerStatusBadge" class="font-mono-luxury text-[10px] tracking-[0.18em] uppercase text-[#e6d5b8]">Standby</span>
             </div>
-            <div class="grid grid-cols-3 gap-2 p-1.5 rounded-2xl bg-black/80 border border-white/10">
-              <button type="button" data-ui="instagram" class="ui-mode-btn py-2.5 rounded-xl bg-[#d4ff33] text-black text-xs font-extrabold transition cursor-pointer">
-                📸 IG Reels
+            <div class="grid grid-cols-3 gap-2 p-1 bg-[#070706] border border-[#c5a880]/20">
+              <button type="button" data-ui="instagram" class="ui-mode-btn py-2.5 bg-[#c5a880] text-black text-[10px] tracking-[0.16em] uppercase font-medium transition cursor-pointer">
+                IG Reels
               </button>
-              <button type="button" data-ui="youtube" class="ui-mode-btn py-2.5 rounded-xl text-neutral-300 hover:text-white text-xs font-bold transition cursor-pointer">
-                ▶️ YT Shorts
+              <button type="button" data-ui="youtube" class="ui-mode-btn py-2.5 text-[#8c857b] hover:text-white text-[10px] tracking-[0.16em] uppercase transition cursor-pointer">
+                YT Shorts
               </button>
-              <button type="button" data-ui="clean" class="ui-mode-btn py-2.5 rounded-xl text-neutral-300 hover:text-white text-xs font-bold transition cursor-pointer">
-                ✨ Clean Raw
+              <button type="button" data-ui="clean" class="ui-mode-btn py-2.5 text-[#8c857b] hover:text-white text-[10px] tracking-[0.16em] uppercase transition cursor-pointer">
+                Pure Plate
               </button>
             </div>
           </div>
 
-          <!-- Kinetic Typography Theme Switcher -->
+          <!-- Subtitle Engraving Style -->
           <div class="w-full grid grid-cols-4 gap-2">
-            <button type="button" data-cap="hormozi" class="cap-btn py-1.5 rounded-xl bg-[#d4ff33]/15 border border-[#d4ff33] text-[10px] font-bold text-[#d4ff33] cursor-pointer">Hormozi</button>
-            <button type="button" data-cap="modern" class="cap-btn py-1.5 rounded-xl bg-white/5 border border-white/10 text-[10px] font-semibold text-neutral-300 cursor-pointer">Glass</button>
-            <button type="button" data-cap="neon" class="cap-btn py-1.5 rounded-xl bg-white/5 border border-white/10 text-[10px] font-semibold text-neutral-300 cursor-pointer">Acid Glow</button>
-            <button type="button" data-cap="red" class="cap-btn py-1.5 rounded-xl bg-white/5 border border-white/10 text-[10px] font-semibold text-neutral-300 cursor-pointer">Amber Pill</button>
+            <button type="button" data-cap="hormozi" class="cap-btn py-2 border border-[#c5a880] bg-[#c5a880]/10 text-[9px] tracking-[0.16em] uppercase text-[#e6d5b8] cursor-pointer">Aurum</button>
+            <button type="button" data-cap="modern" class="cap-btn py-2 border border-white/10 text-[9px] tracking-[0.16em] uppercase text-[#8c857b] cursor-pointer">Obsidian</button>
+            <button type="button" data-cap="neon" class="cap-btn py-2 border border-white/10 text-[9px] tracking-[0.16em] uppercase text-[#8c857b] cursor-pointer">Editorial</button>
+            <button type="button" data-cap="red" class="cap-btn py-2 border border-white/10 text-[9px] tracking-[0.16em] uppercase text-[#8c857b] cursor-pointer">Crimson</button>
           </div>
 
-          <!-- 9:16 Phone Hardware Frame -->
-          <div class="relative w-[274px] h-[486px] rounded-[44px] border-[8px] border-[#191b22] bg-black overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.95)] ring-1 ring-white/15">
+          <!-- Brushed Titanium 9:16 Cinema Bezel -->
+          <div class="relative w-[280px] h-[498px] rounded-[36px] border-[7px] border-[#1f1d1a] bg-black overflow-hidden shadow-[0_35px_90px_rgba(0,0,0,0.95)] ring-1 ring-[#c5a880]/30">
             <canvas id="reelCanvas" width="540" height="960" class="w-full h-full object-cover"></canvas>
           </div>
 
-          <!-- Play & Scene Scrub Controls -->
+          <!-- Playback Transport -->
           <div class="w-full grid grid-cols-2 gap-3">
-            <button type="button" id="playReelBtn" class="py-3.5 px-4 rounded-2xl bg-white text-black hover:bg-neutral-200 font-extrabold text-xs transition shadow-lg cursor-pointer">
-              ▶ Play w/ Voice
+            <button type="button" id="playReelBtn" class="btn-outline-luxury py-3.5 text-[10px] font-medium cursor-pointer">
+              ▶ Audition Reel
             </button>
-            <button type="button" id="nextSceneBtn" class="py-3.5 px-4 rounded-2xl bg-white/5 hover:bg-white/10 text-white border border-white/15 font-bold text-xs transition cursor-pointer">
-              ⏭ Scene (1/4)
+            <button type="button" id="nextSceneBtn" class="btn-outline-luxury py-3.5 text-[10px] cursor-pointer">
+              Act I / IV ⏭
             </button>
           </div>
 
-          <!-- PROMINENT EXPORT & DOWNLOAD SUITE -->
-          <div class="w-full pt-4 border-t border-white/10 space-y-2.5">
-            <button type="button" id="downloadVideoBtn" class="btn-acid w-full py-4 px-5 rounded-2xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer">
-              <span>⬇️ DOWNLOAD 9:16 VIDEO (.WEBM)</span>
+          <!-- Master Export Suite -->
+          <div class="w-full pt-5 border-t border-[#c5a880]/15 space-y-3">
+            <button type="button" id="downloadVideoBtn" class="btn-champagne w-full py-4 text-[11px] flex items-center justify-center gap-2 cursor-pointer">
+              <span>⬇️ Export Master Video (.WEBM)</span>
             </button>
-            <div class="grid grid-cols-2 gap-2.5">
-              <button type="button" id="downloadScriptBtn" class="py-3 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-neutral-200 font-bold text-[11px] transition cursor-pointer">
-                📄 Export Script (.TXT)
+            <div class="grid grid-cols-2 gap-3">
+              <button type="button" id="downloadScriptBtn" class="btn-outline-luxury py-3 text-[10px] cursor-pointer">
+                Manuscript (.TXT)
               </button>
-              <button type="button" id="downloadFramePngBtn" class="py-3 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-neutral-200 font-bold text-[11px] transition cursor-pointer">
-                🖼️ Save Poster (.PNG)
+              <button type="button" id="downloadFramePngBtn" class="btn-outline-luxury py-3 text-[10px] cursor-pointer">
+                Still Plate (.PNG)
               </button>
             </div>
           </div>
@@ -561,299 +534,266 @@
     </div>
   </section>
 
-  <!-- SECTION 02: 12 HARDWARE & MEDIA DIAGNOSTIC UTILITIES (Generous Grid Spacing) -->
-  <section id="utility-suite" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pb-28 sm:pb-36 kinetic-block">
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+  <!-- SECTION II: UNIFIED PRIVATE SUITE DIRECTORY (Clean Tabbed Architecture Instead of Cluttered Cards!) -->
+  <section id="suite-directory" class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-12 pb-32 sm:pb-44 atelier-reveal">
+    <div class="border-t border-[#c5a880]/15 pt-16 mb-14 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
       <div>
-        <span class="font-mono-code text-xs uppercase tracking-widest text-[#ff5e36] block mb-2">02 // HARDWARE & MEDIA LAB</span>
-        <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Creator <span class="font-editorial text-[#d4ff33]">Diagnostic Suite</span></h2>
+        <span class="text-[10px] tracking-[0.32em] uppercase text-[#c5a880] block mb-3">Chapter II • Private Suite</span>
+        <h2 class="font-serif-luxury text-3xl sm:text-5xl text-[#f4efe6]">38 Bespoke <span class="italic text-[#c5a880]">Instruments</span></h2>
       </div>
-      <p class="text-xs sm:text-sm text-neutral-400 max-w-md">
-        Real-time browser camera & microphone diagnostics (with automatic 10-second hardware release), audio extraction, and AI script engines.
-      </p>
+
+      <!-- Clean Filter Tabs so only one curated collection shows at a time -->
+      <div class="flex flex-wrap gap-3">
+        <button type="button" data-tab="clippers" class="suite-tab-btn px-6 py-3 bg-[#c5a880] text-black text-[10px] tracking-[0.2em] uppercase font-medium transition cursor-pointer">
+          I. AI Video Clippers (26)
+        </button>
+        <button type="button" data-tab="diagnostics" class="suite-tab-btn px-6 py-3 border border-[#c5a880]/30 text-[#e6d5b8] text-[10px] tracking-[0.2em] uppercase transition cursor-pointer">
+          II. Studio Diagnostics & Audio (12)
+        </button>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="utilityCardsGrid"></div>
+    <!-- Tab 1: 26 AI Clippers (Spacious Architectural Grid) -->
+    <div id="suiteClippersPane" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+    <!-- Tab 2: 12 Hardware & Media Diagnostics (Hidden until clicked) -->
+    <div id="suiteDiagnosticsPane" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
-  <!-- SECTION 03: 26 AI VIDEO CLIPPER & REPURPOSING WORKFLOWS -->
-  <section id="clipper-grid" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pb-28 sm:pb-36 kinetic-block">
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-      <div>
-        <span class="font-mono-code text-xs uppercase tracking-widest text-[#d4ff33] block mb-2">03 // AUTONOMOUS REPURPOSING</span>
-        <h2 class="text-3xl sm:text-5xl font-extrabold text-white">26+ Viral <span class="font-editorial text-[#ff5e36]">Clipping Engines</span></h2>
-      </div>
-      <p class="text-xs sm:text-sm text-neutral-400 max-w-md">
-        Select any workflow below to launch the interactive URL & local file repurposing modal.
+  <!-- SECTION III: PATRONAGE & ₹50 CUSTOM RUPEE SLIDER + DIRECT BANK SETTLEMENT -->
+  <section id="pricing" class="relative z-10 max-w-[1250px] mx-auto px-6 sm:px-12 pb-32 sm:pb-44 atelier-reveal">
+    <div class="border-t border-[#c5a880]/15 pt-16 text-center mb-16">
+      <span class="text-[10px] tracking-[0.32em] uppercase text-[#c5a880] block mb-3">Chapter III • Patronage & Settlement</span>
+      <h2 class="font-serif-luxury text-3xl sm:text-5xl text-[#f4efe6]">Complimentary Access or <span class="italic text-[#c5a880]">₹50 Bespoke Commission</span></h2>
+      <p class="text-[#8c857b] text-xs sm:text-sm max-w-lg mx-auto mt-4 leading-relaxed">
+        Begin with complimentary studio access, or commission custom video allocations starting at ₹50 with direct UPI bank settlement.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5" id="clipperCardsGrid"></div>
-  </section>
-
-  <!-- SECTION 04: FREE TRIAL + ₹50 CUSTOM RUPEE SLIDER + DIRECT BANK UPI GATEWAY -->
-  <section id="pricing" class="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 pb-28 sm:pb-36 kinetic-block">
-    <div class="text-center mb-14">
-      <span class="font-mono-code text-xs uppercase tracking-widest text-[#d4ff33] block mb-2">04 // TRANSPARENT INDIA SETTLEMENT</span>
-      <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Start Free or Build a <span class="font-editorial text-[#d4ff33]">₹50 Custom Pack</span></h2>
-      <p class="text-xs sm:text-base text-neutral-400 max-w-xl mx-auto mt-3">
-        Zero bloated retainers. Test everything free, or slide to unlock custom video packs starting at ₹50 with direct UPI settlement.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14 items-stretch">
       
-      <!-- Card 1: Free Forever Sandbox -->
-      <div class="spatial-pod p-8 sm:p-10 flex flex-col justify-between">
+      <!-- Complimentary Tier -->
+      <div class="luxury-card p-10 sm:p-14 flex flex-col justify-between">
         <div>
-          <div class="flex items-center justify-between">
-            <span class="px-3.5 py-1 rounded-full bg-white/10 text-white text-xs font-bold">Creator Sandbox</span>
-            <span class="text-xs font-mono-code text-[#d4ff33]">OPEN ACCESS</span>
+          <div class="flex items-center justify-between border-b border-white/10 pb-5">
+            <span class="text-[10px] tracking-[0.24em] uppercase text-[#8c857b]">Guest Pass</span>
+            <span class="font-mono-luxury text-[10px] text-[#c5a880] uppercase">Complimentary</span>
           </div>
-          <div class="mt-6 mb-3 flex items-baseline gap-2">
-            <span class="text-5xl sm:text-6xl font-extrabold text-white font-display">₹0</span>
-            <span class="text-xs text-neutral-400 font-mono-code">/ FREE TRIAL</span>
+          <div class="my-8 flex items-baseline gap-3">
+            <span class="font-serif-luxury text-6xl sm:text-7xl text-[#f4efe6]">₹0</span>
+            <span class="text-[10px] tracking-[0.22em] uppercase text-[#8c857b]">/ Perpetual Trial</span>
           </div>
-          <p class="text-xs sm:text-sm text-neutral-400 mb-8 leading-relaxed">
-            Experience the complete 9:16 studio, Smart AI background synthesis, 6 voice personas, and WebM video exports immediately.
-          </p>
-          <ul class="text-xs sm:text-sm text-neutral-200 space-y-3.5 mb-10">
-            <li class="flex items-center gap-3"><span class="text-[#d4ff33] font-bold">✦</span> <span>3 Free 9:16 Vertical Video Downloads (.WEBM)</span></li>
-            <li class="flex items-center gap-3"><span class="text-[#d4ff33] font-bold">✦</span> <span>Smart AI Text-to-Background Synthesis</span></li>
-            <li class="flex items-center gap-3"><span class="text-[#d4ff33] font-bold">✦</span> <span>Instagram Reels & YouTube Shorts UI Previews</span></li>
-            <li class="flex items-center gap-3"><span class="text-[#d4ff33] font-bold">✦</span> <span>Full Access to All 38+ Diagnostic & Clipper Tools</span></li>
+          <ul class="text-xs text-[#e6d5b8]/80 space-y-4 mb-12 leading-relaxed">
+            <li class="flex items-center gap-3"><span class="text-[#c5a880]">—</span> <span>Three 9:16 Master Video Exports (.WEBM)</span></li>
+            <li class="flex items-center gap-3"><span class="text-[#c5a880]">—</span> <span>Smart AI Scene Synthesis & 35mm Archival Plates</span></li>
+            <li class="flex items-center gap-3"><span class="text-[#c5a880]">—</span> <span>Six Neural Voice Personas & Cadence Control</span></li>
+            <li class="flex items-center gap-3"><span class="text-[#c5a880]">—</span> <span>Full Access to All 38 Atelier Instruments</span></li>
           </ul>
         </div>
-        <a href="#studio" class="w-full py-4 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-extrabold text-xs uppercase tracking-wider text-center border border-white/15 transition">
-          Launch Free Studio →
+        <a href="#studio" class="btn-outline-luxury w-full py-4 text-[10px] text-center">
+          Enter Screening Room
         </a>
       </div>
 
-      <!-- Card 2: Custom Rupee Plan Starting at ₹50 -->
-      <div class="spatial-pod p-8 sm:p-10 flex flex-col justify-between border-2 border-[#d4ff33] relative">
-        <span class="absolute -top-3.5 right-8 px-4 py-1 rounded-full bg-[#d4ff33] text-black text-[10px] font-extrabold uppercase tracking-widest">STARTS AT ₹50</span>
+      <!-- Bespoke Rupee Commission Starting at ₹50 -->
+      <div class="luxury-card p-10 sm:p-14 flex flex-col justify-between border border-[#c5a880]/60 relative">
+        <span class="absolute -top-3 right-10 px-4 py-1 bg-[#c5a880] text-black text-[9px] tracking-[0.24em] uppercase font-medium">From ₹50</span>
         <div>
-          <div class="flex items-center justify-between">
-            <span class="px-3.5 py-1 rounded-full bg-[#d4ff33]/15 text-[#d4ff33] text-xs font-bold">Custom Rupee Slider</span>
-            <span id="customReelCountBadge" class="text-xs font-mono-code text-[#ff5e36] font-bold">1 PRO VIDEO PACK</span>
+          <div class="flex items-center justify-between border-b border-[#c5a880]/20 pb-5">
+            <span class="text-[10px] tracking-[0.24em] uppercase text-[#c5a880]">Private Commission</span>
+            <span id="customReelCountBadge" class="font-mono-luxury text-[10px] text-[#f4efe6] uppercase">1 Master Reel</span>
           </div>
 
-          <div class="mt-6 mb-5 flex items-baseline gap-2">
-            <span id="customPriceDisplay" class="text-5xl sm:text-6xl font-extrabold text-white font-display">₹50</span>
-            <span class="text-xs text-neutral-400 font-mono-code">/ INSTANT PACK</span>
+          <div class="my-8 flex items-baseline gap-3">
+            <span id="customPriceDisplay" class="font-serif-luxury text-6xl sm:text-7xl text-[#f4efe6]">₹50</span>
+            <span class="text-[10px] tracking-[0.22em] uppercase text-[#8c857b]">/ Direct Settlement</span>
           </div>
 
-          <!-- Tactile Slider Box -->
-          <div class="p-5 rounded-2xl bg-black/70 border border-white/10 mb-6 space-y-3">
-            <div class="flex justify-between text-xs font-bold">
-              <span class="text-neutral-300">Slide to select video credits:</span>
-              <span id="sliderVideosLabel" class="text-[#d4ff33] font-mono-code">1 Video (₹50)</span>
+          <div class="p-6 bg-[#070706] border border-[#c5a880]/20 mb-8 space-y-4">
+            <div class="flex justify-between text-[11px] tracking-[0.14em] uppercase">
+              <span class="text-[#8c857b]">Commission Volume:</span>
+              <span id="sliderVideosLabel" class="text-[#c5a880] font-mono-luxury">1 Video (₹50)</span>
             </div>
-            <input id="customPlanSlider" type="range" min="1" max="50" step="1" value="1" class="w-full accent-[#d4ff33] cursor-pointer">
-            <div class="flex justify-between text-[10px] text-neutral-500 font-mono-code">
-              <span>1 Video (₹50)</span>
-              <span>15 Videos (₹750)</span>
-              <span>50 Videos (₹2,500)</span>
+            <input id="customPlanSlider" type="range" min="1" max="50" step="1" value="1" class="w-full cursor-pointer">
+            <div class="flex justify-between text-[9px] font-mono-luxury text-[#8c857b] uppercase">
+              <span>1 Reel (₹50)</span>
+              <span>15 Reels (₹750)</span>
+              <span>50 Reels (₹2,500)</span>
             </div>
           </div>
 
-          <ul class="text-xs sm:text-sm text-neutral-200 space-y-3 mb-8">
-            <li class="flex items-center gap-3"><span class="text-[#d4ff33] font-bold">✦</span> <span>1080p Watermark-Free Video & Voice Renders</span></li>
-            <li class="flex items-center gap-3"><span class="text-[#d4ff33] font-bold">✦</span> <span>Unlimited Smart AI Custom Scene Backgrounds</span></li>
-            <li class="flex items-center gap-3"><span class="text-[#d4ff33] font-bold">✦</span> <span>Direct UPI QR Settlement to Founder Bank Account</span></li>
+          <ul class="text-xs text-[#e6d5b8]/80 space-y-4 mb-10 leading-relaxed">
+            <li class="flex items-center gap-3"><span class="text-[#c5a880]">—</span> <span>Uncompressed 1080p Masters & Custom Voice Cloning</span></li>
+            <li class="flex items-center gap-3"><span class="text-[#c5a880]">—</span> <span>Unlimited Smart AI Scene Plates</span></li>
+            <li class="flex items-center gap-3"><span class="text-[#c5a880]">—</span> <span>Direct Bank UPI Settlement & Priority Concierge</span></li>
           </ul>
         </div>
 
-        <button type="button" id="openPaymentGatewayBtn" class="btn-acid w-full py-4 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
-          💳 Pay ₹50+ via Instant UPI / Bank Gateway
+        <button type="button" id="openPaymentGatewayBtn" class="btn-champagne w-full py-4 text-[11px] cursor-pointer">
+          Proceed to Private Bank Settlement
         </button>
       </div>
 
     </div>
   </section>
 
-  <!-- SECTION 05: FOUNDER CONCIERGE DESK (+91 7820847387) -->
-  <section id="founder-desk" class="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 pb-28 kinetic-block">
-    <div class="spatial-pod p-8 sm:p-12 border border-[#d4ff33]/35 flex flex-col md:flex-row items-center justify-between gap-8">
+  <!-- SECTION IV: PRIVATE FOUNDER CONCIERGE (+91 7820847387) -->
+  <section id="founder-desk" class="relative z-10 max-w-[1250px] mx-auto px-6 sm:px-12 pb-36 atelier-reveal">
+    <div class="luxury-card p-10 sm:p-16 border border-[#c5a880]/30 flex flex-col md:flex-row items-center justify-between gap-10">
       <div class="space-y-3 text-center md:text-left">
-        <span class="font-mono-code text-xs uppercase tracking-widest text-[#d4ff33]">05 // DIRECT FOUNDER LINE</span>
-        <h2 class="text-2xl sm:text-4xl font-extrabold text-white">Want Custom B2B AI Video Production?</h2>
-        <p class="text-xs sm:text-sm text-neutral-300 max-w-xl leading-relaxed">
-          Send your generated script directly to our founder production desk on WhatsApp (+91 7820847387) for bespoke brand grading, voice cloning, or enterprise onboarding.
+        <span class="text-[10px] tracking-[0.32em] uppercase text-[#c5a880]">Chapter IV • Direct Line</span>
+        <h2 class="font-serif-luxury text-3xl sm:text-5xl text-[#f4efe6]">Private Founder <span class="italic text-[#c5a880]">Concierge</span></h2>
+        <p class="text-xs sm:text-sm text-[#8c857b] max-w-xl leading-relaxed">
+          For bespoke brand retainers, custom ElevenLabs voice sessions, or direct production inquiries, connect with founder Arjun Dhore on WhatsApp (+91 7820847387).
         </p>
       </div>
-      <button type="button" id="contactFounderWhatsAppBtn" class="btn-acid px-8 py-4 rounded-full text-xs sm:text-sm uppercase tracking-wider shrink-0 cursor-pointer">
-        💬 Message Founder (+91 7820847387) →
+      <button type="button" id="contactFounderWhatsAppBtn" class="btn-champagne px-10 py-4 text-[11px] shrink-0 cursor-pointer">
+        WhatsApp Concierge (+91 7820847387)
       </button>
     </div>
   </section>
 
-  <!-- MODAL 1: DEDICATED AI CLIPPER & CONVERTER WORKSPACE -->
-  <div id="clipperWorkspaceModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-xl flex items-center justify-center p-4">
-    <div class="spatial-pod max-w-lg w-full p-7 border border-[#d4ff33]/40 space-y-5 shadow-2xl">
-      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+  <!-- MODAL 1: DEDICATED AI CLIPPER WORKSPACE -->
+  <div id="clipperWorkspaceModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
+    <div class="luxury-card max-w-lg w-full p-8 sm:p-10 border border-[#c5a880]/40 space-y-6">
+      <div class="flex items-baseline justify-between border-b border-[#c5a880]/20 pb-4">
         <div>
-          <span class="text-[10px] font-mono-code uppercase text-[#d4ff33]">Autonomous Repurposing Engine</span>
-          <h3 id="clipperModalTitle" class="text-xl font-extrabold text-white font-display">Video to Reels Converter</h3>
+          <span class="text-[9px] tracking-[0.28em] uppercase text-[#c5a880]">Autonomous Telecine</span>
+          <h3 id="clipperModalTitle" class="font-serif-luxury text-2xl text-[#f4efe6] mt-1">Video to Reels Converter</h3>
         </div>
-        <button type="button" id="closeClipperModalBtn" class="text-neutral-400 hover:text-white text-base cursor-pointer">✕</button>
+        <button type="button" id="closeClipperModalBtn" class="text-[#8c857b] hover:text-white text-sm cursor-pointer">✕</button>
       </div>
 
-      <div class="space-y-4">
+      <div class="space-y-5">
         <div>
-          <label class="block text-xs font-semibold text-neutral-300 mb-1.5">1. Paste Long Video URL (YouTube, Drive, Dropbox, Twitch) or Topic:</label>
-          <input id="clipperUrlInput" type="text" placeholder="https://youtube.com/watch?v=... or describe your video" class="w-full bg-black/80 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#d4ff33]">
+          <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2">Source Link (YouTube, Drive, Dropbox) or Subject</label>
+          <input id="clipperUrlInput" type="text" placeholder="https://youtube.com/watch?v=... or describe footage" class="input-atelier w-full px-4 py-3 text-xs">
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-neutral-300 mb-1.5">2. Or Upload Local Video / Audio File:</label>
-          <input id="clipperFileInput" type="file" accept="video/*,audio/*" class="w-full text-xs text-neutral-300 file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-white/10 file:text-white file:font-bold cursor-pointer">
+          <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2">Or Select Local Master File</label>
+          <input id="clipperFileInput" type="file" accept="video/*,audio/*" class="w-full text-xs text-[#8c857b] file:mr-4 file:py-2 file:px-4 file:border file:border-[#c5a880]/40 file:bg-transparent file:text-[#e6d5b8] file:text-[10px] file:uppercase file:tracking-widest cursor-pointer">
         </div>
 
-        <div class="grid grid-cols-3 gap-3">
-          <div>
-            <label class="block text-[10px] text-neutral-400 mb-1">Clip Length</label>
-            <select id="clipperDuration" class="w-full bg-black/80 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
-              <option value="15s">15s Viral Cut</option>
-              <option value="30s" selected>24s - 30s Reel</option>
-              <option value="60s">60s YT Short</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-[10px] text-neutral-400 mb-1">Auto-Reframe</label>
-            <select class="w-full bg-black/80 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
-              <option>9:16 Face-Track</option>
-              <option>Split-Screen</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-[10px] text-neutral-400 mb-1">Subtitles</label>
-            <select class="w-full bg-black/80 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
-              <option>Hormozi Bold</option>
-              <option>Hinglish Auto</option>
-            </select>
-          </div>
-        </div>
-
-        <div id="clipperProgressWrap" class="hidden p-4 rounded-2xl bg-black/80 border border-[#d4ff33]/30 space-y-2">
-          <div class="flex justify-between text-[11px] font-mono-code text-[#d4ff33]">
-            <span id="clipperStageText">Analyzing audio peaks & hooks...</span>
+        <div id="clipperProgressWrap" class="hidden p-4 bg-[#070706] border border-[#c5a880]/30 space-y-2">
+          <div class="flex justify-between text-[10px] font-mono-luxury text-[#c5a880]">
+            <span id="clipperStageText">Isolating high-retention act...</span>
             <span id="clipperPctText">35%</span>
           </div>
-          <div class="w-full h-2 bg-neutral-900 rounded-full overflow-hidden">
-            <div id="clipperProgressBar" class="h-full bg-[#d4ff33] w-1/3 transition-all duration-300"></div>
+          <div class="w-full h-1 bg-neutral-900 overflow-hidden">
+            <div id="clipperProgressBar" class="h-full bg-[#c5a880] w-1/3 transition-all duration-300"></div>
           </div>
         </div>
 
-        <button type="button" id="runClipperExtractBtn" class="btn-acid w-full py-4 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
-          ✂️ Extract Viral 9:16 Clip & Open in Studio
+        <button type="button" id="runClipperExtractBtn" class="btn-champagne w-full py-4 text-[10px] cursor-pointer">
+          Extract Vertical Master & Load Screening Room
         </button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 2: DIRECT BANK UPI PAYMENT GATEWAY -->
-  <div id="paymentGatewayModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-xl flex items-center justify-center p-4">
-    <div class="spatial-pod max-w-md w-full overflow-hidden border border-[#d4ff33]/40 shadow-2xl max-h-[92vh] overflow-y-auto">
-      <div class="bg-[#d4ff33] p-5 flex items-center justify-between text-black">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-black text-[#d4ff33] flex items-center justify-center font-extrabold text-lg">₹</div>
-          <div>
-            <h3 class="text-sm font-extrabold uppercase tracking-wide">Direct Bank UPI Settlement</h3>
-            <p id="gatewayPlanSubtitle" class="text-xs font-semibold opacity-80">Custom Pack: 1 Video</p>
-          </div>
+  <!-- MODAL 2: DIRECT BANK UPI SETTLEMENT -->
+  <div id="paymentGatewayModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
+    <div class="luxury-card max-w-md w-full overflow-hidden border border-[#c5a880]/50 max-h-[92vh] overflow-y-auto">
+      <div class="bg-[#14120f] border-b border-[#c5a880]/25 p-6 flex items-center justify-between">
+        <div>
+          <span class="text-[9px] tracking-[0.28em] uppercase text-[#c5a880]">Private Treasury</span>
+          <h3 class="font-serif-luxury text-2xl text-[#f4efe6]">Direct Bank Settlement</h3>
+          <p id="gatewayPlanSubtitle" class="text-[11px] text-[#8c857b] mt-0.5">Commission: 1 Video</p>
         </div>
         <div class="text-right">
-          <span id="gatewayAmountBadge" class="text-2xl font-extrabold font-display">₹50</span>
-          <button type="button" id="closePaymentModalBtn" class="block ml-auto text-xs font-bold underline cursor-pointer">Close</button>
+          <span id="gatewayAmountBadge" class="font-serif-luxury text-3xl text-[#c5a880]">₹50</span>
+          <button type="button" id="closePaymentModalBtn" class="block ml-auto text-[10px] tracking-widest uppercase text-[#8c857b] hover:text-white mt-1 cursor-pointer">Close</button>
         </div>
       </div>
 
-      <div class="p-6 space-y-4">
-        <div class="p-3.5 rounded-2xl bg-black/70 border border-white/10 space-y-1.5">
+      <div class="p-6 space-y-5">
+        <div class="p-4 bg-[#070706] border border-[#c5a880]/20 space-y-2">
           <div class="flex items-center justify-between">
-            <span class="text-[11px] font-bold text-[#d4ff33]">🏦 Receiving Bank UPI ID:</span>
-            <button type="button" id="toggleUpiEditBtn" class="text-[10px] text-[#ff5e36] underline cursor-pointer">Edit Bank UPI</button>
+            <span class="text-[10px] tracking-[0.18em] uppercase text-[#8c857b]">Receiving Bank UPI:</span>
+            <button type="button" id="toggleUpiEditBtn" class="text-[10px] tracking-widest uppercase text-[#c5a880] underline cursor-pointer">Configure</button>
           </div>
-          <p id="activeMerchantUpiLabel" class="text-xs font-mono-code text-white font-bold">7820847387@upi</p>
+          <p id="activeMerchantUpiLabel" class="text-xs font-mono-luxury text-[#f4efe6]">7820847387@upi</p>
           <div id="merchantUpiEditBox" class="hidden pt-2 space-y-2">
-            <input id="merchantUpiInput" type="text" placeholder="e.g. 7820847387@kotak or 7820847387@okaxis" class="w-full bg-black border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono-code">
-            <button type="button" id="saveMerchantUpiBtn" class="btn-acid w-full py-2 rounded-xl text-[11px] cursor-pointer">Save Receiving UPI ID</button>
+            <input id="merchantUpiInput" type="text" placeholder="e.g. 7820847387@kotak or 7820847387@okaxis" class="input-atelier w-full px-3 py-2 text-xs font-mono-luxury">
+            <button type="button" id="saveMerchantUpiBtn" class="btn-champagne w-full py-2 text-[10px] cursor-pointer">Save Bank UPI</button>
           </div>
         </div>
 
         <div class="text-center space-y-3">
-          <p class="text-xs text-neutral-300">1. Scan QR with GPay, PhonePe, Paytm, or Kotak/Axis App:</p>
-          <div class="w-44 h-44 mx-auto bg-white p-2.5 rounded-2xl shadow-lg flex items-center justify-center">
+          <p class="text-[11px] text-[#8c857b]">Scan via GPay, PhonePe, or Private Banking App:</p>
+          <div class="w-44 h-44 mx-auto bg-white p-3 flex items-center justify-center">
             <img id="dynamicUpiQr" src="" alt="UPI QR" class="w-full h-full object-contain">
           </div>
-          <a id="mobileUpiDeepLink" href="#" class="inline-block w-full py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold text-[#d4ff33] transition">
-            📱 Tap Here on Phone to Pay via UPI App
+          <a id="mobileUpiDeepLink" href="#" class="btn-outline-luxury inline-block w-full py-3 text-[10px]">
+            Launch Mobile UPI App Directly
           </a>
         </div>
 
-        <div class="space-y-2.5 pt-2 border-t border-white/10">
-          <label class="block text-[11px] font-semibold text-neutral-300">2. Enter Customer Name & 12-Digit UPI Ref / UTR No:</label>
-          <input id="payerNameInput" type="text" placeholder="Your Name / Brand Name *" class="w-full bg-black/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
-          <input id="payerUtrInput" type="text" placeholder="12-Digit UPI Ref / UTR Number" class="w-full bg-black/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white font-mono-code">
+        <div class="space-y-3 pt-3 border-t border-white/10">
+          <input id="payerNameInput" type="text" placeholder="Patron Name / Maison *" class="input-atelier w-full px-3.5 py-2.5 text-xs">
+          <input id="payerUtrInput" type="text" placeholder="12-Digit UPI Reference / UTR Number" class="input-atelier w-full px-3.5 py-2.5 text-xs font-mono-luxury">
         </div>
 
-        <button type="button" id="confirmPaymentBtn" class="btn-acid w-full py-4 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
-          ✓ Verify Payment & Unlock on WhatsApp
+        <button type="button" id="confirmPaymentBtn" class="btn-champagne w-full py-4 text-[10px] cursor-pointer">
+          Transmit Receipt & Unlock Allocation
         </button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 3: HARDWARE & CREATOR UTILITY MODAL -->
-  <div id="utilityToolModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-xl flex items-center justify-center p-4">
-    <div class="spatial-pod max-w-lg w-full p-7 border border-white/15 space-y-4">
-      <div class="flex items-center justify-between">
-        <h3 id="utilModalTitle" class="text-xl font-bold text-white font-display">Utility Tool</h3>
-        <button type="button" id="closeUtilModalBtn" class="text-neutral-400 hover:text-white text-base cursor-pointer">✕</button>
+  <!-- MODAL 3: DIAGNOSTIC INSTRUMENT MODAL (Auto-Releases Mic & Camera!) -->
+  <div id="utilityToolModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
+    <div class="luxury-card max-w-lg w-full p-8 border border-[#c5a880]/40 space-y-5">
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <h3 id="utilModalTitle" class="font-serif-luxury text-2xl text-[#f4efe6]">Instrument</h3>
+        <button type="button" id="closeUtilModalBtn" class="text-[#8c857b] hover:text-white text-sm cursor-pointer">✕</button>
       </div>
-      <p id="utilModalDesc" class="text-xs text-neutral-400"></p>
-      <div id="utilModalBody" class="space-y-3"></div>
+      <p id="utilModalDesc" class="text-xs text-[#8c857b]"></p>
+      <div id="utilModalBody" class="space-y-4"></div>
     </div>
   </div>
 
-  <!-- MODAL 4: PERSISTENT LOGIN & REGISTER -->
-  <div id="authModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-xl flex items-center justify-center p-4">
-    <div class="spatial-pod max-w-md w-full p-7 space-y-5 border border-white/15">
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-bold text-white font-display">ReelFlow Creator Pass</h3>
-        <button type="button" id="closeAuthModalBtn" class="text-neutral-400 hover:text-white text-base cursor-pointer">✕</button>
+  <!-- MODAL 4: PERSISTENT MEMBER ACCESS -->
+  <div id="authModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
+    <div class="luxury-card max-w-md w-full p-8 sm:p-10 space-y-6 border border-[#c5a880]/40">
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div>
+          <span class="text-[9px] tracking-[0.28em] uppercase text-[#c5a880]">Private Registry</span>
+          <h3 class="font-serif-luxury text-2xl text-[#f4efe6] mt-0.5">Atelier Member Pass</h3>
+        </div>
+        <button type="button" id="closeAuthModalBtn" class="text-[#8c857b] hover:text-white text-sm cursor-pointer">✕</button>
       </div>
-      <div class="grid grid-cols-2 gap-2 p-1.5 rounded-2xl bg-black border border-white/10">
-        <button type="button" id="tabLoginBtn" class="py-2.5 rounded-xl bg-[#d4ff33] text-black text-xs font-extrabold cursor-pointer">Sign In</button>
-        <button type="button" id="tabRegisterBtn" class="py-2.5 rounded-xl text-neutral-400 text-xs font-bold cursor-pointer">Register</button>
+      <div class="grid grid-cols-2 gap-2 p-1 bg-[#070706] border border-white/10">
+        <button type="button" id="tabLoginBtn" class="py-2.5 bg-[#c5a880] text-black text-[10px] tracking-[0.2em] uppercase font-medium cursor-pointer">Sign In</button>
+        <button type="button" id="tabRegisterBtn" class="py-2.5 text-[#8c857b] text-[10px] tracking-[0.2em] uppercase cursor-pointer">Register</button>
       </div>
-      <form id="authForm" class="space-y-3.5">
-        <input id="authNameInput" type="text" placeholder="Your Full Name *" class="hidden w-full bg-black/70 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white">
-        <input id="authEmailInput" type="email" required placeholder="Email Address *" class="w-full bg-black/70 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white">
-        <input id="authPassInput" type="password" required placeholder="Password *" class="w-full bg-black/70 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white">
-        <button type="submit" class="btn-acid w-full py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">Save Session & Enter →</button>
+      <form id="authForm" class="space-y-4">
+        <input id="authNameInput" type="text" placeholder="Full Name or Title *" class="hidden input-atelier w-full px-4 py-3 text-xs">
+        <input id="authEmailInput" type="email" required placeholder="Private Email Address *" class="input-atelier w-full px-4 py-3 text-xs">
+        <input id="authPassInput" type="password" required placeholder="Passkey *" class="input-atelier w-full px-4 py-3 text-xs">
+        <button type="submit" class="btn-champagne w-full py-4 text-[10px] cursor-pointer">Authenticate & Remember Pass</button>
       </form>
-      <p class="text-[11px] text-neutral-400 text-center">Your login is permanently remembered on this browser until you click Exit.</p>
+      <p class="text-[10px] text-[#8c857b] text-center">Your credentials remain persistently active on this device.</p>
     </div>
   </div>
 
-  <!-- MODAL 5: GEMINI API KEY -->
-  <div id="apiModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-xl flex items-center justify-center p-4">
-    <div class="spatial-pod max-w-md w-full p-7 space-y-4 border border-white/15">
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-bold text-white font-display">⚡ Connect Gemini 2.5 Flash Key</h3>
-        <button type="button" id="closeApiModalBtn" class="text-neutral-400 hover:text-white text-base cursor-pointer">✕</button>
+  <!-- MODAL 5: GEMINI API ENGINE KEY -->
+  <div id="apiModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
+    <div class="luxury-card max-w-md w-full p-8 space-y-5 border border-[#c5a880]/40">
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <h3 class="font-serif-luxury text-2xl text-[#f4efe6]">Gemini 2.5 Flash Key</h3>
+        <button type="button" id="closeApiModalBtn" class="text-[#8c857b] hover:text-white text-sm cursor-pointer">✕</button>
       </div>
-      <p class="text-xs text-neutral-400">Paste a free API key from Google AI Studio for live LLM script synthesis:</p>
-      <input id="geminiKeyInput" type="password" placeholder="AIzaSy..." class="w-full bg-black/70 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white font-mono-code">
-      <div class="flex justify-end gap-2">
-        <button type="button" id="saveApiKeyBtn" class="btn-acid px-5 py-2.5 rounded-xl text-xs cursor-pointer">Save Key</button>
+      <p class="text-xs text-[#8c857b]">Enter your Google AI Studio key for live LLM manuscript synthesis:</p>
+      <input id="geminiKeyInput" type="password" placeholder="AIzaSy..." class="input-atelier w-full px-4 py-3 text-xs font-mono-luxury">
+      <div class="flex justify-end">
+        <button type="button" id="saveApiKeyBtn" class="btn-champagne px-6 py-2.5 text-[10px] cursor-pointer">Save Key</button>
       </div>
     </div>
   </div>
 
-  <!-- SYNTAX-VERIFIED APPLICATION JAVASCRIPT ENGINE -->
+  <!-- SYNTAX-VERIFIED ATELIER JAVASCRIPT ENGINE -->
   <script>
     (function() {
       var FOUNDER_WHATSAPP = "917820847387";
@@ -898,18 +838,18 @@
       };
 
       var UTILITY_TOOLS = [
-        { id: "camera", icon: "📹", title: "Camera Test", desc: "Live webcam check with instant hardware release" },
-        { id: "mic", icon: "🎙️", title: "Mic Test", desc: "10s frequency spectrum check with auto-shutoff" },
-        { id: "audioconv", icon: "🔄", title: "Audio Converter", desc: "Convert raw audio tracks into MP3 & WAV" },
-        { id: "videoconv", icon: "🎞️", title: "Video Converter", desc: "Transcode vertical clips to MP4 & WEBM" },
-        { id: "extractor", icon: "🎵", title: "Audio Extractor", desc: "Strip clean voice tracks from any video file" },
-        { id: "remover", icon: "🔇", title: "Audio Remover", desc: "Mute background noise and room echo" },
-        { id: "audiotrans", icon: "📝", title: "Audio Transcription", desc: "Convert voice notes into structured text" },
-        { id: "videotrans", icon: "📄", title: "Video Transcription", desc: "Extract timestamped captions from video" },
-        { id: "podtrans", icon: "🎧", title: "Podcast Transcription", desc: "Turn multi-guest podcasts into show notes" },
-        { id: "tiktokscript", icon: "✨", title: "AI TikTok Script Engine", desc: "Engineer pattern-interrupt TikTok & Reel scripts" },
-        { id: "ytscript", icon: "▶️", title: "AI YouTube Script Engine", desc: "Write high-retention YouTube Shorts scripts" },
-        { id: "salesscript", icon: "💼", title: "AI Sales Script Engine", desc: "Build direct-response B2B & D2C video scripts" }
+        { id: "camera", code: "01", title: "Optical Camera Diagnostic", desc: "Verify lens framing with instant hardware release" },
+        { id: "mic", code: "02", title: "Acoustic Microphone Check", desc: "10-second spectrum calibration with auto-shutoff" },
+        { id: "audioconv", code: "03", title: "Master Audio Transcoder", desc: "Convert raw recordings into uncompressed WAV & MP3" },
+        { id: "videoconv", code: "04", title: "Telecine Video Converter", desc: "Transcode cinema plates to MP4 & WEBM" },
+        { id: "extractor", code: "05", title: "Dialogue Stem Extractor", desc: "Isolate pure voice tracks from master footage" },
+        { id: "remover", code: "06", title: "Ambient Noise Suppressor", desc: "Strip unwanted room resonance from video" },
+        { id: "audiotrans", code: "07", title: "Voice-to-Manuscript", desc: "Transcribe spoken monologues into clean prose" },
+        { id: "videotrans", code: "08", title: "Timecode Caption Scribe", desc: "Extract synchronized subtitles from film" },
+        { id: "podtrans", code: "09", title: "Salon & Podcast Scribe", desc: "Distill long-form conversations into essays" },
+        { id: "tiktokscript", code: "10", title: "Short-Form Hook Architect", desc: "Compose high-retention vertical manuscripts" },
+        { id: "ytscript", code: "11", title: "YouTube Shorts Dramaturg", desc: "Structure 60-second narrative arcs" },
+        { id: "salesscript", code: "12", title: "Commercial Pitch Scribe", desc: "Write persuasive B2B & D2C acquisition scripts" }
       ];
 
       var CLIPPER_TOOLS = [
@@ -929,20 +869,20 @@
       ];
 
       var VOICE_PERSONAS = [
-        { id: "aarav", name: "Aarav (Founder)", rate: 1.08, pitch: 0.96 },
-        { id: "zoya", name: "Zoya (Viral D2C)", rate: 1.15, pitch: 1.12 },
-        { id: "kabir", name: "Kabir (Deep Bass)", rate: 0.96, pitch: 0.82 },
-        { id: "riya", name: "Riya (Hinglish)", rate: 1.12, pitch: 1.06 },
-        { id: "vikram", name: "Vikram (Analyst)", rate: 1.10, pitch: 0.92 },
-        { id: "custom", name: "Custom Clone", rate: 1.05, pitch: 1.00 }
+        { id: "aarav", name: "Aarav • Executive", rate: 1.05, pitch: 0.95 },
+        { id: "zoya", name: "Zoya • Editorial", rate: 1.12, pitch: 1.08 },
+        { id: "kabir", name: "Kabir • Baritone", rate: 0.95, pitch: 0.82 },
+        { id: "riya", name: "Riya • Mumbai Vogue", rate: 1.10, pitch: 1.04 },
+        { id: "vikram", name: "Vikram • Strategist", rate: 1.08, pitch: 0.92 },
+        { id: "custom", name: "Bespoke Clone", rate: 1.04, pitch: 1.00 }
       ];
 
       var PRESETS = {
-        coffee: { brand: "Asli Cold Brew Coffee", audience: "Young professionals and college students tired of spending Rs 350 on watery cafe coffee", tone: "controversial", lang: "hinglish", photoPack: "coffee" },
-        fintech: { brand: "Kotak & Burgundy Card Maximizer", audience: "Students booking flights and movie tickets without claiming hidden bank rewards", tone: "data", lang: "hinglish", photoPack: "workspace" },
-        saas: { brand: "PayPulse AI Invoice Recovery", audience: "Agency founders and freelancers chasing overdue client payments", tone: "story", lang: "english", photoPack: "workspace" },
-        podcast: { brand: "Founder Unfiltered Podcast Clip", audience: "Entrepreneurs building profitable AI startups in India", tone: "secret", lang: "hinglish", photoPack: "cyber" },
-        streetwear: { brand: "Bandra 280GSM Heavyweight Tees", audience: "Sneakerheads tired of fast-fashion t-shirts shrinking after two washes", tone: "controversial", lang: "hinglish", photoPack: "street" }
+        coffee: { brand: "Asli Artisanal Cold Brew", audience: "Founders and young professionals fatigued by overpriced ₹350 commercial cafe water", tone: "controversial", lang: "hinglish", photoPack: "coffee" },
+        fintech: { brand: "Kotak & Burgundy Private Rewards", audience: "Members booking flights and cinema seats without unlocking hidden tier privileges", tone: "data", lang: "hinglish", photoPack: "luxury" },
+        saas: { brand: "PayPulse Autonomous Ledger", audience: "Boutique agency principals awaiting overdue client retainers", tone: "story", lang: "english", photoPack: "workspace" },
+        podcast: { brand: "The Founder Monograph Ep. 42", audience: "Entrepreneurs architecting high-margin AI ventures in Mumbai", tone: "secret", lang: "hinglish", photoPack: "cyber" },
+        streetwear: { brand: "Bandra 280GSM Atelier Heavyweight", audience: "Collectors seeking architectural silhouettes that never lose form", tone: "controversial", lang: "hinglish", photoPack: "street" }
       };
 
       var currentProject = null;
@@ -977,9 +917,7 @@
           micAutoStopTimer = null;
         }
         if (activeMediaStream) {
-          activeMediaStream.getTracks().forEach(function(track) {
-            track.stop();
-          });
+          activeMediaStream.getTracks().forEach(function(track) { track.stop(); });
           activeMediaStream = null;
         }
         if (activeAudioContext) {
@@ -1026,10 +964,10 @@
       }
 
       function generateSmartAiBackground(promptText) {
-        var cleanPrompt = (promptText || "modern neon studio background").trim();
-        showToast("Synthesizing Smart AI Background...");
+        var cleanPrompt = (promptText || "luxury dark architectural interior").trim();
+        showToast("Synthesizing Bespoke Scene Plate...");
         var seed = Math.floor(Math.random() * 99999);
-        var aiUrl = "https://image.pollinations.ai/prompt/" + encodeURIComponent(cleanPrompt + ", vertical 9:16 wallpaper, cinematic lighting, 8k, no text") + "?width=540&height=960&nologo=true&seed=" + seed;
+        var aiUrl = "https://image.pollinations.ai/prompt/" + encodeURIComponent(cleanPrompt + ", vertical 9:16 editorial photography, Leica 35mm, chiaroscuro lighting, no text") + "?width=540&height=960&nologo=true&seed=" + seed;
 
         var img = new Image();
         img.crossOrigin = "anonymous";
@@ -1037,7 +975,7 @@
           customOrSmartBgImg = img;
           bgMode = "smart_ai";
           drawCanvas();
-          showToast("✨ Smart AI Background applied to 9:16 monitor!");
+          showToast("Bespoke AI Scene Plate Mounted");
         };
         img.onerror = function() {
           var off = document.createElement("canvas");
@@ -1045,32 +983,32 @@
           off.height = 960;
           var octx = off.getContext("2d");
           var g = octx.createLinearGradient(0, 0, 540, 960);
-          g.addColorStop(0, "#0b0d12");
-          g.addColorStop(0.5, "#1f2410");
-          g.addColorStop(1, "#2e150f");
+          g.addColorStop(0, "#0b0a08");
+          g.addColorStop(0.5, "#1c1813");
+          g.addColorStop(1, "#090807");
           octx.fillStyle = g;
           octx.fillRect(0, 0, 540, 960);
-          for (var i = 0; i < 16; i++) {
-            octx.fillStyle = "rgba(212, 255, 51, 0.08)";
+          for (var i = 0; i < 12; i++) {
+            octx.strokeStyle = "rgba(197, 168, 128, 0.12)";
+            octx.lineWidth = 1;
             octx.beginPath();
-            octx.arc(Math.random() * 540, Math.random() * 960, 30 + Math.random() * 120, 0, Math.PI * 2);
-            octx.fill();
+            octx.arc(270, 480, 40 + i * 35, 0, Math.PI * 2);
+            octx.stroke();
           }
           var dataImg = new Image();
           dataImg.onload = function() {
             customOrSmartBgImg = dataImg;
             bgMode = "smart_ai";
             drawCanvas();
-            showToast("✨ Smart Procedural AI Background applied!");
+            showToast("Bespoke Guilloche Plate Mounted");
           };
           dataImg.src = off.toDataURL();
         };
         img.src = aiUrl;
       }
 
-      // Bidirectional 3D Kinetic Scroll Engine (Scroll Down AND Scroll Up + Top Laser Progress Bar)
-      function initKineticScrollEngine() {
-        var blocks = document.querySelectorAll(".kinetic-block");
+      function initAtelierScrollPhysics() {
+        var blocks = document.querySelectorAll(".atelier-reveal");
         var progBar = document.getElementById("scrollProgressBar");
 
         window.addEventListener("scroll", function() {
@@ -1080,64 +1018,56 @@
           if (progBar) progBar.style.width = pct + "%";
         }, { passive: true });
 
-        // Interactive Cursor Spotlight
-        window.addEventListener("mousemove", function(e) {
-          var xPct = Math.round((e.clientX / window.innerWidth) * 100);
-          var yPct = Math.round((e.clientY / window.innerHeight) * 100);
-          document.documentElement.style.setProperty("--mouse-x", xPct + "%");
-          document.documentElement.style.setProperty("--mouse-y", yPct + "%");
-        }, { passive: true });
-
         if (!("IntersectionObserver" in window)) return;
         var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (entry.isIntersecting) {
-              entry.target.classList.remove("out-below", "out-above");
+              entry.target.classList.remove("veil-below", "veil-above");
             } else {
               var rect = entry.boundingClientRect;
               if (rect.top > 0) {
-                entry.target.classList.add("out-below");
-                entry.target.classList.remove("out-above");
+                entry.target.classList.add("veil-below");
+                entry.target.classList.remove("veil-above");
               } else {
-                entry.target.classList.add("out-above");
-                entry.target.classList.remove("out-below");
+                entry.target.classList.add("veil-above");
+                entry.target.classList.remove("veil-below");
               }
             }
           });
-        }, { threshold: 0.08, rootMargin: "-20px 0px -20px 0px" });
+        }, { threshold: 0.06, rootMargin: "-15px 0px -15px 0px" });
 
         blocks.forEach(function(b) { observer.observe(b); });
       }
 
       function buildBlueprint(brand, audience, tone, lang) {
-        var cleanBrand = (brand || "Your Brand").trim();
-        var cleanAud = (audience || "smart creators").trim();
+        var cleanBrand = (brand || "Your Maison").trim();
+        var cleanAud = (audience || "discerning patrons").trim();
         var hooks = [];
         var scenes = [];
 
         if (lang === "hinglish") {
           hooks = [
-            "Bhai, agar aap abhi bhi " + cleanBrand + " ignore kar rahe ho, toh har mahine paise waste kar rahe ho.",
+            "Sach bataun? Agar aap abhi bhi " + cleanBrand + " ignore kar rahe ho, toh har mahine capital waste kar rahe ho.",
             "99% log yeh ek galti karte hain—especially " + cleanAud.slice(0, 45) + ".",
-            "Sach bataun? Traditional options scam lagte hain jab aap " + cleanBrand + " ka real breakdown dekhte ho."
+            "Mainstream options bilkul ordinary lagte hain jab aap " + cleanBrand + " ka asli craft dekhte ho."
           ];
           scenes = [
-            { time: "00:00 - 00:03", label: "HOOK IMPACT", voice: hooks[0] },
-            { time: "00:03 - 00:09", label: "PAIN AGITATION", voice: "Dekho problem simple hai: " + cleanAud + " roz time aur paisa lagate hain, par result zero milta hai." },
-            { time: "00:09 - 00:18", label: "THE SOLUTION", voice: "Isiliye humne banaya " + cleanBrand + ". Bina kisi manual headache ke, aapko milta hai 3X faster output." },
-            { time: "00:18 - 00:24", label: "CALL TO ACTION", voice: "Abhi comment karo LINK aur free trial seedha apne DM mein pao!" }
+            { time: "00:00 - 00:03", label: "ACT I • THE OVERTURE", voice: hooks[0] },
+            { time: "00:03 - 00:09", label: "ACT II • THE TENSION", voice: "Dekho problem simple hai: " + cleanAud + " roz time aur paisa lagate hain, par uncompromising quality nahi milti." },
+            { time: "00:09 - 00:18", label: "ACT III • THE CRAFT", voice: "Isiliye humne curate kiya " + cleanBrand + ". Bina kisi manual friction ke, aapko milta hai studio-grade excellence." },
+            { time: "00:18 - 00:24", label: "ACT IV • INVITATION", voice: "Abhi comment karo INVITE aur private access seedha apne DM mein pao." }
           ];
         } else {
           hooks = [
-            "Stop wasting money on outdated options if you care about " + cleanBrand + ".",
-            "Here is the exact math behind how " + cleanBrand + " saves you 10+ hours every single week.",
-            "The industry does not want " + cleanAud.slice(0, 42) + " to know this simple shortcut exists."
+            "Forgive the candor, but most alternatives to " + cleanBrand + " are built on compromise.",
+            "We examined the numbers behind " + cleanBrand + "—and the asymmetry is impossible to ignore.",
+            "What the establishment rarely tells " + cleanAud.slice(0, 42) + " about true leverage."
           ];
           scenes = [
-            { time: "00:00 - 00:03", label: "HOOK IMPACT", voice: hooks[0] },
-            { time: "00:03 - 00:09", label: "PAIN AGITATION", voice: "Right now, " + cleanAud + " are stuck overpaying and losing hours on broken workflows." },
-            { time: "00:09 - 00:18", label: "THE SOLUTION", voice: "That is why " + cleanBrand + " was built from day one to deliver studio-grade results automatically." },
-            { time: "00:18 - 00:24", label: "CALL TO ACTION", voice: "Comment LINK below and we will send instant access straight to your DMs!" }
+            { time: "00:00 - 00:03", label: "ACT I • THE OVERTURE", voice: hooks[0] },
+            { time: "00:03 - 00:09", label: "ACT II • THE TENSION", voice: "For too long, " + cleanAud + " have had to choose between exorbitant retainers and mediocre execution." },
+            { time: "00:09 - 00:18", label: "ACT III • THE CRAFT", voice: cleanBrand + " was architected from first principles to deliver quiet, uncompromising performance in sixty seconds." },
+            { time: "00:18 - 00:24", label: "ACT IV • INVITATION", voice: "Comment INVITE below to receive your private dossier via direct message." }
           ];
         }
 
@@ -1152,9 +1082,9 @@
           var active = p.id === activePersonaId;
           var btn = document.createElement("button");
           btn.type = "button";
-          btn.className = "p-3 rounded-2xl border text-left transition cursor-pointer " +
-            (active ? "bg-[#d4ff33]/15 border-[#d4ff33] text-white font-bold" : "bg-black/60 border-white/10 text-neutral-300 hover:border-white/25");
-          btn.innerHTML = '<div class="text-xs truncate">🎙️ ' + p.name + '</div>';
+          btn.className = "py-3 px-3.5 border text-left transition cursor-pointer " +
+            (active ? "border-[#c5a880] bg-[#c5a880]/15 text-[#f4efe6]" : "border-white/10 bg-[#070706]/60 text-[#8c857b] hover:border-[#c5a880]/40");
+          btn.innerHTML = '<div class="text-[11px] tracking-[0.08em] truncate">' + p.name + '</div>';
           btn.addEventListener("click", function() {
             activePersonaId = p.id;
             document.getElementById("voiceRate").value = String(p.rate);
@@ -1176,39 +1106,40 @@
         currentProject.hooks.forEach(function(h, idx) {
           var active = idx === currentProject.activeHookIndex;
           var div = document.createElement("div");
-          div.className = "cursor-pointer p-3 rounded-2xl border text-xs transition flex items-center gap-2.5 " +
-            (active ? "bg-[#d4ff33]/15 border-[#d4ff33] text-white font-semibold" : "bg-black/50 border-white/10 text-neutral-300 hover:border-white/25");
-          div.innerHTML = '<span class="px-2 py-0.5 rounded-md bg-[#d4ff33] text-black text-[10px] font-mono-code font-bold">H' + (idx + 1) + '</span><span class="truncate">"' + h + '"</span>';
+          div.className = "cursor-pointer p-4 border text-xs transition flex items-center gap-4 " +
+            (active ? "border-[#c5a880] bg-[#c5a880]/10 text-[#f4efe6]" : "border-white/10 bg-[#070706]/60 text-[#8c857b] hover:border-white/25");
+          div.innerHTML = '<span class="font-mono-luxury text-[10px] text-[#c5a880] tracking-widest">0' + (idx + 1) + '</span><span class="italic font-serif-luxury text-base text-[#f4efe6] flex-1">"' + h + '"</span>';
           div.addEventListener("click", function() {
             currentProject.activeHookIndex = idx;
             currentProject.scenes[0].voice = currentProject.hooks[idx];
             activeSceneIdx = 0;
             renderStoryboardUI();
-            showToast("Activated Hook H" + (idx + 1));
+            showToast("Selected Overture Variation 0" + (idx + 1));
           });
           hooksBox.appendChild(div);
         });
 
         var scenesBox = document.getElementById("scenesList");
         scenesBox.innerHTML = "";
+        var romans = ["I", "II", "III", "IV"];
         currentProject.scenes.forEach(function(sc, idx) {
           var active = idx === activeSceneIdx;
           var node = document.createElement("div");
-          node.className = "timeline-node p-4 space-y-2.5 " + (active ? "active-scene" : "");
+          node.className = "scene-row p-5 space-y-3 " + (active ? "active-scene" : "");
 
           var topBar = document.createElement("div");
           topBar.className = "flex items-center justify-between gap-2";
           topBar.innerHTML =
-            '<div class="scene-select-trigger flex items-center gap-2.5 cursor-pointer">' +
-              '<span class="w-7 h-7 rounded-xl ' + (active ? 'bg-[#d4ff33] text-black' : 'bg-white/10 text-neutral-300') + ' text-xs font-extrabold flex items-center justify-center">0' + (idx + 1) + '</span>' +
+            '<div class="scene-select-trigger flex items-center gap-3 cursor-pointer">' +
+              '<span class="font-serif-luxury italic text-xl text-[#c5a880] w-6">' + romans[idx] + '.</span>' +
               '<div>' +
-                '<span class="block text-xs font-extrabold text-white tracking-wide">' + sc.label + '</span>' +
-                '<span class="block text-[10px] font-mono-code text-[#d4ff33]">' + sc.time + '</span>' +
+                '<span class="block text-[10px] tracking-[0.22em] uppercase text-[#f4efe6]">' + sc.label + '</span>' +
+                '<span class="block text-[9px] font-mono-luxury text-[#8c857b] mt-0.5">' + sc.time + '</span>' +
               '</div>' +
             '</div>' +
-            '<div class="flex items-center gap-1.5">' +
-              '<button type="button" class="speak-scene-btn px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/15 text-[10px] font-bold text-neutral-200 border border-white/10 cursor-pointer">🔊 Speak</button>' +
-              '<button type="button" class="rewrite-scene-btn px-2.5 py-1 rounded-full bg-[#d4ff33]/15 hover:bg-[#d4ff33]/25 text-[10px] font-bold text-[#d4ff33] border border-[#d4ff33]/30 cursor-pointer">✨ Polish</button>' +
+            '<div class="flex items-center gap-2">' +
+              '<button type="button" class="speak-scene-btn px-3 py-1 border border-white/10 hover:border-[#c5a880] text-[9px] tracking-[0.18em] uppercase text-[#e6d5b8] cursor-pointer">Audition</button>' +
+              '<button type="button" class="rewrite-scene-btn px-3 py-1 border border-[#c5a880]/30 hover:bg-[#c5a880]/15 text-[9px] tracking-[0.18em] uppercase text-[#c5a880] cursor-pointer">Refine</button>' +
             '</div>';
 
           topBar.querySelector(".scene-select-trigger").addEventListener("click", function() {
@@ -1226,40 +1157,34 @@
 
           topBar.querySelector(".rewrite-scene-btn").addEventListener("click", function() {
             var variations = [
-              "Wait—before you scroll past " + currentProject.brand + ", look at how much time this saves.",
-              "Top 1% creators quietly switched to " + currentProject.brand + " this month—here is why.",
-              "Stop doing this manually. " + currentProject.brand + " automates the entire workflow in 60 seconds.",
-              "Comment LINK right now and test " + currentProject.brand + " for free today!"
+              "Observe closely—before you scroll past " + currentProject.brand + ", consider the hours reclaimed.",
+              "Discerning founders quietly transitioned to " + currentProject.brand + " this quarter.",
+              "Manual workflows belong to the past. " + currentProject.brand + " orchestrates the entire process.",
+              "Comment INVITE below and experience " + currentProject.brand + " firsthand."
             ];
             currentProject.scenes[idx].voice = variations[idx % variations.length];
             activeSceneIdx = idx;
             renderStoryboardUI();
-            showToast("✨ Polished Scene " + (idx + 1) + " script!");
+            showToast("Refined Act " + romans[idx] + " Dialogue");
           });
 
           var ta = document.createElement("textarea");
           ta.rows = 2;
           ta.value = sc.voice;
-          ta.className = "w-full bg-black/80 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white font-medium focus:outline-none focus:border-[#d4ff33]";
+          ta.className = "input-atelier w-full px-3.5 py-2.5 text-xs leading-relaxed";
           ta.addEventListener("input", function(e) {
             currentProject.scenes[idx].voice = e.target.value;
             activeSceneIdx = idx;
             drawCanvas();
           });
 
-          var footBar = document.createElement("div");
-          footBar.className = "flex justify-between text-[10px] font-mono-code text-neutral-500";
-          var wordCount = sc.voice.trim().split(/\s+/).length;
-          footBar.innerHTML = '<span>WORDS: ' + wordCount + '</span><span>DURATION: ~' + Math.max(2, Math.round(wordCount / 2.8)) + 's</span>';
-
           node.appendChild(topBar);
           node.appendChild(ta);
-          node.appendChild(footBar);
           scenesBox.appendChild(node);
         });
 
         var nextBtn = document.getElementById("nextSceneBtn");
-        if (nextBtn) nextBtn.textContent = "⏭ Scene (" + (activeSceneIdx + 1) + "/4)";
+        if (nextBtn) nextBtn.textContent = "Act " + romans[activeSceneIdx] + " / IV ⏭";
 
         drawCanvas();
       }
@@ -1284,25 +1209,22 @@
 
         if (activeCapStyle === "hormozi" || activeCapStyle === "modern" || activeCapStyle === "red") {
           ctx.fillStyle = activeCapStyle === "red"
-            ? "rgba(255, 94, 54, 0.92)"
-            : (activeCapStyle === "modern" ? "rgba(10, 11, 15, 0.8)" : "rgba(0, 0, 0, 0.85)");
-          ctx.beginPath();
-          ctx.roundRect(36, y - totalH / 2 - 22, 540 - 72, totalH + 44, 24);
-          ctx.fill();
+            ? "rgba(125, 29, 29, 0.88)"
+            : (activeCapStyle === "modern" ? "rgba(10, 9, 8, 0.82)" : "rgba(7, 7, 6, 0.88)");
+          ctx.fillRect(36, y - totalH / 2 - 24, 540 - 72, totalH + 48);
+          ctx.strokeStyle = "rgba(197, 168, 128, 0.45)";
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(36, y - totalH / 2 - 24, 540 - 72, totalH + 48);
         }
 
         for (var i = 0; i < lines.length; i++) {
           var ly = startY + i * lineHeight;
-          ctx.strokeStyle = "rgba(0,0,0,0.92)";
-          ctx.lineWidth = 6;
-          ctx.strokeText(lines[i], x, ly);
-
           if (activeCapStyle === "hormozi") {
-            ctx.fillStyle = i % 2 === 0 ? "#d4ff33" : "#ffffff";
+            ctx.fillStyle = i % 2 === 0 ? "#e6d5b8" : "#ffffff";
           } else if (activeCapStyle === "neon") {
-            ctx.fillStyle = i % 2 === 0 ? "#d4ff33" : "#ff5e36";
+            ctx.fillStyle = i % 2 === 0 ? "#c5a880" : "#f4efe6";
           } else {
-            ctx.fillStyle = "#ffffff";
+            ctx.fillStyle = "#f4efe6";
           }
           ctx.fillText(lines[i], x, ly);
         }
@@ -1315,10 +1237,10 @@
         var W = canvas.width;
         var H = canvas.height;
         var scene = currentProject.scenes[activeSceneIdx] || currentProject.scenes[0];
-        var handle = document.getElementById("creatorHandleInput").value || "@reelflow.ai";
+        var handle = document.getElementById("creatorHandleInput").value || "@reelflow.atelier";
 
-        shaderTick += 0.025;
-        var zoom = 1.04 + Math.sin(shaderTick) * 0.035;
+        shaderTick += 0.018;
+        var zoom = 1.03 + Math.sin(shaderTick) * 0.025;
 
         var activeImg = null;
         if ((bgMode === "smart_ai" || bgMode === "upload") && customOrSmartBgImg && customOrSmartBgImg.complete) {
@@ -1334,19 +1256,19 @@
           ctx.drawImage(activeImg, -W / 2, -H / 2, W, H);
           ctx.restore();
           var vig = ctx.createLinearGradient(0, 0, 0, H);
-          vig.addColorStop(0, "rgba(0,0,0,0.55)");
-          vig.addColorStop(0.5, "rgba(0,0,0,0.28)");
-          vig.addColorStop(1, "rgba(0,0,0,0.85)");
+          vig.addColorStop(0, "rgba(7,7,6,0.65)");
+          vig.addColorStop(0.5, "rgba(7,7,6,0.32)");
+          vig.addColorStop(1, "rgba(7,7,6,0.88)");
           ctx.fillStyle = vig;
           ctx.fillRect(0, 0, W, H);
         } else {
           var shaders = {
-            obsidian: ["#050507", "#12151f", "#1e2412"],
-            gold: ["#090806", "#271c09", "#451a03"],
-            matrix: ["#040804", "#152608", "#080b11"],
+            obsidian: ["#070706", "#12100e", "#070706"],
+            gold: ["#080705", "#241d12", "#0b0907"],
+            matrix: ["#050806", "#0f1c14", "#060807"],
             custom: [
               document.getElementById("customColor1").value,
-              "#050608",
+              "#070706",
               document.getElementById("customColor2").value
             ]
           };
@@ -1358,108 +1280,80 @@
           ctx.fillStyle = bgGrad;
           ctx.fillRect(0, 0, W, H);
 
-          var orbX = W * 0.5 + Math.cos(shaderTick) * 85;
-          var orbY = H * 0.42 + Math.sin(shaderTick) * 65;
-          var glow = ctx.createRadialGradient(orbX, orbY, 10, orbX, orbY, 310);
-          glow.addColorStop(0, "rgba(212, 255, 51, 0.25)");
-          glow.addColorStop(1, "rgba(212, 255, 51, 0)");
+          var orbX = W * 0.5 + Math.cos(shaderTick) * 60;
+          var orbY = H * 0.44 + Math.sin(shaderTick) * 50;
+          var glow = ctx.createRadialGradient(orbX, orbY, 10, orbX, orbY, 280);
+          glow.addColorStop(0, "rgba(197, 168, 128, 0.2)");
+          glow.addColorStop(1, "rgba(197, 168, 128, 0)");
           ctx.fillStyle = glow;
           ctx.fillRect(0, 0, W, H);
         }
 
-        ctx.font = "800 35px 'Plus Jakarta Sans', sans-serif";
+        // Editorial Serif & Sans Captions on Monitor
+        ctx.font = "600 32px 'Cormorant Garamond', Georgia, serif";
         ctx.textAlign = "center";
-        drawKineticCaptions(ctx, scene.voice.toUpperCase(), W / 2, H * 0.48, W - 110, 46);
+        drawKineticCaptions(ctx, scene.voice, W / 2, H * 0.48, W - 110, 44);
 
         if (activeUiMode === "instagram") {
-          ctx.fillStyle = "rgba(255,255,255,0.92)";
-          ctx.font = "bold 24px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillStyle = "rgba(244,239,230,0.9)";
+          ctx.font = "500 22px 'Inter', sans-serif";
           ctx.textAlign = "left";
           ctx.fillText("Reels", 28, 52);
 
           ctx.textAlign = "center";
           var rx = W - 42;
-          ctx.font = "28px sans-serif";
-          ctx.fillText("🤍", rx, H - 290);
-          ctx.font = "600 15px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("31.2K", rx, H - 265);
+          ctx.font = "24px sans-serif";
+          ctx.fillText("🤍", rx, H - 280);
+          ctx.font = "400 13px 'Inter', sans-serif";
+          ctx.fillText("31.2K", rx, H - 255);
 
-          ctx.font = "26px sans-serif";
-          ctx.fillText("💬", rx, H - 215);
-          ctx.font = "600 15px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("718", rx, H - 190);
+          ctx.font = "24px sans-serif";
+          ctx.fillText("💬", rx, H - 205);
+          ctx.font = "400 13px 'Inter', sans-serif";
+          ctx.fillText("718", rx, H - 180);
 
-          ctx.font = "26px sans-serif";
-          ctx.fillText("✈️", rx, H - 140);
-          ctx.font = "600 15px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("5.4K", rx, H - 115);
+          ctx.font = "24px sans-serif";
+          ctx.fillText("✈️", rx, H - 130);
 
           ctx.textAlign = "left";
-          ctx.fillStyle = "#ffffff";
-          ctx.font = "bold 20px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillStyle = "#f4efe6";
+          ctx.font = "500 18px 'Inter', sans-serif";
           ctx.fillText(handle, 26, H - 72);
 
-          ctx.strokeStyle = "rgba(255,255,255,0.85)";
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.roundRect(190, H - 92, 82, 28, 8);
-          ctx.stroke();
-          ctx.font = "bold 14px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("Follow", 209, H - 73);
+          ctx.fillStyle = "rgba(244,239,230,0.75)";
+          ctx.font = "300 15px 'Inter', sans-serif";
+          ctx.fillText("🎵 Original Score • " + currentProject.brand.slice(0, 22), 26, H - 42);
 
-          ctx.fillStyle = "rgba(255,255,255,0.85)";
-          ctx.font = "500 16px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("🎵 Original Audio - " + currentProject.brand.slice(0, 22), 26, H - 40);
-
-          ctx.fillStyle = "rgba(255,255,255,0.25)";
-          ctx.fillRect(0, H - 6, W, 6);
-          ctx.fillStyle = "#d4ff33";
-          ctx.fillRect(0, H - 6, W * ((activeSceneIdx + 1) / 4), 6);
+          ctx.fillStyle = "rgba(255,255,255,0.2)";
+          ctx.fillRect(0, H - 4, W, 4);
+          ctx.fillStyle = "#c5a880";
+          ctx.fillRect(0, H - 4, W * ((activeSceneIdx + 1) / 4), 4);
 
         } else if (activeUiMode === "youtube") {
-          ctx.fillStyle = "rgba(255,255,255,0.92)";
-          ctx.font = "bold 22px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillStyle = "rgba(244,239,230,0.9)";
+          ctx.font = "500 20px 'Inter', sans-serif";
           ctx.textAlign = "left";
-          ctx.fillText("▶️ Shorts", 26, 52);
-
-          ctx.textAlign = "center";
-          var yx = W - 42;
-          ctx.font = "26px sans-serif";
-          ctx.fillText("👍", yx, H - 300);
-          ctx.font = "bold 14px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("48K", yx, H - 275);
-
-          ctx.font = "26px sans-serif";
-          ctx.fillText("👎", yx, H - 225);
-          ctx.font = "bold 14px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("Dislike", yx, H - 200);
-
-          ctx.font = "26px sans-serif";
-          ctx.fillText("💬", yx, H - 150);
-          ctx.font = "bold 14px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("1.4K", yx, H - 125);
+          ctx.fillText("Shorts", 26, 52);
 
           ctx.textAlign = "left";
-          ctx.fillStyle = "#ffffff";
-          ctx.font = "bold 19px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillStyle = "#f4efe6";
+          ctx.font = "500 18px 'Inter', sans-serif";
           ctx.fillText(handle, 26, H - 76);
 
-          ctx.fillStyle = "#ef4444";
-          ctx.beginPath();
-          ctx.roundRect(190, H - 96, 104, 30, 15);
-          ctx.fill();
-          ctx.fillStyle = "#ffffff";
-          ctx.font = "bold 14px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("Subscribe", 208, H - 76);
+          ctx.fillStyle = "#c5a880";
+          ctx.fillRect(210, H - 96, 96, 26);
+          ctx.fillStyle = "#070706";
+          ctx.font = "600 12px 'Inter', sans-serif";
+          ctx.fillText("SUBSCRIBE", 224, H - 78);
 
-          ctx.fillStyle = "rgba(255,255,255,0.9)";
-          ctx.font = "500 16px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillStyle = "rgba(244,239,230,0.8)";
+          ctx.font = "300 15px 'Inter', sans-serif";
           ctx.fillText(currentProject.brand + " #Shorts", 26, H - 42);
 
-          ctx.fillStyle = "rgba(255,255,255,0.25)";
-          ctx.fillRect(0, H - 6, W, 6);
-          ctx.fillStyle = "#ef4444";
-          ctx.fillRect(0, H - 6, W * ((activeSceneIdx + 1) / 4), 6);
+          ctx.fillStyle = "rgba(255,255,255,0.2)";
+          ctx.fillRect(0, H - 4, W, 4);
+          ctx.fillStyle = "#c5a880";
+          ctx.fillRect(0, H - 4, W * ((activeSceneIdx + 1) / 4), 4);
         }
       }
 
@@ -1467,7 +1361,7 @@
         if ("speechSynthesis" in window) {
           window.speechSynthesis.cancel();
           var u = new SpeechSynthesisUtterance(text);
-          u.rate = parseFloat(document.getElementById("voiceRate").value) || 1.08;
+          u.rate = parseFloat(document.getElementById("voiceRate").value) || 1.05;
           u.pitch = parseFloat(document.getElementById("voicePitch").value) || 1.0;
           u.onend = function() { if (onDone) onDone(); };
           u.onerror = function() { if (onDone) onDone(); };
@@ -1484,8 +1378,8 @@
         }
         isPlaying = true;
         activeSceneIdx = 0;
-        document.getElementById("playReelBtn").textContent = "⏹ Stop Reel";
-        document.getElementById("playerStatusBadge").textContent = "PLAYING";
+        document.getElementById("playReelBtn").textContent = "⏹ Halt Audition";
+        document.getElementById("playerStatusBadge").textContent = "Playing";
 
         function loop() {
           if (!isPlaying) return;
@@ -1512,51 +1406,51 @@
         isPlaying = false;
         if (animFrameId) cancelAnimationFrame(animFrameId);
         if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-        document.getElementById("playReelBtn").textContent = "▶ Play w/ Voice";
-        document.getElementById("playerStatusBadge").textContent = "STANDBY";
+        document.getElementById("playReelBtn").textContent = "▶ Audition Reel";
+        document.getElementById("playerStatusBadge").textContent = "Standby";
       }
 
-      function renderToolGrids() {
-        var uGrid = document.getElementById("utilityCardsGrid");
-        uGrid.innerHTML = "";
+      function renderSuiteDirectory() {
+        var cPane = document.getElementById("suiteClippersPane");
+        cPane.innerHTML = "";
+        CLIPPER_TOOLS.forEach(function(title, idx) {
+          var row = document.createElement("div");
+          row.className = "luxury-card p-6 cursor-pointer flex items-center justify-between group";
+          row.innerHTML =
+            '<div>' +
+              '<span class="font-mono-luxury text-[9px] tracking-[0.24em] text-[#8c857b] uppercase block mb-1">Instrument // ' + (idx + 1 < 10 ? '0' + (idx + 1) : (idx + 1)) + '</span>' +
+              '<span class="font-serif-luxury text-xl text-[#f4efe6] group-hover:text-[#c5a880] transition">' + title + '</span>' +
+            '</div>' +
+            '<span class="text-xs text-[#c5a880] group-hover:translate-x-1 transition">→</span>';
+          row.addEventListener("click", function() {
+            openClipperWorkspaceModal(title);
+          });
+          cPane.appendChild(row);
+        });
+
+        var dPane = document.getElementById("suiteDiagnosticsPane");
+        dPane.innerHTML = "";
         UTILITY_TOOLS.forEach(function(tool) {
           var card = document.createElement("div");
-          card.className = "tool-tile p-6 text-left cursor-pointer flex flex-col justify-between min-h-[155px]";
+          card.className = "luxury-card p-7 cursor-pointer flex flex-col justify-between min-h-[150px] group";
           card.innerHTML =
             '<div class="flex items-center justify-between mb-4">' +
-              '<div class="w-11 h-11 rounded-2xl bg-[#d4ff33]/10 border border-[#d4ff33]/30 flex items-center justify-center text-xl">' + tool.icon + '</div>' +
-              '<span class="font-mono-code text-[10px] text-neutral-500">DIAGNOSTIC</span>' +
+              '<span class="font-mono-luxury text-[10px] tracking-[0.24em] text-[#c5a880]">DIAGNOSTIC // ' + tool.code + '</span>' +
+              '<span class="text-xs text-[#8c857b] group-hover:text-[#c5a880] transition">Open →</span>' +
             '</div>' +
             '<div>' +
-              '<h3 class="text-sm font-bold text-white mb-1">' + tool.title + '</h3>' +
-              '<p class="text-xs text-neutral-400 leading-relaxed">' + tool.desc + '</p>' +
+              '<h3 class="font-serif-luxury text-2xl text-[#f4efe6] mb-1">' + tool.title + '</h3>' +
+              '<p class="text-xs text-[#8c857b]">' + tool.desc + '</p>' +
             '</div>';
           card.addEventListener("click", function() {
             openUtilityToolModal(tool);
           });
-          uGrid.appendChild(card);
-        });
-
-        var cGrid = document.getElementById("clipperCardsGrid");
-        cGrid.innerHTML = "";
-        CLIPPER_TOOLS.forEach(function(title, idx) {
-          var tile = document.createElement("div");
-          tile.className = "tool-tile p-5 text-left cursor-pointer flex flex-col justify-between min-h-[96px]";
-          tile.innerHTML =
-            '<div class="flex items-center justify-between text-[10px] font-mono-code text-neutral-500">' +
-              '<span>ENGINE // ' + (idx + 1 < 10 ? '0' + (idx + 1) : (idx + 1)) + '</span>' +
-              '<span class="text-[#d4ff33]">→</span>' +
-            '</div>' +
-            '<span class="text-xs sm:text-sm font-bold text-white mt-2">' + title + '</span>';
-          tile.addEventListener("click", function() {
-            openClipperWorkspaceModal(title);
-          });
-          cGrid.appendChild(tile);
+          dPane.appendChild(card);
         });
       }
 
       function openClipperWorkspaceModal(toolTitle) {
-        document.getElementById("clipperModalTitle").textContent = "✂️ " + toolTitle;
+        document.getElementById("clipperModalTitle").textContent = toolTitle;
         document.getElementById("clipperUrlInput").value = "";
         document.getElementById("clipperProgressWrap").classList.add("hidden");
         document.getElementById("clipperWorkspaceModal").classList.remove("hidden");
@@ -1565,7 +1459,7 @@
       function openUtilityToolModal(tool) {
         stopAllHardwareStreams();
         var modal = document.getElementById("utilityToolModal");
-        document.getElementById("utilModalTitle").textContent = tool.icon + " " + tool.title;
+        document.getElementById("utilModalTitle").textContent = tool.title;
         document.getElementById("utilModalDesc").textContent = tool.desc;
         var body = document.getElementById("utilModalBody");
         body.innerHTML = "";
@@ -1573,36 +1467,36 @@
 
         if (tool.id === "camera") {
           body.innerHTML =
-            '<video id="webcamPreview" autoplay playsinline class="w-full h-56 bg-black rounded-2xl object-cover border border-white/10"></video>' +
+            '<video id="webcamPreview" autoplay playsinline class="w-full h-56 bg-black object-cover border border-[#c5a880]/25"></video>' +
             '<div class="grid grid-cols-2 gap-3">' +
-              '<button type="button" id="startCamBtn" class="btn-acid py-3 rounded-xl text-xs cursor-pointer">▶ Start Webcam</button>' +
-              '<button type="button" id="stopCamBtn" class="py-3 rounded-xl bg-[#ff5e36] text-white text-xs font-bold cursor-pointer">⏹ Stop Webcam</button>' +
+              '<button type="button" id="startCamBtn" class="btn-champagne py-3 text-[10px] cursor-pointer">Engage Optical Feed</button>' +
+              '<button type="button" id="stopCamBtn" class="btn-outline-luxury py-3 text-[10px] cursor-pointer">Release Optical Feed</button>' +
             '</div>';
           document.getElementById("startCamBtn").addEventListener("click", async function() {
             stopAllHardwareStreams();
             try {
               activeMediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
               document.getElementById("webcamPreview").srcObject = activeMediaStream;
-              showToast("Webcam active! Click Stop when finished.");
+              showToast("Optical Feed Active");
             } catch (e) {
-              showToast("Camera permission denied.");
+              showToast("Camera Permission Declined");
             }
           });
           document.getElementById("stopCamBtn").addEventListener("click", function() {
             stopAllHardwareStreams();
             var vid = document.getElementById("webcamPreview");
             if (vid) vid.srcObject = null;
-            showToast("Webcam stopped and released.");
+            showToast("Optical Feed Released");
           });
         } else if (tool.id === "mic") {
           body.innerHTML =
-            '<div class="p-5 rounded-2xl bg-black/80 border border-white/10 text-center space-y-3">' +
-              '<div class="w-full h-5 bg-neutral-900 rounded-full overflow-hidden"><div id="micLevelBar" class="h-full bg-[#d4ff33] w-0 transition-all duration-75"></div></div>' +
-              '<p id="micStatusText" class="text-xs text-neutral-300">Click Start Test (Automatically stops after 10 seconds)</p>' +
+            '<div class="p-5 bg-[#070706] border border-[#c5a880]/20 text-center space-y-3">' +
+              '<div class="w-full h-2 bg-neutral-900 overflow-hidden"><div id="micLevelBar" class="h-full bg-[#c5a880] w-0 transition-all duration-75"></div></div>' +
+              '<p id="micStatusText" class="text-xs text-[#8c857b]">10-Second Acoustic Calibration (Auto-releases hardware)</p>' +
             '</div>' +
             '<div class="grid grid-cols-2 gap-3">' +
-              '<button type="button" id="startMicBtn" class="btn-acid py-3 rounded-xl text-xs cursor-pointer">▶ Start 10s Mic Test</button>' +
-              '<button type="button" id="stopMicBtn" class="py-3 rounded-xl bg-[#ff5e36] text-white text-xs font-bold cursor-pointer">⏹ Stop Microphone</button>' +
+              '<button type="button" id="startMicBtn" class="btn-champagne py-3 text-[10px] cursor-pointer">Begin 10s Calibration</button>' +
+              '<button type="button" id="stopMicBtn" class="btn-outline-luxury py-3 text-[10px] cursor-pointer">Release Microphone</button>' +
             '</div>';
 
           document.getElementById("startMicBtn").addEventListener("click", async function() {
@@ -1614,7 +1508,7 @@
               var analyser = activeAudioContext.createAnalyser();
               src.connect(analyser);
               var data = new Uint8Array(analyser.frequencyBinCount);
-              document.getElementById("micStatusText").textContent = "🎙️ Listening... (Auto-stops in 10s)";
+              document.getElementById("micStatusText").textContent = "Sampling Acoustic Input... (Auto-releases in 10s)";
 
               function tickMic() {
                 if (!activeMediaStream) return;
@@ -1632,11 +1526,11 @@
                 var bar = document.getElementById("micLevelBar");
                 if (bar) bar.style.width = "0%";
                 var st = document.getElementById("micStatusText");
-                if (st) st.textContent = "✓ 10s Mic Test Complete! Microphone hardware released.";
-                showToast("Microphone test finished & turned off automatically.");
+                if (st) st.textContent = "Calibration Complete • Microphone Hardware Released";
+                showToast("Microphone Automatically Released");
               }, 10000);
             } catch (e) {
-              showToast("Microphone permission denied.");
+              showToast("Microphone Permission Declined");
             }
           });
 
@@ -1645,31 +1539,31 @@
             var bar = document.getElementById("micLevelBar");
             if (bar) bar.style.width = "0%";
             var st = document.getElementById("micStatusText");
-            if (st) st.textContent = "⏹ Microphone stopped and released.";
-            showToast("Microphone turned off.");
+            if (st) st.textContent = "Microphone Released";
+            showToast("Microphone Released");
           });
         } else {
           body.innerHTML =
-            '<input type="file" class="w-full text-xs text-neutral-300 file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-[#d4ff33] file:text-black file:font-extrabold cursor-pointer">' +
-            '<textarea id="utilPromptArea" rows="3" placeholder="Paste transcript, topic, or audio notes here..." class="w-full bg-black/80 border border-white/15 rounded-2xl p-3.5 text-xs text-white"></textarea>' +
-            '<button type="button" id="runUtilActionBtn" class="btn-acid w-full py-3.5 rounded-2xl text-xs uppercase cursor-pointer">Process & Load into 9:16 Studio →</button>';
+            '<input type="file" class="w-full text-xs text-[#8c857b] file:mr-4 file:py-2 file:px-4 file:border file:border-[#c5a880]/40 file:bg-transparent file:text-[#e6d5b8] file:text-[10px] file:uppercase cursor-pointer">' +
+            '<textarea id="utilPromptArea" rows="3" placeholder="Enter notes, transcript, or subject..." class="input-atelier w-full p-3.5 text-xs"></textarea>' +
+            '<button type="button" id="runUtilActionBtn" class="btn-champagne w-full py-3.5 text-[10px] cursor-pointer">Mount Output in Screening Room</button>';
           document.getElementById("runUtilActionBtn").addEventListener("click", function() {
-            var val = document.getElementById("utilPromptArea").value.trim() || tool.title + " Output";
+            var val = document.getElementById("utilPromptArea").value.trim() || tool.title;
             document.getElementById("brandInput").value = val;
-            currentProject = buildBlueprint(val, "Creators using " + tool.title, "controversial", "hinglish");
+            currentProject = buildBlueprint(val, "Patrons of " + tool.title, "controversial", "hinglish");
             renderStoryboardUI();
             modal.classList.add("hidden");
             document.getElementById("studio").scrollIntoView({ behavior: "smooth" });
-            showToast(tool.title + " loaded into 9:16 Studio!");
+            showToast("Mounted in Screening Room");
           });
         }
       }
 
       window.addEventListener("DOMContentLoaded", function() {
-        initKineticScrollEngine();
+        initAtelierScrollPhysics();
         syncPersistentUserSession();
         renderVoiceGrid();
-        renderToolGrids();
+        renderSuiteDirectory();
         loadPhotoPack("coffee");
 
         currentProject = buildBlueprint(
@@ -1686,6 +1580,24 @@
         }
         idleLoop();
 
+        // Suite Directory Tabs
+        document.querySelectorAll(".suite-tab-btn").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            var tab = btn.getAttribute("data-tab");
+            document.querySelectorAll(".suite-tab-btn").forEach(function(b) {
+              b.className = "suite-tab-btn px-6 py-3 border border-[#c5a880]/30 text-[#e6d5b8] text-[10px] tracking-[0.2em] uppercase transition cursor-pointer";
+            });
+            btn.className = "suite-tab-btn px-6 py-3 bg-[#c5a880] text-black text-[10px] tracking-[0.2em] uppercase font-medium transition cursor-pointer";
+            if (tab === "clippers") {
+              document.getElementById("suiteClippersPane").classList.remove("hidden");
+              document.getElementById("suiteDiagnosticsPane").classList.add("hidden");
+            } else {
+              document.getElementById("suiteClippersPane").classList.add("hidden");
+              document.getElementById("suiteDiagnosticsPane").classList.remove("hidden");
+            }
+          });
+        });
+
         document.querySelectorAll(".preset-btn").forEach(function(btn) {
           btn.addEventListener("click", function() {
             var p = PRESETS[btn.getAttribute("data-preset")];
@@ -1698,7 +1610,7 @@
             currentProject = buildBlueprint(p.brand, p.audience, p.tone, p.lang);
             activeSceneIdx = 0;
             renderStoryboardUI();
-            showToast("Loaded " + p.brand + " + HD Photo Pack!");
+            showToast("Loaded Brief: " + p.brand);
           });
         });
 
@@ -1712,7 +1624,7 @@
           );
           activeSceneIdx = 0;
           renderStoryboardUI();
-          showToast("Synthesized new 4-scene Reel!");
+          showToast("Four-Act Manuscript Composed");
         });
 
         document.getElementById("generateSmartBgBtn").addEventListener("click", function() {
@@ -1724,11 +1636,11 @@
           btn.addEventListener("click", function() {
             var key = btn.getAttribute("data-photo");
             document.querySelectorAll(".photo-pack-btn").forEach(function(b) {
-              b.className = "photo-pack-btn py-2 px-2.5 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-neutral-300 cursor-pointer";
+              b.className = "photo-pack-btn py-3 px-3 border border-white/10 text-[10px] tracking-[0.16em] uppercase text-[#8c857b] hover:border-[#c5a880]/50 cursor-pointer";
             });
-            btn.className = "photo-pack-btn py-2 px-2.5 rounded-xl bg-[#d4ff33]/15 border border-[#d4ff33] text-[11px] font-bold text-white cursor-pointer";
+            btn.className = "photo-pack-btn py-3 px-3 border border-[#c5a880] bg-[#c5a880]/10 text-[10px] tracking-[0.16em] uppercase text-[#f4efe6] cursor-pointer";
             loadPhotoPack(key);
-            showToast("Loaded HD Photo Pack: " + key.toUpperCase());
+            showToast("Mounted 35mm Archival Collection: " + key.toUpperCase());
           });
         });
 
@@ -1737,7 +1649,7 @@
             bgMode = "shader";
             activeShaderName = btn.getAttribute("data-shader");
             drawCanvas();
-            showToast("Switched to " + activeShaderName.toUpperCase() + " motion shader");
+            showToast("Tonal Shader: " + activeShaderName.toUpperCase());
           });
         });
         document.getElementById("customColor1").addEventListener("input", function() {
@@ -1762,7 +1674,7 @@
               customOrSmartBgImg = img;
               bgMode = "upload";
               drawCanvas();
-              showToast("Uploaded background image applied!");
+              showToast("Custom Plate Mounted");
             };
             img.src = ev.target.result;
           };
@@ -1773,9 +1685,9 @@
           btn.addEventListener("click", function() {
             activeUiMode = btn.getAttribute("data-ui");
             document.querySelectorAll(".ui-mode-btn").forEach(function(b) {
-              b.className = "ui-mode-btn py-2.5 rounded-xl text-neutral-300 hover:text-white text-xs font-bold transition cursor-pointer";
+              b.className = "ui-mode-btn py-2.5 text-[#8c857b] hover:text-white text-[10px] tracking-[0.16em] uppercase transition cursor-pointer";
             });
-            btn.className = "ui-mode-btn py-2.5 rounded-xl bg-[#d4ff33] text-black text-xs font-extrabold transition cursor-pointer";
+            btn.className = "ui-mode-btn py-2.5 bg-[#c5a880] text-black text-[10px] tracking-[0.16em] uppercase font-medium transition cursor-pointer";
             drawCanvas();
           });
         });
@@ -1784,9 +1696,9 @@
           btn.addEventListener("click", function() {
             activeCapStyle = btn.getAttribute("data-cap");
             document.querySelectorAll(".cap-btn").forEach(function(b) {
-              b.className = "cap-btn py-1.5 rounded-xl bg-white/5 border border-white/10 text-[10px] font-semibold text-neutral-300 cursor-pointer";
+              b.className = "cap-btn py-2 border border-white/10 text-[9px] tracking-[0.16em] uppercase text-[#8c857b] cursor-pointer";
             });
-            btn.className = "cap-btn py-1.5 rounded-xl bg-[#d4ff33]/15 border border-[#d4ff33] text-[10px] font-bold text-[#d4ff33] cursor-pointer";
+            btn.className = "cap-btn py-2 border border-[#c5a880] bg-[#c5a880]/10 text-[9px] tracking-[0.16em] uppercase text-[#e6d5b8] cursor-pointer";
             drawCanvas();
           });
         });
@@ -1798,13 +1710,13 @@
           document.getElementById("pitchLabel").textContent = parseFloat(e.target.value).toFixed(2);
         });
         document.getElementById("sampleVoiceBtn").addEventListener("click", function() {
-          speakText("Testing ReelFlow AI spatial studio voiceover for your next viral video.");
+          speakText("Welcome to ReelFlow Atelier. Your vertical cinema score is ready for audition.");
         });
         document.getElementById("toggleCloneBoxBtn").addEventListener("click", function() {
           document.getElementById("elevenCloneBox").classList.toggle("hidden");
         });
         document.getElementById("saveElevenBtn").addEventListener("click", function() {
-          showToast("Custom ElevenLabs Voice Saved!");
+          showToast("ElevenLabs Voice Clone Bound");
         });
 
         document.getElementById("playReelBtn").addEventListener("click", startReel);
@@ -1817,12 +1729,12 @@
         document.getElementById("downloadVideoBtn").addEventListener("click", function() {
           var canvas = document.getElementById("reelCanvas");
           if (!canvas || typeof MediaRecorder === "undefined") {
-            showToast("Use Chrome or Edge to download .WEBM video!");
+            showToast("Use Chrome or Edge to export Master .WEBM");
             return;
           }
           stopReel();
-          showToast("Recording 4-scene 9:16 video... Download starts in 6 seconds!");
-          document.getElementById("playerStatusBadge").textContent = "RECORDING...";
+          showToast("Recording 4-Act Master... Export completes in 6 seconds");
+          document.getElementById("playerStatusBadge").textContent = "Mastering";
           var stream = canvas.captureStream(30);
           var recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
           var chunks = [];
@@ -1831,10 +1743,10 @@
             var blob = new Blob(chunks, { type: "video/webm" });
             var a = document.createElement("a");
             a.href = URL.createObjectURL(blob);
-            a.download = currentProject.brand.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-reel.webm";
+            a.download = currentProject.brand.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-master.webm";
             a.click();
-            document.getElementById("playerStatusBadge").textContent = "EXPORTED";
-            showToast("Video (.WEBM) downloaded to your device!");
+            document.getElementById("playerStatusBadge").textContent = "Exported";
+            showToast("Master Video (.WEBM) Exported");
           };
           recorder.start();
           var step = 0;
@@ -1850,66 +1762,66 @@
         });
 
         document.getElementById("downloadScriptBtn").addEventListener("click", function() {
-          var txt = "REELFLOW AI SCRIPT - " + currentProject.brand + "\n\n" +
+          var txt = "REELFLOW ATELIER MANUSCRIPT — " + currentProject.brand + "\n\n" +
             currentProject.scenes.map(function(s, i) {
-              return "SCENE " + (i + 1) + " (" + s.time + "):\n" + s.voice;
+              return "ACT " + (i + 1) + " (" + s.time + "):\n" + s.voice;
             }).join("\n\n");
           var blob = new Blob([txt], { type: "text/plain" });
           var a = document.createElement("a");
           a.href = URL.createObjectURL(blob);
-          a.download = currentProject.brand.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-script.txt";
+          a.download = currentProject.brand.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-manuscript.txt";
           a.click();
-          showToast("Downloaded Script (.TXT)!");
+          showToast("Manuscript (.TXT) Exported");
         });
 
         document.getElementById("downloadFramePngBtn").addEventListener("click", function() {
           var canvas = document.getElementById("reelCanvas");
           var a = document.createElement("a");
           a.href = canvas.toDataURL("image/png");
-          a.download = "reelflow-poster.png";
+          a.download = "reelflow-plate.png";
           a.click();
-          showToast("Saved 9:16 Poster (.PNG)!");
+          showToast("Still Plate (.PNG) Saved");
         });
 
         document.getElementById("copyAllScriptBtn").addEventListener("click", function() {
           var txt = currentProject.scenes.map(function(s) { return s.voice; }).join("\n\n");
           navigator.clipboard.writeText(txt);
-          showToast("Script copied to clipboard!");
+          showToast("Manuscript Copied");
         });
 
         document.getElementById("closeClipperModalBtn").addEventListener("click", function() {
           document.getElementById("clipperWorkspaceModal").classList.add("hidden");
         });
         document.getElementById("runClipperExtractBtn").addEventListener("click", function() {
-          var urlOrTopic = document.getElementById("clipperUrlInput").value.trim() || "Viral Repurposed Clip";
-          var toolName = document.getElementById("clipperModalTitle").textContent.replace("✂️ ", "");
+          var urlOrTopic = document.getElementById("clipperUrlInput").value.trim() || "Archival Telecine Extract";
+          var toolName = document.getElementById("clipperModalTitle").textContent;
           var progWrap = document.getElementById("clipperProgressWrap");
           var bar = document.getElementById("clipperProgressBar");
           var st = document.getElementById("clipperStageText");
           var pct = document.getElementById("clipperPctText");
 
           progWrap.classList.remove("hidden");
-          bar.style.width = "30%";
-          st.textContent = "Scanning video & extracting high-retention hook...";
-          pct.textContent = "30%";
+          bar.style.width = "35%";
+          st.textContent = "Analyzing cadence & isolating key act...";
+          pct.textContent = "35%";
 
           setTimeout(function() {
-            bar.style.width = "75%";
-            st.textContent = "Reframing to 9:16 & syncing kinetic subtitles...";
-            pct.textContent = "75%";
+            bar.style.width = "80%";
+            st.textContent = "Formatting 9:16 plate & engraving subtitles...";
+            pct.textContent = "80%";
           }, 600);
 
           setTimeout(function() {
             bar.style.width = "100%";
             pct.textContent = "100%";
             document.getElementById("brandInput").value = urlOrTopic;
-            document.getElementById("activeWorkflowBadge").textContent = toolName.slice(0, 18).toUpperCase();
-            currentProject = buildBlueprint(urlOrTopic, "Viewers watching " + toolName, "controversial", "hinglish");
+            document.getElementById("activeWorkflowBadge").textContent = toolName.slice(0, 20);
+            currentProject = buildBlueprint(urlOrTopic, "Patrons viewing " + toolName, "controversial", "hinglish");
             activeSceneIdx = 0;
             renderStoryboardUI();
             document.getElementById("clipperWorkspaceModal").classList.add("hidden");
             document.getElementById("studio").scrollIntoView({ behavior: "smooth" });
-            showToast("✂️ Extracted 4-scene vertical clip into Studio!");
+            showToast("Mounted in Screening Room");
           }, 1300);
         });
 
@@ -1922,13 +1834,13 @@
           var rupeePrice = count * 50;
           var upiId = getMerchantUpiId();
           document.getElementById("activeMerchantUpiLabel").textContent = upiId;
-          document.getElementById("customReelCountBadge").textContent = count + (count === 1 ? " PRO VIDEO PACK" : " PRO VIDEOS PACK");
+          document.getElementById("customReelCountBadge").textContent = count + (count === 1 ? " Master Reel" : " Master Reels");
           document.getElementById("customPriceDisplay").textContent = "₹" + rupeePrice.toLocaleString("en-IN");
-          document.getElementById("sliderVideosLabel").textContent = count + (count === 1 ? " Video" : " Videos") + " (₹" + rupeePrice.toLocaleString("en-IN") + ")";
-          document.getElementById("gatewayPlanSubtitle").textContent = "Custom Pack: " + count + (count === 1 ? " Video" : " Videos");
+          document.getElementById("sliderVideosLabel").textContent = count + (count === 1 ? " Reel" : " Reels") + " (₹" + rupeePrice.toLocaleString("en-IN") + ")";
+          document.getElementById("gatewayPlanSubtitle").textContent = "Commission: " + count + (count === 1 ? " Master Reel" : " Master Reels");
           document.getElementById("gatewayAmountBadge").textContent = "₹" + rupeePrice.toLocaleString("en-IN");
 
-          var upiUri = "upi://pay?pa=" + encodeURIComponent(upiId) + "&pn=ReelFlow%20AI&am=" + rupeePrice + "&cu=INR";
+          var upiUri = "upi://pay?pa=" + encodeURIComponent(upiId) + "&pn=ReelFlow%20Atelier&am=" + rupeePrice + "&cu=INR";
           document.getElementById("mobileUpiDeepLink").href = upiUri;
           document.getElementById("dynamicUpiQr").src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(upiUri);
         }
@@ -1953,22 +1865,21 @@
             localStorage.setItem("reelflow_merchant_upi_v6", val);
             document.getElementById("merchantUpiEditBox").classList.add("hidden");
             updateCustomPrice();
-            showToast("Saved receiving Bank UPI ID: " + val);
+            showToast("Receiving Bank UPI Updated");
           }
         });
 
         document.getElementById("confirmPaymentBtn").addEventListener("click", function() {
-          var payer = document.getElementById("payerNameInput").value.trim() || "Customer";
-          var utr = document.getElementById("payerUtrInput").value.trim() || "Paid via QR";
+          var payer = document.getElementById("payerNameInput").value.trim() || "Patron";
+          var utr = document.getElementById("payerUtrInput").value.trim() || "QR Settlement";
           var count = planSlider.value;
           var amt = document.getElementById("gatewayAmountBadge").textContent;
           var msg = encodeURIComponent(
-            "Hi Arjun! 👋 I just paid " + amt + " via Direct UPI on ReelFlow AI:\n\n" +
-            "*Customer:* " + payer + "\n" +
-            "*Plan:* " + count + " Video Pack (" + amt + ")\n" +
-            "*UTR / Ref No:* " + utr + "\n" +
-            "*Brand Project:* " + currentProject.brand + "\n\n" +
-            "Please verify in your bank app and activate my pack!"
+            "Greetings Arjun — I have completed a " + amt + " UPI settlement on ReelFlow Atelier:\n\n" +
+            "*Patron:* " + payer + "\n" +
+            "*Commission:* " + count + " Master Reels (" + amt + ")\n" +
+            "*UTR Reference:* " + utr + "\n" +
+            "*Maison:* " + currentProject.brand
           );
           window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + msg, "_blank");
           document.getElementById("paymentGatewayModal").classList.add("hidden");
@@ -1976,7 +1887,7 @@
 
         document.getElementById("contactFounderWhatsAppBtn").addEventListener("click", function() {
           var msg = encodeURIComponent(
-            "Hi Arjun! 👋 I am using ReelFlow AI Studio v7.0 for my brand (" + currentProject.brand + ") and want to discuss custom AI video production."
+            "Greetings Arjun — I am inside ReelFlow Atelier (" + currentProject.brand + ") and would like to inquire about a private commission."
           );
           window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + msg, "_blank");
         });
@@ -1994,13 +1905,13 @@
         });
         document.getElementById("tabRegisterBtn").addEventListener("click", function() {
           document.getElementById("authNameInput").classList.remove("hidden");
-          document.getElementById("tabRegisterBtn").className = "py-2.5 rounded-xl bg-[#d4ff33] text-black text-xs font-extrabold cursor-pointer";
-          document.getElementById("tabLoginBtn").className = "py-2.5 rounded-xl text-neutral-400 text-xs font-bold cursor-pointer";
+          document.getElementById("tabRegisterBtn").className = "py-2.5 bg-[#c5a880] text-black text-[10px] tracking-[0.2em] uppercase font-medium cursor-pointer";
+          document.getElementById("tabLoginBtn").className = "py-2.5 text-[#8c857b] text-[10px] tracking-[0.2em] uppercase cursor-pointer";
         });
         document.getElementById("tabLoginBtn").addEventListener("click", function() {
           document.getElementById("authNameInput").classList.add("hidden");
-          document.getElementById("tabLoginBtn").className = "py-2.5 rounded-xl bg-[#d4ff33] text-black text-xs font-extrabold cursor-pointer";
-          document.getElementById("tabRegisterBtn").className = "py-2.5 rounded-xl text-neutral-400 text-xs font-bold cursor-pointer";
+          document.getElementById("tabLoginBtn").className = "py-2.5 bg-[#c5a880] text-black text-[10px] tracking-[0.2em] uppercase font-medium cursor-pointer";
+          document.getElementById("tabRegisterBtn").className = "py-2.5 text-[#8c857b] text-[10px] tracking-[0.2em] uppercase cursor-pointer";
         });
 
         document.getElementById("authForm").addEventListener("submit", function(e) {
@@ -2010,13 +1921,13 @@
           localStorage.setItem("reelflow_saved_user_v6", JSON.stringify({ name: name, email: email }));
           syncPersistentUserSession();
           document.getElementById("authModal").classList.add("hidden");
-          showToast("Welcome back, " + name + "! Session saved permanently.");
+          showToast("Welcome to the Atelier, " + name);
         });
 
         document.getElementById("logoutBtn").addEventListener("click", function() {
           localStorage.removeItem("reelflow_saved_user_v6");
           syncPersistentUserSession();
-          showToast("Logged out.");
+          showToast("Session Closed");
         });
 
         document.getElementById("openApiModalBtn").addEventListener("click", function() {
@@ -2027,7 +1938,7 @@
         });
         document.getElementById("saveApiKeyBtn").addEventListener("click", function() {
           document.getElementById("apiModal").classList.add("hidden");
-          showToast("Saved Gemini API Key!");
+          showToast("Engine Key Bound");
         });
       });
     })();
