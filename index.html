@@ -3,443 +3,554 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>ReelFlow AI — Autonomous Short-Form Video & Creator Suite</title>
-  <!-- Custom SVG Brand Favicon (Replaces the Chrome Earth Icon) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%236366f1'/%3E%3Cstop offset='50%25' stop-color='%23a855f7'/%3E%3Cstop offset='100%25' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2305070f'/%3E%3Crect x='3' y='3' width='58' height='58' rx='14' fill='none' stroke='url(%23g)' stroke-width='4'/%3E%3Cpath d='M22 16 L48 32 L22 48 Z' fill='url(%23g)'/%3E%3Ccircle cx='46' cy='18' r='5' fill='%2338bdf8'/%3E%3C/svg%3E">
+  <title>ReelFlow AI — Spatial Short-Form Cinema & Autonomous Studio</title>
+  <!-- Custom Geometric Acid-Lime & Obsidian Brand Favicon (Replaces Chrome Earth Icon) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23050507'/%3E%3Crect x='3' y='3' width='58' height='58' rx='15' fill='none' stroke='%23d4ff33' stroke-width='3.5'/%3E%3Cpath d='M18 16 L48 32 L18 48 Z' fill='%23d4ff33'/%3E%3Ccircle cx='46' cy='16' r='5' fill='%23ff5e36'/%3E%3C/svg%3E">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #030408;
+      --bg-void: #030304;
+      --bg-surface: #0a0b0e;
+      --acid-lime: #d4ff33;
+      --solar-amber: #ff5e36;
+      --champagne: #f4f1ea;
+      --mouse-x: 50%;
+      --mouse-y: 30%;
     }
     * { box-sizing: border-box; }
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-dark);
-      color: #f8fafc;
+      background-color: var(--bg-void);
+      color: var(--champagne);
       overflow-x: hidden;
+      letter-spacing: -0.01em;
     }
     h1, h2, h3, .font-display {
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Syne', sans-serif;
+    }
+    .font-editorial {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
     }
     .font-mono-code {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Space Mono', monospace;
     }
 
-    /* Futuristic Mesh Grid */
-    .mesh-bg {
-      background-color: #030408;
-      background-image: 
-        radial-gradient(at 15% 10%, rgba(99, 102, 241, 0.14) 0px, transparent 45%),
-        radial-gradient(at 85% 20%, rgba(236, 72, 153, 0.11) 0px, transparent 45%),
-        radial-gradient(at 50% 85%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 100% 100%, 42px 42px, 42px 42px;
+    /* Architectural Spatial Background with Cursor Spotlight */
+    .spatial-canvas {
+      background-color: #030304;
+      background-image:
+        radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(212, 255, 51, 0.055), transparent 40%),
+        radial-gradient(650px circle at 85% 15%, rgba(255, 94, 54, 0.05), transparent 45%),
+        linear-gradient(rgba(244, 241, 234, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 241, 234, 0.022) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 72px 72px, 72px 72px;
+      background-attachment: fixed;
     }
 
-    /* Safe Scroll Animation (Never hides page if JS is still loading!) */
-    .scroll-card {
+    /* Bidirectional 3D Kinetic Scroll Animation (Works Scrolling Down AND Up, Never Blank!) */
+    .kinetic-block {
       opacity: 1;
-      transform: translateY(0) scale(1);
-      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.55s ease;
+      transform: perspective(1100px) translateY(0px) rotateX(0deg) scale(1);
+      filter: blur(0px);
+      transition:
+        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity, filter;
     }
-    .scroll-card.scroll-out {
-      opacity: 0.35;
-      transform: translateY(24px) scale(0.98);
+    .kinetic-block.out-below {
+      opacity: 0.14;
+      transform: perspective(1100px) translateY(68px) rotateX(6deg) scale(0.95);
+      filter: blur(5px);
+    }
+    .kinetic-block.out-above {
+      opacity: 0.14;
+      transform: perspective(1100px) translateY(-58px) rotateX(-6deg) scale(0.96);
+      filter: blur(4px);
     }
 
-    /* Next-Gen Glass Surfaces */
-    .neo-panel {
-      background: linear-gradient(160deg, rgba(15, 19, 30, 0.9) 0%, rgba(7, 9, 15, 0.95) 100%);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.8);
+    /* Luxury Spatial Glass Pods (Generous Padding & Tactile Borders) */
+    .spatial-pod {
+      background: linear-gradient(165deg, rgba(16, 17, 22, 0.88) 0%, rgba(7, 8, 11, 0.96) 100%);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(244, 241, 234, 0.08);
+      border-radius: 32px;
+      box-shadow: 0 32px 80px -20px rgba(0, 0, 0, 0.9), inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
+      transition: border-color 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+    }
+    .spatial-pod:hover {
+      border-color: rgba(212, 255, 51, 0.32);
+      box-shadow: 0 40px 90px -20px rgba(0, 0, 0, 0.95), 0 0 40px -15px rgba(212, 255, 51, 0.12);
     }
 
-    /* NLE Timeline Node Styling */
+    /* NLE Timeline Track Cards */
     .timeline-node {
-      position: relative;
-      background: linear-gradient(145deg, rgba(18, 23, 38, 0.92) 0%, rgba(10, 13, 22, 0.96) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      transition: all 0.25s ease;
+      background: rgba(12, 13, 18, 0.92);
+      border: 1px solid rgba(244, 241, 234, 0.08);
+      border-radius: 24px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .timeline-node:hover {
+      border-color: rgba(244, 241, 234, 0.22);
+      transform: translateX(4px);
     }
     .timeline-node.active-scene {
-      border-color: #818cf8;
-      box-shadow: 0 0 28px -6px rgba(99, 102, 241, 0.45);
+      border-color: var(--acid-lime);
+      background: linear-gradient(135deg, rgba(212, 255, 51, 0.07) 0%, rgba(12, 13, 18, 0.96) 100%);
+      box-shadow: 0 12px 35px -10px rgba(212, 255, 51, 0.22);
     }
 
-    /* Tool Card Hover */
+    /* Architectural Bento Tool Tiles */
     .tool-tile {
-      background: #0a0d16;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.22s ease;
+      background: rgba(11, 12, 16, 0.85);
+      border: 1px solid rgba(244, 241, 234, 0.07);
+      border-radius: 26px;
+      transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .tool-tile:hover {
-      background: #111626;
-      border-color: #818cf8;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px -8px rgba(99, 102, 241, 0.3);
+      background: rgba(19, 21, 28, 0.95);
+      border-color: var(--acid-lime);
+      transform: translateY(-6px) scale(1.015);
+      box-shadow: 0 22px 45px -15px rgba(212, 255, 51, 0.18);
     }
 
-    .gradient-text {
-      background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 35%, #e879f9 70%, #38bdf8 100%);
+    /* Acid Lime & Champagne Buttons */
+    .btn-acid {
+      background: var(--acid-lime);
+      color: #050507;
+      font-weight: 800;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-acid:hover {
+      background: #e2ff66;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px -8px rgba(212, 255, 51, 0.45);
+    }
+
+    .text-acid-gradient {
+      background: linear-gradient(135deg, #f4f1ea 0%, #d4ff33 55%, #ff5e36 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
+    /* Infinite Editorial Ribbon */
+    @keyframes tickerMove {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: tickerMove 34s linear infinite;
+    }
+
+    /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #030408; }
-    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+    ::-webkit-scrollbar-track { background: #030304; }
+    ::-webkit-scrollbar-thumb { background: #23252f; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #d4ff33; }
   </style>
 </head>
-<body class="mesh-bg min-h-screen selection:bg-indigo-500 selection:text-white pb-24 md:pb-0">
+<body class="spatial-canvas min-h-screen selection:bg-[#d4ff33] selection:text-black pb-28 md:pb-0">
 
-  <!-- Toast Banner -->
-  <div id="toastBanner" class="fixed bottom-20 md:bottom-6 right-5 z-50 hidden px-4 py-3 rounded-2xl bg-indigo-600 text-white text-xs font-bold shadow-2xl border border-white/20 flex items-center gap-2">
-    <span class="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
-    <span id="toastText">Ready!</span>
+  <!-- Top Laser Scroll Progress Bar -->
+  <div class="fixed top-0 left-0 right-0 h-[3px] bg-white/5 z-50">
+    <div id="scrollProgressBar" class="h-full bg-gradient-to-r from-[#d4ff33] via-[#ff5e36] to-[#d4ff33] w-0 transition-all duration-75"></div>
   </div>
 
-  <!-- Floating Contact Founder WhatsApp Pill (Bottom Left on Desktop) -->
-  <a href="https://wa.me/917820847387?text=Hi%20Arjun!%20I%20am%20testing%20ReelFlow%20AI%20and%20want%20to%20connect." target="_blank" class="hidden md:flex fixed bottom-6 left-6 z-40 items-center gap-2.5 px-4 py-2.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 backdrop-blur-xl text-emerald-300 text-xs font-bold shadow-2xl transition">
-    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-    <span>💬 Founder Desk (+91 7820847387)</span>
+  <!-- Toast Notification -->
+  <div id="toastBanner" class="fixed bottom-24 md:bottom-8 right-6 z-50 hidden px-5 py-3.5 rounded-2xl bg-[#d4ff33] text-black text-xs font-extrabold shadow-2xl flex items-center gap-2.5">
+    <span class="w-2.5 h-2.5 rounded-full bg-black animate-ping"></span>
+    <span id="toastText">System Ready</span>
+  </div>
+
+  <!-- Floating Founder Concierge Pill (Bottom Left on Desktop) -->
+  <a href="https://wa.me/917820847387?text=Hi%20Arjun!%20I%20am%20testing%20ReelFlow%20AI%20v7.0%20and%20want%20to%20connect." target="_blank" class="hidden md:flex fixed bottom-7 left-7 z-40 items-center gap-3 px-5 py-3 rounded-full bg-[#0b0c10]/90 hover:bg-[#14161d] border border-[#d4ff33]/40 backdrop-blur-2xl text-[#f4f1ea] text-xs font-bold shadow-2xl transition group">
+    <span class="w-2.5 h-2.5 rounded-full bg-[#d4ff33] animate-ping"></span>
+    <span>Founder Concierge</span>
+    <span class="font-mono-code text-[11px] text-[#d4ff33] group-hover:translate-x-0.5 transition">+91 7820847387 →</span>
   </a>
 
-  <!-- TOP NAVIGATION BAR WITH CUSTOM VECTOR BRAND LOGO -->
-  <header class="sticky top-0 z-40 border-b border-white/10 bg-[#030408]/85 backdrop-blur-2xl">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2">
-      <!-- Custom SVG Brand Logo -->
-      <a href="#hero" class="flex items-center gap-3 group">
-        <div class="relative w-11 h-11 rounded-2xl bg-[#090d1a] border border-indigo-500/40 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition">
+  <!-- FLOATING SPATIAL ISLAND NAVBAR (Not a boring full-width bar!) -->
+  <header class="sticky top-4 z-40 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto rounded-full bg-[#08090c]/85 backdrop-blur-2xl border border-white/10 px-4 sm:px-7 h-16 sm:h-20 flex items-center justify-between gap-4 shadow-[0_20px_60px_rgba(0,0,0,0.85)]">
+      
+      <!-- Custom Geometric Vector Brand Logo -->
+      <a href="#hero" class="flex items-center gap-3.5 group">
+        <div class="relative w-11 h-11 rounded-2xl bg-[#0e1016] border border-[#d4ff33]/40 flex items-center justify-center shadow-lg group-hover:rotate-6 transition">
           <svg class="w-7 h-7" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#6366f1"/>
-                <stop offset="50%" stop-color="#c084fc"/>
-                <stop offset="100%" stop-color="#ec4899"/>
-              </linearGradient>
-            </defs>
-            <path d="M14 12C14 9.79086 15.7909 8 18 8H34C44 8 50 14 50 22C50 28 45 33 38 34L50 52H39L28 35H24V52H14V12Z" fill="url(#brandGrad)" fill-opacity="0.22"/>
-            <path d="M20 14L48 32L20 50V14Z" fill="url(#brandGrad)"/>
-            <circle cx="48" cy="14" r="5" fill="#38bdf8"/>
+            <rect x="6" y="6" width="52" height="52" rx="14" stroke="#d4ff33" stroke-width="3" stroke-opacity="0.35"/>
+            <path d="M20 15L48 32L20 49V15Z" fill="#d4ff33"/>
+            <circle cx="48" cy="15" r="5.5" fill="#ff5e36"/>
           </svg>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="font-extrabold text-lg sm:text-xl tracking-tight font-display text-white">ReelFlow<span class="text-indigo-400">.ai</span></span>
-            <span class="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono-code uppercase bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 rounded-full">v6.1 Studio</span>
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight font-display text-white">ReelFlow<span class="text-[#d4ff33]">.ai</span></span>
+            <span class="hidden sm:inline-block px-2.5 py-0.5 text-[10px] font-mono-code uppercase bg-[#d4ff33]/10 text-[#d4ff33] border border-[#d4ff33]/30 rounded-full">OS 7.0</span>
           </div>
-          <p class="text-[10px] text-slate-400 hidden sm:block">Autonomous Short-Form Video & Voice Engine</p>
+          <p class="text-[10px] text-neutral-400 hidden sm:block font-mono-code">SPATIAL SHORT-FORM ENGINE</p>
         </div>
       </a>
 
-      <!-- Desktop Navigation Links -->
-      <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold text-slate-300">
-        <a href="#studio" class="hover:text-white transition">9:16 Studio</a>
-        <a href="#smart-bg-anchor" class="hover:text-white transition">Smart AI Background</a>
-        <a href="#utility-suite" class="hover:text-white transition">Creator Tools</a>
-        <a href="#clipper-grid" class="hover:text-white transition">AI Clippers</a>
-        <a href="#pricing" class="hover:text-white transition">₹50 Custom Plan</a>
-        <a href="#founder-desk" class="text-emerald-400 hover:text-emerald-300 transition">Contact Founder</a>
+      <!-- Spaced Editorial Nav Links -->
+      <nav class="hidden lg:flex items-center gap-8 text-xs font-semibold text-neutral-300">
+        <a href="#studio" class="hover:text-[#d4ff33] transition">01 / Studio</a>
+        <a href="#smart-bg-anchor" class="hover:text-[#d4ff33] transition">02 / Smart Visuals</a>
+        <a href="#utility-suite" class="hover:text-[#d4ff33] transition">03 / Diagnostics</a>
+        <a href="#clipper-grid" class="hover:text-[#d4ff33] transition">04 / AI Clippers</a>
+        <a href="#pricing" class="hover:text-[#d4ff33] transition">05 / ₹50 Custom Plan</a>
       </nav>
 
-      <!-- Right Controls: AI Key + Persistent User Profile -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <button type="button" id="openApiModalBtn" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-indigo-300 transition cursor-pointer">
-          ⚡ AI Key
+      <!-- Right Controls: API Key + Persistent Login Profile -->
+      <div class="flex items-center gap-2.5 sm:gap-3.5">
+        <button type="button" id="openApiModalBtn" class="px-3.5 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono-code text-neutral-200 transition cursor-pointer">
+          ⚡ LLM KEY
         </button>
 
-        <!-- Shown ONLY when logged out -->
-        <button type="button" id="openAuthModalBtn" class="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-95 text-white text-xs font-extrabold shadow-lg transition cursor-pointer">
-          Login / Register
+        <button type="button" id="openAuthModalBtn" class="btn-acid px-5 py-2.5 rounded-full text-xs uppercase tracking-wider cursor-pointer">
+          Sign In
         </button>
 
-        <!-- Shown permanently when logged in (Saved in localStorage) -->
-        <div id="userProfileBadge" class="hidden items-center gap-2 bg-indigo-950/50 border border-indigo-500/40 px-3 py-1.5 rounded-xl">
-          <div id="userInitials" class="w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-500 to-pink-500 text-white text-[11px] font-extrabold flex items-center justify-center">A</div>
+        <!-- Persistent Logged-In Pill -->
+        <div id="userProfileBadge" class="hidden items-center gap-2.5 bg-white/5 border border-[#d4ff33]/40 px-3.5 py-1.5 rounded-full">
+          <div id="userInitials" class="w-6 h-6 rounded-full bg-[#d4ff33] text-black text-[11px] font-extrabold flex items-center justify-center">A</div>
           <div class="text-left">
-            <span id="userNameText" class="block text-xs font-bold text-white max-w-[100px] truncate leading-none">Founder</span>
-            <span class="text-[9px] text-emerald-400 font-mono-code">● Saved Session</span>
+            <span id="userNameText" class="block text-xs font-bold text-white max-w-[95px] truncate leading-none">Founder</span>
+            <span class="text-[9px] text-[#d4ff33] font-mono-code">● ACTIVE</span>
           </div>
-          <button type="button" id="logoutBtn" class="text-[10px] text-rose-400 hover:text-rose-300 ml-1.5 font-bold cursor-pointer">Logout</button>
+          <button type="button" id="logoutBtn" class="text-[10px] text-[#ff5e36] hover:underline ml-1 font-bold cursor-pointer">Exit</button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Bottom Navigation Bar -->
-  <div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#050710]/95 backdrop-blur-xl border-t border-white/10 px-2 py-2 flex justify-around items-center text-[10px] font-bold text-slate-300">
-    <a href="#studio" class="flex flex-col items-center gap-0.5 text-indigo-400"><span>🎬</span><span>Studio</span></a>
-    <a href="#player-column" class="flex flex-col items-center gap-0.5 hover:text-white"><span>⬇️</span><span>Download</span></a>
+  <!-- Mobile Bottom Floating Dock -->
+  <div class="md:hidden fixed bottom-3 inset-x-4 z-40 rounded-3xl bg-[#0a0b0f]/95 backdrop-blur-2xl border border-white/15 px-3 py-2.5 flex justify-around items-center text-[10px] font-bold text-neutral-300 shadow-2xl">
+    <a href="#studio" class="flex flex-col items-center gap-0.5 text-[#d4ff33]"><span>🎬</span><span>Studio</span></a>
+    <a href="#player-column" class="flex flex-col items-center gap-0.5 hover:text-white"><span>⬇️</span><span>Export</span></a>
     <a href="#clipper-grid" class="flex flex-col items-center gap-0.5 hover:text-white"><span>✂️</span><span>Clippers</span></a>
-    <a href="#pricing" class="flex flex-col items-center gap-0.5 text-emerald-400"><span>₹50</span><span>Plans</span></a>
+    <a href="#pricing" class="flex flex-col items-center gap-0.5 text-[#ff5e36]"><span>₹50</span><span>Plans</span></a>
     <a href="#founder-desk" class="flex flex-col items-center gap-0.5 hover:text-white"><span>💬</span><span>Founder</span></a>
   </div>
 
-  <!-- HERO SECTION -->
-  <section id="hero" class="relative z-10 max-w-6xl mx-auto px-4 pt-8 sm:pt-12 pb-8 text-center scroll-card">
-    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold mb-4">
-      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-      <span>Smart AI Backgrounds • 6 Voice Clones • IG Reels & YT Shorts Engine</span>
+  <!-- EDITORIAL SPATIAL HERO SECTION (Generous Whitespace & High-Contrast Typography) -->
+  <section id="hero" class="relative z-10 max-w-6xl mx-auto px-6 pt-16 sm:pt-24 pb-16 sm:pb-24 text-center kinetic-block">
+    <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-neutral-300 text-xs font-mono-code uppercase tracking-widest mb-8">
+      <span class="w-2 h-2 rounded-full bg-[#d4ff33] animate-ping"></span>
+      <span>Spatial Video Synthesis • 2027 Production Architecture</span>
     </div>
-    <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.08] mb-3">
-      Generate Viral 9:16 Videos with <br class="hidden sm:inline" />
-      <span class="gradient-text">Smart AI Backgrounds & Voices.</span>
+
+    <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-[82px] font-extrabold tracking-tight leading-[1.02] mb-8">
+      Autonomous <span class="font-editorial font-normal text-[#d4ff33] px-1">vertical cinema</span> <br class="hidden sm:inline" />
+      <span class="text-acid-gradient">engineered in 60 seconds.</span>
     </h1>
-    <p class="text-slate-400 text-xs sm:text-base max-w-2xl mx-auto">
-      Create scripts, synthesize custom AI scene backgrounds or HD stock photos, switch between Instagram Reels & YouTube Shorts UI, and download your video in one click.
+
+    <p class="text-neutral-400 text-sm sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
+      A non-linear AI production suite combining pattern-interrupt hooks, neural voice cloning, generative 9:16 backgrounds, and native Instagram Reels & YouTube Shorts rendering.
     </p>
+
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href="#studio" class="btn-acid px-8 py-4 rounded-full text-xs sm:text-sm uppercase tracking-wider shadow-xl">
+        Enter Production Studio ↓
+      </a>
+      <a href="#clipper-grid" class="px-8 py-4 rounded-full bg-white/[0.04] hover:bg-white/[0.09] border border-white/15 text-white font-bold text-xs sm:text-sm transition">
+        Explore 38+ AI Tools →
+      </a>
+    </div>
   </section>
 
-  <!-- MAIN WORKSPACE STUDIO -->
-  <section id="studio" class="relative z-10 max-w-7xl mx-auto px-4 pb-20">
+  <!-- ARCHITECTURAL MARQUEE RIBBON -->
+  <div class="relative z-10 border-y border-white/10 bg-[#07080b]/80 py-4 overflow-hidden mb-20 sm:mb-28">
+    <div class="marquee-track flex items-center gap-12 text-xs font-mono-code tracking-widest text-neutral-400 uppercase">
+      <span>✦ SMART AI SCENE SYNTHESIS</span>
+      <span class="text-[#d4ff33]">///</span>
+      <span>✦ 6 CALIBRATED NEURAL VOICE PERSONAS</span>
+      <span class="text-[#ff5e36]">///</span>
+      <span>✦ NATIVE INSTAGRAM REELS & YOUTUBE SHORTS INTERFACES</span>
+      <span class="text-[#d4ff33]">///</span>
+      <span>✦ DIRECT .WEBM VERTICAL VIDEO RECORDING</span>
+      <span class="text-[#ff5e36]">///</span>
+      <span>✦ INSTANT ₹50 BANK UPI SETTLEMENT</span>
+      <span class="text-[#d4ff33]">///</span>
+      <span>✦ SMART AI SCENE SYNTHESIS</span>
+      <span class="text-[#d4ff33]">///</span>
+      <span>✦ 6 CALIBRATED NEURAL VOICE PERSONAS</span>
+      <span class="text-[#ff5e36]">///</span>
+      <span>✦ NATIVE INSTAGRAM REELS & YOUTUBE SHORTS INTERFACES</span>
+    </div>
+  </div>
 
-    <!-- Quick Industry Presets -->
-    <div class="neo-panel rounded-3xl p-4 mb-6 scroll-card">
-      <div class="flex flex-wrap items-center justify-between gap-2">
-        <div class="flex items-center gap-2 flex-wrap">
-          <span class="text-xs font-bold uppercase tracking-wider text-indigo-400 mr-1">1-Click Presets:</span>
-          <button type="button" data-preset="coffee" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">☕ D2C Cold Brew</button>
-          <button type="button" data-preset="fintech" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">💳 Student Fintech</button>
-          <button type="button" data-preset="saas" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">📊 B2B SaaS</button>
-          <button type="button" data-preset="podcast" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">🎙️ Podcast Clip</button>
-          <button type="button" data-preset="streetwear" class="preset-btn px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">👕 Streetwear Drop</button>
-        </div>
-        <span id="activeWorkflowBadge" class="font-mono-code text-[11px] px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">
-          ● Active: Automatic Reel Studio
-        </span>
+  <!-- SECTION 01: MAIN SPATIAL WORKSPACE STUDIO (Massive Breathing Room & Clean Separation) -->
+  <section id="studio" class="relative z-10 max-w-[1380px] mx-auto px-4 sm:px-8 pb-28 sm:pb-36">
+
+    <!-- Section Header + Quick Industry Presets -->
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6 kinetic-block">
+      <div>
+        <span class="font-mono-code text-xs uppercase tracking-widest text-[#d4ff33] block mb-2">01 // NON-LINEAR WORKSPACE</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Interactive <span class="font-editorial text-[#d4ff33]">9:16 Studio</span></h2>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2.5">
+        <span class="text-xs font-mono-code uppercase text-neutral-400 mr-1">Load Preset:</span>
+        <button type="button" data-preset="coffee" class="preset-btn px-4 py-2 rounded-full bg-white/[0.04] hover:bg-[#d4ff33] hover:text-black border border-white/10 text-xs font-bold text-white transition cursor-pointer">☕ D2C Cold Brew</button>
+        <button type="button" data-preset="fintech" class="preset-btn px-4 py-2 rounded-full bg-white/[0.04] hover:bg-[#d4ff33] hover:text-black border border-white/10 text-xs font-bold text-white transition cursor-pointer">💳 Student Fintech</button>
+        <button type="button" data-preset="saas" class="preset-btn px-4 py-2 rounded-full bg-white/[0.04] hover:bg-[#d4ff33] hover:text-black border border-white/10 text-xs font-bold text-white transition cursor-pointer">📊 B2B SaaS</button>
+        <button type="button" data-preset="podcast" class="preset-btn px-4 py-2 rounded-full bg-white/[0.04] hover:bg-[#d4ff33] hover:text-black border border-white/10 text-xs font-bold text-white transition cursor-pointer">🎙️ Podcast Clip</button>
+        <button type="button" data-preset="streetwear" class="preset-btn px-4 py-2 rounded-full bg-white/[0.04] hover:bg-[#d4ff33] hover:text-black border border-white/10 text-xs font-bold text-white transition cursor-pointer">👕 Streetwear</button>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <!-- Spaced 12-Column Studio Grid (gap-8 lg:gap-10 so nothing feels cramped!) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
 
-      <!-- LEFT COLUMN (4 Cols): Brief + SMART AI BACKGROUND GENERATOR + Voices -->
-      <div class="lg:col-span-4 space-y-5">
+      <!-- LEFT COLUMN (4 Cols): Campaign Brief + Smart Background Studio + Voice Lab -->
+      <div class="lg:col-span-4 space-y-8">
         
-        <!-- 1. Campaign Brief -->
-        <div class="neo-panel rounded-3xl p-5 space-y-3.5 scroll-card">
-          <div class="flex items-center justify-between">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-indigo-400">1. Brand & Script Engine</h2>
-            <span class="text-[10px] text-slate-400 font-mono-code">Step 1/3</span>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Brand / Topic / Video URL *</label>
-            <input id="brandInput" type="text" value="Asli Cold Brew Coffee" placeholder="e.g. Protein Shake, Sneaker Store, SaaS..." class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Target Audience & Pain Point *</label>
-            <textarea id="audienceInput" rows="2" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">Young professionals and college students tired of spending Rs 350 on watery cafe coffee</textarea>
-          </div>
-          <div class="grid grid-cols-2 gap-2.5">
+        <!-- Pod 1: Campaign & Script Brief -->
+        <div class="spatial-pod p-6 sm:p-8 space-y-5 kinetic-block">
+          <div class="flex items-center justify-between border-b border-white/10 pb-4">
             <div>
-              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Hook Psychology</label>
-              <select id="toneInput" class="w-full bg-black/60 border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white">
-                <option value="controversial">🔥 Pattern Interrupt</option>
-                <option value="data">📊 Hard Math / Proof</option>
-                <option value="story">🎭 Founder Story</option>
-                <option value="secret">🤫 Secret Hack</option>
-              </select>
+              <span class="font-mono-code text-[10px] text-[#d4ff33] uppercase">MODULE 01</span>
+              <h3 class="text-lg font-bold text-white">Campaign & Script Engine</h3>
             </div>
-            <div>
-              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Language Vibe</label>
-              <select id="langInput" class="w-full bg-black/60 border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white">
-                <option value="hinglish">🇮🇳 Hinglish (Viral)</option>
-                <option value="english">🌐 Global English</option>
-              </select>
-            </div>
+            <span id="activeWorkflowBadge" class="font-mono-code text-[10px] px-2.5 py-1 rounded-full bg-[#d4ff33]/10 text-[#d4ff33] border border-[#d4ff33]/30">
+              READY
+            </span>
           </div>
-          <button type="button" id="generateBtn" class="w-full py-3 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:opacity-95 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg cursor-pointer">
-            ⚡ Generate Script & Storyboard
-          </button>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-neutral-300 mb-2">Brand / Product / Video URL</label>
+              <input id="brandInput" type="text" value="Asli Cold Brew Coffee" placeholder="e.g. Protein Shake, Sneaker Store, SaaS..." class="w-full bg-black/70 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#d4ff33] transition">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-neutral-300 mb-2">Target Audience & Core Frustration</label>
+              <textarea id="audienceInput" rows="2" class="w-full bg-black/70 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#d4ff33] transition">Young professionals and college students tired of spending Rs 350 on watery cafe coffee</textarea>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-semibold text-neutral-400 mb-1.5">Hook Psychology</label>
+                <select id="toneInput" class="w-full bg-black/70 border border-white/15 rounded-2xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#d4ff33]">
+                  <option value="controversial">🔥 Pattern Interrupt</option>
+                  <option value="data">📊 Hard Math / Proof</option>
+                  <option value="story">🎭 Founder Story</option>
+                  <option value="secret">🤫 Secret Hack</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-neutral-400 mb-1.5">Language Vibe</label>
+                <select id="langInput" class="w-full bg-black/70 border border-white/15 rounded-2xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#d4ff33]">
+                  <option value="hinglish">🇮🇳 Hinglish (Viral)</option>
+                  <option value="english">🌐 Global English</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="button" id="generateBtn" class="btn-acid w-full py-4 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
+              ⚡ Synthesize 4-Scene Script
+            </button>
+          </div>
         </div>
 
-        <!-- 2. SMART AI BACKGROUND GENERATOR + HD STOCK IMAGES + SHADERS -->
-        <div id="smart-bg-anchor" class="neo-panel rounded-3xl p-5 space-y-3.5 scroll-card border border-pink-500/25">
-          <div class="flex items-center justify-between">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-pink-400">2. Smart Background Studio</h2>
-            <label class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/15 text-[11px] font-bold text-white cursor-pointer border border-white/15">
-              <span>📁 Upload Photo</span>
+        <!-- Pod 2: Smart AI Background Generator + HD Photo Packs + Shaders -->
+        <div id="smart-bg-anchor" class="spatial-pod p-6 sm:p-8 space-y-5 kinetic-block">
+          <div class="flex items-center justify-between border-b border-white/10 pb-4">
+            <div>
+              <span class="font-mono-code text-[10px] text-[#ff5e36] uppercase">MODULE 02</span>
+              <h3 class="text-lg font-bold text-white">Smart Visual Canvas</h3>
+            </div>
+            <label class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-[11px] font-bold text-white cursor-pointer border border-white/15 transition">
+              <span>+ Upload Photo</span>
               <input id="customBgUpload" type="file" accept="image/*" class="hidden">
             </label>
           </div>
 
           <!-- Smart AI Prompt-to-Background Generator -->
-          <div class="p-3 rounded-2xl bg-gradient-to-br from-indigo-950/60 to-purple-950/40 border border-indigo-500/30 space-y-2">
-            <label class="block text-[11px] font-bold text-indigo-200">✨ Smart AI Background Generator:</label>
-            <div class="flex gap-1.5">
-              <input id="smartBgPromptInput" type="text" placeholder="e.g. Iced coffee splash neon dark studio..." value="Iced cold brew coffee cinematic dark cafe neon lighting" class="flex-1 bg-black/70 border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-pink-400">
-              <button type="button" id="generateSmartBgBtn" class="px-3 py-2 rounded-xl bg-pink-600 hover:bg-pink-500 text-white text-xs font-extrabold whitespace-nowrap cursor-pointer">
-                ✨ Generate BG
+          <div class="p-4 rounded-2xl bg-black/60 border border-[#d4ff33]/25 space-y-2.5">
+            <label class="block text-xs font-bold text-[#d4ff33]">✨ Smart AI Background Generator</label>
+            <div class="flex gap-2">
+              <input id="smartBgPromptInput" type="text" placeholder="Describe any scene aesthetic..." value="Iced cold brew coffee cinematic dark cafe neon lighting" class="flex-1 bg-black border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#d4ff33]">
+              <button type="button" id="generateSmartBgBtn" class="px-4 py-2.5 rounded-xl bg-[#ff5e36] hover:bg-[#ff7452] text-white text-xs font-extrabold whitespace-nowrap cursor-pointer transition">
+                Generate
               </button>
             </div>
-            <p class="text-[10px] text-slate-400">Synthesizes a custom 9:16 vertical background from any text prompt.</p>
+            <p class="text-[11px] text-neutral-400">Generates a bespoke 9:16 vertical visual directly from your prompt.</p>
           </div>
 
           <!-- Curated HD Photography B-Roll Packs -->
           <div>
-            <label class="block text-[11px] font-semibold text-slate-300 mb-1.5">🖼️ HD Photography B-Roll Packs:</label>
-            <div class="grid grid-cols-3 gap-1.5">
-              <button type="button" data-photo="coffee" class="photo-pack-btn py-1.5 px-2 rounded-xl bg-white/10 border border-indigo-400 text-[11px] font-bold text-white cursor-pointer">☕ Cafe HD</button>
-              <button type="button" data-photo="cyber" class="photo-pack-btn py-1.5 px-2 rounded-xl bg-black/50 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">🌆 Cyber City</button>
-              <button type="button" data-photo="luxury" class="photo-pack-btn py-1.5 px-2 rounded-xl bg-black/50 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">⌚ Luxury</button>
-              <button type="button" data-photo="workspace" class="photo-pack-btn py-1.5 px-2 rounded-xl bg-black/50 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">💻 Tech Desk</button>
-              <button type="button" data-photo="fitness" class="photo-pack-btn py-1.5 px-2 rounded-xl bg-black/50 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">🏋️ Gym Neon</button>
-              <button type="button" data-photo="street" class="photo-pack-btn py-1.5 px-2 rounded-xl bg-black/50 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">👟 Streetwear</button>
+            <label class="block text-xs font-semibold text-neutral-300 mb-2.5">HD Photography B-Roll Packs</label>
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" data-photo="coffee" class="photo-pack-btn py-2 px-2.5 rounded-xl bg-[#d4ff33]/15 border border-[#d4ff33] text-[11px] font-bold text-white cursor-pointer">☕ Cafe HD</button>
+              <button type="button" data-photo="cyber" class="photo-pack-btn py-2 px-2.5 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-neutral-300 cursor-pointer">🌆 Cyber</button>
+              <button type="button" data-photo="luxury" class="photo-pack-btn py-2 px-2.5 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-neutral-300 cursor-pointer">⌚ Luxury</button>
+              <button type="button" data-photo="workspace" class="photo-pack-btn py-2 px-2.5 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-neutral-300 cursor-pointer">💻 Tech</button>
+              <button type="button" data-photo="fitness" class="photo-pack-btn py-2 px-2.5 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-neutral-300 cursor-pointer">🏋️ Gym</button>
+              <button type="button" data-photo="street" class="photo-pack-btn py-2 px-2.5 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-neutral-300 cursor-pointer">👟 Street</button>
             </div>
           </div>
 
-          <!-- Motion Shader Gradients + Custom Brand Colors -->
+          <!-- Procedural Shaders + Custom Colors -->
           <div>
-            <label class="block text-[11px] font-semibold text-slate-300 mb-1.5">🎨 Or Use Procedural Motion Shaders:</label>
-            <div class="grid grid-cols-4 gap-1.5">
-              <button type="button" data-shader="obsidian" class="shader-btn py-1.5 rounded-lg bg-black/60 border border-white/10 text-[10px] font-semibold text-indigo-300 cursor-pointer">Obsidian</button>
-              <button type="button" data-shader="gold" class="shader-btn py-1.5 rounded-lg bg-black/60 border border-white/10 text-[10px] font-semibold text-amber-300 cursor-pointer">Gold</button>
-              <button type="button" data-shader="matrix" class="shader-btn py-1.5 rounded-lg bg-black/60 border border-white/10 text-[10px] font-semibold text-emerald-300 cursor-pointer">Matrix</button>
-              <button type="button" data-shader="custom" class="shader-btn py-1.5 rounded-lg bg-black/60 border border-white/10 text-[10px] font-semibold text-pink-300 cursor-pointer">Custom</button>
+            <label class="block text-xs font-semibold text-neutral-300 mb-2">Procedural Motion Shaders</label>
+            <div class="grid grid-cols-4 gap-2">
+              <button type="button" data-shader="obsidian" class="shader-btn py-2 rounded-xl bg-black/70 border border-white/10 text-[11px] font-semibold text-neutral-200 cursor-pointer">Carbon</button>
+              <button type="button" data-shader="gold" class="shader-btn py-2 rounded-xl bg-black/70 border border-white/10 text-[11px] font-semibold text-amber-300 cursor-pointer">Gold</button>
+              <button type="button" data-shader="matrix" class="shader-btn py-2 rounded-xl bg-black/70 border border-white/10 text-[11px] font-semibold text-[#d4ff33] cursor-pointer">Acid</button>
+              <button type="button" data-shader="custom" class="shader-btn py-2 rounded-xl bg-black/70 border border-white/10 text-[11px] font-semibold text-[#ff5e36] cursor-pointer">Custom</button>
             </div>
           </div>
 
-          <div class="grid grid-cols-3 gap-2 pt-1 items-center">
+          <div class="grid grid-cols-3 gap-3 pt-1 items-center">
             <div>
-              <label class="block text-[10px] text-slate-400 mb-1">Color 1</label>
-              <input id="customColor1" type="color" value="#1e1b4b" class="w-full h-7 rounded bg-transparent border border-white/15 cursor-pointer">
+              <label class="block text-[10px] text-neutral-400 mb-1">Tone 1</label>
+              <input id="customColor1" type="color" value="#12131a" class="w-full h-8 rounded-lg bg-transparent border border-white/15 cursor-pointer">
             </div>
             <div>
-              <label class="block text-[10px] text-slate-400 mb-1">Color 2</label>
-              <input id="customColor2" type="color" value="#be185d" class="w-full h-7 rounded bg-transparent border border-white/15 cursor-pointer">
+              <label class="block text-[10px] text-neutral-400 mb-1">Tone 2</label>
+              <input id="customColor2" type="color" value="#d4ff33" class="w-full h-8 rounded-lg bg-transparent border border-white/15 cursor-pointer">
             </div>
             <div>
-              <label class="block text-[10px] text-slate-400 mb-1">@Handle</label>
-              <input id="creatorHandleInput" type="text" value="@reelflow.ai" class="w-full bg-black/60 border border-white/15 rounded-lg px-2 py-1 text-[11px] text-white">
+              <label class="block text-[10px] text-neutral-400 mb-1">@Handle</label>
+              <input id="creatorHandleInput" type="text" value="@reelflow.ai" class="w-full bg-black/70 border border-white/15 rounded-xl px-2.5 py-1.5 text-[11px] text-white">
             </div>
           </div>
         </div>
 
-        <!-- 3. Multi-Voice & Custom Clone Lab -->
-        <div class="neo-panel rounded-3xl p-5 space-y-3 scroll-card">
-          <div class="flex items-center justify-between">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-purple-400">3. Voice & Clone Studio</h2>
-            <button type="button" id="sampleVoiceBtn" class="px-2.5 py-1 rounded-lg bg-purple-500/20 border border-purple-400/30 text-[11px] font-bold text-purple-200 cursor-pointer">
-              🔊 Test Voice
+        <!-- Pod 3: Neural Voice & Clone Studio -->
+        <div class="spatial-pod p-6 sm:p-8 space-y-5 kinetic-block">
+          <div class="flex items-center justify-between border-b border-white/10 pb-4">
+            <div>
+              <span class="font-mono-code text-[10px] text-[#d4ff33] uppercase">MODULE 03</span>
+              <h3 class="text-lg font-bold text-white">Neural Voice Lab</h3>
+            </div>
+            <button type="button" id="sampleVoiceBtn" class="px-3.5 py-1.5 rounded-full bg-[#d4ff33]/15 border border-[#d4ff33]/40 text-xs font-bold text-[#d4ff33] cursor-pointer">
+              🔊 Audition
             </button>
           </div>
-          <div id="voicePersonaGrid" class="grid grid-cols-2 gap-2"></div>
-          <div class="grid grid-cols-2 gap-3 pt-1">
+
+          <div id="voicePersonaGrid" class="grid grid-cols-2 gap-2.5"></div>
+
+          <div class="grid grid-cols-2 gap-4 pt-2">
             <div>
-              <div class="flex justify-between text-[10px] text-slate-400"><span>Speed</span><span id="rateLabel">1.08x</span></div>
-              <input id="voiceRate" type="range" min="0.75" max="1.35" step="0.05" value="1.08" class="w-full accent-indigo-500 cursor-pointer">
+              <div class="flex justify-between text-xs text-neutral-400 mb-1"><span>Cadence</span><span id="rateLabel" class="font-mono-code text-white">1.08x</span></div>
+              <input id="voiceRate" type="range" min="0.75" max="1.35" step="0.05" value="1.08" class="w-full accent-[#d4ff33] cursor-pointer">
             </div>
             <div>
-              <div class="flex justify-between text-[10px] text-slate-400"><span>Pitch</span><span id="pitchLabel">1.00</span></div>
-              <input id="voicePitch" type="range" min="0.7" max="1.3" step="0.05" value="1.00" class="w-full accent-purple-500 cursor-pointer">
+              <div class="flex justify-between text-xs text-neutral-400 mb-1"><span>Timbre</span><span id="pitchLabel" class="font-mono-code text-white">1.00</span></div>
+              <input id="voicePitch" type="range" min="0.7" max="1.3" step="0.05" value="1.00" class="w-full accent-[#ff5e36] cursor-pointer">
             </div>
           </div>
-          <button type="button" id="toggleCloneBoxBtn" class="text-[11px] font-bold text-pink-300 hover:underline cursor-pointer block pt-1">
-            + Connect Custom ElevenLabs Voice ID
+
+          <button type="button" id="toggleCloneBoxBtn" class="text-xs font-bold text-[#ff5e36] hover:underline cursor-pointer block pt-1">
+            + Connect Custom ElevenLabs Voice Clone ID
           </button>
-          <div id="elevenCloneBox" class="hidden space-y-2 pt-2 border-t border-white/10">
-            <input id="elevenKeyInput" type="password" placeholder="ElevenLabs API Key" class="w-full bg-black/60 border border-white/15 rounded-lg px-2.5 py-1.5 text-xs text-white">
-            <input id="elevenVoiceIdInput" type="text" placeholder="ElevenLabs Voice ID" class="w-full bg-black/60 border border-white/15 rounded-lg px-2.5 py-1.5 text-xs text-white">
-            <button type="button" id="saveElevenBtn" class="w-full py-1.5 rounded-lg bg-pink-600 text-white text-xs font-bold cursor-pointer">Save Custom Voice</button>
+          <div id="elevenCloneBox" class="hidden space-y-2.5 pt-3 border-t border-white/10">
+            <input id="elevenKeyInput" type="password" placeholder="ElevenLabs API Key" class="w-full bg-black/70 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
+            <input id="elevenVoiceIdInput" type="text" placeholder="ElevenLabs Voice ID" class="w-full bg-black/70 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
+            <button type="button" id="saveElevenBtn" class="btn-acid w-full py-2 rounded-xl text-xs cursor-pointer">Activate Voice Clone</button>
           </div>
         </div>
 
       </div>
 
-      <!-- CENTER COLUMN (4 Cols): REDESIGNED NLE TIMELINE STORYBOARD EDITOR -->
-      <div class="lg:col-span-4 space-y-5">
-        <div class="neo-panel rounded-3xl p-5 space-y-4 scroll-card">
-          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+      <!-- CENTER COLUMN (4 Cols): SPATIAL NLE TIMELINE EDITOR -->
+      <div class="lg:col-span-4 space-y-8">
+        <div class="spatial-pod p-6 sm:p-8 space-y-6 kinetic-block">
+          <div class="flex items-center justify-between border-b border-white/10 pb-4">
             <div>
-              <h2 class="text-sm font-bold uppercase tracking-wider text-emerald-400">4. NLE Timeline Editor</h2>
-              <p class="text-[11px] text-slate-400">Edit dialogue, test scene audio, or AI-polish</p>
+              <span class="font-mono-code text-[10px] text-[#d4ff33] uppercase">MODULE 04</span>
+              <h3 class="text-lg font-bold text-white">NLE Storyboard Track</h3>
             </div>
-            <button type="button" id="copyAllScriptBtn" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 text-xs font-bold text-slate-200 border border-white/10 cursor-pointer">
-              📋 Copy Script
+            <button type="button" id="copyAllScriptBtn" class="px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/15 text-xs font-bold text-neutral-200 border border-white/10 cursor-pointer">
+              📋 Copy All
             </button>
           </div>
 
-          <!-- Hook Variations Selector -->
+          <!-- 3s Hook Switcher -->
           <div>
-            <div class="flex items-center justify-between mb-1.5">
-              <label class="text-[11px] font-bold uppercase tracking-wider text-indigo-300">⚡ Viral 3s Hook Switcher:</label>
-              <span class="text-[10px] text-slate-400">Click to swap Scene 1</span>
+            <div class="flex items-center justify-between mb-2.5">
+              <label class="text-xs font-bold uppercase tracking-wider text-neutral-300">⚡ 3-Second Pattern Interrupts</label>
+              <span class="text-[10px] font-mono-code text-neutral-500">Tap to Swap</span>
             </div>
-            <div id="hooksList" class="space-y-1.5"></div>
+            <div id="hooksList" class="space-y-2.5"></div>
           </div>
 
-          <!-- Redesigned Vertical Timeline Nodes -->
+          <!-- 4-Scene Master Timeline -->
           <div>
-            <div class="flex items-center justify-between mb-2">
-              <label class="text-[11px] font-bold uppercase tracking-wider text-emerald-300">🎞️ 4-Scene Master Track:</label>
-              <span class="text-[10px] font-mono-code text-slate-400">Total: 24.0s</span>
+            <div class="flex items-center justify-between mb-3">
+              <label class="text-xs font-bold uppercase tracking-wider text-neutral-300">🎞️ Master Scene Sequence</label>
+              <span class="text-[10px] font-mono-code text-[#d4ff33]">24.0s VERTICAL</span>
             </div>
-            <div id="scenesList" class="space-y-3 max-h-[520px] overflow-y-auto pr-1"></div>
+            <div id="scenesList" class="space-y-4 max-h-[580px] overflow-y-auto pr-1"></div>
           </div>
         </div>
       </div>
 
-      <!-- RIGHT COLUMN (4 Cols): 9:16 Video Player + IG/YT Toggle + BIG DOWNLOAD BUTTONS -->
-      <div id="player-column" class="lg:col-span-4 flex flex-col items-center scroll-card">
-        <div class="neo-panel rounded-3xl p-5 w-full flex flex-col items-center">
+      <!-- RIGHT COLUMN (4 Cols): 9:16 CINEMA MONITOR + IG/YT SWITCHER + DOWNLOAD SUITE -->
+      <div id="player-column" class="lg:col-span-4 flex flex-col items-center kinetic-block">
+        <div class="spatial-pod p-6 sm:p-8 w-full flex flex-col items-center space-y-5">
           
           <!-- Platform Interface Mode Switcher -->
-          <div class="w-full mb-3">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-300">Platform Preview Mode:</span>
-              <span id="playerStatusBadge" class="text-[10px] font-mono-code px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300">READY</span>
+          <div class="w-full">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-mono-code text-[10px] uppercase tracking-wider text-neutral-400">MODULE 05 // MONITOR UI</span>
+              <span id="playerStatusBadge" class="text-[10px] font-mono-code px-2.5 py-0.5 rounded-full bg-[#d4ff33]/15 text-[#d4ff33]">STANDBY</span>
             </div>
-            <div class="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-black/60 border border-white/10">
-              <button type="button" data-ui="instagram" class="ui-mode-btn py-2 rounded-xl bg-gradient-to-r from-pink-600 to-purple-600 text-white text-[11px] font-bold transition cursor-pointer">
+            <div class="grid grid-cols-3 gap-2 p-1.5 rounded-2xl bg-black/80 border border-white/10">
+              <button type="button" data-ui="instagram" class="ui-mode-btn py-2.5 rounded-xl bg-[#d4ff33] text-black text-xs font-extrabold transition cursor-pointer">
                 📸 IG Reels
               </button>
-              <button type="button" data-ui="youtube" class="ui-mode-btn py-2 rounded-xl text-slate-300 hover:text-white text-[11px] font-bold transition cursor-pointer">
+              <button type="button" data-ui="youtube" class="ui-mode-btn py-2.5 rounded-xl text-neutral-300 hover:text-white text-xs font-bold transition cursor-pointer">
                 ▶️ YT Shorts
               </button>
-              <button type="button" data-ui="clean" class="ui-mode-btn py-2 rounded-xl text-slate-300 hover:text-white text-[11px] font-bold transition cursor-pointer">
+              <button type="button" data-ui="clean" class="ui-mode-btn py-2.5 rounded-xl text-neutral-300 hover:text-white text-xs font-bold transition cursor-pointer">
                 ✨ Clean Raw
               </button>
             </div>
           </div>
 
-          <!-- Caption Theme Bar -->
-          <div class="w-full grid grid-cols-4 gap-1.5 mb-3">
-            <button type="button" data-cap="hormozi" class="cap-btn py-1 rounded-lg bg-amber-500/20 border border-amber-400 text-[10px] font-bold text-amber-300 cursor-pointer">Hormozi</button>
-            <button type="button" data-cap="modern" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Glass Pill</button>
-            <button type="button" data-cap="neon" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Cyber Neon</button>
-            <button type="button" data-cap="red" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Viral Red</button>
+          <!-- Kinetic Typography Theme Switcher -->
+          <div class="w-full grid grid-cols-4 gap-2">
+            <button type="button" data-cap="hormozi" class="cap-btn py-1.5 rounded-xl bg-[#d4ff33]/15 border border-[#d4ff33] text-[10px] font-bold text-[#d4ff33] cursor-pointer">Hormozi</button>
+            <button type="button" data-cap="modern" class="cap-btn py-1.5 rounded-xl bg-white/5 border border-white/10 text-[10px] font-semibold text-neutral-300 cursor-pointer">Glass</button>
+            <button type="button" data-cap="neon" class="cap-btn py-1.5 rounded-xl bg-white/5 border border-white/10 text-[10px] font-semibold text-neutral-300 cursor-pointer">Acid Glow</button>
+            <button type="button" data-cap="red" class="cap-btn py-1.5 rounded-xl bg-white/5 border border-white/10 text-[10px] font-semibold text-neutral-300 cursor-pointer">Amber Pill</button>
           </div>
 
           <!-- 9:16 Phone Hardware Frame -->
-          <div class="relative w-[268px] h-[476px] rounded-[40px] border-[7px] border-slate-800 bg-black overflow-hidden shadow-2xl">
+          <div class="relative w-[274px] h-[486px] rounded-[44px] border-[8px] border-[#191b22] bg-black overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.95)] ring-1 ring-white/15">
             <canvas id="reelCanvas" width="540" height="960" class="w-full h-full object-cover"></canvas>
           </div>
 
           <!-- Play & Scene Scrub Controls -->
-          <div class="w-full mt-4 grid grid-cols-2 gap-2.5">
-            <button type="button" id="playReelBtn" class="py-3 px-4 rounded-2xl bg-white text-slate-950 hover:bg-slate-200 font-extrabold text-xs transition shadow-lg cursor-pointer">
-              ▶ Play Reel w/ Voice
+          <div class="w-full grid grid-cols-2 gap-3">
+            <button type="button" id="playReelBtn" class="py-3.5 px-4 rounded-2xl bg-white text-black hover:bg-neutral-200 font-extrabold text-xs transition shadow-lg cursor-pointer">
+              ▶ Play w/ Voice
             </button>
-            <button type="button" id="nextSceneBtn" class="py-3 px-4 rounded-2xl bg-white/5 hover:bg-white/10 text-white border border-white/15 font-bold text-xs transition cursor-pointer">
-              ⏭ Next Scene (1/4)
+            <button type="button" id="nextSceneBtn" class="py-3.5 px-4 rounded-2xl bg-white/5 hover:bg-white/10 text-white border border-white/15 font-bold text-xs transition cursor-pointer">
+              ⏭ Scene (1/4)
             </button>
           </div>
 
-          <!-- BIG DOWNLOAD VIDEO & CONTENT BUTTONS -->
-          <div class="w-full mt-3 pt-3 border-t border-white/10 space-y-2">
-            <button type="button" id="downloadVideoBtn" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:opacity-95 text-slate-950 font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-emerald-500/20 transition flex items-center justify-center gap-2 cursor-pointer">
-              <span>⬇️ DOWNLOAD VIDEO (.WEBM)</span>
+          <!-- PROMINENT EXPORT & DOWNLOAD SUITE -->
+          <div class="w-full pt-4 border-t border-white/10 space-y-2.5">
+            <button type="button" id="downloadVideoBtn" class="btn-acid w-full py-4 px-5 rounded-2xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer">
+              <span>⬇️ DOWNLOAD 9:16 VIDEO (.WEBM)</span>
             </button>
-            <div class="grid grid-cols-2 gap-2">
-              <button type="button" id="downloadScriptBtn" class="py-2.5 px-3 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-400/30 text-indigo-200 font-bold text-[11px] transition cursor-pointer">
-                📄 Download Script (.TXT)
+            <div class="grid grid-cols-2 gap-2.5">
+              <button type="button" id="downloadScriptBtn" class="py-3 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-neutral-200 font-bold text-[11px] transition cursor-pointer">
+                📄 Export Script (.TXT)
               </button>
-              <button type="button" id="downloadFramePngBtn" class="py-2.5 px-3 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 border border-purple-400/30 text-purple-200 font-bold text-[11px] transition cursor-pointer">
-                🖼️ Save Frame (.PNG)
+              <button type="button" id="downloadFramePngBtn" class="py-3 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-neutral-200 font-bold text-[11px] transition cursor-pointer">
+                🖼️ Save Poster (.PNG)
               </button>
             </div>
           </div>
@@ -450,96 +561,110 @@
     </div>
   </section>
 
-  <!-- SECTION 2: 12 CREATOR & HARDWARE DIAGNOSTIC UTILITIES (With Auto-Stop Mic & Camera!) -->
-  <section id="utility-suite" class="relative z-10 max-w-6xl mx-auto px-4 pb-20 scroll-card">
-    <div class="text-center mb-10">
-      <span class="text-xs font-bold uppercase tracking-wider text-indigo-400">Creator Hardware & Media Suite</span>
-      <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">12 Built-In Production Utilities</h2>
-      <p class="text-xs sm:text-sm text-slate-400 mt-1">Click any tool to run hardware diagnostics (auto-stops after test), convert media, or transcribe audio.</p>
+  <!-- SECTION 02: 12 HARDWARE & MEDIA DIAGNOSTIC UTILITIES (Generous Grid Spacing) -->
+  <section id="utility-suite" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pb-28 sm:pb-36 kinetic-block">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+      <div>
+        <span class="font-mono-code text-xs uppercase tracking-widest text-[#ff5e36] block mb-2">02 // HARDWARE & MEDIA LAB</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Creator <span class="font-editorial text-[#d4ff33]">Diagnostic Suite</span></h2>
+      </div>
+      <p class="text-xs sm:text-sm text-neutral-400 max-w-md">
+        Real-time browser camera & microphone diagnostics (with automatic 10-second hardware release), audio extraction, and AI script engines.
+      </p>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="utilityCardsGrid"></div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="utilityCardsGrid"></div>
   </section>
 
-  <!-- SECTION 3: 26 AI VIDEO CLIPPER & CONVERTER TOOLS (Opens Interactive Clipper Workspace!) -->
-  <section id="clipper-grid" class="relative z-10 max-w-6xl mx-auto px-4 pb-20 scroll-card">
-    <div class="text-center mb-10">
-      <span class="text-xs font-bold uppercase tracking-wider text-purple-400">Discover AI Clippers</span>
-      <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">26+ Viral Video Clipping & Repurposing Tools</h2>
-      <p class="text-xs sm:text-sm text-slate-400 mt-1">Click any tool below to open the dedicated AI Video Clipper & URL Converter workspace.</p>
+  <!-- SECTION 03: 26 AI VIDEO CLIPPER & REPURPOSING WORKFLOWS -->
+  <section id="clipper-grid" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pb-28 sm:pb-36 kinetic-block">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+      <div>
+        <span class="font-mono-code text-xs uppercase tracking-widest text-[#d4ff33] block mb-2">03 // AUTONOMOUS REPURPOSING</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white">26+ Viral <span class="font-editorial text-[#ff5e36]">Clipping Engines</span></h2>
+      </div>
+      <p class="text-xs sm:text-sm text-neutral-400 max-w-md">
+        Select any workflow below to launch the interactive URL & local file repurposing modal.
+      </p>
     </div>
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5" id="clipperCardsGrid"></div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5" id="clipperCardsGrid"></div>
   </section>
 
-  <!-- SECTION 4: FREE TRIAL + CUSTOM RUPEE PLAN STARTING AT ₹50 + DIRECT BANK UPI GATEWAY -->
-  <section id="pricing" class="relative z-10 max-w-5xl mx-auto px-4 pb-20 scroll-card">
-    <div class="text-center mb-10">
-      <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-bold uppercase">Student & Startup Friendly Pricing</span>
-      <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-3">Start Free or Custom Plan Starting at Just ₹50</h2>
-      <p class="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto mt-1">Direct UPI & QR settlements go straight into your connected bank account with zero middleman delay.</p>
+  <!-- SECTION 04: FREE TRIAL + ₹50 CUSTOM RUPEE SLIDER + DIRECT BANK UPI GATEWAY -->
+  <section id="pricing" class="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 pb-28 sm:pb-36 kinetic-block">
+    <div class="text-center mb-14">
+      <span class="font-mono-code text-xs uppercase tracking-widest text-[#d4ff33] block mb-2">04 // TRANSPARENT INDIA SETTLEMENT</span>
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Start Free or Build a <span class="font-editorial text-[#d4ff33]">₹50 Custom Pack</span></h2>
+      <p class="text-xs sm:text-base text-neutral-400 max-w-xl mx-auto mt-3">
+        Zero bloated retainers. Test everything free, or slide to unlock custom video packs starting at ₹50 with direct UPI settlement.
+      </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 items-stretch">
       
-      <!-- Card 1: Free Trial -->
-      <div class="neo-panel rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-white/10">
+      <!-- Card 1: Free Forever Sandbox -->
+      <div class="spatial-pod p-8 sm:p-10 flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between">
-            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold">Free Forever Trial</span>
-            <span class="text-xs font-mono-code text-emerald-400">Active Now</span>
+            <span class="px-3.5 py-1 rounded-full bg-white/10 text-white text-xs font-bold">Creator Sandbox</span>
+            <span class="text-xs font-mono-code text-[#d4ff33]">OPEN ACCESS</span>
           </div>
-          <div class="mt-5 mb-2 flex items-baseline gap-2">
-            <span class="text-4xl sm:text-5xl font-extrabold text-white font-display">₹0</span>
-            <span class="text-xs text-slate-400">/ Try All Features</span>
+          <div class="mt-6 mb-3 flex items-baseline gap-2">
+            <span class="text-5xl sm:text-6xl font-extrabold text-white font-display">₹0</span>
+            <span class="text-xs text-neutral-400 font-mono-code">/ FREE TRIAL</span>
           </div>
-          <p class="text-xs text-slate-400 mb-6">Test smart AI background generation, 6 voices, and WebM video downloads right now.</p>
-          <ul class="text-xs text-slate-200 space-y-3 mb-8">
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> <span>3 Free 9:16 Video Downloads (.WEBM)</span></li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> <span>Smart AI Text-to-Background Generator</span></li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> <span>Instagram Reels & YouTube Shorts Previews</span></li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> <span>All 38+ Creator & Clipper Utilities</span></li>
+          <p class="text-xs sm:text-sm text-neutral-400 mb-8 leading-relaxed">
+            Experience the complete 9:16 studio, Smart AI background synthesis, 6 voice personas, and WebM video exports immediately.
+          </p>
+          <ul class="text-xs sm:text-sm text-neutral-200 space-y-3.5 mb-10">
+            <li class="flex items-center gap-3"><span class="text-[#d4ff33] font-bold">✦</span> <span>3 Free 9:16 Vertical Video Downloads (.WEBM)</span></li>
+            <li class="flex items-center gap-3"><span class="text-[#d4ff33] font-bold">✦</span> <span>Smart AI Text-to-Background Synthesis</span></li>
+            <li class="flex items-center gap-3"><span class="text-[#d4ff33] font-bold">✦</span> <span>Instagram Reels & YouTube Shorts UI Previews</span></li>
+            <li class="flex items-center gap-3"><span class="text-[#d4ff33] font-bold">✦</span> <span>Full Access to All 38+ Diagnostic & Clipper Tools</span></li>
           </ul>
         </div>
-        <a href="#studio" class="w-full py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-extrabold text-xs uppercase tracking-wider text-center border border-white/15 transition">
-          Use Free Studio Now →
+        <a href="#studio" class="w-full py-4 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-extrabold text-xs uppercase tracking-wider text-center border border-white/15 transition">
+          Launch Free Studio →
         </a>
       </div>
 
       <!-- Card 2: Custom Rupee Plan Starting at ₹50 -->
-      <div class="neo-panel rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-2 border-indigo-500 relative shadow-2xl shadow-indigo-500/15">
-        <span class="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white text-[10px] font-extrabold uppercase tracking-wider">Starts at ₹50</span>
+      <div class="spatial-pod p-8 sm:p-10 flex flex-col justify-between border-2 border-[#d4ff33] relative">
+        <span class="absolute -top-3.5 right-8 px-4 py-1 rounded-full bg-[#d4ff33] text-black text-[10px] font-extrabold uppercase tracking-widest">STARTS AT ₹50</span>
         <div>
           <div class="flex items-center justify-between">
-            <span class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold">Custom Rupee Builder</span>
-            <span id="customReelCountBadge" class="text-xs font-mono-code text-amber-300 font-bold">1 Pro Video Pack</span>
+            <span class="px-3.5 py-1 rounded-full bg-[#d4ff33]/15 text-[#d4ff33] text-xs font-bold">Custom Rupee Slider</span>
+            <span id="customReelCountBadge" class="text-xs font-mono-code text-[#ff5e36] font-bold">1 PRO VIDEO PACK</span>
           </div>
 
-          <div class="mt-5 mb-4 flex items-baseline gap-2">
-            <span id="customPriceDisplay" class="text-4xl sm:text-5xl font-extrabold text-white font-display">₹50</span>
-            <span class="text-xs text-slate-400">/ instant pack</span>
+          <div class="mt-6 mb-5 flex items-baseline gap-2">
+            <span id="customPriceDisplay" class="text-5xl sm:text-6xl font-extrabold text-white font-display">₹50</span>
+            <span class="text-xs text-neutral-400 font-mono-code">/ INSTANT PACK</span>
           </div>
 
-          <!-- Slider Starting at 1 Video = ₹50 -->
-          <div class="p-4 rounded-2xl bg-black/60 border border-white/10 mb-5 space-y-2">
-            <div class="flex justify-between text-xs font-semibold">
-              <span class="text-slate-300">Slide to choose video credits:</span>
-              <span id="sliderVideosLabel" class="text-indigo-400 font-bold">1 Video (₹50)</span>
+          <!-- Tactile Slider Box -->
+          <div class="p-5 rounded-2xl bg-black/70 border border-white/10 mb-6 space-y-3">
+            <div class="flex justify-between text-xs font-bold">
+              <span class="text-neutral-300">Slide to select video credits:</span>
+              <span id="sliderVideosLabel" class="text-[#d4ff33] font-mono-code">1 Video (₹50)</span>
             </div>
-            <input id="customPlanSlider" type="range" min="1" max="50" step="1" value="1" class="w-full accent-indigo-500 cursor-pointer">
-            <div class="flex justify-between text-[10px] text-slate-500 font-mono-code">
+            <input id="customPlanSlider" type="range" min="1" max="50" step="1" value="1" class="w-full accent-[#d4ff33] cursor-pointer">
+            <div class="flex justify-between text-[10px] text-neutral-500 font-mono-code">
               <span>1 Video (₹50)</span>
               <span>15 Videos (₹750)</span>
               <span>50 Videos (₹2,500)</span>
             </div>
           </div>
 
-          <ul class="text-xs text-slate-200 space-y-2.5 mb-6">
-            <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> <span>1080p Watermark-Free Video & Voice Renders</span></li>
-            <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> <span>Unlimited Smart AI Custom Backgrounds</span></li>
-            <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> <span>Direct UPI Payment to Founder Bank Account</span></li>
+          <ul class="text-xs sm:text-sm text-neutral-200 space-y-3 mb-8">
+            <li class="flex items-center gap-3"><span class="text-[#d4ff33] font-bold">✦</span> <span>1080p Watermark-Free Video & Voice Renders</span></li>
+            <li class="flex items-center gap-3"><span class="text-[#d4ff33] font-bold">✦</span> <span>Unlimited Smart AI Custom Scene Backgrounds</span></li>
+            <li class="flex items-center gap-3"><span class="text-[#d4ff33] font-bold">✦</span> <span>Direct UPI QR Settlement to Founder Bank Account</span></li>
           </ul>
         </div>
 
-        <button type="button" id="openPaymentGatewayBtn" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:opacity-95 text-white font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-indigo-600/30 transition cursor-pointer">
+        <button type="button" id="openPaymentGatewayBtn" class="btn-acid w-full py-4 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
           💳 Pay ₹50+ via Instant UPI / Bank Gateway
         </button>
       </div>
@@ -547,83 +672,80 @@
     </div>
   </section>
 
-  <!-- SECTION 5: CONTACT FOUNDER & PRODUCTION CONCIERGE DESK (+91 7820847387) -->
-  <section id="founder-desk" class="relative z-10 max-w-5xl mx-auto px-4 pb-24 scroll-card">
-    <div class="neo-panel rounded-3xl p-6 sm:p-10 border border-emerald-500/30 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="space-y-2 text-center md:text-left">
-        <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-xs font-bold uppercase">Direct Founder Concierge</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Need Custom AI Marketing or Done-For-You Reels?</h2>
-        <p class="text-xs sm:text-sm text-slate-300 max-w-xl">
-          Connect directly with our founder desk on WhatsApp (+91 7820847387) to send your generated script, request custom brand edits, or partner with ReelFlow AI.
+  <!-- SECTION 05: FOUNDER CONCIERGE DESK (+91 7820847387) -->
+  <section id="founder-desk" class="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 pb-28 kinetic-block">
+    <div class="spatial-pod p-8 sm:p-12 border border-[#d4ff33]/35 flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="space-y-3 text-center md:text-left">
+        <span class="font-mono-code text-xs uppercase tracking-widest text-[#d4ff33]">05 // DIRECT FOUNDER LINE</span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white">Want Custom B2B AI Video Production?</h2>
+        <p class="text-xs sm:text-sm text-neutral-300 max-w-xl leading-relaxed">
+          Send your generated script directly to our founder production desk on WhatsApp (+91 7820847387) for bespoke brand grading, voice cloning, or enterprise onboarding.
         </p>
       </div>
-      <div class="flex flex-col sm:flex-row gap-3 shrink-0">
-        <button type="button" id="contactFounderWhatsAppBtn" class="px-6 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider shadow-xl shadow-emerald-500/20 transition cursor-pointer">
-          💬 WhatsApp Founder (+91 7820847387)
-        </button>
-      </div>
+      <button type="button" id="contactFounderWhatsAppBtn" class="btn-acid px-8 py-4 rounded-full text-xs sm:text-sm uppercase tracking-wider shrink-0 cursor-pointer">
+        💬 Message Founder (+91 7820847387) →
+      </button>
     </div>
   </section>
 
   <!-- MODAL 1: DEDICATED AI CLIPPER & CONVERTER WORKSPACE -->
-  <div id="clipperWorkspaceModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="neo-panel max-w-lg w-full rounded-3xl p-6 border border-indigo-500/40 space-y-4 shadow-2xl">
-      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+  <div id="clipperWorkspaceModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-xl flex items-center justify-center p-4">
+    <div class="spatial-pod max-w-lg w-full p-7 border border-[#d4ff33]/40 space-y-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
         <div>
-          <span class="text-[10px] font-mono-code uppercase text-indigo-400">Interactive AI Repurposing Engine</span>
-          <h3 id="clipperModalTitle" class="text-lg font-extrabold text-white font-display">Video to Reels Converter</h3>
+          <span class="text-[10px] font-mono-code uppercase text-[#d4ff33]">Autonomous Repurposing Engine</span>
+          <h3 id="clipperModalTitle" class="text-xl font-extrabold text-white font-display">Video to Reels Converter</h3>
         </div>
-        <button type="button" id="closeClipperModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
+        <button type="button" id="closeClipperModalBtn" class="text-neutral-400 hover:text-white text-base cursor-pointer">✕</button>
       </div>
 
-      <div class="space-y-3">
+      <div class="space-y-4">
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">1. Paste Long Video URL (YouTube, Drive, Dropbox, Twitch) or Topic:</label>
-          <input id="clipperUrlInput" type="text" placeholder="https://youtube.com/watch?v=... or describe your video" class="w-full bg-black/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+          <label class="block text-xs font-semibold text-neutral-300 mb-1.5">1. Paste Long Video URL (YouTube, Drive, Dropbox, Twitch) or Topic:</label>
+          <input id="clipperUrlInput" type="text" placeholder="https://youtube.com/watch?v=... or describe your video" class="w-full bg-black/80 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#d4ff33]">
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">2. Or Upload Local Video / Audio File from Device:</label>
-          <input id="clipperFileInput" type="file" accept="video/*,audio/*" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-white/10 file:text-white file:font-bold cursor-pointer">
+          <label class="block text-xs font-semibold text-neutral-300 mb-1.5">2. Or Upload Local Video / Audio File:</label>
+          <input id="clipperFileInput" type="file" accept="video/*,audio/*" class="w-full text-xs text-neutral-300 file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-white/10 file:text-white file:font-bold cursor-pointer">
         </div>
 
-        <div class="grid grid-cols-3 gap-2">
+        <div class="grid grid-cols-3 gap-3">
           <div>
-            <label class="block text-[10px] text-slate-400 mb-1">Clip Length</label>
-            <select id="clipperDuration" class="w-full bg-black/70 border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white">
+            <label class="block text-[10px] text-neutral-400 mb-1">Clip Length</label>
+            <select id="clipperDuration" class="w-full bg-black/80 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
               <option value="15s">15s Viral Cut</option>
               <option value="30s" selected>24s - 30s Reel</option>
               <option value="60s">60s YT Short</option>
             </select>
           </div>
           <div>
-            <label class="block text-[10px] text-slate-400 mb-1">Auto-Reframe</label>
-            <select class="w-full bg-black/70 border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white">
+            <label class="block text-[10px] text-neutral-400 mb-1">Auto-Reframe</label>
+            <select class="w-full bg-black/80 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
               <option>9:16 Face-Track</option>
               <option>Split-Screen</option>
             </select>
           </div>
           <div>
-            <label class="block text-[10px] text-slate-400 mb-1">Subtitles</label>
-            <select class="w-full bg-black/70 border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white">
+            <label class="block text-[10px] text-neutral-400 mb-1">Subtitles</label>
+            <select class="w-full bg-black/80 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
               <option>Hormozi Bold</option>
               <option>Hinglish Auto</option>
             </select>
           </div>
         </div>
 
-        <!-- Simulated AI Progress Bar -->
-        <div id="clipperProgressWrap" class="hidden p-3 rounded-2xl bg-black/60 border border-indigo-500/30 space-y-2">
-          <div class="flex justify-between text-[11px] font-mono-code text-indigo-300">
+        <div id="clipperProgressWrap" class="hidden p-4 rounded-2xl bg-black/80 border border-[#d4ff33]/30 space-y-2">
+          <div class="flex justify-between text-[11px] font-mono-code text-[#d4ff33]">
             <span id="clipperStageText">Analyzing audio peaks & hooks...</span>
             <span id="clipperPctText">35%</span>
           </div>
-          <div class="w-full h-2 bg-slate-900 rounded-full overflow-hidden">
-            <div id="clipperProgressBar" class="h-full bg-gradient-to-r from-indigo-500 to-pink-500 w-1/3 transition-all duration-300"></div>
+          <div class="w-full h-2 bg-neutral-900 rounded-full overflow-hidden">
+            <div id="clipperProgressBar" class="h-full bg-[#d4ff33] w-1/3 transition-all duration-300"></div>
           </div>
         </div>
 
-        <button type="button" id="runClipperExtractBtn" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg cursor-pointer">
+        <button type="button" id="runClipperExtractBtn" class="btn-acid w-full py-4 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
           ✂️ Extract Viral 9:16 Clip & Open in Studio
         </button>
       </div>
@@ -631,105 +753,102 @@
   </div>
 
   <!-- MODAL 2: DIRECT BANK UPI PAYMENT GATEWAY -->
-  <div id="paymentGatewayModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="neo-panel max-w-md w-full rounded-3xl overflow-hidden border border-white/20 shadow-2xl max-h-[92vh] overflow-y-auto">
-      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-4 sm:p-5 flex items-center justify-between text-white">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center font-extrabold">₹</div>
+  <div id="paymentGatewayModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-xl flex items-center justify-center p-4">
+    <div class="spatial-pod max-w-md w-full overflow-hidden border border-[#d4ff33]/40 shadow-2xl max-h-[92vh] overflow-y-auto">
+      <div class="bg-[#d4ff33] p-5 flex items-center justify-between text-black">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-black text-[#d4ff33] flex items-center justify-center font-extrabold text-lg">₹</div>
           <div>
-            <h3 class="text-sm font-extrabold">Direct Bank UPI Checkout</h3>
-            <p id="gatewayPlanSubtitle" class="text-[11px] text-indigo-100">Custom Pack: 1 Video</p>
+            <h3 class="text-sm font-extrabold uppercase tracking-wide">Direct Bank UPI Settlement</h3>
+            <p id="gatewayPlanSubtitle" class="text-xs font-semibold opacity-80">Custom Pack: 1 Video</p>
           </div>
         </div>
         <div class="text-right">
-          <span id="gatewayAmountBadge" class="text-xl font-extrabold font-display">₹50</span>
-          <button type="button" id="closePaymentModalBtn" class="block ml-auto text-xs text-white/80 hover:text-white cursor-pointer">✕ Close</button>
+          <span id="gatewayAmountBadge" class="text-2xl font-extrabold font-display">₹50</span>
+          <button type="button" id="closePaymentModalBtn" class="block ml-auto text-xs font-bold underline cursor-pointer">Close</button>
         </div>
       </div>
 
-      <div class="p-5 space-y-4">
-        <!-- Founder Merchant UPI Setup -->
-        <div class="p-3 rounded-2xl bg-indigo-950/50 border border-indigo-500/30 space-y-1.5">
+      <div class="p-6 space-y-4">
+        <div class="p-3.5 rounded-2xl bg-black/70 border border-white/10 space-y-1.5">
           <div class="flex items-center justify-between">
-            <span class="text-[11px] font-bold text-indigo-300">🏦 Receiving Bank UPI ID (Direct Settlement):</span>
-            <button type="button" id="toggleUpiEditBtn" class="text-[10px] text-pink-300 underline cursor-pointer">Change UPI ID</button>
+            <span class="text-[11px] font-bold text-[#d4ff33]">🏦 Receiving Bank UPI ID:</span>
+            <button type="button" id="toggleUpiEditBtn" class="text-[10px] text-[#ff5e36] underline cursor-pointer">Edit Bank UPI</button>
           </div>
-          <p id="activeMerchantUpiLabel" class="text-xs font-mono-code text-emerald-300 font-bold">7820847387@upi</p>
-          <div id="merchantUpiEditBox" class="hidden pt-1 space-y-1.5">
-            <input id="merchantUpiInput" type="text" placeholder="e.g. 7820847387@kotak or 7820847387@okaxis" class="w-full bg-black/70 border border-white/15 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono-code">
-            <button type="button" id="saveMerchantUpiBtn" class="w-full py-1.5 rounded-lg bg-indigo-600 text-white text-[11px] font-bold cursor-pointer">Save My Bank UPI ID</button>
+          <p id="activeMerchantUpiLabel" class="text-xs font-mono-code text-white font-bold">7820847387@upi</p>
+          <div id="merchantUpiEditBox" class="hidden pt-2 space-y-2">
+            <input id="merchantUpiInput" type="text" placeholder="e.g. 7820847387@kotak or 7820847387@okaxis" class="w-full bg-black border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono-code">
+            <button type="button" id="saveMerchantUpiBtn" class="btn-acid w-full py-2 rounded-xl text-[11px] cursor-pointer">Save Receiving UPI ID</button>
           </div>
         </div>
 
-        <!-- QR Code + 1-Tap Mobile UPI Deep Link -->
-        <div class="text-center space-y-2.5">
-          <p class="text-xs text-slate-300">1. Scan QR with GPay, PhonePe, Paytm, or Kotak/Axis App:</p>
-          <div class="w-40 h-40 mx-auto bg-white p-2 rounded-2xl shadow-lg flex items-center justify-center">
+        <div class="text-center space-y-3">
+          <p class="text-xs text-neutral-300">1. Scan QR with GPay, PhonePe, Paytm, or Kotak/Axis App:</p>
+          <div class="w-44 h-44 mx-auto bg-white p-2.5 rounded-2xl shadow-lg flex items-center justify-center">
             <img id="dynamicUpiQr" src="" alt="UPI QR" class="w-full h-full object-contain">
           </div>
-          <a id="mobileUpiDeepLink" href="#" class="inline-block w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold text-emerald-300 transition">
-            📱 Tap Here on Phone to Pay via GPay / PhonePe App
+          <a id="mobileUpiDeepLink" href="#" class="inline-block w-full py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold text-[#d4ff33] transition">
+            📱 Tap Here on Phone to Pay via UPI App
           </a>
         </div>
 
-        <!-- UTR Verification & WhatsApp Receipt -->
-        <div class="space-y-2 pt-2 border-t border-white/10">
-          <label class="block text-[11px] font-semibold text-slate-300">2. Enter Customer Name & 12-Digit UPI Ref / UTR No:</label>
-          <input id="payerNameInput" type="text" placeholder="Your Name / Brand Name *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
-          <input id="payerUtrInput" type="text" placeholder="12-Digit UPI Ref / UTR Number (or last 4 digits)" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono-code">
+        <div class="space-y-2.5 pt-2 border-t border-white/10">
+          <label class="block text-[11px] font-semibold text-neutral-300">2. Enter Customer Name & 12-Digit UPI Ref / UTR No:</label>
+          <input id="payerNameInput" type="text" placeholder="Your Name / Brand Name *" class="w-full bg-black/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
+          <input id="payerUtrInput" type="text" placeholder="12-Digit UPI Ref / UTR Number" class="w-full bg-black/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white font-mono-code">
         </div>
 
-        <button type="button" id="confirmPaymentBtn" class="w-full py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider transition cursor-pointer">
-          ✓ Verify Payment & Unlock Credits on WhatsApp
+        <button type="button" id="confirmPaymentBtn" class="btn-acid w-full py-4 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
+          ✓ Verify Payment & Unlock on WhatsApp
         </button>
       </div>
     </div>
   </div>
 
   <!-- MODAL 3: HARDWARE & CREATOR UTILITY MODAL -->
-  <div id="utilityToolModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="neo-panel max-w-lg w-full rounded-3xl p-6 border border-white/15 space-y-4">
+  <div id="utilityToolModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-xl flex items-center justify-center p-4">
+    <div class="spatial-pod max-w-lg w-full p-7 border border-white/15 space-y-4">
       <div class="flex items-center justify-between">
-        <h3 id="utilModalTitle" class="text-lg font-bold text-white font-display">Utility Tool</h3>
-        <button type="button" id="closeUtilModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
+        <h3 id="utilModalTitle" class="text-xl font-bold text-white font-display">Utility Tool</h3>
+        <button type="button" id="closeUtilModalBtn" class="text-neutral-400 hover:text-white text-base cursor-pointer">✕</button>
       </div>
-      <p id="utilModalDesc" class="text-xs text-slate-300"></p>
+      <p id="utilModalDesc" class="text-xs text-neutral-400"></p>
       <div id="utilModalBody" class="space-y-3"></div>
     </div>
   </div>
 
   <!-- MODAL 4: PERSISTENT LOGIN & REGISTER -->
-  <div id="authModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="neo-panel max-w-md w-full rounded-3xl p-6 space-y-4 border border-white/15">
+  <div id="authModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-xl flex items-center justify-center p-4">
+    <div class="spatial-pod max-w-md w-full p-7 space-y-5 border border-white/15">
       <div class="flex items-center justify-between">
-        <h3 class="text-base font-bold text-white font-display">ReelFlow Creator Account</h3>
-        <button type="button" id="closeAuthModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
+        <h3 class="text-lg font-bold text-white font-display">ReelFlow Creator Pass</h3>
+        <button type="button" id="closeAuthModalBtn" class="text-neutral-400 hover:text-white text-base cursor-pointer">✕</button>
       </div>
-      <div class="grid grid-cols-2 gap-2 p-1 rounded-xl bg-black/60 border border-white/10">
-        <button type="button" id="tabLoginBtn" class="py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold cursor-pointer">Login</button>
-        <button type="button" id="tabRegisterBtn" class="py-2 rounded-lg text-slate-400 text-xs font-bold cursor-pointer">Register</button>
+      <div class="grid grid-cols-2 gap-2 p-1.5 rounded-2xl bg-black border border-white/10">
+        <button type="button" id="tabLoginBtn" class="py-2.5 rounded-xl bg-[#d4ff33] text-black text-xs font-extrabold cursor-pointer">Sign In</button>
+        <button type="button" id="tabRegisterBtn" class="py-2.5 rounded-xl text-neutral-400 text-xs font-bold cursor-pointer">Register</button>
       </div>
-      <form id="authForm" class="space-y-3">
-        <input id="authNameInput" type="text" placeholder="Your Full Name *" class="hidden w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
-        <input id="authEmailInput" type="email" required placeholder="Email Address *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
-        <input id="authPassInput" type="password" required placeholder="Password *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
-        <button type="submit" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase cursor-pointer">Save Session & Continue →</button>
+      <form id="authForm" class="space-y-3.5">
+        <input id="authNameInput" type="text" placeholder="Your Full Name *" class="hidden w-full bg-black/70 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white">
+        <input id="authEmailInput" type="email" required placeholder="Email Address *" class="w-full bg-black/70 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white">
+        <input id="authPassInput" type="password" required placeholder="Password *" class="w-full bg-black/70 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white">
+        <button type="submit" class="btn-acid w-full py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">Save Session & Enter →</button>
       </form>
-      <p class="text-[11px] text-slate-400 text-center">Your login is permanently remembered on this browser until you click Logout.</p>
+      <p class="text-[11px] text-neutral-400 text-center">Your login is permanently remembered on this browser until you click Exit.</p>
     </div>
   </div>
 
   <!-- MODAL 5: GEMINI API KEY -->
-  <div id="apiModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="neo-panel max-w-md w-full rounded-3xl p-6 space-y-4 border border-white/15">
+  <div id="apiModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-xl flex items-center justify-center p-4">
+    <div class="spatial-pod max-w-md w-full p-7 space-y-4 border border-white/15">
       <div class="flex items-center justify-between">
-        <h3 class="text-base font-bold text-white">⚡ Connect Gemini 2.5 Flash Key</h3>
-        <button type="button" id="closeApiModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
+        <h3 class="text-lg font-bold text-white font-display">⚡ Connect Gemini 2.5 Flash Key</h3>
+        <button type="button" id="closeApiModalBtn" class="text-neutral-400 hover:text-white text-base cursor-pointer">✕</button>
       </div>
-      <p class="text-xs text-slate-300">Paste a free API key from Google AI Studio for live LLM script generation:</p>
-      <input id="geminiKeyInput" type="password" placeholder="AIzaSy..." class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white font-mono-code">
+      <p class="text-xs text-neutral-400">Paste a free API key from Google AI Studio for live LLM script synthesis:</p>
+      <input id="geminiKeyInput" type="password" placeholder="AIzaSy..." class="w-full bg-black/70 border border-white/15 rounded-2xl px-4 py-3 text-xs text-white font-mono-code">
       <div class="flex justify-end gap-2">
-        <button type="button" id="saveApiKeyBtn" class="px-4 py-2 rounded-xl bg-indigo-600 text-xs font-bold text-white cursor-pointer">Save Key</button>
+        <button type="button" id="saveApiKeyBtn" class="btn-acid px-5 py-2.5 rounded-xl text-xs cursor-pointer">Save Key</button>
       </div>
     </div>
   </div>
@@ -779,18 +898,18 @@
       };
 
       var UTILITY_TOOLS = [
-        { id: "camera", icon: "📹", title: "Camera Test", desc: "Test your webcam (Auto-stops when done)" },
-        { id: "mic", icon: "🎙️", title: "Mic Test", desc: "10s microphone level test with auto-shutoff" },
-        { id: "audioconv", icon: "🔄", title: "Audio Converter", desc: "Convert audio files to MP3 and WAV format" },
-        { id: "videoconv", icon: "🎞️", title: "Video Converter", desc: "Convert video clips to MP4 and WEBM" },
-        { id: "extractor", icon: "🎵", title: "Audio Extractor", desc: "Separate clean audio tracks from your video" },
-        { id: "remover", icon: "🔇", title: "Audio Remover", desc: "Mute and strip background noise from video" },
-        { id: "audiotrans", icon: "📝", title: "Audio Transcription", desc: "Transcribe voice notes and audio to text" },
-        { id: "videotrans", icon: "📄", title: "Video Transcription", desc: "Transcribe video dialogue to timestamped text" },
-        { id: "podtrans", icon: "🎧", title: "Podcast Transcription", desc: "Turn multi-speaker podcasts into show notes" },
-        { id: "tiktokscript", icon: "✨", title: "AI TikTok Script Generator", desc: "Generate viral TikTok & Reel scripts using AI" },
-        { id: "ytscript", icon: "▶️", title: "AI YouTube Script Generator", desc: "Generate high-retention YouTube Shorts scripts" },
-        { id: "salesscript", icon: "💼", title: "AI Sales Script Generator", desc: "Generate high-converting B2B & D2C video scripts" }
+        { id: "camera", icon: "📹", title: "Camera Test", desc: "Live webcam check with instant hardware release" },
+        { id: "mic", icon: "🎙️", title: "Mic Test", desc: "10s frequency spectrum check with auto-shutoff" },
+        { id: "audioconv", icon: "🔄", title: "Audio Converter", desc: "Convert raw audio tracks into MP3 & WAV" },
+        { id: "videoconv", icon: "🎞️", title: "Video Converter", desc: "Transcode vertical clips to MP4 & WEBM" },
+        { id: "extractor", icon: "🎵", title: "Audio Extractor", desc: "Strip clean voice tracks from any video file" },
+        { id: "remover", icon: "🔇", title: "Audio Remover", desc: "Mute background noise and room echo" },
+        { id: "audiotrans", icon: "📝", title: "Audio Transcription", desc: "Convert voice notes into structured text" },
+        { id: "videotrans", icon: "📄", title: "Video Transcription", desc: "Extract timestamped captions from video" },
+        { id: "podtrans", icon: "🎧", title: "Podcast Transcription", desc: "Turn multi-guest podcasts into show notes" },
+        { id: "tiktokscript", icon: "✨", title: "AI TikTok Script Engine", desc: "Engineer pattern-interrupt TikTok & Reel scripts" },
+        { id: "ytscript", icon: "▶️", title: "AI YouTube Script Engine", desc: "Write high-retention YouTube Shorts scripts" },
+        { id: "salesscript", icon: "💼", title: "AI Sales Script Engine", desc: "Build direct-response B2B & D2C video scripts" }
       ];
 
       var CLIPPER_TOOLS = [
@@ -908,7 +1027,7 @@
 
       function generateSmartAiBackground(promptText) {
         var cleanPrompt = (promptText || "modern neon studio background").trim();
-        showToast("Generating Smart AI Background...");
+        showToast("Synthesizing Smart AI Background...");
         var seed = Math.floor(Math.random() * 99999);
         var aiUrl = "https://image.pollinations.ai/prompt/" + encodeURIComponent(cleanPrompt + ", vertical 9:16 wallpaper, cinematic lighting, 8k, no text") + "?width=540&height=960&nologo=true&seed=" + seed;
 
@@ -918,7 +1037,7 @@
           customOrSmartBgImg = img;
           bgMode = "smart_ai";
           drawCanvas();
-          showToast("✨ Smart AI Background applied to 9:16 video!");
+          showToast("✨ Smart AI Background applied to 9:16 monitor!");
         };
         img.onerror = function() {
           var off = document.createElement("canvas");
@@ -926,13 +1045,13 @@
           off.height = 960;
           var octx = off.getContext("2d");
           var g = octx.createLinearGradient(0, 0, 540, 960);
-          g.addColorStop(0, "#1e1b4b");
-          g.addColorStop(0.5, "#4c0519");
-          g.addColorStop(1, "#064e3b");
+          g.addColorStop(0, "#0b0d12");
+          g.addColorStop(0.5, "#1f2410");
+          g.addColorStop(1, "#2e150f");
           octx.fillStyle = g;
           octx.fillRect(0, 0, 540, 960);
-          for (var i = 0; i < 18; i++) {
-            octx.fillStyle = "rgba(255,255,255,0.08)";
+          for (var i = 0; i < 16; i++) {
+            octx.fillStyle = "rgba(212, 255, 51, 0.08)";
             octx.beginPath();
             octx.arc(Math.random() * 540, Math.random() * 960, 30 + Math.random() * 120, 0, Math.PI * 2);
             octx.fill();
@@ -949,19 +1068,45 @@
         img.src = aiUrl;
       }
 
-      function initScrollObserver() {
-        var els = document.querySelectorAll(".scroll-card");
+      // Bidirectional 3D Kinetic Scroll Engine (Scroll Down AND Scroll Up + Top Laser Progress Bar)
+      function initKineticScrollEngine() {
+        var blocks = document.querySelectorAll(".kinetic-block");
+        var progBar = document.getElementById("scrollProgressBar");
+
+        window.addEventListener("scroll", function() {
+          var scrollTop = window.scrollY || document.documentElement.scrollTop;
+          var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          var pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+          if (progBar) progBar.style.width = pct + "%";
+        }, { passive: true });
+
+        // Interactive Cursor Spotlight
+        window.addEventListener("mousemove", function(e) {
+          var xPct = Math.round((e.clientX / window.innerWidth) * 100);
+          var yPct = Math.round((e.clientY / window.innerHeight) * 100);
+          document.documentElement.style.setProperty("--mouse-x", xPct + "%");
+          document.documentElement.style.setProperty("--mouse-y", yPct + "%");
+        }, { passive: true });
+
         if (!("IntersectionObserver" in window)) return;
-        var obs = new IntersectionObserver(function(entries) {
+        var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (entry.isIntersecting) {
-              entry.target.classList.remove("scroll-out");
+              entry.target.classList.remove("out-below", "out-above");
             } else {
-              entry.target.classList.add("scroll-out");
+              var rect = entry.boundingClientRect;
+              if (rect.top > 0) {
+                entry.target.classList.add("out-below");
+                entry.target.classList.remove("out-above");
+              } else {
+                entry.target.classList.add("out-above");
+                entry.target.classList.remove("out-below");
+              }
             }
           });
-        }, { threshold: 0.08 });
-        els.forEach(function(el) { obs.observe(el); });
+        }, { threshold: 0.08, rootMargin: "-20px 0px -20px 0px" });
+
+        blocks.forEach(function(b) { observer.observe(b); });
       }
 
       function buildBlueprint(brand, audience, tone, lang) {
@@ -1007,8 +1152,8 @@
           var active = p.id === activePersonaId;
           var btn = document.createElement("button");
           btn.type = "button";
-          btn.className = "p-2 rounded-xl border text-left transition cursor-pointer " +
-            (active ? "bg-purple-600/30 border-purple-400 text-white font-bold" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
+          btn.className = "p-3 rounded-2xl border text-left transition cursor-pointer " +
+            (active ? "bg-[#d4ff33]/15 border-[#d4ff33] text-white font-bold" : "bg-black/60 border-white/10 text-neutral-300 hover:border-white/25");
           btn.innerHTML = '<div class="text-xs truncate">🎙️ ' + p.name + '</div>';
           btn.addEventListener("click", function() {
             activePersonaId = p.id;
@@ -1031,9 +1176,9 @@
         currentProject.hooks.forEach(function(h, idx) {
           var active = idx === currentProject.activeHookIndex;
           var div = document.createElement("div");
-          div.className = "cursor-pointer p-2.5 rounded-xl border text-xs transition flex items-center gap-2 " +
-            (active ? "bg-indigo-600/25 border-indigo-400 text-white font-semibold" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
-          div.innerHTML = '<span class="px-2 py-0.5 rounded-md bg-indigo-500/30 border border-indigo-400/40 text-[10px] font-mono-code text-indigo-200">H' + (idx + 1) + '</span><span class="truncate">"' + h + '"</span>';
+          div.className = "cursor-pointer p-3 rounded-2xl border text-xs transition flex items-center gap-2.5 " +
+            (active ? "bg-[#d4ff33]/15 border-[#d4ff33] text-white font-semibold" : "bg-black/50 border-white/10 text-neutral-300 hover:border-white/25");
+          div.innerHTML = '<span class="px-2 py-0.5 rounded-md bg-[#d4ff33] text-black text-[10px] font-mono-code font-bold">H' + (idx + 1) + '</span><span class="truncate">"' + h + '"</span>';
           div.addEventListener("click", function() {
             currentProject.activeHookIndex = idx;
             currentProject.scenes[0].voice = currentProject.hooks[idx];
@@ -1049,21 +1194,21 @@
         currentProject.scenes.forEach(function(sc, idx) {
           var active = idx === activeSceneIdx;
           var node = document.createElement("div");
-          node.className = "timeline-node rounded-2xl p-3.5 space-y-2 " + (active ? "active-scene" : "");
+          node.className = "timeline-node p-4 space-y-2.5 " + (active ? "active-scene" : "");
 
           var topBar = document.createElement("div");
-          topBar.className = "flex items-center justify-between gap-1";
+          topBar.className = "flex items-center justify-between gap-2";
           topBar.innerHTML =
-            '<div class="scene-select-trigger flex items-center gap-2 cursor-pointer">' +
-              '<span class="w-6 h-6 rounded-lg ' + (active ? 'bg-indigo-600 text-white' : 'bg-white/10 text-slate-300') + ' text-[11px] font-extrabold flex items-center justify-center">0' + (idx + 1) + '</span>' +
+            '<div class="scene-select-trigger flex items-center gap-2.5 cursor-pointer">' +
+              '<span class="w-7 h-7 rounded-xl ' + (active ? 'bg-[#d4ff33] text-black' : 'bg-white/10 text-neutral-300') + ' text-xs font-extrabold flex items-center justify-center">0' + (idx + 1) + '</span>' +
               '<div>' +
-                '<span class="block text-[11px] font-extrabold text-white tracking-wide">' + sc.label + '</span>' +
-                '<span class="block text-[9px] font-mono-code text-indigo-300">' + sc.time + '</span>' +
+                '<span class="block text-xs font-extrabold text-white tracking-wide">' + sc.label + '</span>' +
+                '<span class="block text-[10px] font-mono-code text-[#d4ff33]">' + sc.time + '</span>' +
               '</div>' +
             '</div>' +
-            '<div class="flex items-center gap-1">' +
-              '<button type="button" class="speak-scene-btn px-2 py-1 rounded-lg bg-white/5 hover:bg-white/15 text-[10px] font-bold text-purple-300 border border-white/10 cursor-pointer">🔊 Speak</button>' +
-              '<button type="button" class="rewrite-scene-btn px-2 py-1 rounded-lg bg-indigo-500/15 hover:bg-indigo-500/30 text-[10px] font-bold text-indigo-300 border border-indigo-500/30 cursor-pointer">✨ Polish</button>' +
+            '<div class="flex items-center gap-1.5">' +
+              '<button type="button" class="speak-scene-btn px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/15 text-[10px] font-bold text-neutral-200 border border-white/10 cursor-pointer">🔊 Speak</button>' +
+              '<button type="button" class="rewrite-scene-btn px-2.5 py-1 rounded-full bg-[#d4ff33]/15 hover:bg-[#d4ff33]/25 text-[10px] font-bold text-[#d4ff33] border border-[#d4ff33]/30 cursor-pointer">✨ Polish</button>' +
             '</div>';
 
           topBar.querySelector(".scene-select-trigger").addEventListener("click", function() {
@@ -1095,7 +1240,7 @@
           var ta = document.createElement("textarea");
           ta.rows = 2;
           ta.value = sc.voice;
-          ta.className = "w-full bg-black/70 border border-white/10 rounded-xl px-3 py-2 text-xs text-white font-medium focus:outline-none focus:border-indigo-400";
+          ta.className = "w-full bg-black/80 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white font-medium focus:outline-none focus:border-[#d4ff33]";
           ta.addEventListener("input", function(e) {
             currentProject.scenes[idx].voice = e.target.value;
             activeSceneIdx = idx;
@@ -1103,9 +1248,9 @@
           });
 
           var footBar = document.createElement("div");
-          footBar.className = "flex justify-between text-[10px] font-mono-code text-slate-500";
+          footBar.className = "flex justify-between text-[10px] font-mono-code text-neutral-500";
           var wordCount = sc.voice.trim().split(/\s+/).length;
-          footBar.innerHTML = '<span>Words: ' + wordCount + '</span><span>Est. Speak Time: ~' + Math.max(2, Math.round(wordCount / 2.8)) + 's</span>';
+          footBar.innerHTML = '<span>WORDS: ' + wordCount + '</span><span>DURATION: ~' + Math.max(2, Math.round(wordCount / 2.8)) + 's</span>';
 
           node.appendChild(topBar);
           node.appendChild(ta);
@@ -1114,7 +1259,7 @@
         });
 
         var nextBtn = document.getElementById("nextSceneBtn");
-        if (nextBtn) nextBtn.textContent = "⏭ Next Scene (" + (activeSceneIdx + 1) + "/4)";
+        if (nextBtn) nextBtn.textContent = "⏭ Scene (" + (activeSceneIdx + 1) + "/4)";
 
         drawCanvas();
       }
@@ -1139,8 +1284,8 @@
 
         if (activeCapStyle === "hormozi" || activeCapStyle === "modern" || activeCapStyle === "red") {
           ctx.fillStyle = activeCapStyle === "red"
-            ? "rgba(225, 29, 72, 0.92)"
-            : (activeCapStyle === "modern" ? "rgba(15, 23, 42, 0.78)" : "rgba(0, 0, 0, 0.82)");
+            ? "rgba(255, 94, 54, 0.92)"
+            : (activeCapStyle === "modern" ? "rgba(10, 11, 15, 0.8)" : "rgba(0, 0, 0, 0.85)");
           ctx.beginPath();
           ctx.roundRect(36, y - totalH / 2 - 22, 540 - 72, totalH + 44, 24);
           ctx.fill();
@@ -1148,14 +1293,14 @@
 
         for (var i = 0; i < lines.length; i++) {
           var ly = startY + i * lineHeight;
-          ctx.strokeStyle = "rgba(0,0,0,0.9)";
+          ctx.strokeStyle = "rgba(0,0,0,0.92)";
           ctx.lineWidth = 6;
           ctx.strokeText(lines[i], x, ly);
 
           if (activeCapStyle === "hormozi") {
-            ctx.fillStyle = i % 2 === 0 ? "#fde047" : "#ffffff";
+            ctx.fillStyle = i % 2 === 0 ? "#d4ff33" : "#ffffff";
           } else if (activeCapStyle === "neon") {
-            ctx.fillStyle = i % 2 === 0 ? "#38bdf8" : "#f472b6";
+            ctx.fillStyle = i % 2 === 0 ? "#d4ff33" : "#ff5e36";
           } else {
             ctx.fillStyle = "#ffffff";
           }
@@ -1191,17 +1336,17 @@
           var vig = ctx.createLinearGradient(0, 0, 0, H);
           vig.addColorStop(0, "rgba(0,0,0,0.55)");
           vig.addColorStop(0.5, "rgba(0,0,0,0.28)");
-          vig.addColorStop(1, "rgba(0,0,0,0.82)");
+          vig.addColorStop(1, "rgba(0,0,0,0.85)");
           ctx.fillStyle = vig;
           ctx.fillRect(0, 0, W, H);
         } else {
           var shaders = {
-            obsidian: ["#090a10", "#1e1b4b", "#3b0764"],
+            obsidian: ["#050507", "#12151f", "#1e2412"],
             gold: ["#090806", "#271c09", "#451a03"],
-            matrix: ["#040d0a", "#064e3b", "#0f172a"],
+            matrix: ["#040804", "#152608", "#080b11"],
             custom: [
               document.getElementById("customColor1").value,
-              "#05070e",
+              "#050608",
               document.getElementById("customColor2").value
             ]
           };
@@ -1216,8 +1361,8 @@
           var orbX = W * 0.5 + Math.cos(shaderTick) * 85;
           var orbY = H * 0.42 + Math.sin(shaderTick) * 65;
           var glow = ctx.createRadialGradient(orbX, orbY, 10, orbX, orbY, 310);
-          glow.addColorStop(0, "rgba(139, 92, 246, 0.34)");
-          glow.addColorStop(1, "rgba(139, 92, 246, 0)");
+          glow.addColorStop(0, "rgba(212, 255, 51, 0.25)");
+          glow.addColorStop(1, "rgba(212, 255, 51, 0)");
           ctx.fillStyle = glow;
           ctx.fillRect(0, 0, W, H);
         }
@@ -1268,7 +1413,7 @@
 
           ctx.fillStyle = "rgba(255,255,255,0.25)";
           ctx.fillRect(0, H - 6, W, 6);
-          ctx.fillStyle = "#ffffff";
+          ctx.fillStyle = "#d4ff33";
           ctx.fillRect(0, H - 6, W * ((activeSceneIdx + 1) / 4), 6);
 
         } else if (activeUiMode === "youtube") {
@@ -1367,8 +1512,8 @@
         isPlaying = false;
         if (animFrameId) cancelAnimationFrame(animFrameId);
         if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-        document.getElementById("playReelBtn").textContent = "▶ Play Reel w/ Voice";
-        document.getElementById("playerStatusBadge").textContent = "READY";
+        document.getElementById("playReelBtn").textContent = "▶ Play w/ Voice";
+        document.getElementById("playerStatusBadge").textContent = "STANDBY";
       }
 
       function renderToolGrids() {
@@ -1376,11 +1521,16 @@
         uGrid.innerHTML = "";
         UTILITY_TOOLS.forEach(function(tool) {
           var card = document.createElement("div");
-          card.className = "tool-tile rounded-2xl p-5 text-center cursor-pointer flex flex-col items-center justify-center min-h-[135px]";
+          card.className = "tool-tile p-6 text-left cursor-pointer flex flex-col justify-between min-h-[155px]";
           card.innerHTML =
-            '<div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-lg mb-2.5">' + tool.icon + '</div>' +
-            '<h3 class="text-xs font-bold text-white mb-1">' + tool.title + '</h3>' +
-            '<p class="text-[11px] text-slate-400">' + tool.desc + '</p>';
+            '<div class="flex items-center justify-between mb-4">' +
+              '<div class="w-11 h-11 rounded-2xl bg-[#d4ff33]/10 border border-[#d4ff33]/30 flex items-center justify-center text-xl">' + tool.icon + '</div>' +
+              '<span class="font-mono-code text-[10px] text-neutral-500">DIAGNOSTIC</span>' +
+            '</div>' +
+            '<div>' +
+              '<h3 class="text-sm font-bold text-white mb-1">' + tool.title + '</h3>' +
+              '<p class="text-xs text-neutral-400 leading-relaxed">' + tool.desc + '</p>' +
+            '</div>';
           card.addEventListener("click", function() {
             openUtilityToolModal(tool);
           });
@@ -1389,12 +1539,15 @@
 
         var cGrid = document.getElementById("clipperCardsGrid");
         cGrid.innerHTML = "";
-        CLIPPER_TOOLS.forEach(function(title) {
+        CLIPPER_TOOLS.forEach(function(title, idx) {
           var tile = document.createElement("div");
-          tile.className = "tool-tile rounded-2xl p-4 text-center cursor-pointer flex flex-col items-center justify-center min-h-[82px] gap-1";
+          tile.className = "tool-tile p-5 text-left cursor-pointer flex flex-col justify-between min-h-[96px]";
           tile.innerHTML =
-            '<span class="text-xs font-bold text-white">' + title + '</span>' +
-            '<span class="text-[10px] text-indigo-400 font-mono-code">Launch Tool →</span>';
+            '<div class="flex items-center justify-between text-[10px] font-mono-code text-neutral-500">' +
+              '<span>ENGINE // ' + (idx + 1 < 10 ? '0' + (idx + 1) : (idx + 1)) + '</span>' +
+              '<span class="text-[#d4ff33]">→</span>' +
+            '</div>' +
+            '<span class="text-xs sm:text-sm font-bold text-white mt-2">' + title + '</span>';
           tile.addEventListener("click", function() {
             openClipperWorkspaceModal(title);
           });
@@ -1421,9 +1574,9 @@
         if (tool.id === "camera") {
           body.innerHTML =
             '<video id="webcamPreview" autoplay playsinline class="w-full h-56 bg-black rounded-2xl object-cover border border-white/10"></video>' +
-            '<div class="grid grid-cols-2 gap-2">' +
-              '<button type="button" id="startCamBtn" class="py-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold cursor-pointer">▶ Start Webcam</button>' +
-              '<button type="button" id="stopCamBtn" class="py-2.5 rounded-xl bg-rose-600 text-white text-xs font-bold cursor-pointer">⏹ Stop Webcam</button>' +
+            '<div class="grid grid-cols-2 gap-3">' +
+              '<button type="button" id="startCamBtn" class="btn-acid py-3 rounded-xl text-xs cursor-pointer">▶ Start Webcam</button>' +
+              '<button type="button" id="stopCamBtn" class="py-3 rounded-xl bg-[#ff5e36] text-white text-xs font-bold cursor-pointer">⏹ Stop Webcam</button>' +
             '</div>';
           document.getElementById("startCamBtn").addEventListener("click", async function() {
             stopAllHardwareStreams();
@@ -1443,13 +1596,13 @@
           });
         } else if (tool.id === "mic") {
           body.innerHTML =
-            '<div class="p-4 rounded-2xl bg-black/60 border border-white/10 text-center space-y-3">' +
-              '<div class="w-full h-5 bg-slate-900 rounded-full overflow-hidden"><div id="micLevelBar" class="h-full bg-emerald-400 w-0 transition-all duration-75"></div></div>' +
-              '<p id="micStatusText" class="text-xs text-slate-300">Click Start Test (Automatically stops after 10 seconds)</p>' +
+            '<div class="p-5 rounded-2xl bg-black/80 border border-white/10 text-center space-y-3">' +
+              '<div class="w-full h-5 bg-neutral-900 rounded-full overflow-hidden"><div id="micLevelBar" class="h-full bg-[#d4ff33] w-0 transition-all duration-75"></div></div>' +
+              '<p id="micStatusText" class="text-xs text-neutral-300">Click Start Test (Automatically stops after 10 seconds)</p>' +
             '</div>' +
-            '<div class="grid grid-cols-2 gap-2">' +
-              '<button type="button" id="startMicBtn" class="py-2.5 rounded-xl bg-emerald-500 text-slate-950 text-xs font-extrabold cursor-pointer">▶ Start 10s Mic Test</button>' +
-              '<button type="button" id="stopMicBtn" class="py-2.5 rounded-xl bg-rose-600 text-white text-xs font-bold cursor-pointer">⏹ Stop Microphone</button>' +
+            '<div class="grid grid-cols-2 gap-3">' +
+              '<button type="button" id="startMicBtn" class="btn-acid py-3 rounded-xl text-xs cursor-pointer">▶ Start 10s Mic Test</button>' +
+              '<button type="button" id="stopMicBtn" class="py-3 rounded-xl bg-[#ff5e36] text-white text-xs font-bold cursor-pointer">⏹ Stop Microphone</button>' +
             '</div>';
 
           document.getElementById("startMicBtn").addEventListener("click", async function() {
@@ -1497,9 +1650,9 @@
           });
         } else {
           body.innerHTML =
-            '<input type="file" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-indigo-600 file:text-white file:font-bold cursor-pointer">' +
-            '<textarea id="utilPromptArea" rows="3" placeholder="Paste transcript, topic, or audio notes here..." class="w-full bg-black/60 border border-white/15 rounded-xl p-3 text-xs text-white"></textarea>' +
-            '<button type="button" id="runUtilActionBtn" class="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs font-bold cursor-pointer">Process & Load into 9:16 Studio →</button>';
+            '<input type="file" class="w-full text-xs text-neutral-300 file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-[#d4ff33] file:text-black file:font-extrabold cursor-pointer">' +
+            '<textarea id="utilPromptArea" rows="3" placeholder="Paste transcript, topic, or audio notes here..." class="w-full bg-black/80 border border-white/15 rounded-2xl p-3.5 text-xs text-white"></textarea>' +
+            '<button type="button" id="runUtilActionBtn" class="btn-acid w-full py-3.5 rounded-2xl text-xs uppercase cursor-pointer">Process & Load into 9:16 Studio →</button>';
           document.getElementById("runUtilActionBtn").addEventListener("click", function() {
             var val = document.getElementById("utilPromptArea").value.trim() || tool.title + " Output";
             document.getElementById("brandInput").value = val;
@@ -1513,7 +1666,7 @@
       }
 
       window.addEventListener("DOMContentLoaded", function() {
-        initScrollObserver();
+        initKineticScrollEngine();
         syncPersistentUserSession();
         renderVoiceGrid();
         renderToolGrids();
@@ -1559,7 +1712,7 @@
           );
           activeSceneIdx = 0;
           renderStoryboardUI();
-          showToast("Generated new 4-scene Reel!");
+          showToast("Synthesized new 4-scene Reel!");
         });
 
         document.getElementById("generateSmartBgBtn").addEventListener("click", function() {
@@ -1571,9 +1724,9 @@
           btn.addEventListener("click", function() {
             var key = btn.getAttribute("data-photo");
             document.querySelectorAll(".photo-pack-btn").forEach(function(b) {
-              b.className = "photo-pack-btn py-1.5 px-2 rounded-xl bg-black/50 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer";
+              b.className = "photo-pack-btn py-2 px-2.5 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-neutral-300 cursor-pointer";
             });
-            btn.className = "photo-pack-btn py-1.5 px-2 rounded-xl bg-white/10 border border-indigo-400 text-[11px] font-bold text-white cursor-pointer";
+            btn.className = "photo-pack-btn py-2 px-2.5 rounded-xl bg-[#d4ff33]/15 border border-[#d4ff33] text-[11px] font-bold text-white cursor-pointer";
             loadPhotoPack(key);
             showToast("Loaded HD Photo Pack: " + key.toUpperCase());
           });
@@ -1620,9 +1773,9 @@
           btn.addEventListener("click", function() {
             activeUiMode = btn.getAttribute("data-ui");
             document.querySelectorAll(".ui-mode-btn").forEach(function(b) {
-              b.className = "ui-mode-btn py-2 rounded-xl text-slate-300 hover:text-white text-[11px] font-bold transition cursor-pointer";
+              b.className = "ui-mode-btn py-2.5 rounded-xl text-neutral-300 hover:text-white text-xs font-bold transition cursor-pointer";
             });
-            btn.className = "ui-mode-btn py-2 rounded-xl bg-gradient-to-r from-pink-600 to-purple-600 text-white text-[11px] font-bold transition cursor-pointer";
+            btn.className = "ui-mode-btn py-2.5 rounded-xl bg-[#d4ff33] text-black text-xs font-extrabold transition cursor-pointer";
             drawCanvas();
           });
         });
@@ -1631,9 +1784,9 @@
           btn.addEventListener("click", function() {
             activeCapStyle = btn.getAttribute("data-cap");
             document.querySelectorAll(".cap-btn").forEach(function(b) {
-              b.className = "cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer";
+              b.className = "cap-btn py-1.5 rounded-xl bg-white/5 border border-white/10 text-[10px] font-semibold text-neutral-300 cursor-pointer";
             });
-            btn.className = "cap-btn py-1 rounded-lg bg-amber-500/20 border border-amber-400 text-[10px] font-bold text-amber-300 cursor-pointer";
+            btn.className = "cap-btn py-1.5 rounded-xl bg-[#d4ff33]/15 border border-[#d4ff33] text-[10px] font-bold text-[#d4ff33] cursor-pointer";
             drawCanvas();
           });
         });
@@ -1645,7 +1798,7 @@
           document.getElementById("pitchLabel").textContent = parseFloat(e.target.value).toFixed(2);
         });
         document.getElementById("sampleVoiceBtn").addEventListener("click", function() {
-          speakText("Testing ReelFlow AI studio voiceover for your next viral video.");
+          speakText("Testing ReelFlow AI spatial studio voiceover for your next viral video.");
         });
         document.getElementById("toggleCloneBoxBtn").addEventListener("click", function() {
           document.getElementById("elevenCloneBox").classList.toggle("hidden");
@@ -1680,7 +1833,7 @@
             a.href = URL.createObjectURL(blob);
             a.download = currentProject.brand.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-reel.webm";
             a.click();
-            document.getElementById("playerStatusBadge").textContent = "DOWNLOADED";
+            document.getElementById("playerStatusBadge").textContent = "EXPORTED";
             showToast("Video (.WEBM) downloaded to your device!");
           };
           recorder.start();
@@ -1750,7 +1903,7 @@
             bar.style.width = "100%";
             pct.textContent = "100%";
             document.getElementById("brandInput").value = urlOrTopic;
-            document.getElementById("activeWorkflowBadge").textContent = "● Active: " + toolName;
+            document.getElementById("activeWorkflowBadge").textContent = toolName.slice(0, 18).toUpperCase();
             currentProject = buildBlueprint(urlOrTopic, "Viewers watching " + toolName, "controversial", "hinglish");
             activeSceneIdx = 0;
             renderStoryboardUI();
@@ -1769,7 +1922,7 @@
           var rupeePrice = count * 50;
           var upiId = getMerchantUpiId();
           document.getElementById("activeMerchantUpiLabel").textContent = upiId;
-          document.getElementById("customReelCountBadge").textContent = count + (count === 1 ? " Pro Video Pack" : " Pro Videos Pack");
+          document.getElementById("customReelCountBadge").textContent = count + (count === 1 ? " PRO VIDEO PACK" : " PRO VIDEOS PACK");
           document.getElementById("customPriceDisplay").textContent = "₹" + rupeePrice.toLocaleString("en-IN");
           document.getElementById("sliderVideosLabel").textContent = count + (count === 1 ? " Video" : " Videos") + " (₹" + rupeePrice.toLocaleString("en-IN") + ")";
           document.getElementById("gatewayPlanSubtitle").textContent = "Custom Pack: " + count + (count === 1 ? " Video" : " Videos");
@@ -1823,7 +1976,7 @@
 
         document.getElementById("contactFounderWhatsAppBtn").addEventListener("click", function() {
           var msg = encodeURIComponent(
-            "Hi Arjun! 👋 I am using ReelFlow AI Studio for my brand (" + currentProject.brand + ") and want to discuss custom AI video production."
+            "Hi Arjun! 👋 I am using ReelFlow AI Studio v7.0 for my brand (" + currentProject.brand + ") and want to discuss custom AI video production."
           );
           window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + msg, "_blank");
         });
@@ -1841,13 +1994,13 @@
         });
         document.getElementById("tabRegisterBtn").addEventListener("click", function() {
           document.getElementById("authNameInput").classList.remove("hidden");
-          document.getElementById("tabRegisterBtn").className = "py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold cursor-pointer";
-          document.getElementById("tabLoginBtn").className = "py-2 rounded-lg text-slate-400 text-xs font-bold cursor-pointer";
+          document.getElementById("tabRegisterBtn").className = "py-2.5 rounded-xl bg-[#d4ff33] text-black text-xs font-extrabold cursor-pointer";
+          document.getElementById("tabLoginBtn").className = "py-2.5 rounded-xl text-neutral-400 text-xs font-bold cursor-pointer";
         });
         document.getElementById("tabLoginBtn").addEventListener("click", function() {
           document.getElementById("authNameInput").classList.add("hidden");
-          document.getElementById("tabLoginBtn").className = "py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold cursor-pointer";
-          document.getElementById("tabRegisterBtn").className = "py-2 rounded-lg text-slate-400 text-xs font-bold cursor-pointer";
+          document.getElementById("tabLoginBtn").className = "py-2.5 rounded-xl bg-[#d4ff33] text-black text-xs font-extrabold cursor-pointer";
+          document.getElementById("tabRegisterBtn").className = "py-2.5 rounded-xl text-neutral-400 text-xs font-bold cursor-pointer";
         });
 
         document.getElementById("authForm").addEventListener("submit", function(e) {
