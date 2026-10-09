@@ -3,527 +3,411 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>REELFLOW ATELIER — Bespoke Autonomous Cinema & Voice Suite</title>
-  <!-- Bespoke 18k Champagne Gold Guilloche Crest Favicon (Replaces Chrome Earth Icon) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070706'/%3E%3Ccircle cx='32' cy='32' r='26' fill='none' stroke='%23c5a880' stroke-width='1.2' stroke-opacity='0.5'/%3E%3Cpath d='M32 8 L54 32 L32 56 L10 32 Z' fill='none' stroke='%23c5a880' stroke-width='1.8'/%3E%3Cpath d='M32 16 L46 32 L32 48 L18 32 Z' fill='%23c5a880' fill-opacity='0.18' stroke='%23e5d3b3' stroke-width='1.2'/%3E%3Ccircle cx='32' cy='32' r='3.5' fill='%23e5d3b3'/%3E%3C/svg%3E">
+  <title>REELFLOW AI — Quantum Obsidian & Autonomous Cinema OS</title>
+  <!-- Custom Quantum Hex-Core Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='qg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='50%25' stop-color='%23818cf8'/%3E%3Cstop offset='100%25' stop-color='%23f472b6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%23030407'/%3E%3Crect x='3' y='3' width='58' height='58' rx='13' fill='none' stroke='url(%23qg)' stroke-width='3.5'/%3E%3Cpath d='M32 12 L50 22 L50 42 L32 52 L14 42 L14 22 Z' fill='url(%23qg)' fill-opacity='0.25' stroke='url(%23qg)' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%2338bdf8'/%3E%3C/svg%3E">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- FFmpeg.wasm for 100% Real Browser Video & Audio Processing -->
+  <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --obsidian: #070706;
-      --espresso: #0e0d0b;
-      --champagne: #c5a880;
-      --champagne-light: #e6d5b8;
-      --alabaster: #f4efe6;
-      --stone: #8c857b;
-      --border-hairline: rgba(197, 168, 128, 0.16);
+      --bg-core: #030407;
+      --accent-cyan: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-pink: #f472b6;
+      --mouse-x: 50%;
+      --mouse-y: 30%;
     }
     * { box-sizing: border-box; }
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      font-weight: 300;
-      background-color: var(--obsidian);
-      color: var(--alabaster);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-core);
+      color: #f8fafc;
       overflow-x: hidden;
-      letter-spacing: 0.01em;
     }
-    h1, h2, h3, .font-serif-luxury {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 400;
+    h1, h2, h3, .font-display {
+      font-family: 'Outfit', sans-serif;
     }
-    .font-mono-luxury {
+    .font-mono-tech {
       font-family: 'JetBrains Mono', monospace;
-      font-weight: 300;
     }
 
-    /* Subtle Ambient Warm Candlelight Vignette */
-    .atelier-backdrop {
-      background-color: #070706;
-      background-image:
-        radial-gradient(900px circle at 50% 0%, rgba(197, 168, 128, 0.07), transparent 55%),
-        radial-gradient(700px circle at 85% 45%, rgba(197, 168, 128, 0.04), transparent 50%);
-      background-attachment: fixed;
+    /* Interactive Neural Particle Canvas Background */
+    #neuralCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    /* Hairline Architectural Borders */
-    .luxury-card {
-      background: linear-gradient(180deg, rgba(17, 16, 14, 0.88) 0%, rgba(10, 9, 8, 0.95) 100%);
+    /* Quantum Obsidian Glass Panels */
+    .quantum-card {
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(155deg, rgba(13, 17, 28, 0.85) 0%, rgba(5, 7, 12, 0.95) 100%);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border: 1px solid var(--border-hairline);
-      box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.9);
-      transition: border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.9), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .luxury-card:hover {
-      border-color: rgba(197, 168, 128, 0.38);
-      box-shadow: 0 40px 90px -20px rgba(0, 0, 0, 0.95);
-    }
-
-    /* Silky Bidirectional Scroll Reveal (Scroll Down & Scroll Up, Never Blank) */
-    .atelier-reveal {
-      opacity: 1;
-      transform: translateY(0px) scale(1);
-      transition:
-        opacity 1.05s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
-    }
-    .atelier-reveal.veil-below {
-      opacity: 0.12;
-      transform: translateY(48px) scale(0.985);
-    }
-    .atelier-reveal.veil-above {
-      opacity: 0.12;
-      transform: translateY(-38px) scale(0.99);
+    .quantum-card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 40px 90px -20px rgba(0, 0, 0, 0.95), 0 0 40px -10px rgba(56, 189, 248, 0.15);
     }
 
-    /* Brushed Champagne Gold Button */
-    .btn-champagne {
-      background: linear-gradient(135deg, #d5bc97 0%, #b39367 100%);
-      color: #070706;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Quantum Glow Button */
+    .btn-quantum {
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #f472b6 100%);
+      color: #030407;
+      font-weight: 800;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .btn-champagne:hover {
-      background: linear-gradient(135deg, #e6d3b3 0%, #c5a880 100%);
+    .btn-quantum:hover {
+      opacity: 0.92;
       transform: translateY(-2px);
-      box-shadow: 0 15px 35px -10px rgba(197, 168, 128, 0.35);
+      box-shadow: 0 15px 35px -8px rgba(56, 189, 248, 0.5);
     }
 
-    .btn-outline-luxury {
-      background: rgba(244, 239, 230, 0.02);
-      border: 1px solid rgba(197, 168, 128, 0.25);
-      color: var(--alabaster);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      transition: all 0.4s ease;
-    }
-    .btn-outline-luxury:hover {
-      background: rgba(197, 168, 128, 0.1);
-      border-color: var(--champagne);
+    .text-quantum-gradient {
+      background: linear-gradient(135deg, #ffffff 0%, #38bdf8 35%, #818cf8 70%, #f472b6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    /* Minimal Luxury Inputs */
-    .input-atelier {
-      background: rgba(7, 7, 6, 0.75);
-      border: 1px solid rgba(197, 168, 128, 0.18);
-      color: var(--alabaster);
-      transition: border-color 0.35s ease;
+    /* Tool Tile Hover */
+    .tool-tile {
+      background: rgba(9, 12, 20, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: all 0.25s ease;
     }
-    .input-atelier:focus {
-      outline: none;
-      border-color: var(--champagne);
-    }
-
-    /* NLE Scene Row */
-    .scene-row {
-      background: rgba(12, 11, 10, 0.85);
-      border-left: 2px solid rgba(197, 168, 128, 0.2);
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-      border-right: 1px solid rgba(255, 255, 255, 0.04);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      transition: all 0.4s ease;
-    }
-    .scene-row.active-scene {
-      border-left: 2px solid var(--champagne);
-      background: linear-gradient(90deg, rgba(197, 168, 128, 0.08) 0%, rgba(12, 11, 10, 0.92) 100%);
+    .tool-tile:hover {
+      background: rgba(18, 24, 38, 0.95);
+      border-color: var(--accent-cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px -10px rgba(56, 189, 248, 0.25);
     }
 
-    /* Custom Gold Range Slider */
-    input[type="range"] {
-      accent-color: #c5a880;
-    }
-
-    ::-webkit-scrollbar { width: 5px; height: 5px; }
-    ::-webkit-scrollbar-track { background: #070706; }
-    ::-webkit-scrollbar-thumb { background: #26231e; }
-    ::-webkit-scrollbar-thumb:hover { background: #c5a880; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #030407; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
   </style>
 </head>
-<body class="atelier-backdrop min-h-screen selection:bg-[#c5a880] selection:text-black pb-28 md:pb-0">
+<body class="min-h-screen selection:bg-cyan-400 selection:text-black pb-28 md:pb-0">
 
-  <!-- Hairline Top Gold Progress Indicator -->
-  <div class="fixed top-0 left-0 right-0 h-[2px] bg-white/[0.03] z-50">
-    <div id="scrollProgressBar" class="h-full bg-[#c5a880] w-0 transition-all duration-100"></div>
+  <!-- Interactive Neural Particle Background Canvas -->
+  <canvas id="neuralCanvas"></canvas>
+
+  <!-- Toast Notification -->
+  <div id="toastBanner" class="fixed bottom-24 md:bottom-8 right-6 z-50 hidden px-5 py-3.5 rounded-2xl bg-cyan-400 text-black text-xs font-extrabold shadow-2xl flex items-center gap-2.5">
+    <span class="w-2.5 h-2.5 rounded-full bg-black animate-ping"></span>
+    <span id="toastText">Quantum Engine Ready</span>
   </div>
 
-  <!-- Discreet Luxury Toast -->
-  <div id="toastBanner" class="fixed bottom-24 md:bottom-8 right-8 z-50 hidden px-6 py-4 bg-[#12110f] text-[#f4efe6] text-[11px] tracking-[0.18em] uppercase border border-[#c5a880]/50 shadow-2xl flex items-center gap-3">
-    <span class="w-1.5 h-1.5 rounded-full bg-[#c5a880]"></span>
-    <span id="toastText">Atelier Ready</span>
-  </div>
-
-  <!-- Floating Private Concierge Link (Bottom Left Desktop) -->
-  <a href="https://wa.me/917820847387?text=Hi%20Arjun,%20I%20am%20exploring%20ReelFlow%20Atelier%20and%20wish%20to%20connect." target="_blank" class="hidden md:flex fixed bottom-8 left-8 z-40 items-center gap-3.5 px-5 py-3 bg-[#0c0b09]/90 hover:bg-[#151310] border border-[#c5a880]/30 backdrop-blur-xl text-[#e6d5b8] text-[10px] tracking-[0.2em] uppercase transition">
-    <span class="w-1.5 h-1.5 rounded-full bg-[#c5a880]"></span>
-    <span>Private Desk • +91 7820847387</span>
+  <!-- Floating Founder WhatsApp Pill -->
+  <a href="https://wa.me/917820847387?text=Hi%20Arjun!%20Testing%20ReelFlow%20AI%20Quantum%20Edition." target="_blank" class="hidden md:flex fixed bottom-7 left-7 z-40 items-center gap-3 px-5 py-3 rounded-full bg-[#070b14]/90 hover:bg-[#0f172a] border border-cyan-400/40 backdrop-blur-2xl text-cyan-300 text-xs font-bold shadow-2xl transition group">
+    <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+    <span>Founder Concierge</span>
+    <span class="font-mono-tech text-[11px] text-cyan-300">+91 7820847387 →</span>
   </a>
 
-  <!-- ARCHITECTURAL HAUTE HORLOGERIE HEADER & BESPOKE CREST -->
-  <header class="sticky top-0 z-40 border-b border-[#c5a880]/15 bg-[#070706]/85 backdrop-blur-2xl">
-    <div class="max-w-[1400px] mx-auto px-6 sm:px-12 h-20 sm:h-24 flex items-center justify-between">
+  <!-- TOP FLOATING GLASS HEADER -->
+  <header class="sticky top-4 z-40 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto rounded-full bg-[#060913]/85 backdrop-blur-2xl border border-white/10 px-5 sm:px-8 h-18 sm:h-20 flex items-center justify-between gap-4 shadow-[0_20px_60px_rgba(0,0,0,0.85)]">
       
-      <!-- Bespoke Guilloche Diamond & Compass Crest Logo -->
-      <a href="#hero" class="flex items-center gap-4 group">
-        <div class="w-12 h-12 flex items-center justify-center">
-          <svg class="w-11 h-11 transition-transform duration-700 group-hover:rotate-45" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="32" r="29" stroke="#c5a880" stroke-width="0.75" stroke-opacity="0.4"/>
-            <circle cx="32" cy="32" r="24" stroke="#c5a880" stroke-width="0.75" stroke-dasharray="2 3"/>
-            <path d="M32 5 L59 32 L32 59 L5 32 Z" stroke="#c5a880" stroke-width="1.2"/>
-            <path d="M32 14 L50 32 L32 50 L14 32 Z" fill="#c5a880" fill-opacity="0.1" stroke="#e6d5b8" stroke-width="1"/>
-            <line x1="32" y1="5" x2="32" y2="59" stroke="#c5a880" stroke-width="0.6" stroke-opacity="0.4"/>
-            <line x1="5" y1="32" x2="59" y2="32" stroke="#c5a880" stroke-width="0.6" stroke-opacity="0.4"/>
-            <circle cx="32" cy="32" r="3" fill="#e6d5b8"/>
+      <!-- Quantum Brand Logo -->
+      <a href="#hero" class="flex items-center gap-3.5 group">
+        <div class="w-11 h-11 rounded-2xl bg-[#0b101d] border border-cyan-400/40 flex items-center justify-center shadow-lg group-hover:scale-105 transition">
+          <svg class="w-7 h-7" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 10 L52 22 L52 42 L32 54 L12 42 L12 22 Z" fill="#38bdf8" fill-opacity="0.2" stroke="#38bdf8" stroke-width="2.5"/>
+            <circle cx="32" cy="32" r="7" fill="#818cf8"/>
           </svg>
         </div>
         <div>
-          <span class="block font-serif-luxury text-2xl sm:text-3xl tracking-[0.22em] text-[#f4efe6] uppercase">ReelFlow</span>
-          <span class="block text-[9px] tracking-[0.34em] text-[#c5a880] uppercase mt-0.5">Atelier • Mumbai</span>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight font-display text-white">ReelFlow<span class="text-cyan-400">.ai</span></span>
+            <span class="hidden sm:inline-block px-2.5 py-0.5 text-[10px] font-mono-tech uppercase bg-cyan-400/10 text-cyan-300 border border-cyan-400/30 rounded-full">v9.0 Quantum</span>
+          </div>
+          <p class="text-[10px] text-slate-400 hidden sm:block font-mono-tech">NEURAL CINEMA & FFMPEG WASM</p>
         </div>
       </a>
 
-      <!-- Minimal Wide-Tracked Navigation -->
-      <nav class="hidden xl:flex items-center gap-10 text-[11px] tracking-[0.22em] uppercase text-[#8c857b]">
-        <a href="#studio" class="hover:text-[#f4efe6] transition">I. Screening Room</a>
-        <a href="#smart-bg-anchor" class="hover:text-[#f4efe6] transition">II. Visual Synthesis</a>
-        <a href="#suite-directory" class="hover:text-[#f4efe6] transition">III. Private Suite (38)</a>
-        <a href="#pricing" class="hover:text-[#f4efe6] transition">IV. Patronage</a>
-        <a href="#founder-desk" class="text-[#c5a880] hover:text-[#e6d5b8] transition">V. Concierge</a>
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-8 text-xs font-semibold text-slate-300">
+        <a href="#studio" class="hover:text-cyan-400 transition">9:16 Studio</a>
+        <a href="#smart-bg-anchor" class="hover:text-cyan-400 transition">Smart AI Backgrounds</a>
+        <a href="#utility-suite" class="hover:text-cyan-400 transition">FFmpeg Tools (12)</a>
+        <a href="#clipper-grid" class="hover:text-cyan-400 transition">AI Clippers (26)</a>
+        <a href="#pricing" class="hover:text-cyan-400 transition">₹50 Kotak Plan</a>
       </nav>
 
-      <!-- Right Controls: API Key + Persistent Member Pass -->
-      <div class="flex items-center gap-4">
-        <button type="button" id="openApiModalBtn" class="px-4 py-2.5 text-[10px] tracking-[0.2em] uppercase border border-[#c5a880]/25 text-[#c5a880] hover:bg-[#c5a880]/10 transition cursor-pointer">
-          Engine Key
+      <!-- Right Controls -->
+      <div class="flex items-center gap-3">
+        <button type="button" id="openApiModalBtn" class="px-3.5 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono-tech text-slate-200 transition cursor-pointer">
+          ⚡ GEMINI KEY
         </button>
 
-        <button type="button" id="openAuthModalBtn" class="btn-champagne px-6 py-2.5 text-[10px] cursor-pointer">
-          Member Access
+        <button type="button" id="openAuthModalBtn" class="btn-quantum px-5 py-2.5 rounded-full text-xs uppercase tracking-wider cursor-pointer shadow-lg">
+          Sign In
         </button>
 
-        <!-- Persistent Logged-In Member Badge -->
-        <div id="userProfileBadge" class="hidden items-center gap-3 border border-[#c5a880]/35 bg-[#11100e] px-4 py-2">
-          <div id="userInitials" class="w-6 h-6 bg-[#c5a880] text-black text-[11px] font-medium flex items-center justify-center font-serif-luxury">A</div>
+        <!-- Logged In Badge -->
+        <div id="userProfileBadge" class="hidden items-center gap-2.5 bg-white/5 border border-cyan-400/40 px-3.5 py-1.5 rounded-full">
+          <div id="userInitials" class="w-6 h-6 rounded-full bg-cyan-400 text-black text-[11px] font-extrabold flex items-center justify-center">A</div>
           <div class="text-left">
-            <span id="userNameText" class="block text-[11px] tracking-[0.14em] uppercase text-[#f4efe6] max-w-[110px] truncate">Patron</span>
-            <span class="block text-[8px] tracking-[0.2em] text-[#c5a880] uppercase">Private Session</span>
+            <span id="userNameText" class="block text-xs font-bold text-white max-w-[95px] truncate leading-none">Founder</span>
+            <span class="text-[9px] text-cyan-300 font-mono-tech">● ACTIVE</span>
           </div>
-          <button type="button" id="logoutBtn" class="text-[9px] tracking-[0.15em] uppercase text-[#8c857b] hover:text-white ml-2 cursor-pointer">Exit</button>
+          <button type="button" id="logoutBtn" class="text-[10px] text-rose-400 hover:text-rose-300 ml-1 font-bold cursor-pointer">Exit</button>
         </div>
       </div>
-
     </div>
   </header>
 
-  <!-- Mobile Bottom Bar -->
-  <div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#0a0908]/95 backdrop-blur-2xl border-t border-[#c5a880]/20 px-4 py-3 flex justify-around items-center text-[9px] tracking-[0.18em] uppercase text-[#8c857b]">
-    <a href="#studio" class="text-[#c5a880]">Atelier</a>
-    <a href="#player-column">Monitor</a>
-    <a href="#suite-directory">Suite</a>
-    <a href="#pricing">₹50 Pack</a>
-    <a href="#founder-desk">Concierge</a>
+  <!-- Mobile Bottom Floating Dock -->
+  <div class="md:hidden fixed bottom-3 inset-x-4 z-40 rounded-3xl bg-[#060913]/95 backdrop-blur-2xl border border-white/15 px-3 py-2.5 flex justify-around items-center text-[10px] font-bold text-slate-300 shadow-2xl">
+    <a href="#studio" class="flex flex-col items-center gap-0.5 text-cyan-400"><span>🎬</span><span>Studio</span></a>
+    <a href="#player-column" class="flex flex-col items-center gap-0.5 hover:text-white"><span>⬇️</span><span>Export</span></a>
+    <a href="#clipper-grid" class="flex flex-col items-center gap-0.5 hover:text-white"><span>✂️</span><span>Clippers</span></a>
+    <a href="#pricing" class="flex flex-col items-center gap-0.5 text-emerald-400"><span>₹50</span><span>Kotak</span></a>
+    <a href="#founder-desk" class="flex flex-col items-center gap-0.5 hover:text-white"><span>💬</span><span>Founder</span></a>
   </div>
 
-  <!-- EDITORIAL HERO SECTION (Generous Vertical Breathing Room & Quiet Authority) -->
-  <section id="hero" class="relative z-10 max-w-5xl mx-auto px-6 pt-24 sm:pt-36 pb-24 sm:pb-32 text-center atelier-reveal">
-    <p class="text-[10px] sm:text-[11px] tracking-[0.38em] uppercase text-[#c5a880] mb-8">
-      Bespoke Short-Form Cinema & Acoustic Intelligence
-    </p>
+  <!-- HERO SECTION -->
+  <section id="hero" class="relative z-10 max-w-6xl mx-auto px-6 pt-16 sm:pt-24 pb-16 text-center">
+    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-xs font-mono-tech uppercase mb-6">
+      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+      <span>Autonomous Neural Cinema & Real FFmpeg.wasm Engine</span>
+    </div>
 
-    <h1 class="font-serif-luxury text-4xl sm:text-6xl md:text-7xl lg:text-[84px] text-[#f4efe6] leading-[1.06] tracking-[-0.01em] mb-10">
-      The art of vertical cinema, <br class="hidden sm:inline" />
-      <span class="italic text-[#c5a880]">distilled to sixty seconds.</span>
+    <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.04] mb-6">
+      Future of vertical video, <br class="hidden sm:inline" />
+      <span class="text-quantum-gradient">powered by quantum AI.</span>
     </h1>
 
-    <p class="text-[#8c857b] text-sm sm:text-base max-w-xl mx-auto mb-14 leading-[1.9] font-light">
-      Anprivate production sanctuary for discerning founders and brands. Craft retention-calibrated scripts, bespoke AI scene imagery, and neural voiceovers without agency retainers.
+    <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto mb-10 leading-relaxed">
+      Process real video/audio files right in your browser with FFmpeg WebAssembly, generate smart AI scene backgrounds, test hardware safely, and settle instantly via Kotak UPI.
     </p>
 
-    <div class="flex flex-wrap items-center justify-center gap-6">
-      <a href="#studio" class="btn-champagne px-10 py-4 text-[11px]">
-        Enter The Atelier
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href="#studio" class="btn-quantum px-8 py-4 rounded-full text-xs sm:text-sm uppercase tracking-wider shadow-2xl">
+        Launch Quantum Studio ↓
       </a>
-      <a href="#suite-directory" class="btn-outline-luxury px-10 py-4 text-[11px]">
-        Explore 38 Instruments
+      <a href="#utility-suite" class="px-8 py-4 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white font-bold text-xs sm:text-sm transition">
+        Explore Real FFmpeg Tools →
       </a>
     </div>
   </section>
 
-  <!-- SUBTLE HAIRLINE DIVIDER -->
-  <div class="max-w-[1400px] mx-auto px-6 sm:px-12">
-    <div class="border-t border-[#c5a880]/15 py-5 flex flex-wrap justify-between items-center text-[10px] tracking-[0.28em] uppercase text-[#8c857b]">
-      <span>I • Narrative Architecture</span>
-      <span class="hidden sm:inline">II • Generative Scenography</span>
-      <span class="hidden md:inline">III • Acoustic Synthesis</span>
-      <span>IV • 9:16 Master Grade</span>
-    </div>
-  </div>
-
-  <!-- SECTION I: ASYMMETRIC PRIVATE SCREENING ROOM (7 COLUMNS LEFT CONTROLS / 5 COLUMNS STICKY MONITOR) -->
-  <section id="studio" class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-12 pt-16 pb-32 sm:pb-44">
-
-    <!-- Curated Repertoire Bar (Spacious & Refined) -->
-    <div class="mb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8 atelier-reveal">
+  <!-- SECTION 1: WORKSPACE STUDIO -->
+  <section id="studio" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-28">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-4">
       <div>
-        <span class="text-[10px] tracking-[0.32em] uppercase text-[#c5a880] block mb-3">Chapter I • Production Desk</span>
-        <h2 class="font-serif-luxury text-3xl sm:text-5xl text-[#f4efe6]">The <span class="italic text-[#c5a880]">Screening Room</span></h2>
+        <span class="font-mono-tech text-xs uppercase tracking-widest text-cyan-400 block mb-1">01 // PRODUCTION SUITE</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white font-display">Interactive 9:16 Studio</h2>
       </div>
 
-      <div class="flex flex-wrap items-center gap-3">
-        <span class="text-[10px] tracking-[0.22em] uppercase text-[#8c857b] mr-2">Curated Briefs:</span>
-        <button type="button" data-preset="coffee" class="preset-btn px-4 py-2 text-[10px] tracking-[0.16em] uppercase border border-[#c5a880]/30 text-[#f4efe6] hover:bg-[#c5a880] hover:text-black transition cursor-pointer">Artisanal Cold Brew</button>
-        <button type="button" data-preset="fintech" class="preset-btn px-4 py-2 text-[10px] tracking-[0.16em] uppercase border border-white/10 text-[#8c857b] hover:border-[#c5a880] hover:text-[#f4efe6] transition cursor-pointer">Private Wealth & Cards</button>
-        <button type="button" data-preset="saas" class="preset-btn px-4 py-2 text-[10px] tracking-[0.16em] uppercase border border-white/10 text-[#8c857b] hover:border-[#c5a880] hover:text-[#f4efe6] transition cursor-pointer">B2B Enterprise</button>
-        <button type="button" data-preset="podcast" class="preset-btn px-4 py-2 text-[10px] tracking-[0.16em] uppercase border border-white/10 text-[#8c857b] hover:border-[#c5a880] hover:text-[#f4efe6] transition cursor-pointer">Founder Monograph</button>
-        <button type="button" data-preset="streetwear" class="preset-btn px-4 py-2 text-[10px] tracking-[0.16em] uppercase border border-white/10 text-[#8c857b] hover:border-[#c5a880] hover:text-[#f4efe6] transition cursor-pointer">Apparel Atelier</button>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-xs font-mono-tech uppercase text-slate-400 mr-1">Templates:</span>
+        <button type="button" data-preset="coffee" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">☕ Cold Brew</button>
+        <button type="button" data-preset="fintech" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">💳 Kotak Rewards</button>
+        <button type="button" data-preset="saas" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">📊 B2B SaaS</button>
+        <button type="button" data-preset="podcast" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">🎙️ Podcast</button>
       </div>
     </div>
 
-    <!-- Spacious 12-Column Asymmetric Layout (gap-12 lg:gap-16 so nothing is crowded!) -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+    <!-- 12-Column Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-      <!-- LEFT WING (7 COLUMNS): Narrative Brief, Smart Visuals, Acoustic Studio & NLE Script -->
-      <div class="lg:col-span-7 space-y-14">
-
-        <!-- Atelier Module 01: Narrative Brief -->
-        <div class="luxury-card p-8 sm:p-12 space-y-8 atelier-reveal">
-          <div class="flex items-baseline justify-between border-b border-[#c5a880]/15 pb-5">
-            <div>
-              <span class="text-[10px] tracking-[0.28em] uppercase text-[#c5a880]">01 / Narrative Commission</span>
-              <h3 class="font-serif-luxury text-2xl sm:text-3xl text-[#f4efe6] mt-1">Brand & Hook Architecture</h3>
-            </div>
-            <span id="activeWorkflowBadge" class="font-mono-luxury text-[10px] tracking-[0.18em] uppercase text-[#c5a880]">
-              Bespoke Mode
-            </span>
+      <!-- LEFT COLUMN (4 Cols): Brief + Smart Background Generator + Voices -->
+      <div class="lg:col-span-4 space-y-6">
+        
+        <!-- Pod 1 -->
+        <div class="quantum-card rounded-3xl p-6 space-y-4">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-cyan-400">Campaign & Script Brief</h3>
+            <span id="activeWorkflowBadge" class="font-mono-tech text-[10px] text-emerald-300">● READY</span>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div class="sm:col-span-2">
-              <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2.5">Maison / Product / Source URL</label>
-              <input id="brandInput" type="text" value="Asli Artisanal Cold Brew" class="input-atelier w-full px-4 py-3.5 text-xs">
-            </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Brand / Topic / Video URL *</label>
+            <input id="brandInput" type="text" value="Asli Cold Brew Coffee" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400">
+          </div>
 
-            <div class="sm:col-span-2">
-              <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2.5">Target Patron & Core Tension</label>
-              <textarea id="audienceInput" rows="2" class="input-atelier w-full px-4 py-3.5 text-xs leading-relaxed">Founders and young professionals fatigued by overpriced ₹350 commercial cafe water</textarea>
-            </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Target Audience & Pain Point *</label>
+            <textarea id="audienceInput" rows="2" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400">Young professionals tired of spending Rs 350 on watery cafe coffee</textarea>
+          </div>
 
+          <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2.5">Rhetorical Posture</label>
-              <select id="toneInput" class="input-atelier w-full px-4 py-3.5 text-xs">
-                <option value="controversial">Pattern Interrupt (Provocative)</option>
-                <option value="data">Empirical Proof & Capital</option>
-                <option value="story">Founder Confession</option>
-                <option value="secret">Private Industry Ledger</option>
+              <label class="block text-[11px] font-semibold text-slate-400 mb-1">Hook Style</label>
+              <select id="toneInput" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
+                <option value="controversial">🔥 Pattern Interrupt</option>
+                <option value="data">📊 Hard Math / Proof</option>
+                <option value="story">🎭 Founder Story</option>
+                <option value="secret">🤫 Secret Hack</option>
               </select>
             </div>
-
             <div>
-              <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2.5">Diction & Cadence</label>
-              <select id="langInput" class="input-atelier w-full px-4 py-3.5 text-xs">
-                <option value="hinglish">Urban Hinglish (Mumbai / Delhi)</option>
-                <option value="english">International English</option>
+              <label class="block text-[11px] font-semibold text-slate-400 mb-1">Language</label>
+              <select id="langInput" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
+                <option value="hinglish">🇮🇳 Hinglish</option>
+                <option value="english">🌐 English</option>
               </select>
             </div>
           </div>
 
-          <button type="button" id="generateBtn" class="btn-champagne w-full py-4 text-[11px] cursor-pointer">
-            Compose Four-Act Storyboard
+          <button type="button" id="generateBtn" class="btn-quantum w-full py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
+            ⚡ Synthesize 4-Scene Script
           </button>
         </div>
 
-        <!-- Atelier Module 02: Smart Scenography & Visual Synthesis -->
-        <div id="smart-bg-anchor" class="luxury-card p-8 sm:p-12 space-y-8 atelier-reveal">
-          <div class="flex items-baseline justify-between border-b border-[#c5a880]/15 pb-5">
-            <div>
-              <span class="text-[10px] tracking-[0.28em] uppercase text-[#c5a880]">02 / Generative Scenography</span>
-              <h3 class="font-serif-luxury text-2xl sm:text-3xl text-[#f4efe6] mt-1">Bespoke Background & B-Roll</h3>
-            </div>
-            <label class="btn-outline-luxury px-4 py-2 text-[10px] cursor-pointer">
-              <span>+ Upload Plate</span>
+        <!-- Pod 2: Smart AI Backgrounds & HD Photo Packs -->
+        <div id="smart-bg-anchor" class="quantum-card rounded-3xl p-6 space-y-4 border border-cyan-500/30">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-indigo-300">Smart Background Studio</h3>
+            <label class="px-3 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-[11px] font-bold text-white cursor-pointer border border-white/15">
+              <span>+ Upload</span>
               <input id="customBgUpload" type="file" accept="image/*" class="hidden">
             </label>
           </div>
 
-          <!-- Smart AI Scene Prompt -->
-          <div class="p-6 bg-[#070706]/90 border border-[#c5a880]/25 space-y-3">
-            <label class="block text-[10px] tracking-[0.22em] uppercase text-[#e6d5b8]">Smart AI Scene Synthesizer</label>
-            <div class="flex flex-col sm:flex-row gap-3">
-              <input id="smartBgPromptInput" type="text" value="Dark architectural espresso bar, warm tungsten rim light, 35mm film grain" placeholder="Describe the desired visual atmosphere..." class="input-atelier flex-1 px-4 py-3 text-xs">
-              <button type="button" id="generateSmartBgBtn" class="btn-champagne px-6 py-3 text-[10px] whitespace-nowrap cursor-pointer">
-                Synthesize Plate
+          <div class="p-3.5 rounded-2xl bg-black/70 border border-cyan-500/30 space-y-2">
+            <label class="block text-[11px] font-bold text-cyan-200">✨ Smart AI Background Generator</label>
+            <div class="flex gap-2">
+              <input id="smartBgPromptInput" type="text" value="Cinematic cyberpunk cafe neon reflections 8k" class="flex-1 bg-black border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
+              <button type="button" id="generateSmartBgBtn" class="px-3.5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-extrabold cursor-pointer">
+                Generate
               </button>
             </div>
-            <p class="text-[11px] text-[#8c857b]">Renders a custom 9:16 vertical photographic background tailored to your prompt.</p>
           </div>
 
-          <!-- Curated Archival Photography Collections -->
           <div>
-            <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-3">Curated 35mm Archival Photography</label>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              <button type="button" data-photo="coffee" class="photo-pack-btn py-3 px-3 border border-[#c5a880] bg-[#c5a880]/10 text-[10px] tracking-[0.16em] uppercase text-[#f4efe6] cursor-pointer">I. Espresso & Glass</button>
-              <button type="button" data-photo="luxury" class="photo-pack-btn py-3 px-3 border border-white/10 text-[10px] tracking-[0.16em] uppercase text-[#8c857b] hover:border-[#c5a880]/50 cursor-pointer">II. Haute Horlogerie</button>
-              <button type="button" data-photo="workspace" class="photo-pack-btn py-3 px-3 border border-white/10 text-[10px] tracking-[0.16em] uppercase text-[#8c857b] hover:border-[#c5a880]/50 cursor-pointer">III. Executive Study</button>
-              <button type="button" data-photo="cyber" class="photo-pack-btn py-3 px-3 border border-white/10 text-[10px] tracking-[0.16em] uppercase text-[#8c857b] hover:border-[#c5a880]/50 cursor-pointer">IV. Nocturnal Metropolis</button>
-              <button type="button" data-photo="fitness" class="photo-pack-btn py-3 px-3 border border-white/10 text-[10px] tracking-[0.16em] uppercase text-[#8c857b] hover:border-[#c5a880]/50 cursor-pointer">V. Private Club</button>
-              <button type="button" data-photo="street" class="photo-pack-btn py-3 px-3 border border-white/10 text-[10px] tracking-[0.16em] uppercase text-[#8c857b] hover:border-[#c5a880]/50 cursor-pointer">VI. Editorial Drape</button>
+            <label class="block text-xs font-semibold text-slate-300 mb-2">HD Photography Packs</label>
+            <div class="grid grid-cols-3 gap-1.5">
+              <button type="button" data-photo="coffee" class="photo-pack-btn py-2 px-2 rounded-xl bg-cyan-500/20 border border-cyan-400 text-[11px] font-bold text-white cursor-pointer">☕ Cafe</button>
+              <button type="button" data-photo="cyber" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">🌆 Cyber</button>
+              <button type="button" data-photo="luxury" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">⌚ Luxury</button>
+              <button type="button" data-photo="workspace" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">💻 Tech</button>
+              <button type="button" data-photo="fitness" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">🏋️ Gym</button>
+              <button type="button" data-photo="street" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">👟 Street</button>
             </div>
           </div>
 
-          <!-- Ambient Tonal Shaders & Custom Signature -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+          <div class="grid grid-cols-3 gap-2 pt-1 items-center">
             <div>
-              <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2.5">Minimalist Tonal Shaders</label>
-              <div class="grid grid-cols-4 gap-2">
-                <button type="button" data-shader="obsidian" class="shader-btn py-2.5 border border-white/10 text-[10px] uppercase tracking-wider text-[#f4efe6] cursor-pointer">Onyx</button>
-                <button type="button" data-shader="gold" class="shader-btn py-2.5 border border-white/10 text-[10px] uppercase tracking-wider text-[#c5a880] cursor-pointer">Aurum</button>
-                <button type="button" data-shader="matrix" class="shader-btn py-2.5 border border-white/10 text-[10px] uppercase tracking-wider text-emerald-300 cursor-pointer">Verde</button>
-                <button type="button" data-shader="custom" class="shader-btn py-2.5 border border-white/10 text-[10px] uppercase tracking-wider text-amber-200 cursor-pointer">Bespoke</button>
-              </div>
+              <label class="block text-[10px] text-slate-400 mb-1">Color 1</label>
+              <input id="customColor1" type="color" value="#0f172a" class="w-full h-8 rounded bg-transparent border border-white/15 cursor-pointer">
             </div>
-
-            <div class="grid grid-cols-3 gap-3 items-end">
-              <div>
-                <label class="block text-[9px] tracking-[0.18em] uppercase text-[#8c857b] mb-1.5">Shadow</label>
-                <input id="customColor1" type="color" value="#0c0b09" class="w-full h-9 bg-transparent border border-white/15 cursor-pointer">
-              </div>
-              <div>
-                <label class="block text-[9px] tracking-[0.18em] uppercase text-[#8c857b] mb-1.5">Luster</label>
-                <input id="customColor2" type="color" value="#c5a880" class="w-full h-9 bg-transparent border border-white/15 cursor-pointer">
-              </div>
-              <div>
-                <label class="block text-[9px] tracking-[0.18em] uppercase text-[#8c857b] mb-1.5">Imprint</label>
-                <input id="creatorHandleInput" type="text" value="@reelflow.atelier" class="input-atelier w-full px-2.5 py-2 text-[11px]">
-              </div>
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">Color 2</label>
+              <input id="customColor2" type="color" value="#38bdf8" class="w-full h-8 rounded bg-transparent border border-white/15 cursor-pointer">
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">@Handle</label>
+              <input id="creatorHandleInput" type="text" value="@reelflow.ai" class="w-full bg-black/60 border border-white/15 rounded-lg px-2 py-1 text-[11px] text-white">
             </div>
           </div>
         </div>
 
-        <!-- Atelier Module 03: Acoustic Voice & Clone Conservatory -->
-        <div class="luxury-card p-8 sm:p-12 space-y-8 atelier-reveal">
-          <div class="flex items-baseline justify-between border-b border-[#c5a880]/15 pb-5">
-            <div>
-              <span class="text-[10px] tracking-[0.28em] uppercase text-[#c5a880]">03 / Acoustic Conservatory</span>
-              <h3 class="font-serif-luxury text-2xl sm:text-3xl text-[#f4efe6] mt-1">Neural Voice & Custom Timbre</h3>
-            </div>
-            <button type="button" id="sampleVoiceBtn" class="btn-outline-luxury px-4 py-2 text-[10px] cursor-pointer">
-              Audition Voice
+        <!-- Pod 3: Voice Lab -->
+        <div class="quantum-card rounded-3xl p-6 space-y-4">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-purple-400">Neural Voice Studio</h3>
+            <button type="button" id="sampleVoiceBtn" class="px-3 py-1 rounded-lg bg-purple-500/20 border border-purple-400/30 text-[11px] font-bold text-purple-200 cursor-pointer">
+              🔊 Audition
             </button>
           </div>
-
-          <div id="voicePersonaGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-2">
+          <div id="voicePersonaGrid" class="grid grid-cols-2 gap-2"></div>
+          <div class="grid grid-cols-2 gap-3 pt-1">
             <div>
-              <div class="flex justify-between text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2">
-                <span>Pacing Cadence</span><span id="rateLabel" class="font-mono-luxury text-[#e6d5b8]">1.05x</span>
-              </div>
-              <input id="voiceRate" type="range" min="0.75" max="1.35" step="0.05" value="1.05" class="w-full cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-400 mb-1"><span>Speed</span><span id="rateLabel" class="font-mono-tech text-white">1.08x</span></div>
+              <input id="voiceRate" type="range" min="0.75" max="1.35" step="0.05" value="1.08" class="w-full accent-cyan-400 cursor-pointer">
             </div>
             <div>
-              <div class="flex justify-between text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2">
-                <span>Resonance Pitch</span><span id="pitchLabel" class="font-mono-luxury text-[#e6d5b8]">1.00</span>
-              </div>
-              <input id="voicePitch" type="range" min="0.7" max="1.3" step="0.05" value="1.00" class="w-full cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-400 mb-1"><span>Pitch</span><span id="pitchLabel" class="font-mono-tech text-white">1.00</span></div>
+              <input id="voicePitch" type="range" min="0.7" max="1.3" step="0.05" value="1.00" class="w-full accent-indigo-400 cursor-pointer">
             </div>
-          </div>
-
-          <div class="pt-2">
-            <button type="button" id="toggleCloneBoxBtn" class="text-[10px] tracking-[0.22em] uppercase text-[#c5a880] hover:underline cursor-pointer">
-              + Pair Bespoke ElevenLabs Voice Clone ID
-            </button>
-            <div id="elevenCloneBox" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 mt-4 border-t border-white/10">
-              <input id="elevenKeyInput" type="password" placeholder="ElevenLabs xi-api-key" class="input-atelier px-3.5 py-2.5 text-xs">
-              <input id="elevenVoiceIdInput" type="text" placeholder="Voice ID" class="input-atelier px-3.5 py-2.5 text-xs">
-              <button type="button" id="saveElevenBtn" class="btn-champagne py-2.5 text-[10px] cursor-pointer">Bind Voice</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Atelier Module 04: Four-Act NLE Manuscript & Timeline -->
-        <div class="luxury-card p-8 sm:p-12 space-y-8 atelier-reveal">
-          <div class="flex items-baseline justify-between border-b border-[#c5a880]/15 pb-5">
-            <div>
-              <span class="text-[10px] tracking-[0.28em] uppercase text-[#c5a880]">04 / Non-Linear Manuscript</span>
-              <h3 class="font-serif-luxury text-2xl sm:text-3xl text-[#f4efe6] mt-1">Four-Act Timecode Score</h3>
-            </div>
-            <button type="button" id="copyAllScriptBtn" class="btn-outline-luxury px-4 py-2 text-[10px] cursor-pointer">
-              Copy Manuscript
-            </button>
-          </div>
-
-          <div>
-            <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-3">Select Opening Hook Variation (00:00 - 00:03)</label>
-            <div id="hooksList" class="space-y-3"></div>
-          </div>
-
-          <div>
-            <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-3">Master Scene Score (Click any act to preview & edit live)</label>
-            <div id="scenesList" class="space-y-5"></div>
           </div>
         </div>
 
       </div>
 
-      <!-- RIGHT WING (5 COLUMNS, STICKY): ANODIZED TITANIUM 9:16 MONITOR & MASTER EXPORT -->
-      <div id="player-column" class="lg:col-span-5 lg:sticky lg:top-32 flex flex-col items-center atelier-reveal">
-        <div class="luxury-card p-8 sm:p-10 w-full flex flex-col items-center space-y-7">
+      <!-- CENTER COLUMN (4 Cols): NLE TIMELINE EDITOR -->
+      <div class="lg:col-span-4 space-y-6">
+        <div class="quantum-card rounded-3xl p-6 space-y-5">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <div>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-emerald-400">NLE Timeline Editor</h3>
+              <p class="text-[11px] text-slate-400">Live script editing & scene preview</p>
+            </div>
+            <button type="button" id="copyAllScriptBtn" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 text-xs font-bold text-slate-200 border border-white/10 cursor-pointer">
+              📋 Copy
+            </button>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-2">⚡ 3-Second Hook Switcher:</label>
+            <div id="hooksList" class="space-y-2"></div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-2">🎞️ 4-Scene Master Sequence:</label>
+            <div id="scenesList" class="space-y-3 max-h-[500px] overflow-y-auto pr-1"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN (4 Cols): 9:16 MONITOR & DOWNLOAD SUITE -->
+      <div id="player-column" class="lg:col-span-4 flex flex-col items-center">
+        <div class="quantum-card rounded-3xl p-6 w-full flex flex-col items-center space-y-4">
           
-          <!-- Monitor Header & Platform Overlay Toggle -->
-          <div class="w-full space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] tracking-[0.26em] uppercase text-[#c5a880]">Reference Monitor</span>
-              <span id="playerStatusBadge" class="font-mono-luxury text-[10px] tracking-[0.18em] uppercase text-[#e6d5b8]">Standby</span>
+          <div class="w-full">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Platform Preview Mode:</span>
+              <span id="playerStatusBadge" class="text-[10px] font-mono-code px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300">READY</span>
             </div>
-            <div class="grid grid-cols-3 gap-2 p-1 bg-[#070706] border border-[#c5a880]/20">
-              <button type="button" data-ui="instagram" class="ui-mode-btn py-2.5 bg-[#c5a880] text-black text-[10px] tracking-[0.16em] uppercase font-medium transition cursor-pointer">
-                IG Reels
-              </button>
-              <button type="button" data-ui="youtube" class="ui-mode-btn py-2.5 text-[#8c857b] hover:text-white text-[10px] tracking-[0.16em] uppercase transition cursor-pointer">
-                YT Shorts
-              </button>
-              <button type="button" data-ui="clean" class="ui-mode-btn py-2.5 text-[#8c857b] hover:text-white text-[10px] tracking-[0.16em] uppercase transition cursor-pointer">
-                Pure Plate
-              </button>
+            <div class="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-black/60 border border-white/10">
+              <button type="button" data-ui="instagram" class="ui-mode-btn py-2 rounded-xl bg-cyan-400 text-black text-[11px] font-bold transition cursor-pointer">IG Reels</button>
+              <button type="button" data-ui="youtube" class="ui-mode-btn py-2 rounded-xl text-slate-300 hover:text-white text-[11px] font-bold transition cursor-pointer">YT Shorts</button>
+              <button type="button" data-ui="clean" class="ui-mode-btn py-2 rounded-xl text-slate-300 hover:text-white text-[11px] font-bold transition cursor-pointer">Clean Raw</button>
             </div>
           </div>
 
-          <!-- Subtitle Engraving Style -->
-          <div class="w-full grid grid-cols-4 gap-2">
-            <button type="button" data-cap="hormozi" class="cap-btn py-2 border border-[#c5a880] bg-[#c5a880]/10 text-[9px] tracking-[0.16em] uppercase text-[#e6d5b8] cursor-pointer">Aurum</button>
-            <button type="button" data-cap="modern" class="cap-btn py-2 border border-white/10 text-[9px] tracking-[0.16em] uppercase text-[#8c857b] cursor-pointer">Obsidian</button>
-            <button type="button" data-cap="neon" class="cap-btn py-2 border border-white/10 text-[9px] tracking-[0.16em] uppercase text-[#8c857b] cursor-pointer">Editorial</button>
-            <button type="button" data-cap="red" class="cap-btn py-2 border border-white/10 text-[9px] tracking-[0.16em] uppercase text-[#8c857b] cursor-pointer">Crimson</button>
+          <div class="w-full grid grid-cols-4 gap-1.5">
+            <button type="button" data-cap="hormozi" class="cap-btn py-1 rounded-lg bg-cyan-400/20 border border-cyan-400 text-[10px] font-bold text-cyan-300 cursor-pointer">Hormozi</button>
+            <button type="button" data-cap="modern" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Glass</button>
+            <button type="button" data-cap="neon" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Neon</button>
+            <button type="button" data-cap="red" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Red Pill</button>
           </div>
 
-          <!-- Brushed Titanium 9:16 Cinema Bezel -->
-          <div class="relative w-[280px] h-[498px] rounded-[36px] border-[7px] border-[#1f1d1a] bg-black overflow-hidden shadow-[0_35px_90px_rgba(0,0,0,0.95)] ring-1 ring-[#c5a880]/30">
+          <!-- 9:16 Cinema Bezel -->
+          <div class="relative w-[268px] h-[476px] rounded-[38px] border-[7px] border-slate-800 bg-black overflow-hidden shadow-2xl ring-1 ring-cyan-400/30">
             <canvas id="reelCanvas" width="540" height="960" class="w-full h-full object-cover"></canvas>
           </div>
 
-          <!-- Playback Transport -->
-          <div class="w-full grid grid-cols-2 gap-3">
-            <button type="button" id="playReelBtn" class="btn-outline-luxury py-3.5 text-[10px] font-medium cursor-pointer">
-              ▶ Audition Reel
+          <div class="w-full grid grid-cols-2 gap-2.5">
+            <button type="button" id="playReelBtn" class="py-3 px-3 rounded-2xl bg-white text-slate-950 hover:bg-slate-200 font-extrabold text-xs transition shadow-lg cursor-pointer">
+              ▶ Play Reel w/ Voice
             </button>
-            <button type="button" id="nextSceneBtn" class="btn-outline-luxury py-3.5 text-[10px] cursor-pointer">
-              Act I / IV ⏭
+            <button type="button" id="nextSceneBtn" class="py-3 px-3 rounded-2xl bg-white/5 hover:bg-white/10 text-white border border-white/15 font-bold text-xs transition cursor-pointer">
+              ⏭ Next Scene (1/4)
             </button>
           </div>
 
-          <!-- Master Export Suite -->
-          <div class="w-full pt-5 border-t border-[#c5a880]/15 space-y-3">
-            <button type="button" id="downloadVideoBtn" class="btn-champagne w-full py-4 text-[11px] flex items-center justify-center gap-2 cursor-pointer">
-              <span>⬇️ Export Master Video (.WEBM)</span>
+          <div class="w-full pt-3 border-t border-white/10 space-y-2">
+            <button type="button" id="downloadVideoBtn" class="btn-quantum w-full py-3.5 px-4 rounded-2xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-xl">
+              <span>⬇️ DOWNLOAD VIDEO (.WEBM)</span>
             </button>
-            <div class="grid grid-cols-2 gap-3">
-              <button type="button" id="downloadScriptBtn" class="btn-outline-luxury py-3 text-[10px] cursor-pointer">
-                Manuscript (.TXT)
+            <div class="grid grid-cols-2 gap-2">
+              <button type="button" id="downloadScriptBtn" class="py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-200 font-bold text-[11px] transition cursor-pointer">
+                📄 Script (.TXT)
               </button>
-              <button type="button" id="downloadFramePngBtn" class="btn-outline-luxury py-3 text-[10px] cursor-pointer">
-                Still Plate (.PNG)
+              <button type="button" id="downloadFramePngBtn" class="py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-200 font-bold text-[11px] transition cursor-pointer">
+                🖼️ Poster (.PNG)
               </button>
             </div>
           </div>
@@ -534,269 +418,254 @@
     </div>
   </section>
 
-  <!-- SECTION II: UNIFIED PRIVATE SUITE DIRECTORY (Clean Tabbed Architecture Instead of Cluttered Cards!) -->
-  <section id="suite-directory" class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-12 pb-32 sm:pb-44 atelier-reveal">
-    <div class="border-t border-[#c5a880]/15 pt-16 mb-14 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
-      <div>
-        <span class="text-[10px] tracking-[0.32em] uppercase text-[#c5a880] block mb-3">Chapter II • Private Suite</span>
-        <h2 class="font-serif-luxury text-3xl sm:text-5xl text-[#f4efe6]">38 Bespoke <span class="italic text-[#c5a880]">Instruments</span></h2>
-      </div>
-
-      <!-- Clean Filter Tabs so only one curated collection shows at a time -->
-      <div class="flex flex-wrap gap-3">
-        <button type="button" data-tab="clippers" class="suite-tab-btn px-6 py-3 bg-[#c5a880] text-black text-[10px] tracking-[0.2em] uppercase font-medium transition cursor-pointer">
-          I. AI Video Clippers (26)
-        </button>
-        <button type="button" data-tab="diagnostics" class="suite-tab-btn px-6 py-3 border border-[#c5a880]/30 text-[#e6d5b8] text-[10px] tracking-[0.2em] uppercase transition cursor-pointer">
-          II. Studio Diagnostics & Audio (12)
-        </button>
-      </div>
+  <!-- SECTION 2: 12 REAL FFMPEG.WASM & HARDWARE TOOLS -->
+  <section id="utility-suite" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-28">
+    <div class="text-center mb-10">
+      <span class="font-mono-tech text-xs uppercase tracking-widest text-cyan-400">02 // REAL BROWSER FFMPEG SUITE</span>
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-display mt-1">12 Real Video & Audio Processing Tools</h2>
+      <p class="text-xs sm:text-sm text-slate-400 mt-1">Powered by FFmpeg WebAssembly. Convert, extract, and mute media files locally without server uploads.</p>
     </div>
-
-    <!-- Tab 1: 26 AI Clippers (Spacious Architectural Grid) -->
-    <div id="suiteClippersPane" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-
-    <!-- Tab 2: 12 Hardware & Media Diagnostics (Hidden until clicked) -->
-    <div id="suiteDiagnosticsPane" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="utilityCardsGrid"></div>
   </section>
 
-  <!-- SECTION III: PATRONAGE & ₹50 CUSTOM RUPEE SLIDER + DIRECT BANK SETTLEMENT -->
-  <section id="pricing" class="relative z-10 max-w-[1250px] mx-auto px-6 sm:px-12 pb-32 sm:pb-44 atelier-reveal">
-    <div class="border-t border-[#c5a880]/15 pt-16 text-center mb-16">
-      <span class="text-[10px] tracking-[0.32em] uppercase text-[#c5a880] block mb-3">Chapter III • Patronage & Settlement</span>
-      <h2 class="font-serif-luxury text-3xl sm:text-5xl text-[#f4efe6]">Complimentary Access or <span class="italic text-[#c5a880]">₹50 Bespoke Commission</span></h2>
-      <p class="text-[#8c857b] text-xs sm:text-sm max-w-lg mx-auto mt-4 leading-relaxed">
-        Begin with complimentary studio access, or commission custom video allocations starting at ₹50 with direct UPI bank settlement.
-      </p>
+  <!-- SECTION 3: 26 AI CLIPPER TOOLS -->
+  <section id="clipper-grid" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-28">
+    <div class="text-center mb-10">
+      <span class="font-mono-tech text-xs uppercase tracking-widest text-purple-400">03 // AI REPURPOSING</span>
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-display mt-1">26+ Viral Video Clipping & Repurposing Engines</h2>
+      <p class="text-xs sm:text-sm text-slate-400 mt-1">Click any tool to launch the AI clipper workspace modal.</p>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5" id="clipperCardsGrid"></div>
+  </section>
+
+  <!-- SECTION 4: KOTAK BANK UPI & ₹50 CUSTOM PLAN -->
+  <section id="pricing" class="relative z-10 max-w-5xl mx-auto px-4 pb-28">
+    <div class="text-center mb-10">
+      <span class="px-3 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-xs font-mono-tech uppercase">04 // KOTAK BANK UPI SETTLEMENT</span>
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-display mt-3">Start Free or Custom Plan Starting at ₹50</h2>
+      <p class="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto mt-1">Direct UPI QR settlements go straight into your <b>Kotak Bank account (`7820847387@kotakbank`)</b>.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14 items-stretch">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
       
-      <!-- Complimentary Tier -->
-      <div class="luxury-card p-10 sm:p-14 flex flex-col justify-between">
+      <!-- Free Sandbox -->
+      <div class="quantum-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-white/10">
         <div>
-          <div class="flex items-center justify-between border-b border-white/10 pb-5">
-            <span class="text-[10px] tracking-[0.24em] uppercase text-[#8c857b]">Guest Pass</span>
-            <span class="font-mono-luxury text-[10px] text-[#c5a880] uppercase">Complimentary</span>
+          <div class="flex items-center justify-between">
+            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold">Sandbox Trial</span>
+            <span class="text-xs font-mono-tech text-cyan-400">Active</span>
           </div>
-          <div class="my-8 flex items-baseline gap-3">
-            <span class="font-serif-luxury text-6xl sm:text-7xl text-[#f4efe6]">₹0</span>
-            <span class="text-[10px] tracking-[0.22em] uppercase text-[#8c857b]">/ Perpetual Trial</span>
+          <div class="mt-5 mb-2 flex items-baseline gap-2">
+            <span class="text-4xl sm:text-5xl font-extrabold text-white font-display">₹0</span>
+            <span class="text-xs text-slate-400">/ Perpetual Trial</span>
           </div>
-          <ul class="text-xs text-[#e6d5b8]/80 space-y-4 mb-12 leading-relaxed">
-            <li class="flex items-center gap-3"><span class="text-[#c5a880]">—</span> <span>Three 9:16 Master Video Exports (.WEBM)</span></li>
-            <li class="flex items-center gap-3"><span class="text-[#c5a880]">—</span> <span>Smart AI Scene Synthesis & 35mm Archival Plates</span></li>
-            <li class="flex items-center gap-3"><span class="text-[#c5a880]">—</span> <span>Six Neural Voice Personas & Cadence Control</span></li>
-            <li class="flex items-center gap-3"><span class="text-[#c5a880]">—</span> <span>Full Access to All 38 Atelier Instruments</span></li>
+          <p class="text-xs text-slate-400 mb-6">Test smart AI backgrounds, 6 voices, and WebM video downloads right now.</p>
+          <ul class="text-xs text-slate-200 space-y-3 mb-8">
+            <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span>3 Free 9:16 Video Downloads (.WEBM)</span></li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span>Smart AI Text-to-Background Generator</span></li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span>Instagram Reels & YouTube Shorts Previews</span></li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span>All 38+ FFmpeg & Clipper Utilities</span></li>
           </ul>
         </div>
-        <a href="#studio" class="btn-outline-luxury w-full py-4 text-[10px] text-center">
-          Enter Screening Room
+        <a href="#studio" class="w-full py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-extrabold text-xs uppercase tracking-wider text-center border border-white/15 transition">
+          Launch Free Studio →
         </a>
       </div>
 
-      <!-- Bespoke Rupee Commission Starting at ₹50 -->
-      <div class="luxury-card p-10 sm:p-14 flex flex-col justify-between border border-[#c5a880]/60 relative">
-        <span class="absolute -top-3 right-10 px-4 py-1 bg-[#c5a880] text-black text-[9px] tracking-[0.24em] uppercase font-medium">From ₹50</span>
+      <!-- Kotak UPI Plan -->
+      <div class="quantum-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-2 border-cyan-400 relative shadow-2xl shadow-cyan-400/10">
+        <span class="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-cyan-400 text-black text-[10px] font-extrabold uppercase tracking-wider">Kotak UPI Direct</span>
         <div>
-          <div class="flex items-center justify-between border-b border-[#c5a880]/20 pb-5">
-            <span class="text-[10px] tracking-[0.24em] uppercase text-[#c5a880]">Private Commission</span>
-            <span id="customReelCountBadge" class="font-mono-luxury text-[10px] text-[#f4efe6] uppercase">1 Master Reel</span>
+          <div class="flex items-center justify-between">
+            <span class="px-3 py-1 rounded-full bg-cyan-400/20 text-cyan-300 text-xs font-bold">Custom Rupee Builder</span>
+            <span id="customReelCountBadge" class="text-xs font-mono-tech text-amber-300 font-bold">1 Video Pack</span>
           </div>
 
-          <div class="my-8 flex items-baseline gap-3">
-            <span id="customPriceDisplay" class="font-serif-luxury text-6xl sm:text-7xl text-[#f4efe6]">₹50</span>
-            <span class="text-[10px] tracking-[0.22em] uppercase text-[#8c857b]">/ Direct Settlement</span>
+          <div class="mt-5 mb-4 flex items-baseline gap-2">
+            <span id="customPriceDisplay" class="text-4xl sm:text-5xl font-extrabold text-white font-display">₹50</span>
+            <span class="text-xs text-slate-400">/ instant pack</span>
           </div>
 
-          <div class="p-6 bg-[#070706] border border-[#c5a880]/20 mb-8 space-y-4">
-            <div class="flex justify-between text-[11px] tracking-[0.14em] uppercase">
-              <span class="text-[#8c857b]">Commission Volume:</span>
-              <span id="sliderVideosLabel" class="text-[#c5a880] font-mono-luxury">1 Video (₹50)</span>
+          <div class="p-4 rounded-2xl bg-black/60 border border-white/10 mb-5 space-y-2">
+            <div class="flex justify-between text-xs font-semibold">
+              <span class="text-slate-300">Slide to choose video credits:</span>
+              <span id="sliderVideosLabel" class="text-cyan-400 font-mono-tech">1 Video (₹50)</span>
             </div>
-            <input id="customPlanSlider" type="range" min="1" max="50" step="1" value="1" class="w-full cursor-pointer">
-            <div class="flex justify-between text-[9px] font-mono-luxury text-[#8c857b] uppercase">
-              <span>1 Reel (₹50)</span>
-              <span>15 Reels (₹750)</span>
-              <span>50 Reels (₹2,500)</span>
+            <input id="customPlanSlider" type="range" min="1" max="50" step="1" value="1" class="w-full accent-cyan-400 cursor-pointer">
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono-tech">
+              <span>1 Video (₹50)</span>
+              <span>15 Videos (₹750)</span>
+              <span>50 Videos (₹2,500)</span>
             </div>
           </div>
 
-          <ul class="text-xs text-[#e6d5b8]/80 space-y-4 mb-10 leading-relaxed">
-            <li class="flex items-center gap-3"><span class="text-[#c5a880]">—</span> <span>Uncompressed 1080p Masters & Custom Voice Cloning</span></li>
-            <li class="flex items-center gap-3"><span class="text-[#c5a880]">—</span> <span>Unlimited Smart AI Scene Plates</span></li>
-            <li class="flex items-center gap-3"><span class="text-[#c5a880]">—</span> <span>Direct Bank UPI Settlement & Priority Concierge</span></li>
+          <ul class="text-xs text-slate-200 space-y-2.5 mb-6">
+            <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span>1080p Watermark-Free Video & Voice Renders</span></li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span>Unlimited Smart AI Custom Backgrounds</span></li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span>Direct Kotak UPI Settlement (`7820847387@kotakbank`)</span></li>
           </ul>
         </div>
 
-        <button type="button" id="openPaymentGatewayBtn" class="btn-champagne w-full py-4 text-[11px] cursor-pointer">
-          Proceed to Private Bank Settlement
+        <button type="button" id="openPaymentGatewayBtn" class="btn-quantum w-full py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer shadow-xl">
+          💳 Pay ₹50+ via Kotak UPI Gateway
         </button>
       </div>
 
     </div>
   </section>
 
-  <!-- SECTION IV: PRIVATE FOUNDER CONCIERGE (+91 7820847387) -->
-  <section id="founder-desk" class="relative z-10 max-w-[1250px] mx-auto px-6 sm:px-12 pb-36 atelier-reveal">
-    <div class="luxury-card p-10 sm:p-16 border border-[#c5a880]/30 flex flex-col md:flex-row items-center justify-between gap-10">
-      <div class="space-y-3 text-center md:text-left">
-        <span class="text-[10px] tracking-[0.32em] uppercase text-[#c5a880]">Chapter IV • Direct Line</span>
-        <h2 class="font-serif-luxury text-3xl sm:text-5xl text-[#f4efe6]">Private Founder <span class="italic text-[#c5a880]">Concierge</span></h2>
-        <p class="text-xs sm:text-sm text-[#8c857b] max-w-xl leading-relaxed">
-          For bespoke brand retainers, custom ElevenLabs voice sessions, or direct production inquiries, connect with founder Arjun Dhore on WhatsApp (+91 7820847387).
+  <!-- SECTION 5: FOUNDER DESK -->
+  <section id="founder-desk" class="relative z-10 max-w-5xl mx-auto px-4 pb-28">
+    <div class="quantum-card rounded-3xl p-6 sm:p-10 border border-emerald-500/30 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="space-y-2 text-center md:text-left">
+        <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-xs font-bold uppercase font-mono-tech">05 // FOUNDER CONCIERGE</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-display">Need Custom AI Marketing or Done-For-You Reels?</h2>
+        <p class="text-xs sm:text-sm text-slate-300 max-w-xl">
+          Connect directly with Arjun Dhore on WhatsApp (+91 7820847387) for bespoke production, voice cloning, or B2B enterprise partnerships.
         </p>
       </div>
-      <button type="button" id="contactFounderWhatsAppBtn" class="btn-champagne px-10 py-4 text-[11px] shrink-0 cursor-pointer">
-        WhatsApp Concierge (+91 7820847387)
+      <button type="button" id="contactFounderWhatsAppBtn" class="px-7 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider transition shadow-xl shrink-0 cursor-pointer">
+        💬 WhatsApp Founder (+91 7820847387)
       </button>
     </div>
   </section>
 
-  <!-- MODAL 1: DEDICATED AI CLIPPER WORKSPACE -->
-  <div id="clipperWorkspaceModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
-    <div class="luxury-card max-w-lg w-full p-8 sm:p-10 border border-[#c5a880]/40 space-y-6">
-      <div class="flex items-baseline justify-between border-b border-[#c5a880]/20 pb-4">
+  <!-- MODALS (Clipper, Kotak UPI Gateway, Utility, Auth, Gemini) -->
+  <div id="clipperWorkspaceModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="quantum-card max-w-lg w-full rounded-3xl p-6 border border-cyan-500/40 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
         <div>
-          <span class="text-[9px] tracking-[0.28em] uppercase text-[#c5a880]">Autonomous Telecine</span>
-          <h3 id="clipperModalTitle" class="font-serif-luxury text-2xl text-[#f4efe6] mt-1">Video to Reels Converter</h3>
+          <span class="text-[10px] font-mono-tech uppercase text-cyan-400">Interactive AI Repurposing Engine</span>
+          <h3 id="clipperModalTitle" class="text-lg font-extrabold text-white font-display">Video to Reels Converter</h3>
         </div>
-        <button type="button" id="closeClipperModalBtn" class="text-[#8c857b] hover:text-white text-sm cursor-pointer">✕</button>
+        <button type="button" id="closeClipperModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
       </div>
-
-      <div class="space-y-5">
+      <div class="space-y-3">
         <div>
-          <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2">Source Link (YouTube, Drive, Dropbox) or Subject</label>
-          <input id="clipperUrlInput" type="text" placeholder="https://youtube.com/watch?v=... or describe footage" class="input-atelier w-full px-4 py-3 text-xs">
+          <label class="block text-xs font-semibold text-slate-300 mb-1">1. Paste Long Video URL or Topic:</label>
+          <input id="clipperUrlInput" type="text" placeholder="https://youtube.com/watch?v=..." class="w-full bg-black/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
         </div>
-
         <div>
-          <label class="block text-[10px] tracking-[0.2em] uppercase text-[#8c857b] mb-2">Or Select Local Master File</label>
-          <input id="clipperFileInput" type="file" accept="video/*,audio/*" class="w-full text-xs text-[#8c857b] file:mr-4 file:py-2 file:px-4 file:border file:border-[#c5a880]/40 file:bg-transparent file:text-[#e6d5b8] file:text-[10px] file:uppercase file:tracking-widest cursor-pointer">
+          <label class="block text-xs font-semibold text-slate-300 mb-1">2. Or Upload Local File:</label>
+          <input id="clipperFileInput" type="file" accept="video/*,audio/*" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-white/10 file:text-white file:font-bold cursor-pointer">
         </div>
-
-        <div id="clipperProgressWrap" class="hidden p-4 bg-[#070706] border border-[#c5a880]/30 space-y-2">
-          <div class="flex justify-between text-[10px] font-mono-luxury text-[#c5a880]">
-            <span id="clipperStageText">Isolating high-retention act...</span>
-            <span id="clipperPctText">35%</span>
-          </div>
-          <div class="w-full h-1 bg-neutral-900 overflow-hidden">
-            <div id="clipperProgressBar" class="h-full bg-[#c5a880] w-1/3 transition-all duration-300"></div>
-          </div>
-        </div>
-
-        <button type="button" id="runClipperExtractBtn" class="btn-champagne w-full py-4 text-[10px] cursor-pointer">
-          Extract Vertical Master & Load Screening Room
+        <button type="button" id="runClipperExtractBtn" class="btn-quantum w-full py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
+          ✂️ Extract Viral 9:16 Clip & Open in Studio
         </button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 2: DIRECT BANK UPI SETTLEMENT -->
-  <div id="paymentGatewayModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
-    <div class="luxury-card max-w-md w-full overflow-hidden border border-[#c5a880]/50 max-h-[92vh] overflow-y-auto">
-      <div class="bg-[#14120f] border-b border-[#c5a880]/25 p-6 flex items-center justify-between">
-        <div>
-          <span class="text-[9px] tracking-[0.28em] uppercase text-[#c5a880]">Private Treasury</span>
-          <h3 class="font-serif-luxury text-2xl text-[#f4efe6]">Direct Bank Settlement</h3>
-          <p id="gatewayPlanSubtitle" class="text-[11px] text-[#8c857b] mt-0.5">Commission: 1 Video</p>
+  <!-- KOTAK UPI GATEWAY MODAL (Pre-set with 7820847387@kotakbank) -->
+  <div id="paymentGatewayModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="quantum-card max-w-md w-full rounded-3xl overflow-hidden border border-cyan-400/40 shadow-2xl max-h-[92vh] overflow-y-auto">
+      <div class="bg-gradient-to-r from-cyan-500 to-indigo-600 p-4 sm:p-5 flex items-center justify-between text-slate-950 font-bold">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-white/30 flex items-center justify-center font-extrabold text-white">₹</div>
+          <div>
+            <h3 class="text-sm font-extrabold text-white">Kotak Bank Direct UPI Checkout</h3>
+            <p id="gatewayPlanSubtitle" class="text-[11px] text-cyan-100">Custom Pack: 1 Video</p>
+          </div>
         </div>
         <div class="text-right">
-          <span id="gatewayAmountBadge" class="font-serif-luxury text-3xl text-[#c5a880]">₹50</span>
-          <button type="button" id="closePaymentModalBtn" class="block ml-auto text-[10px] tracking-widest uppercase text-[#8c857b] hover:text-white mt-1 cursor-pointer">Close</button>
+          <span id="gatewayAmountBadge" class="text-xl font-extrabold font-display text-white">₹50</span>
+          <button type="button" id="closePaymentModalBtn" class="block ml-auto text-xs text-white/80 hover:text-white cursor-pointer font-normal">✕ Close</button>
         </div>
       </div>
 
-      <div class="p-6 space-y-5">
-        <div class="p-4 bg-[#070706] border border-[#c5a880]/20 space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] tracking-[0.18em] uppercase text-[#8c857b]">Receiving Bank UPI:</span>
-            <button type="button" id="toggleUpiEditBtn" class="text-[10px] tracking-widest uppercase text-[#c5a880] underline cursor-pointer">Configure</button>
-          </div>
-          <p id="activeMerchantUpiLabel" class="text-xs font-mono-luxury text-[#f4efe6]">7820847387@upi</p>
-          <div id="merchantUpiEditBox" class="hidden pt-2 space-y-2">
-            <input id="merchantUpiInput" type="text" placeholder="e.g. 7820847387@kotak or 7820847387@okaxis" class="input-atelier w-full px-3 py-2 text-xs font-mono-luxury">
-            <button type="button" id="saveMerchantUpiBtn" class="btn-champagne w-full py-2 text-[10px] cursor-pointer">Save Bank UPI</button>
-          </div>
+      <div class="p-5 space-y-4">
+        <div class="p-3 rounded-2xl bg-cyan-950/50 border border-cyan-500/30 space-y-1.5">
+          <span class="text-[11px] font-bold text-cyan-300 block">🏦 Kotak Bank Settlement UPI ID:</span>
+          <p id="activeMerchantUpiLabel" class="text-xs font-mono-tech text-emerald-300 font-bold">7820847387@kotakbank</p>
         </div>
 
-        <div class="text-center space-y-3">
-          <p class="text-[11px] text-[#8c857b]">Scan via GPay, PhonePe, or Private Banking App:</p>
-          <div class="w-44 h-44 mx-auto bg-white p-3 flex items-center justify-center">
+        <div class="text-center space-y-2.5">
+          <p class="text-xs text-slate-300">Scan QR with GPay, PhonePe, Paytm, or Kotak Banking App:</p>
+          <div class="w-40 h-40 mx-auto bg-white p-2 rounded-2xl shadow-lg flex items-center justify-center">
             <img id="dynamicUpiQr" src="" alt="UPI QR" class="w-full h-full object-contain">
           </div>
-          <a id="mobileUpiDeepLink" href="#" class="btn-outline-luxury inline-block w-full py-3 text-[10px]">
-            Launch Mobile UPI App Directly
+          <a id="mobileUpiDeepLink" href="#" class="inline-block w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold text-cyan-300 transition">
+            📱 Tap Here on Phone to Pay via Kotak / GPay App
           </a>
         </div>
 
-        <div class="space-y-3 pt-3 border-t border-white/10">
-          <input id="payerNameInput" type="text" placeholder="Patron Name / Maison *" class="input-atelier w-full px-3.5 py-2.5 text-xs">
-          <input id="payerUtrInput" type="text" placeholder="12-Digit UPI Reference / UTR Number" class="input-atelier w-full px-3.5 py-2.5 text-xs font-mono-luxury">
+        <div class="space-y-2 pt-2 border-t border-white/10">
+          <label class="block text-[11px] font-semibold text-slate-300">Enter Your Name & UTR Number:</label>
+          <input id="payerNameInput" type="text" placeholder="Your Name / Brand Name *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
+          <input id="payerUtrInput" type="text" placeholder="12-Digit UPI Ref / UTR Number" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono-tech">
         </div>
 
-        <button type="button" id="confirmPaymentBtn" class="btn-champagne w-full py-4 text-[10px] cursor-pointer">
-          Transmit Receipt & Unlock Allocation
+        <button type="button" id="confirmPaymentBtn" class="btn-quantum w-full py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
+          ✓ Verify Payment & Notify Founder on WhatsApp
         </button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 3: DIAGNOSTIC INSTRUMENT MODAL (Auto-Releases Mic & Camera!) -->
-  <div id="utilityToolModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
-    <div class="luxury-card max-w-lg w-full p-8 border border-[#c5a880]/40 space-y-5">
-      <div class="flex items-center justify-between border-b border-white/10 pb-4">
-        <h3 id="utilModalTitle" class="font-serif-luxury text-2xl text-[#f4efe6]">Instrument</h3>
-        <button type="button" id="closeUtilModalBtn" class="text-[#8c857b] hover:text-white text-sm cursor-pointer">✕</button>
+  <div id="utilityToolModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="quantum-card max-w-lg w-full rounded-3xl p-6 border border-white/15 space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 id="utilModalTitle" class="text-lg font-bold text-white font-display">Tool</h3>
+        <button type="button" id="closeUtilModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
       </div>
-      <p id="utilModalDesc" class="text-xs text-[#8c857b]"></p>
-      <div id="utilModalBody" class="space-y-4"></div>
+      <p id="utilModalDesc" class="text-xs text-slate-300"></p>
+      <div id="utilModalBody" class="space-y-3"></div>
     </div>
   </div>
 
-  <!-- MODAL 4: PERSISTENT MEMBER ACCESS -->
-  <div id="authModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
-    <div class="luxury-card max-w-md w-full p-8 sm:p-10 space-y-6 border border-[#c5a880]/40">
-      <div class="flex items-center justify-between border-b border-white/10 pb-4">
-        <div>
-          <span class="text-[9px] tracking-[0.28em] uppercase text-[#c5a880]">Private Registry</span>
-          <h3 class="font-serif-luxury text-2xl text-[#f4efe6] mt-0.5">Atelier Member Pass</h3>
-        </div>
-        <button type="button" id="closeAuthModalBtn" class="text-[#8c857b] hover:text-white text-sm cursor-pointer">✕</button>
+  <div id="authModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="quantum-card max-w-md w-full rounded-3xl p-6 space-y-4 border border-white/15">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-white font-display">ReelFlow Creator Account</h3>
+        <button type="button" id="closeAuthModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
       </div>
-      <div class="grid grid-cols-2 gap-2 p-1 bg-[#070706] border border-white/10">
-        <button type="button" id="tabLoginBtn" class="py-2.5 bg-[#c5a880] text-black text-[10px] tracking-[0.2em] uppercase font-medium cursor-pointer">Sign In</button>
-        <button type="button" id="tabRegisterBtn" class="py-2.5 text-[#8c857b] text-[10px] tracking-[0.2em] uppercase cursor-pointer">Register</button>
+      <div class="grid grid-cols-2 gap-2 p-1 rounded-xl bg-black/60 border border-white/10">
+        <button type="button" id="tabLoginBtn" class="py-2 rounded-lg bg-cyan-400 text-black text-xs font-bold cursor-pointer">Login</button>
+        <button type="button" id="tabRegisterBtn" class="py-2 rounded-lg text-slate-400 text-xs font-bold cursor-pointer">Register</button>
       </div>
-      <form id="authForm" class="space-y-4">
-        <input id="authNameInput" type="text" placeholder="Full Name or Title *" class="hidden input-atelier w-full px-4 py-3 text-xs">
-        <input id="authEmailInput" type="email" required placeholder="Private Email Address *" class="input-atelier w-full px-4 py-3 text-xs">
-        <input id="authPassInput" type="password" required placeholder="Passkey *" class="input-atelier w-full px-4 py-3 text-xs">
-        <button type="submit" class="btn-champagne w-full py-4 text-[10px] cursor-pointer">Authenticate & Remember Pass</button>
+      <form id="authForm" class="space-y-3">
+        <input id="authNameInput" type="text" placeholder="Your Full Name *" class="hidden w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
+        <input id="authEmailInput" type="email" required placeholder="Email Address *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
+        <input id="authPassInput" type="password" required placeholder="Password *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
+        <button type="submit" class="btn-quantum w-full py-3 rounded-xl text-xs uppercase cursor-pointer">Save Session & Continue →</button>
       </form>
-      <p class="text-[10px] text-[#8c857b] text-center">Your credentials remain persistently active on this device.</p>
     </div>
   </div>
 
-  <!-- MODAL 5: GEMINI API ENGINE KEY -->
-  <div id="apiModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
-    <div class="luxury-card max-w-md w-full p-8 space-y-5 border border-[#c5a880]/40">
-      <div class="flex items-center justify-between border-b border-white/10 pb-4">
-        <h3 class="font-serif-luxury text-2xl text-[#f4efe6]">Gemini 2.5 Flash Key</h3>
-        <button type="button" id="closeApiModalBtn" class="text-[#8c857b] hover:text-white text-sm cursor-pointer">✕</button>
+  <div id="apiModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="quantum-card max-w-md w-full rounded-3xl p-6 space-y-4 border border-white/15">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-white">⚡ Connect Gemini Key</h3>
+        <button type="button" id="closeApiModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
       </div>
-      <p class="text-xs text-[#8c857b]">Enter your Google AI Studio key for live LLM manuscript synthesis:</p>
-      <input id="geminiKeyInput" type="password" placeholder="AIzaSy..." class="input-atelier w-full px-4 py-3 text-xs font-mono-luxury">
+      <input id="geminiKeyInput" type="password" placeholder="AIzaSy..." class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white font-mono-tech">
       <div class="flex justify-end">
-        <button type="button" id="saveApiKeyBtn" class="btn-champagne px-6 py-2.5 text-[10px] cursor-pointer">Save Key</button>
+        <button type="button" id="saveApiKeyBtn" class="btn-quantum px-4 py-2 rounded-xl text-xs cursor-pointer">Save Key</button>
       </div>
     </div>
   </div>
 
-  <!-- SYNTAX-VERIFIED ATELIER JAVASCRIPT ENGINE -->
+  <!-- JAVASCRIPT ENGINE (FFmpeg.wasm + Neural Canvas + Kotak UPI) -->
   <script>
     (function() {
       var FOUNDER_WHATSAPP = "917820847387";
+      var KOTAK_UPI_DEFAULT = "7820847387@kotakbank";
+
+      // Initialize FFmpeg.wasm instance
+      var ffmpeg = null;
+      async function initFFmpegWasm() {
+        if (typeof FFmpeg !== "undefined" && !ffmpeg) {
+          try {
+            const { createFFmpeg } = FFmpeg;
+            ffmpeg = createFFmpeg({ log: true });
+            await ffmpeg.load();
+            showToast("✓ FFmpeg.wasm loaded locally in browser!");
+          } catch (e) {
+            console.log("FFmpeg load fallback mode:", e);
+          }
+        }
+      }
+      initFFmpegWasm();
 
       var PHOTO_PACKS = {
         coffee: [
@@ -838,18 +707,18 @@
       };
 
       var UTILITY_TOOLS = [
-        { id: "camera", code: "01", title: "Optical Camera Diagnostic", desc: "Verify lens framing with instant hardware release" },
-        { id: "mic", code: "02", title: "Acoustic Microphone Check", desc: "10-second spectrum calibration with auto-shutoff" },
-        { id: "audioconv", code: "03", title: "Master Audio Transcoder", desc: "Convert raw recordings into uncompressed WAV & MP3" },
-        { id: "videoconv", code: "04", title: "Telecine Video Converter", desc: "Transcode cinema plates to MP4 & WEBM" },
-        { id: "extractor", code: "05", title: "Dialogue Stem Extractor", desc: "Isolate pure voice tracks from master footage" },
-        { id: "remover", code: "06", title: "Ambient Noise Suppressor", desc: "Strip unwanted room resonance from video" },
-        { id: "audiotrans", code: "07", title: "Voice-to-Manuscript", desc: "Transcribe spoken monologues into clean prose" },
-        { id: "videotrans", code: "08", title: "Timecode Caption Scribe", desc: "Extract synchronized subtitles from film" },
-        { id: "podtrans", code: "09", title: "Salon & Podcast Scribe", desc: "Distill long-form conversations into essays" },
-        { id: "tiktokscript", code: "10", title: "Short-Form Hook Architect", desc: "Compose high-retention vertical manuscripts" },
-        { id: "ytscript", code: "11", title: "YouTube Shorts Dramaturg", desc: "Structure 60-second narrative arcs" },
-        { id: "salesscript", code: "12", title: "Commercial Pitch Scribe", desc: "Write persuasive B2B & D2C acquisition scripts" }
+        { id: "camera", icon: "📹", title: "Camera Test", desc: "Test webcam with instant hardware release" },
+        { id: "mic", icon: "🎙️", title: "Mic Test", desc: "10s mic spectrum test with auto-shutoff" },
+        { id: "audioconv", icon: "🔄", title: "Audio Converter", desc: "Convert media to MP3/WAV via FFmpeg.wasm" },
+        { id: "videoconv", icon: "🎞️", title: "Video Converter", desc: "Transcode video clips to MP4 and WEBM" },
+        { id: "extractor", icon: "🎵", title: "Audio Extractor", desc: "Separate clean voice track from video" },
+        { id: "remover", icon: "🔇", title: "Audio Remover", desc: "Mute and strip background noise" },
+        { id: "audiotrans", icon: "📝", title: "Audio Transcription", desc: "Transcribe voice notes to text" },
+        { id: "videotrans", icon: "📄", title: "Video Transcription", desc: "Transcribe video dialogue" },
+        { id: "podtrans", icon: "🎧", title: "Podcast Transcription", desc: "Turn multi-speaker podcasts into notes" },
+        { id: "tiktokscript", icon: "✨", title: "AI TikTok Script Generator", desc: "Generate viral TikTok & Reel scripts" },
+        { id: "ytscript", icon: "▶️", title: "AI YouTube Script Generator", desc: "Generate YouTube Shorts scripts" },
+        { id: "salesscript", icon: "💼", title: "AI Sales Script Generator", desc: "Generate high-converting video scripts" }
       ];
 
       var CLIPPER_TOOLS = [
@@ -869,20 +738,19 @@
       ];
 
       var VOICE_PERSONAS = [
-        { id: "aarav", name: "Aarav • Executive", rate: 1.05, pitch: 0.95 },
-        { id: "zoya", name: "Zoya • Editorial", rate: 1.12, pitch: 1.08 },
-        { id: "kabir", name: "Kabir • Baritone", rate: 0.95, pitch: 0.82 },
-        { id: "riya", name: "Riya • Mumbai Vogue", rate: 1.10, pitch: 1.04 },
-        { id: "vikram", name: "Vikram • Strategist", rate: 1.08, pitch: 0.92 },
-        { id: "custom", name: "Bespoke Clone", rate: 1.04, pitch: 1.00 }
+        { id: "aarav", name: "Aarav (Founder)", rate: 1.08, pitch: 0.96 },
+        { id: "zoya", name: "Zoya (Viral D2C)", rate: 1.15, pitch: 1.12 },
+        { id: "kabir", name: "Kabir (Deep Bass)", rate: 0.96, pitch: 0.82 },
+        { id: "riya", name: "Riya (Hinglish)", rate: 1.12, pitch: 1.06 },
+        { id: "vikram", name: "Vikram (Analyst)", rate: 1.10, pitch: 0.92 },
+        { id: "custom", name: "Custom Clone", rate: 1.05, pitch: 1.00 }
       ];
 
       var PRESETS = {
-        coffee: { brand: "Asli Artisanal Cold Brew", audience: "Founders and young professionals fatigued by overpriced ₹350 commercial cafe water", tone: "controversial", lang: "hinglish", photoPack: "coffee" },
-        fintech: { brand: "Kotak & Burgundy Private Rewards", audience: "Members booking flights and cinema seats without unlocking hidden tier privileges", tone: "data", lang: "hinglish", photoPack: "luxury" },
-        saas: { brand: "PayPulse Autonomous Ledger", audience: "Boutique agency principals awaiting overdue client retainers", tone: "story", lang: "english", photoPack: "workspace" },
-        podcast: { brand: "The Founder Monograph Ep. 42", audience: "Entrepreneurs architecting high-margin AI ventures in Mumbai", tone: "secret", lang: "hinglish", photoPack: "cyber" },
-        streetwear: { brand: "Bandra 280GSM Atelier Heavyweight", audience: "Collectors seeking architectural silhouettes that never lose form", tone: "controversial", lang: "hinglish", photoPack: "street" }
+        coffee: { brand: "Asli Cold Brew Coffee", audience: "Young professionals and college students tired of spending Rs 350 on watery cafe coffee", tone: "controversial", lang: "hinglish", photoPack: "coffee" },
+        fintech: { brand: "Kotak & Burgundy Card Maximizer", audience: "Students booking flights and movie tickets without claiming hidden bank rewards", tone: "data", lang: "hinglish", photoPack: "workspace" },
+        saas: { brand: "PayPulse AI Invoice Recovery", audience: "Agency founders and freelancers chasing overdue client payments", tone: "story", lang: "english", photoPack: "workspace" },
+        podcast: { brand: "Founder Unfiltered Podcast Clip", audience: "Entrepreneurs building profitable AI startups in India", tone: "secret", lang: "hinglish", photoPack: "cyber" }
       };
 
       var currentProject = null;
@@ -891,12 +759,10 @@
       var activeUiMode = "instagram";
       var activeCapStyle = "hormozi";
       var bgMode = "photo";
-      var activeShaderName = "obsidian";
       var loadedPhotoPackImgs = [null, null, null, null];
       var customOrSmartBgImg = null;
       var isPlaying = false;
       var animFrameId = null;
-      var shaderTick = 0;
 
       var activeMediaStream = null;
       var activeAudioContext = null;
@@ -927,7 +793,7 @@
       }
 
       function syncPersistentUserSession() {
-        var raw = localStorage.getItem("reelflow_saved_user_v6");
+        var raw = localStorage.getItem("reelflow_user_v9");
         var loginBtn = document.getElementById("openAuthModalBtn");
         var badge = document.getElementById("userProfileBadge");
         if (raw) {
@@ -964,10 +830,10 @@
       }
 
       function generateSmartAiBackground(promptText) {
-        var cleanPrompt = (promptText || "luxury dark architectural interior").trim();
-        showToast("Synthesizing Bespoke Scene Plate...");
+        var cleanPrompt = (promptText || "cyberpunk neon studio").trim();
+        showToast("Synthesizing Smart AI Background...");
         var seed = Math.floor(Math.random() * 99999);
-        var aiUrl = "https://image.pollinations.ai/prompt/" + encodeURIComponent(cleanPrompt + ", vertical 9:16 editorial photography, Leica 35mm, chiaroscuro lighting, no text") + "?width=540&height=960&nologo=true&seed=" + seed;
+        var aiUrl = "https://image.pollinations.ai/prompt/" + encodeURIComponent(cleanPrompt + ", vertical 9:16 wallpaper, cinematic lighting, 8k, no text") + "?width=540&height=960&nologo=true&seed=" + seed;
 
         var img = new Image();
         img.crossOrigin = "anonymous";
@@ -975,102 +841,113 @@
           customOrSmartBgImg = img;
           bgMode = "smart_ai";
           drawCanvas();
-          showToast("Bespoke AI Scene Plate Mounted");
+          showToast("✨ Smart AI Background applied!");
         };
         img.onerror = function() {
           var off = document.createElement("canvas");
-          off.width = 540;
-          off.height = 960;
+          off.width = 540; off.height = 960;
           var octx = off.getContext("2d");
-          var g = octx.createLinearGradient(0, 0, 540, 960);
-          g.addColorStop(0, "#0b0a08");
-          g.addColorStop(0.5, "#1c1813");
-          g.addColorStop(1, "#090807");
-          octx.fillStyle = g;
+          octx.fillStyle = "#0a0f1d";
           octx.fillRect(0, 0, 540, 960);
-          for (var i = 0; i < 12; i++) {
-            octx.strokeStyle = "rgba(197, 168, 128, 0.12)";
-            octx.lineWidth = 1;
-            octx.beginPath();
-            octx.arc(270, 480, 40 + i * 35, 0, Math.PI * 2);
-            octx.stroke();
-          }
-          var dataImg = new Image();
-          dataImg.onload = function() {
-            customOrSmartBgImg = dataImg;
+          var dImg = new Image();
+          dImg.onload = function() {
+            customOrSmartBgImg = dImg;
             bgMode = "smart_ai";
             drawCanvas();
-            showToast("Bespoke Guilloche Plate Mounted");
+            showToast("✨ Procedural Background applied!");
           };
-          dataImg.src = off.toDataURL();
+          dImg.src = off.toDataURL();
         };
         img.src = aiUrl;
       }
 
-      function initAtelierScrollPhysics() {
-        var blocks = document.querySelectorAll(".atelier-reveal");
-        var progBar = document.getElementById("scrollProgressBar");
+      // Interactive Neural Particle Neural Background Engine
+      function initNeuralCanvasBackground() {
+        var canvas = document.getElementById("neuralCanvas");
+        if (!canvas) return;
+        var ctx = canvas.getContext("2d");
+        var w = canvas.width = window.innerWidth;
+        var h = canvas.height = window.innerHeight;
 
-        window.addEventListener("scroll", function() {
-          var scrollTop = window.scrollY || document.documentElement.scrollTop;
-          var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-          var pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
-          if (progBar) progBar.style.width = pct + "%";
-        }, { passive: true });
+        window.addEventListener("resize", function() {
+          w = canvas.width = window.innerWidth;
+          h = canvas.height = window.innerHeight;
+        });
 
-        if (!("IntersectionObserver" in window)) return;
-        var observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.remove("veil-below", "veil-above");
-            } else {
-              var rect = entry.boundingClientRect;
-              if (rect.top > 0) {
-                entry.target.classList.add("veil-below");
-                entry.target.classList.remove("veil-above");
-              } else {
-                entry.target.classList.add("veil-above");
-                entry.target.classList.remove("veil-below");
+        var particles = [];
+        for (var i = 0; i < 55; i++) {
+          particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.8,
+            vy: (Math.random() - 0.5) * 0.8,
+            r: Math.random() * 2 + 1
+          });
+        }
+
+        function animNeural() {
+          ctx.clearRect(0, 0, w, h);
+          ctx.fillStyle = "rgba(56, 189, 248, 0.4)";
+          ctx.strokeStyle = "rgba(129, 140, 248, 0.12)";
+          ctx.lineWidth = 1;
+
+          for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > w) p.vx *= -1;
+            if (p.y < 0 || p.y > h) p.vy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+
+            for (var j = i + 1; j < particles.length; j++) {
+              var p2 = particles[j];
+              var dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+              if (dist < 130) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
               }
             }
-          });
-        }, { threshold: 0.06, rootMargin: "-15px 0px -15px 0px" });
-
-        blocks.forEach(function(b) { observer.observe(b); });
+          }
+          requestAnimationFrame(animNeural);
+        }
+        animNeural();
       }
 
       function buildBlueprint(brand, audience, tone, lang) {
-        var cleanBrand = (brand || "Your Maison").trim();
-        var cleanAud = (audience || "discerning patrons").trim();
+        var cleanBrand = (brand || "Your Brand").trim();
+        var cleanAud = (audience || "smart creators").trim();
         var hooks = [];
         var scenes = [];
 
         if (lang === "hinglish") {
           hooks = [
-            "Sach bataun? Agar aap abhi bhi " + cleanBrand + " ignore kar rahe ho, toh har mahine capital waste kar rahe ho.",
+            "Bhai, agar aap abhi bhi " + cleanBrand + " ignore kar rahe ho, toh har mahine paise waste kar rahe ho.",
             "99% log yeh ek galti karte hain—especially " + cleanAud.slice(0, 45) + ".",
-            "Mainstream options bilkul ordinary lagte hain jab aap " + cleanBrand + " ka asli craft dekhte ho."
+            "Sach bataun? Traditional options scam lagte hain jab aap " + cleanBrand + " ka real breakdown dekhte ho."
           ];
           scenes = [
-            { time: "00:00 - 00:03", label: "ACT I • THE OVERTURE", voice: hooks[0] },
-            { time: "00:03 - 00:09", label: "ACT II • THE TENSION", voice: "Dekho problem simple hai: " + cleanAud + " roz time aur paisa lagate hain, par uncompromising quality nahi milti." },
-            { time: "00:09 - 00:18", label: "ACT III • THE CRAFT", voice: "Isiliye humne curate kiya " + cleanBrand + ". Bina kisi manual friction ke, aapko milta hai studio-grade excellence." },
-            { time: "00:18 - 00:24", label: "ACT IV • INVITATION", voice: "Abhi comment karo INVITE aur private access seedha apne DM mein pao." }
+            { time: "00:00 - 00:03", label: "HOOK", voice: hooks[0] },
+            { time: "00:03 - 00:09", label: "PROBLEM", voice: "Dekho problem simple hai: " + cleanAud + " roz time aur paisa lagate hain, par result zero milta hai." },
+            { time: "00:09 - 00:18", label: "SOLUTION", voice: "Isiliye humne banaya " + cleanBrand + ". Bina kisi manual headache ke, aapko milta hai 3X faster output." },
+            { time: "00:18 - 00:24", label: "CTA", voice: "Abhi comment karo LINK aur free trial seedha apne DM mein pao!" }
           ];
         } else {
           hooks = [
-            "Forgive the candor, but most alternatives to " + cleanBrand + " are built on compromise.",
-            "We examined the numbers behind " + cleanBrand + "—and the asymmetry is impossible to ignore.",
-            "What the establishment rarely tells " + cleanAud.slice(0, 42) + " about true leverage."
+            "Stop wasting money on outdated options if you care about " + cleanBrand + ".",
+            "Here is the exact math behind how " + cleanBrand + " saves you 10+ hours every single week.",
+            "The industry does not want " + cleanAud.slice(0, 42) + " to know this simple shortcut exists."
           ];
           scenes = [
-            { time: "00:00 - 00:03", label: "ACT I • THE OVERTURE", voice: hooks[0] },
-            { time: "00:03 - 00:09", label: "ACT II • THE TENSION", voice: "For too long, " + cleanAud + " have had to choose between exorbitant retainers and mediocre execution." },
-            { time: "00:09 - 00:18", label: "ACT III • THE CRAFT", voice: cleanBrand + " was architected from first principles to deliver quiet, uncompromising performance in sixty seconds." },
-            { time: "00:18 - 00:24", label: "ACT IV • INVITATION", voice: "Comment INVITE below to receive your private dossier via direct message." }
+            { time: "00:00 - 00:03", label: "HOOK", voice: hooks[0] },
+            { time: "00:03 - 00:09", label: "PROBLEM", voice: "Right now, " + cleanAud + " are stuck overpaying and losing hours on broken workflows." },
+            { time: "00:09 - 00:18", label: "SOLUTION", voice: "That is why " + cleanBrand + " was built from day one to deliver studio-grade results automatically." },
+            { time: "00:18 - 00:24", label: "CTA", voice: "Comment LINK below and we will send instant access straight to your DMs!" }
           ];
         }
-
         return { brand: cleanBrand, activeHookIndex: 0, hooks: hooks, scenes: scenes };
       }
 
@@ -1082,9 +959,9 @@
           var active = p.id === activePersonaId;
           var btn = document.createElement("button");
           btn.type = "button";
-          btn.className = "py-3 px-3.5 border text-left transition cursor-pointer " +
-            (active ? "border-[#c5a880] bg-[#c5a880]/15 text-[#f4efe6]" : "border-white/10 bg-[#070706]/60 text-[#8c857b] hover:border-[#c5a880]/40");
-          btn.innerHTML = '<div class="text-[11px] tracking-[0.08em] truncate">' + p.name + '</div>';
+          btn.className = "p-2 rounded-xl border text-left transition cursor-pointer " +
+            (active ? "bg-cyan-500/30 border-cyan-400 text-white font-bold" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
+          btn.innerHTML = '<div class="text-xs truncate">🎙️ ' + p.name + '</div>';
           btn.addEventListener("click", function() {
             activePersonaId = p.id;
             document.getElementById("voiceRate").value = String(p.rate);
@@ -1106,126 +983,72 @@
         currentProject.hooks.forEach(function(h, idx) {
           var active = idx === currentProject.activeHookIndex;
           var div = document.createElement("div");
-          div.className = "cursor-pointer p-4 border text-xs transition flex items-center gap-4 " +
-            (active ? "border-[#c5a880] bg-[#c5a880]/10 text-[#f4efe6]" : "border-white/10 bg-[#070706]/60 text-[#8c857b] hover:border-white/25");
-          div.innerHTML = '<span class="font-mono-luxury text-[10px] text-[#c5a880] tracking-widest">0' + (idx + 1) + '</span><span class="italic font-serif-luxury text-base text-[#f4efe6] flex-1">"' + h + '"</span>';
+          div.className = "cursor-pointer p-2.5 rounded-xl border text-xs transition flex items-center gap-2 " +
+            (active ? "bg-cyan-500/25 border-cyan-400 text-white font-semibold" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
+          div.innerHTML = '<span class="px-2 py-0.5 rounded-md bg-cyan-400 text-black text-[10px] font-mono-tech font-bold">H' + (idx + 1) + '</span><span class="truncate">"' + h + '"</span>';
           div.addEventListener("click", function() {
             currentProject.activeHookIndex = idx;
             currentProject.scenes[0].voice = currentProject.hooks[idx];
             activeSceneIdx = 0;
             renderStoryboardUI();
-            showToast("Selected Overture Variation 0" + (idx + 1));
           });
           hooksBox.appendChild(div);
         });
 
         var scenesBox = document.getElementById("scenesList");
         scenesBox.innerHTML = "";
-        var romans = ["I", "II", "III", "IV"];
         currentProject.scenes.forEach(function(sc, idx) {
           var active = idx === activeSceneIdx;
           var node = document.createElement("div");
-          node.className = "scene-row p-5 space-y-3 " + (active ? "active-scene" : "");
-
-          var topBar = document.createElement("div");
-          topBar.className = "flex items-center justify-between gap-2";
-          topBar.innerHTML =
-            '<div class="scene-select-trigger flex items-center gap-3 cursor-pointer">' +
-              '<span class="font-serif-luxury italic text-xl text-[#c5a880] w-6">' + romans[idx] + '.</span>' +
-              '<div>' +
-                '<span class="block text-[10px] tracking-[0.22em] uppercase text-[#f4efe6]">' + sc.label + '</span>' +
-                '<span class="block text-[9px] font-mono-luxury text-[#8c857b] mt-0.5">' + sc.time + '</span>' +
-              '</div>' +
+          node.className = "p-3 rounded-2xl border transition space-y-2 " + (active ? "bg-indigo-950/40 border-cyan-400 shadow-md" : "bg-black/40 border-white/10");
+          node.innerHTML =
+            '<div class="flex items-center justify-between text-[10px] font-mono-code cursor-pointer">' +
+              '<span class="text-cyan-300 font-bold">SCENE ' + (idx + 1) + ': ' + sc.label + '</span>' +
+              '<span class="text-slate-400">' + sc.time + '</span>' +
             '</div>' +
-            '<div class="flex items-center gap-2">' +
-              '<button type="button" class="speak-scene-btn px-3 py-1 border border-white/10 hover:border-[#c5a880] text-[9px] tracking-[0.18em] uppercase text-[#e6d5b8] cursor-pointer">Audition</button>' +
-              '<button type="button" class="rewrite-scene-btn px-3 py-1 border border-[#c5a880]/30 hover:bg-[#c5a880]/15 text-[9px] tracking-[0.18em] uppercase text-[#c5a880] cursor-pointer">Refine</button>' +
-            '</div>';
+            '<textarea rows="2" class="w-full bg-black/70 border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white">' + sc.voice + '</textarea>';
 
-          topBar.querySelector(".scene-select-trigger").addEventListener("click", function() {
-            stopReel();
-            activeSceneIdx = idx;
-            renderStoryboardUI();
+          node.querySelector(".font-mono-code").addEventListener("click", function() {
+            stopReel(); activeSceneIdx = idx; renderStoryboardUI();
           });
-
-          topBar.querySelector(".speak-scene-btn").addEventListener("click", function() {
-            stopReel();
-            activeSceneIdx = idx;
-            renderStoryboardUI();
-            speakText(currentProject.scenes[idx].voice);
-          });
-
-          topBar.querySelector(".rewrite-scene-btn").addEventListener("click", function() {
-            var variations = [
-              "Observe closely—before you scroll past " + currentProject.brand + ", consider the hours reclaimed.",
-              "Discerning founders quietly transitioned to " + currentProject.brand + " this quarter.",
-              "Manual workflows belong to the past. " + currentProject.brand + " orchestrates the entire process.",
-              "Comment INVITE below and experience " + currentProject.brand + " firsthand."
-            ];
-            currentProject.scenes[idx].voice = variations[idx % variations.length];
-            activeSceneIdx = idx;
-            renderStoryboardUI();
-            showToast("Refined Act " + romans[idx] + " Dialogue");
-          });
-
-          var ta = document.createElement("textarea");
-          ta.rows = 2;
-          ta.value = sc.voice;
-          ta.className = "input-atelier w-full px-3.5 py-2.5 text-xs leading-relaxed";
-          ta.addEventListener("input", function(e) {
+          node.querySelector("textarea").addEventListener("input", function(e) {
             currentProject.scenes[idx].voice = e.target.value;
             activeSceneIdx = idx;
             drawCanvas();
           });
-
-          node.appendChild(topBar);
-          node.appendChild(ta);
           scenesBox.appendChild(node);
         });
 
         var nextBtn = document.getElementById("nextSceneBtn");
-        if (nextBtn) nextBtn.textContent = "Act " + romans[activeSceneIdx] + " / IV ⏭";
-
+        if (nextBtn) nextBtn.textContent = "⏭ Scene (" + (activeSceneIdx + 1) + "/4)";
         drawCanvas();
       }
 
       function drawKineticCaptions(ctx, text, x, y, maxWidth, lineHeight) {
         var words = text.split(" ");
-        var line = "";
-        var lines = [];
+        var line = ""; var lines = [];
         for (var n = 0; n < words.length; n++) {
           var testLine = line + words[n] + " ";
           if (ctx.measureText(testLine).width > maxWidth && n > 0) {
-            lines.push(line.trim());
-            line = words[n] + " ";
-          } else {
-            line = testLine;
-          }
+            lines.push(line.trim()); line = words[n] + " ";
+          } else { line = testLine; }
         }
         lines.push(line.trim());
-
         var totalH = lines.length * lineHeight;
         var startY = y - totalH / 2 + lineHeight / 2;
 
         if (activeCapStyle === "hormozi" || activeCapStyle === "modern" || activeCapStyle === "red") {
-          ctx.fillStyle = activeCapStyle === "red"
-            ? "rgba(125, 29, 29, 0.88)"
-            : (activeCapStyle === "modern" ? "rgba(10, 9, 8, 0.82)" : "rgba(7, 7, 6, 0.88)");
-          ctx.fillRect(36, y - totalH / 2 - 24, 540 - 72, totalH + 48);
-          ctx.strokeStyle = "rgba(197, 168, 128, 0.45)";
-          ctx.lineWidth = 1.5;
-          ctx.strokeRect(36, y - totalH / 2 - 24, 540 - 72, totalH + 48);
+          ctx.fillStyle = activeCapStyle === "red" ? "rgba(225, 29, 72, 0.9)" : "rgba(0, 0, 0, 0.85)";
+          ctx.beginPath();
+          ctx.roundRect(36, y - totalH / 2 - 20, 540 - 72, totalH + 40, 20);
+          ctx.fill();
         }
 
         for (var i = 0; i < lines.length; i++) {
           var ly = startY + i * lineHeight;
-          if (activeCapStyle === "hormozi") {
-            ctx.fillStyle = i % 2 === 0 ? "#e6d5b8" : "#ffffff";
-          } else if (activeCapStyle === "neon") {
-            ctx.fillStyle = i % 2 === 0 ? "#c5a880" : "#f4efe6";
-          } else {
-            ctx.fillStyle = "#f4efe6";
-          }
+          ctx.strokeStyle = "rgba(0,0,0,0.9)"; ctx.lineWidth = 6;
+          ctx.strokeText(lines[i], x, ly);
+          ctx.fillStyle = i % 2 === 0 ? "#38bdf8" : "#ffffff";
           ctx.fillText(lines[i], x, ly);
         }
       }
@@ -1234,13 +1057,9 @@
         var canvas = document.getElementById("reelCanvas");
         if (!canvas || !currentProject) return;
         var ctx = canvas.getContext("2d");
-        var W = canvas.width;
-        var H = canvas.height;
+        var W = canvas.width; var H = canvas.height;
         var scene = currentProject.scenes[activeSceneIdx] || currentProject.scenes[0];
-        var handle = document.getElementById("creatorHandleInput").value || "@reelflow.atelier";
-
-        shaderTick += 0.018;
-        var zoom = 1.03 + Math.sin(shaderTick) * 0.025;
+        var handle = document.getElementById("creatorHandleInput").value || "@reelflow.ai";
 
         var activeImg = null;
         if ((bgMode === "smart_ai" || bgMode === "upload") && customOrSmartBgImg && customOrSmartBgImg.complete) {
@@ -1250,110 +1069,36 @@
         }
 
         if (activeImg && activeImg.naturalWidth > 0) {
-          ctx.save();
-          ctx.translate(W / 2, H / 2);
-          ctx.scale(zoom, zoom);
-          ctx.drawImage(activeImg, -W / 2, -H / 2, W, H);
-          ctx.restore();
-          var vig = ctx.createLinearGradient(0, 0, 0, H);
-          vig.addColorStop(0, "rgba(7,7,6,0.65)");
-          vig.addColorStop(0.5, "rgba(7,7,6,0.32)");
-          vig.addColorStop(1, "rgba(7,7,6,0.88)");
-          ctx.fillStyle = vig;
+          ctx.drawImage(activeImg, 0, 0, W, H);
+          ctx.fillStyle = "rgba(0,0,0,0.55)";
           ctx.fillRect(0, 0, W, H);
         } else {
-          var shaders = {
-            obsidian: ["#070706", "#12100e", "#070706"],
-            gold: ["#080705", "#241d12", "#0b0907"],
-            matrix: ["#050806", "#0f1c14", "#060807"],
-            custom: [
-              document.getElementById("customColor1").value,
-              "#070706",
-              document.getElementById("customColor2").value
-            ]
-          };
-          var pal = shaders[activeShaderName] || shaders.obsidian;
-          var bgGrad = ctx.createLinearGradient(0, 0, W, H);
-          bgGrad.addColorStop(0, pal[0]);
-          bgGrad.addColorStop(0.5, pal[1]);
-          bgGrad.addColorStop(1, pal[2]);
-          ctx.fillStyle = bgGrad;
-          ctx.fillRect(0, 0, W, H);
-
-          var orbX = W * 0.5 + Math.cos(shaderTick) * 60;
-          var orbY = H * 0.44 + Math.sin(shaderTick) * 50;
-          var glow = ctx.createRadialGradient(orbX, orbY, 10, orbX, orbY, 280);
-          glow.addColorStop(0, "rgba(197, 168, 128, 0.2)");
-          glow.addColorStop(1, "rgba(197, 168, 128, 0)");
-          ctx.fillStyle = glow;
+          var g = ctx.createLinearGradient(0, 0, W, H);
+          g.addColorStop(0, document.getElementById("customColor1").value);
+          g.addColorStop(1, document.getElementById("customColor2").value);
+          ctx.fillStyle = g;
           ctx.fillRect(0, 0, W, H);
         }
 
-        // Editorial Serif & Sans Captions on Monitor
-        ctx.font = "600 32px 'Cormorant Garamond', Georgia, serif";
+        ctx.font = "800 35px 'Plus Jakarta Sans', sans-serif";
         ctx.textAlign = "center";
-        drawKineticCaptions(ctx, scene.voice, W / 2, H * 0.48, W - 110, 44);
+        drawKineticCaptions(ctx, scene.voice.toUpperCase(), W / 2, H * 0.48, W - 110, 46);
 
         if (activeUiMode === "instagram") {
-          ctx.fillStyle = "rgba(244,239,230,0.9)";
-          ctx.font = "500 22px 'Inter', sans-serif";
-          ctx.textAlign = "left";
-          ctx.fillText("Reels", 28, 52);
-
-          ctx.textAlign = "center";
-          var rx = W - 42;
-          ctx.font = "24px sans-serif";
-          ctx.fillText("🤍", rx, H - 280);
-          ctx.font = "400 13px 'Inter', sans-serif";
-          ctx.fillText("31.2K", rx, H - 255);
-
-          ctx.font = "24px sans-serif";
-          ctx.fillText("💬", rx, H - 205);
-          ctx.font = "400 13px 'Inter', sans-serif";
-          ctx.fillText("718", rx, H - 180);
-
-          ctx.font = "24px sans-serif";
-          ctx.fillText("✈️", rx, H - 130);
-
-          ctx.textAlign = "left";
-          ctx.fillStyle = "#f4efe6";
-          ctx.font = "500 18px 'Inter', sans-serif";
+          ctx.fillStyle = "rgba(255,255,255,0.92)"; ctx.font = "bold 24px sans-serif";
+          ctx.textAlign = "left"; ctx.fillText("Reels", 28, 52);
+          ctx.textAlign = "center"; var rx = W - 42;
+          ctx.font = "26px sans-serif"; ctx.fillText("🤍", rx, H - 280);
+          ctx.font = "600 14px sans-serif"; ctx.fillText("31K", rx, H - 255);
+          ctx.textAlign = "left"; ctx.fillStyle = "#ffffff"; ctx.font = "bold 20px sans-serif";
           ctx.fillText(handle, 26, H - 72);
-
-          ctx.fillStyle = "rgba(244,239,230,0.75)";
-          ctx.font = "300 15px 'Inter', sans-serif";
-          ctx.fillText("🎵 Original Score • " + currentProject.brand.slice(0, 22), 26, H - 42);
-
-          ctx.fillStyle = "rgba(255,255,255,0.2)";
-          ctx.fillRect(0, H - 4, W, 4);
-          ctx.fillStyle = "#c5a880";
-          ctx.fillRect(0, H - 4, W * ((activeSceneIdx + 1) / 4), 4);
-
         } else if (activeUiMode === "youtube") {
-          ctx.fillStyle = "rgba(244,239,230,0.9)";
-          ctx.font = "500 20px 'Inter', sans-serif";
-          ctx.textAlign = "left";
-          ctx.fillText("Shorts", 26, 52);
-
-          ctx.textAlign = "left";
-          ctx.fillStyle = "#f4efe6";
-          ctx.font = "500 18px 'Inter', sans-serif";
+          ctx.fillStyle = "rgba(255,255,255,0.92)"; ctx.font = "bold 22px sans-serif";
+          ctx.textAlign = "left"; ctx.fillText("▶️ Shorts", 26, 52);
+          ctx.fillStyle = "#ffffff"; ctx.font = "bold 19px sans-serif";
           ctx.fillText(handle, 26, H - 76);
-
-          ctx.fillStyle = "#c5a880";
-          ctx.fillRect(210, H - 96, 96, 26);
-          ctx.fillStyle = "#070706";
-          ctx.font = "600 12px 'Inter', sans-serif";
-          ctx.fillText("SUBSCRIBE", 224, H - 78);
-
-          ctx.fillStyle = "rgba(244,239,230,0.8)";
-          ctx.font = "300 15px 'Inter', sans-serif";
-          ctx.fillText(currentProject.brand + " #Shorts", 26, H - 42);
-
-          ctx.fillStyle = "rgba(255,255,255,0.2)";
-          ctx.fillRect(0, H - 4, W, 4);
-          ctx.fillStyle = "#c5a880";
-          ctx.fillRect(0, H - 4, W * ((activeSceneIdx + 1) / 4), 4);
+          ctx.fillStyle = "#ef4444"; ctx.fillRect(190, H - 96, 104, 30);
+          ctx.fillStyle = "#ffffff"; ctx.font = "bold 14px sans-serif"; ctx.fillText("Subscribe", 208, H - 76);
         }
       }
 
@@ -1361,105 +1106,70 @@
         if ("speechSynthesis" in window) {
           window.speechSynthesis.cancel();
           var u = new SpeechSynthesisUtterance(text);
-          u.rate = parseFloat(document.getElementById("voiceRate").value) || 1.05;
+          u.rate = parseFloat(document.getElementById("voiceRate").value) || 1.08;
           u.pitch = parseFloat(document.getElementById("voicePitch").value) || 1.0;
           u.onend = function() { if (onDone) onDone(); };
           u.onerror = function() { if (onDone) onDone(); };
           window.speechSynthesis.speak(u);
-        } else {
-          setTimeout(function() { if (onDone) onDone(); }, 3200);
-        }
+        } else { setTimeout(function() { if (onDone) onDone(); }, 3000); }
       }
 
       function startReel() {
-        if (isPlaying) {
-          stopReel();
-          return;
-        }
-        isPlaying = true;
-        activeSceneIdx = 0;
-        document.getElementById("playReelBtn").textContent = "⏹ Halt Audition";
-        document.getElementById("playerStatusBadge").textContent = "Playing";
-
-        function loop() {
-          if (!isPlaying) return;
-          drawCanvas();
-          animFrameId = requestAnimationFrame(loop);
-        }
-        loop();
-        playStep(0);
+        if (isPlaying) { stopReel(); return; }
+        isPlaying = true; activeSceneIdx = 0;
+        document.getElementById("playReelBtn").textContent = "⏹ Stop Reel";
+        document.getElementById("playerStatusBadge").textContent = "PLAYING";
+        function loop() { if (!isPlaying) return; drawCanvas(); animFrameId = requestAnimationFrame(loop); }
+        loop(); playStep(0);
       }
 
       function playStep(idx) {
-        if (!isPlaying || idx >= currentProject.scenes.length) {
-          stopReel();
-          return;
-        }
-        activeSceneIdx = idx;
-        renderStoryboardUI();
-        speakText(currentProject.scenes[idx].voice, function() {
-          if (isPlaying) playStep(idx + 1);
-        });
+        if (!isPlaying || idx >= currentProject.scenes.length) { stopReel(); return; }
+        activeSceneIdx = idx; renderStoryboardUI();
+        speakText(currentProject.scenes[idx].voice, function() { if (isPlaying) playStep(idx + 1); });
       }
 
       function stopReel() {
         isPlaying = false;
         if (animFrameId) cancelAnimationFrame(animFrameId);
         if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-        document.getElementById("playReelBtn").textContent = "▶ Audition Reel";
-        document.getElementById("playerStatusBadge").textContent = "Standby";
+        document.getElementById("playReelBtn").textContent = "▶ Play Reel w/ Voice";
+        document.getElementById("playerStatusBadge").textContent = "READY";
       }
 
-      function renderSuiteDirectory() {
-        var cPane = document.getElementById("suiteClippersPane");
-        cPane.innerHTML = "";
-        CLIPPER_TOOLS.forEach(function(title, idx) {
-          var row = document.createElement("div");
-          row.className = "luxury-card p-6 cursor-pointer flex items-center justify-between group";
-          row.innerHTML =
-            '<div>' +
-              '<span class="font-mono-luxury text-[9px] tracking-[0.24em] text-[#8c857b] uppercase block mb-1">Instrument // ' + (idx + 1 < 10 ? '0' + (idx + 1) : (idx + 1)) + '</span>' +
-              '<span class="font-serif-luxury text-xl text-[#f4efe6] group-hover:text-[#c5a880] transition">' + title + '</span>' +
-            '</div>' +
-            '<span class="text-xs text-[#c5a880] group-hover:translate-x-1 transition">→</span>';
-          row.addEventListener("click", function() {
-            openClipperWorkspaceModal(title);
-          });
-          cPane.appendChild(row);
-        });
-
-        var dPane = document.getElementById("suiteDiagnosticsPane");
-        dPane.innerHTML = "";
+      function renderToolGrids() {
+        var uGrid = document.getElementById("utilityCardsGrid");
+        uGrid.innerHTML = "";
         UTILITY_TOOLS.forEach(function(tool) {
           var card = document.createElement("div");
-          card.className = "luxury-card p-7 cursor-pointer flex flex-col justify-between min-h-[150px] group";
+          card.className = "tool-tile rounded-2xl p-5 text-center cursor-pointer flex flex-col items-center justify-center min-h-[135px]";
           card.innerHTML =
-            '<div class="flex items-center justify-between mb-4">' +
-              '<span class="font-mono-luxury text-[10px] tracking-[0.24em] text-[#c5a880]">DIAGNOSTIC // ' + tool.code + '</span>' +
-              '<span class="text-xs text-[#8c857b] group-hover:text-[#c5a880] transition">Open →</span>' +
-            '</div>' +
-            '<div>' +
-              '<h3 class="font-serif-luxury text-2xl text-[#f4efe6] mb-1">' + tool.title + '</h3>' +
-              '<p class="text-xs text-[#8c857b]">' + tool.desc + '</p>' +
-            '</div>';
-          card.addEventListener("click", function() {
-            openUtilityToolModal(tool);
+            '<div class="w-10 h-10 rounded-xl bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center text-lg mb-2.5">' + tool.icon + '</div>' +
+            '<h3 class="text-xs font-bold text-white mb-1">' + tool.title + '</h3>' +
+            '<p class="text-[11px] text-slate-400">' + tool.desc + '</p>';
+          card.addEventListener("click", function() { openUtilityToolModal(tool); });
+          uGrid.appendChild(card);
+        });
+
+        var cGrid = document.getElementById("clipperCardsGrid");
+        cGrid.innerHTML = "";
+        CLIPPER_TOOLS.forEach(function(title) {
+          var tile = document.createElement("div");
+          tile.className = "tool-tile rounded-2xl p-4 text-center cursor-pointer flex flex-col items-center justify-center min-h-[82px] gap-1";
+          tile.innerHTML = '<span class="text-xs font-bold text-white">' + title + '</span><span class="text-[10px] text-cyan-400 font-mono-tech">Launch Tool →</span>';
+          tile.addEventListener("click", function() {
+            document.getElementById("clipperModalTitle").textContent = "✂️ " + title;
+            document.getElementById("clipperWorkspaceModal").classList.remove("hidden");
           });
-          dPane.appendChild(card);
+          cGrid.appendChild(tile);
         });
       }
 
-      function openClipperWorkspaceModal(toolTitle) {
-        document.getElementById("clipperModalTitle").textContent = toolTitle;
-        document.getElementById("clipperUrlInput").value = "";
-        document.getElementById("clipperProgressWrap").classList.add("hidden");
-        document.getElementById("clipperWorkspaceModal").classList.remove("hidden");
-      }
-
+      // Real FFmpeg.wasm Local File Processing inside Browser
       function openUtilityToolModal(tool) {
         stopAllHardwareStreams();
         var modal = document.getElementById("utilityToolModal");
-        document.getElementById("utilModalTitle").textContent = tool.title;
+        document.getElementById("utilModalTitle").textContent = tool.icon + " " + tool.title;
         document.getElementById("utilModalDesc").textContent = tool.desc;
         var body = document.getElementById("utilModalBody");
         body.innerHTML = "";
@@ -1467,103 +1177,94 @@
 
         if (tool.id === "camera") {
           body.innerHTML =
-            '<video id="webcamPreview" autoplay playsinline class="w-full h-56 bg-black object-cover border border-[#c5a880]/25"></video>' +
-            '<div class="grid grid-cols-2 gap-3">' +
-              '<button type="button" id="startCamBtn" class="btn-champagne py-3 text-[10px] cursor-pointer">Engage Optical Feed</button>' +
-              '<button type="button" id="stopCamBtn" class="btn-outline-luxury py-3 text-[10px] cursor-pointer">Release Optical Feed</button>' +
+            '<video id="webcamPreview" autoplay playsinline class="w-full h-56 bg-black rounded-2xl object-cover border border-white/10"></video>' +
+            '<div class="grid grid-cols-2 gap-2">' +
+              '<button type="button" id="startCamBtn" class="py-2.5 rounded-xl bg-cyan-500 text-black text-xs font-bold cursor-pointer">▶ Start</button>' +
+              '<button type="button" id="stopCamBtn" class="py-2.5 rounded-xl bg-rose-600 text-white text-xs font-bold cursor-pointer">⏹ Stop</button>' +
             '</div>';
           document.getElementById("startCamBtn").addEventListener("click", async function() {
-            stopAllHardwareStreams();
             try {
               activeMediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
               document.getElementById("webcamPreview").srcObject = activeMediaStream;
-              showToast("Optical Feed Active");
-            } catch (e) {
-              showToast("Camera Permission Declined");
-            }
+              showToast("Webcam active!");
+            } catch (e) { showToast("Camera denied."); }
           });
           document.getElementById("stopCamBtn").addEventListener("click", function() {
-            stopAllHardwareStreams();
-            var vid = document.getElementById("webcamPreview");
-            if (vid) vid.srcObject = null;
-            showToast("Optical Feed Released");
+            stopAllHardwareStreams(); document.getElementById("webcamPreview").srcObject = null; showToast("Webcam stopped.");
           });
         } else if (tool.id === "mic") {
           body.innerHTML =
-            '<div class="p-5 bg-[#070706] border border-[#c5a880]/20 text-center space-y-3">' +
-              '<div class="w-full h-2 bg-neutral-900 overflow-hidden"><div id="micLevelBar" class="h-full bg-[#c5a880] w-0 transition-all duration-75"></div></div>' +
-              '<p id="micStatusText" class="text-xs text-[#8c857b]">10-Second Acoustic Calibration (Auto-releases hardware)</p>' +
+            '<div class="p-4 rounded-2xl bg-black/60 border border-white/10 text-center space-y-3">' +
+              '<div class="w-full h-5 bg-slate-900 rounded-full overflow-hidden"><div id="micLevelBar" class="h-full bg-cyan-400 w-0"></div></div>' +
+              '<p id="micStatusText" class="text-xs text-slate-300">10s Mic Test (Auto-shutoff)</p>' +
             '</div>' +
-            '<div class="grid grid-cols-2 gap-3">' +
-              '<button type="button" id="startMicBtn" class="btn-champagne py-3 text-[10px] cursor-pointer">Begin 10s Calibration</button>' +
-              '<button type="button" id="stopMicBtn" class="btn-outline-luxury py-3 text-[10px] cursor-pointer">Release Microphone</button>' +
-            '</div>';
-
+            '<button type="button" id="startMicBtn" class="w-full py-2.5 rounded-xl bg-cyan-500 text-black text-xs font-bold cursor-pointer">Start 10s Mic Test</button>';
           document.getElementById("startMicBtn").addEventListener("click", async function() {
-            stopAllHardwareStreams();
             try {
               activeMediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
               activeAudioContext = new (window.AudioContext || window.webkitAudioContext)();
               var src = activeAudioContext.createMediaStreamSource(activeMediaStream);
-              var analyser = activeAudioContext.createAnalyser();
-              src.connect(analyser);
+              var analyser = activeAudioContext.createAnalyser(); src.connect(analyser);
               var data = new Uint8Array(analyser.frequencyBinCount);
-              document.getElementById("micStatusText").textContent = "Sampling Acoustic Input... (Auto-releases in 10s)";
-
               function tickMic() {
                 if (!activeMediaStream) return;
                 analyser.getByteFrequencyData(data);
-                var avg = data.reduce(function(a, b) { return a + b; }, 0) / data.length;
-                var pct = Math.min(100, Math.round(avg * 1.9));
-                var bar = document.getElementById("micLevelBar");
-                if (bar) bar.style.width = pct + "%";
+                var avg = data.reduce(function(a,b){return a+b;},0)/data.length;
+                document.getElementById("micLevelBar").style.width = Math.min(100, avg*2) + "%";
                 requestAnimationFrame(tickMic);
               }
               tickMic();
-
               micAutoStopTimer = setTimeout(function() {
                 stopAllHardwareStreams();
-                var bar = document.getElementById("micLevelBar");
-                if (bar) bar.style.width = "0%";
-                var st = document.getElementById("micStatusText");
-                if (st) st.textContent = "Calibration Complete • Microphone Hardware Released";
-                showToast("Microphone Automatically Released");
+                showToast("Microphone test finished & released automatically.");
               }, 10000);
-            } catch (e) {
-              showToast("Microphone Permission Declined");
-            }
-          });
-
-          document.getElementById("stopMicBtn").addEventListener("click", function() {
-            stopAllHardwareStreams();
-            var bar = document.getElementById("micLevelBar");
-            if (bar) bar.style.width = "0%";
-            var st = document.getElementById("micStatusText");
-            if (st) st.textContent = "Microphone Released";
-            showToast("Microphone Released");
+            } catch(e) { showToast("Mic denied."); }
           });
         } else {
+          // Real FFmpeg.wasm processing interface for converters/extractors
           body.innerHTML =
-            '<input type="file" class="w-full text-xs text-[#8c857b] file:mr-4 file:py-2 file:px-4 file:border file:border-[#c5a880]/40 file:bg-transparent file:text-[#e6d5b8] file:text-[10px] file:uppercase cursor-pointer">' +
-            '<textarea id="utilPromptArea" rows="3" placeholder="Enter notes, transcript, or subject..." class="input-atelier w-full p-3.5 text-xs"></textarea>' +
-            '<button type="button" id="runUtilActionBtn" class="btn-champagne w-full py-3.5 text-[10px] cursor-pointer">Mount Output in Screening Room</button>';
-          document.getElementById("runUtilActionBtn").addEventListener("click", function() {
-            var val = document.getElementById("utilPromptArea").value.trim() || tool.title;
-            document.getElementById("brandInput").value = val;
-            currentProject = buildBlueprint(val, "Patrons of " + tool.title, "controversial", "hinglish");
-            renderStoryboardUI();
-            modal.classList.add("hidden");
-            document.getElementById("studio").scrollIntoView({ behavior: "smooth" });
-            showToast("Mounted in Screening Room");
+            '<p class="text-xs text-slate-300">Select file to process locally using FFmpeg WebAssembly:</p>' +
+            '<input id="ffmpegFileIn" type="file" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-cyan-500 file:text-black file:font-bold cursor-pointer">' +
+            '<button type="button" id="runFfmpegAction" class="btn-quantum w-full py-3 rounded-xl text-xs uppercase cursor-pointer">Process File Locally via FFmpeg</button>' +
+            '<p id="ffmpegStatusLog" class="text-[11px] font-mono-tech text-cyan-300"></p>';
+
+          document.getElementById("runFfmpegAction").addEventListener("click", async function() {
+            var fileInput = document.getElementById("ffmpegFileIn");
+            var logEl = document.getElementById("ffmpegStatusLog");
+            if (!fileInput.files || fileInput.files.length === 0) {
+              showToast("Please select a file first!");
+              return;
+            }
+            if (!ffmpeg) {
+              logEl.textContent = "FFmpeg loading... please wait 3 seconds and click again.";
+              return;
+            }
+            var file = fileInput.files[0];
+            logEl.textContent = "Loading " + file.name + " into browser memory...";
+            const { fetchFile } = FFmpeg;
+            ffmpeg.FS('writeFile', file.name, await fetchFile(file));
+
+            logEl.textContent = "Running local transcoding...";
+            var outName = "output.mp4";
+            if (tool.id === "audioconv") outName = "output.mp3";
+            if (tool.id === "extractor") outName = "audio_stem.mp3";
+
+            await ffmpeg.run('-i', file.name, outName);
+            logEl.textContent = "Processing complete! Downloading file...";
+            
+            const data = ffmpeg.FS('readFile', outName);
+            var url = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+            var a = document.createElement('a'); a.href = url; a.download = outName; a.click();
+            showToast("Successfully processed and downloaded " + outName + "!");
           });
         }
       }
 
       window.addEventListener("DOMContentLoaded", function() {
-        initAtelierScrollPhysics();
+        initNeuralCanvasBackground();
         syncPersistentUserSession();
         renderVoiceGrid();
-        renderSuiteDirectory();
+        renderToolGrids();
         loadPhotoPack("coffee");
 
         currentProject = buildBlueprint(
@@ -1574,29 +1275,8 @@
         );
         renderStoryboardUI();
 
-        function idleLoop() {
-          if (!isPlaying) drawCanvas();
-          requestAnimationFrame(idleLoop);
-        }
+        function idleLoop() { if (!isPlaying) drawCanvas(); requestAnimationFrame(idleLoop); }
         idleLoop();
-
-        // Suite Directory Tabs
-        document.querySelectorAll(".suite-tab-btn").forEach(function(btn) {
-          btn.addEventListener("click", function() {
-            var tab = btn.getAttribute("data-tab");
-            document.querySelectorAll(".suite-tab-btn").forEach(function(b) {
-              b.className = "suite-tab-btn px-6 py-3 border border-[#c5a880]/30 text-[#e6d5b8] text-[10px] tracking-[0.2em] uppercase transition cursor-pointer";
-            });
-            btn.className = "suite-tab-btn px-6 py-3 bg-[#c5a880] text-black text-[10px] tracking-[0.2em] uppercase font-medium transition cursor-pointer";
-            if (tab === "clippers") {
-              document.getElementById("suiteClippersPane").classList.remove("hidden");
-              document.getElementById("suiteDiagnosticsPane").classList.add("hidden");
-            } else {
-              document.getElementById("suiteClippersPane").classList.add("hidden");
-              document.getElementById("suiteDiagnosticsPane").classList.remove("hidden");
-            }
-          });
-        });
 
         document.querySelectorAll(".preset-btn").forEach(function(btn) {
           btn.addEventListener("click", function() {
@@ -1604,13 +1284,10 @@
             if (!p) return;
             document.getElementById("brandInput").value = p.brand;
             document.getElementById("audienceInput").value = p.audience;
-            document.getElementById("toneInput").value = p.tone;
-            document.getElementById("langInput").value = p.lang;
             loadPhotoPack(p.photoPack);
             currentProject = buildBlueprint(p.brand, p.audience, p.tone, p.lang);
-            activeSceneIdx = 0;
-            renderStoryboardUI();
-            showToast("Loaded Brief: " + p.brand);
+            activeSceneIdx = 0; renderStoryboardUI();
+            showToast("Loaded " + p.brand);
           });
         });
 
@@ -1622,47 +1299,20 @@
             document.getElementById("toneInput").value,
             document.getElementById("langInput").value
           );
-          activeSceneIdx = 0;
-          renderStoryboardUI();
-          showToast("Four-Act Manuscript Composed");
+          activeSceneIdx = 0; renderStoryboardUI();
+          showToast("Generated new 4-scene Reel!");
         });
 
         document.getElementById("generateSmartBgBtn").addEventListener("click", function() {
-          var prompt = document.getElementById("smartBgPromptInput").value;
-          generateSmartAiBackground(prompt);
+          generateSmartAiBackground(document.getElementById("smartBgPromptInput").value);
         });
 
         document.querySelectorAll(".photo-pack-btn").forEach(function(btn) {
           btn.addEventListener("click", function() {
-            var key = btn.getAttribute("data-photo");
-            document.querySelectorAll(".photo-pack-btn").forEach(function(b) {
-              b.className = "photo-pack-btn py-3 px-3 border border-white/10 text-[10px] tracking-[0.16em] uppercase text-[#8c857b] hover:border-[#c5a880]/50 cursor-pointer";
-            });
-            btn.className = "photo-pack-btn py-3 px-3 border border-[#c5a880] bg-[#c5a880]/10 text-[10px] tracking-[0.16em] uppercase text-[#f4efe6] cursor-pointer";
-            loadPhotoPack(key);
-            showToast("Mounted 35mm Archival Collection: " + key.toUpperCase());
+            loadPhotoPack(btn.getAttribute("data-photo"));
+            showToast("Loaded Photo Pack");
           });
         });
-
-        document.querySelectorAll(".shader-btn").forEach(function(btn) {
-          btn.addEventListener("click", function() {
-            bgMode = "shader";
-            activeShaderName = btn.getAttribute("data-shader");
-            drawCanvas();
-            showToast("Tonal Shader: " + activeShaderName.toUpperCase());
-          });
-        });
-        document.getElementById("customColor1").addEventListener("input", function() {
-          bgMode = "shader";
-          activeShaderName = "custom";
-          drawCanvas();
-        });
-        document.getElementById("customColor2").addEventListener("input", function() {
-          bgMode = "shader";
-          activeShaderName = "custom";
-          drawCanvas();
-        });
-        document.getElementById("creatorHandleInput").addEventListener("input", drawCanvas);
 
         document.getElementById("customBgUpload").addEventListener("change", function(e) {
           var f = e.target.files && e.target.files[0];
@@ -1670,12 +1320,7 @@
           var r = new FileReader();
           r.onload = function(ev) {
             var img = new Image();
-            img.onload = function() {
-              customOrSmartBgImg = img;
-              bgMode = "upload";
-              drawCanvas();
-              showToast("Custom Plate Mounted");
-            };
+            img.onload = function() { customOrSmartBgImg = img; bgMode = "upload"; drawCanvas(); showToast("Custom image applied!"); };
             img.src = ev.target.result;
           };
           r.readAsDataURL(f);
@@ -1684,10 +1329,6 @@
         document.querySelectorAll(".ui-mode-btn").forEach(function(btn) {
           btn.addEventListener("click", function() {
             activeUiMode = btn.getAttribute("data-ui");
-            document.querySelectorAll(".ui-mode-btn").forEach(function(b) {
-              b.className = "ui-mode-btn py-2.5 text-[#8c857b] hover:text-white text-[10px] tracking-[0.16em] uppercase transition cursor-pointer";
-            });
-            btn.className = "ui-mode-btn py-2.5 bg-[#c5a880] text-black text-[10px] tracking-[0.16em] uppercase font-medium transition cursor-pointer";
             drawCanvas();
           });
         });
@@ -1695,201 +1336,86 @@
         document.querySelectorAll(".cap-btn").forEach(function(btn) {
           btn.addEventListener("click", function() {
             activeCapStyle = btn.getAttribute("data-cap");
-            document.querySelectorAll(".cap-btn").forEach(function(b) {
-              b.className = "cap-btn py-2 border border-white/10 text-[9px] tracking-[0.16em] uppercase text-[#8c857b] cursor-pointer";
-            });
-            btn.className = "cap-btn py-2 border border-[#c5a880] bg-[#c5a880]/10 text-[9px] tracking-[0.16em] uppercase text-[#e6d5b8] cursor-pointer";
             drawCanvas();
           });
         });
 
-        document.getElementById("voiceRate").addEventListener("input", function(e) {
-          document.getElementById("rateLabel").textContent = parseFloat(e.target.value).toFixed(2) + "x";
-        });
-        document.getElementById("voicePitch").addEventListener("input", function(e) {
-          document.getElementById("pitchLabel").textContent = parseFloat(e.target.value).toFixed(2);
-        });
-        document.getElementById("sampleVoiceBtn").addEventListener("click", function() {
-          speakText("Welcome to ReelFlow Atelier. Your vertical cinema score is ready for audition.");
-        });
-        document.getElementById("toggleCloneBoxBtn").addEventListener("click", function() {
-          document.getElementById("elevenCloneBox").classList.toggle("hidden");
-        });
-        document.getElementById("saveElevenBtn").addEventListener("click", function() {
-          showToast("ElevenLabs Voice Clone Bound");
-        });
-
         document.getElementById("playReelBtn").addEventListener("click", startReel);
         document.getElementById("nextSceneBtn").addEventListener("click", function() {
-          stopReel();
-          activeSceneIdx = (activeSceneIdx + 1) % currentProject.scenes.length;
-          renderStoryboardUI();
+          stopReel(); activeSceneIdx = (activeSceneIdx + 1) % currentProject.scenes.length; renderStoryboardUI();
         });
 
         document.getElementById("downloadVideoBtn").addEventListener("click", function() {
           var canvas = document.getElementById("reelCanvas");
-          if (!canvas || typeof MediaRecorder === "undefined") {
-            showToast("Use Chrome or Edge to export Master .WEBM");
-            return;
-          }
-          stopReel();
-          showToast("Recording 4-Act Master... Export completes in 6 seconds");
-          document.getElementById("playerStatusBadge").textContent = "Mastering";
-          var stream = canvas.captureStream(30);
-          var recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
-          var chunks = [];
-          recorder.ondataavailable = function(e) { if (e.data && e.data.size > 0) chunks.push(e.data); };
+          if (!canvas || typeof MediaRecorder === "undefined") { showToast("Use Chrome/Edge to download WEBM!"); return; }
+          stopReel(); showToast("Recording 9:16 video...");
+          var stream = canvas.captureStream(30); var recorder = new MediaRecorder(stream, { mimeType: "video/webm" }); var chunks = [];
+          recorder.ondataavailable = function(e) { if (e.data.size > 0) chunks.push(e.data); };
           recorder.onstop = function() {
             var blob = new Blob(chunks, { type: "video/webm" });
-            var a = document.createElement("a");
-            a.href = URL.createObjectURL(blob);
-            a.download = currentProject.brand.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-master.webm";
-            a.click();
-            document.getElementById("playerStatusBadge").textContent = "Exported";
-            showToast("Master Video (.WEBM) Exported");
+            var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "reelflow-quantum.webm"; a.click();
+            showToast("Video downloaded!");
           };
-          recorder.start();
-          var step = 0;
-          var timer = setInterval(function() {
-            activeSceneIdx = step;
-            renderStoryboardUI();
-            step++;
-            if (step >= 4) {
-              clearInterval(timer);
-              setTimeout(function() { recorder.stop(); }, 1400);
-            }
-          }, 1400);
+          recorder.start(); var step = 0;
+          var t = setInterval(function() {
+            activeSceneIdx = step; renderStoryboardUI(); step++;
+            if (step >= 4) { clearInterval(t); setTimeout(function(){ recorder.stop(); }, 1500); }
+          }, 1500);
         });
 
         document.getElementById("downloadScriptBtn").addEventListener("click", function() {
-          var txt = "REELFLOW ATELIER MANUSCRIPT — " + currentProject.brand + "\n\n" +
-            currentProject.scenes.map(function(s, i) {
-              return "ACT " + (i + 1) + " (" + s.time + "):\n" + s.voice;
-            }).join("\n\n");
-          var blob = new Blob([txt], { type: "text/plain" });
-          var a = document.createElement("a");
-          a.href = URL.createObjectURL(blob);
-          a.download = currentProject.brand.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-manuscript.txt";
-          a.click();
-          showToast("Manuscript (.TXT) Exported");
+          var txt = currentProject.scenes.map(function(s){ return s.voice; }).join("\n\n");
+          var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([txt], {type:"text/plain"})); a.download="script.txt"; a.click();
+          showToast("Script downloaded!");
         });
 
         document.getElementById("downloadFramePngBtn").addEventListener("click", function() {
-          var canvas = document.getElementById("reelCanvas");
-          var a = document.createElement("a");
-          a.href = canvas.toDataURL("image/png");
-          a.download = "reelflow-plate.png";
-          a.click();
-          showToast("Still Plate (.PNG) Saved");
+          var a = document.createElement("a"); a.href = document.getElementById("reelCanvas").toDataURL("image/png"); a.download="poster.png"; a.click();
+          showToast("Poster saved!");
         });
 
         document.getElementById("copyAllScriptBtn").addEventListener("click", function() {
-          var txt = currentProject.scenes.map(function(s) { return s.voice; }).join("\n\n");
-          navigator.clipboard.writeText(txt);
-          showToast("Manuscript Copied");
+          navigator.clipboard.writeText(currentProject.scenes.map(function(s){return s.voice;}).join("\n\n"));
+          showToast("Copied to clipboard!");
         });
 
-        document.getElementById("closeClipperModalBtn").addEventListener("click", function() {
-          document.getElementById("clipperWorkspaceModal").classList.add("hidden");
-        });
-        document.getElementById("runClipperExtractBtn").addEventListener("click", function() {
-          var urlOrTopic = document.getElementById("clipperUrlInput").value.trim() || "Archival Telecine Extract";
-          var toolName = document.getElementById("clipperModalTitle").textContent;
-          var progWrap = document.getElementById("clipperProgressWrap");
-          var bar = document.getElementById("clipperProgressBar");
-          var st = document.getElementById("clipperStageText");
-          var pct = document.getElementById("clipperPctText");
-
-          progWrap.classList.remove("hidden");
-          bar.style.width = "35%";
-          st.textContent = "Analyzing cadence & isolating key act...";
-          pct.textContent = "35%";
-
-          setTimeout(function() {
-            bar.style.width = "80%";
-            st.textContent = "Formatting 9:16 plate & engraving subtitles...";
-            pct.textContent = "80%";
-          }, 600);
-
-          setTimeout(function() {
-            bar.style.width = "100%";
-            pct.textContent = "100%";
-            document.getElementById("brandInput").value = urlOrTopic;
-            document.getElementById("activeWorkflowBadge").textContent = toolName.slice(0, 20);
-            currentProject = buildBlueprint(urlOrTopic, "Patrons viewing " + toolName, "controversial", "hinglish");
-            activeSceneIdx = 0;
-            renderStoryboardUI();
-            document.getElementById("clipperWorkspaceModal").classList.add("hidden");
-            document.getElementById("studio").scrollIntoView({ behavior: "smooth" });
-            showToast("Mounted in Screening Room");
-          }, 1300);
-        });
-
+        // Kotak UPI Gateway with 7820847387@kotakbank
         var planSlider = document.getElementById("customPlanSlider");
-        function getMerchantUpiId() {
-          return localStorage.getItem("reelflow_merchant_upi_v6") || "7820847387@upi";
-        }
-        function updateCustomPrice() {
+        function updateKotakPrice() {
           var count = parseInt(planSlider.value, 10);
-          var rupeePrice = count * 50;
-          var upiId = getMerchantUpiId();
-          document.getElementById("activeMerchantUpiLabel").textContent = upiId;
-          document.getElementById("customReelCountBadge").textContent = count + (count === 1 ? " Master Reel" : " Master Reels");
-          document.getElementById("customPriceDisplay").textContent = "₹" + rupeePrice.toLocaleString("en-IN");
-          document.getElementById("sliderVideosLabel").textContent = count + (count === 1 ? " Reel" : " Reels") + " (₹" + rupeePrice.toLocaleString("en-IN") + ")";
-          document.getElementById("gatewayPlanSubtitle").textContent = "Commission: " + count + (count === 1 ? " Master Reel" : " Master Reels");
-          document.getElementById("gatewayAmountBadge").textContent = "₹" + rupeePrice.toLocaleString("en-IN");
-
-          var upiUri = "upi://pay?pa=" + encodeURIComponent(upiId) + "&pn=ReelFlow%20Atelier&am=" + rupeePrice + "&cu=INR";
+          var amt = count * 50;
+          document.getElementById("customReelCountBadge").textContent = count + (count === 1 ? " Video Pack" : " Videos Pack");
+          document.getElementById("customPriceDisplay").textContent = "₹" + amt;
+          document.getElementById("sliderVideosLabel").textContent = count + " Videos (₹" + amt + ")";
+          document.getElementById("gatewayPlanSubtitle").textContent = "Custom Pack: " + count + " Videos";
+          document.getElementById("gatewayAmountBadge").textContent = "₹" + amt;
+          var upiUri = "upi://pay?pa=" + encodeURIComponent(KOTAK_UPI_DEFAULT) + "&pn=ReelFlow%20AI&am=" + amt + "&cu=INR";
           document.getElementById("mobileUpiDeepLink").href = upiUri;
           document.getElementById("dynamicUpiQr").src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(upiUri);
         }
-        planSlider.addEventListener("input", updateCustomPrice);
-        updateCustomPrice();
+        planSlider.addEventListener("input", updateKotakPrice);
+        updateKotakPrice();
 
         document.getElementById("openPaymentGatewayBtn").addEventListener("click", function() {
-          updateCustomPrice();
+          updateKotakPrice();
           document.getElementById("paymentGatewayModal").classList.remove("hidden");
         });
         document.getElementById("closePaymentModalBtn").addEventListener("click", function() {
           document.getElementById("paymentGatewayModal").classList.add("hidden");
         });
-        document.getElementById("toggleUpiEditBtn").addEventListener("click", function() {
-          var box = document.getElementById("merchantUpiEditBox");
-          box.classList.toggle("hidden");
-          document.getElementById("merchantUpiInput").value = getMerchantUpiId();
-        });
-        document.getElementById("saveMerchantUpiBtn").addEventListener("click", function() {
-          var val = document.getElementById("merchantUpiInput").value.trim();
-          if (val) {
-            localStorage.setItem("reelflow_merchant_upi_v6", val);
-            document.getElementById("merchantUpiEditBox").classList.add("hidden");
-            updateCustomPrice();
-            showToast("Receiving Bank UPI Updated");
-          }
-        });
 
         document.getElementById("confirmPaymentBtn").addEventListener("click", function() {
-          var payer = document.getElementById("payerNameInput").value.trim() || "Patron";
-          var utr = document.getElementById("payerUtrInput").value.trim() || "QR Settlement";
-          var count = planSlider.value;
+          var name = document.getElementById("payerNameInput").value.trim() || "Customer";
+          var utr = document.getElementById("payerUtrInput").value.trim() || "QR";
           var amt = document.getElementById("gatewayAmountBadge").textContent;
-          var msg = encodeURIComponent(
-            "Greetings Arjun — I have completed a " + amt + " UPI settlement on ReelFlow Atelier:\n\n" +
-            "*Patron:* " + payer + "\n" +
-            "*Commission:* " + count + " Master Reels (" + amt + ")\n" +
-            "*UTR Reference:* " + utr + "\n" +
-            "*Maison:* " + currentProject.brand
-          );
+          var msg = encodeURIComponent("Hi Arjun! I paid " + amt + " to your Kotak account (" + KOTAK_UPI_DEFAULT + "). Name: " + name + ", UTR: " + utr);
           window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + msg, "_blank");
           document.getElementById("paymentGatewayModal").classList.add("hidden");
+          showToast("Payment notification sent to WhatsApp!");
         });
 
         document.getElementById("contactFounderWhatsAppBtn").addEventListener("click", function() {
-          var msg = encodeURIComponent(
-            "Greetings Arjun — I am inside ReelFlow Atelier (" + currentProject.brand + ") and would like to inquire about a private commission."
-          );
-          window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + msg, "_blank");
+          window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=Hi%20Arjun!%20Inquiring%20about%20ReelFlow%20AI.", "_blank");
         });
 
         document.getElementById("closeUtilModalBtn").addEventListener("click", function() {
@@ -1905,29 +1431,25 @@
         });
         document.getElementById("tabRegisterBtn").addEventListener("click", function() {
           document.getElementById("authNameInput").classList.remove("hidden");
-          document.getElementById("tabRegisterBtn").className = "py-2.5 bg-[#c5a880] text-black text-[10px] tracking-[0.2em] uppercase font-medium cursor-pointer";
-          document.getElementById("tabLoginBtn").className = "py-2.5 text-[#8c857b] text-[10px] tracking-[0.2em] uppercase cursor-pointer";
         });
         document.getElementById("tabLoginBtn").addEventListener("click", function() {
           document.getElementById("authNameInput").classList.add("hidden");
-          document.getElementById("tabLoginBtn").className = "py-2.5 bg-[#c5a880] text-black text-[10px] tracking-[0.2em] uppercase font-medium cursor-pointer";
-          document.getElementById("tabRegisterBtn").className = "py-2.5 text-[#8c857b] text-[10px] tracking-[0.2em] uppercase cursor-pointer";
         });
 
         document.getElementById("authForm").addEventListener("submit", function(e) {
           e.preventDefault();
           var email = document.getElementById("authEmailInput").value.trim();
           var name = document.getElementById("authNameInput").value.trim() || email.split("@")[0];
-          localStorage.setItem("reelflow_saved_user_v6", JSON.stringify({ name: name, email: email }));
+          localStorage.setItem("reelflow_user_v9", JSON.stringify({ name: name, email: email }));
           syncPersistentUserSession();
           document.getElementById("authModal").classList.add("hidden");
-          showToast("Welcome to the Atelier, " + name);
+          showToast("Welcome " + name + "!");
         });
 
         document.getElementById("logoutBtn").addEventListener("click", function() {
-          localStorage.removeItem("reelflow_saved_user_v6");
+          localStorage.removeItem("reelflow_user_v9");
           syncPersistentUserSession();
-          showToast("Session Closed");
+          showToast("Logged out.");
         });
 
         document.getElementById("openApiModalBtn").addEventListener("click", function() {
@@ -1938,7 +1460,7 @@
         });
         document.getElementById("saveApiKeyBtn").addEventListener("click", function() {
           document.getElementById("apiModal").classList.add("hidden");
-          showToast("Engine Key Bound");
+          showToast("Gemini key saved!");
         });
       });
     })();
