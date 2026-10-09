@@ -6,12 +6,14 @@
   <title>REELFLOW SOVEREIGN — Autonomous Neural Cinema & Media OS</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23020306'/%3E%3Crect x='3' y='3' width='58' height='58' rx='13' fill='none' stroke='%2300f0ff' stroke-width='3'/%3E%3Cpath d='M32 12 L50 22 L50 42 L32 54 L14 42 L14 22 Z' fill='%2300f0ff' fill-opacity='0.25' stroke='%2300f0ff' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23ffffff'/%3E%3C/svg%3E">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --void: #020306;
       --surface: #070a12;
       --cyan-glow: #00f0ff;
+      --violet-glow: #7000ff;
     }
     * { box-sizing: border-box; }
     body {
@@ -19,12 +21,25 @@
       background-color: var(--void);
       color: #f1f5f9;
       overflow-x: hidden;
+      letter-spacing: -0.01em;
     }
     h1, h2, h3, .font-display { font-family: 'Outfit', sans-serif; }
     .font-mono-tech { font-family: 'JetBrains Mono', monospace; }
+
+    /* Interactive Neural Canvas Background */
+    #neuralCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
     .sovereign-pod {
+      position: relative;
+      z-index: 10;
       background: linear-gradient(160deg, rgba(12, 16, 28, 0.9) 0%, rgba(4, 6, 11, 0.96) 100%);
       backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
       border: 1px solid rgba(0, 240, 255, 0.15);
       box-shadow: 0 40px 100px -25px rgba(0, 0, 0, 0.95);
     }
@@ -46,7 +61,10 @@
 </head>
 <body class="min-h-screen selection:bg-[#00f0ff] selection:text-black pb-32 md:pb-0">
 
-  <!-- Toast Banner -->
+  <!-- Interactive Neural Particle Background Canvas -->
+  <canvas id="neuralCanvas"></canvas>
+
+  <!-- Toast Notification -->
   <div id="toastBanner" class="fixed bottom-24 md:bottom-8 right-6 z-50 hidden px-5 py-3.5 rounded-2xl bg-[#00f0ff] text-black text-xs font-extrabold shadow-2xl flex items-center gap-2.5">
     <span class="w-2.5 h-2.5 rounded-full bg-black animate-ping"></span>
     <span id="toastText">System Initialized</span>
@@ -59,7 +77,7 @@
     <span class="font-mono-tech text-[11px] text-[#00f0ff]">+91 7820847387 →</span>
   </a>
 
-  <!-- TOP SOVEREIGN HEADER -->
+  <!-- TOP HEADER -->
   <header class="sticky top-4 z-40 px-4 sm:px-8">
     <div class="max-w-7xl mx-auto rounded-full bg-[#050810]/90 backdrop-blur-2xl border border-white/10 px-6 sm:px-8 h-18 sm:h-20 flex items-center justify-between gap-4 shadow-2xl">
       <a href="#hero" class="flex items-center gap-3.5">
@@ -79,16 +97,15 @@
   </header>
 
   <!-- HERO SECTION -->
-  <section id="hero" class="max-w-6xl mx-auto px-6 pt-16 pb-12 text-center">
+  <section id="hero" class="relative z-10 max-w-6xl mx-auto px-6 pt-16 pb-12 text-center">
     <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">Autonomous Neural Cinema & <span class="text-[#00f0ff]">Media OS</span></h1>
     <p class="text-slate-400 text-sm max-w-xl mx-auto">Fully operational production suite with guaranteed rendering for all 38+ utilities and Kotak Bank UPI settlement.</p>
   </section>
 
   <!-- SECTION 1: STUDIO -->
-  <section id="studio" class="max-w-7xl mx-auto px-4 pb-20">
+  <section id="studio" class="relative z-10 max-w-7xl mx-auto px-4 pb-20">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
       
-      <!-- Left Config -->
       <div class="lg:col-span-7 sovereign-pod rounded-3xl p-6 sm:p-8 space-y-4">
         <h3 class="text-sm font-bold uppercase tracking-wider text-[#00f0ff]">Narrative Script & Brief</h3>
         <div>
@@ -103,7 +120,6 @@
         <div id="scenesList" class="space-y-3 pt-2"></div>
       </div>
 
-      <!-- Right Monitor -->
       <div id="player-column" class="lg:col-span-5 flex flex-col items-center">
         <div class="sovereign-pod rounded-3xl p-6 w-full flex flex-col items-center space-y-4">
           <div class="relative w-[268px] h-[476px] rounded-[38px] border-[7px] border-slate-800 bg-black overflow-hidden shadow-2xl ring-1 ring-[#00f0ff]/30">
@@ -118,7 +134,7 @@
   </section>
 
   <!-- SECTION 2: 12 UTILITY TOOLS -->
-  <section id="utility-suite" class="max-w-7xl mx-auto px-4 pb-20">
+  <section id="utility-suite" class="relative z-10 max-w-7xl mx-auto px-4 pb-20">
     <div class="text-center mb-8">
       <h2 class="text-2xl font-extrabold text-white">Creator Diagnostic Suite (12 Tools)</h2>
       <p class="text-xs text-slate-400">Guaranteed operational utilities and hardware tests.</p>
@@ -127,7 +143,7 @@
   </section>
 
   <!-- SECTION 3: 26 AI CLIPPER TOOLS -->
-  <section id="clipper-grid" class="max-w-7xl mx-auto px-4 pb-20">
+  <section id="clipper-grid" class="relative z-10 max-w-7xl mx-auto px-4 pb-20">
     <div class="text-center mb-8">
       <h2 class="text-2xl font-extrabold text-white">AI Video Clippers & Repurposing (26 Engines)</h2>
       <p class="text-xs text-slate-400">Click any engine to launch the interactive extraction workspace.</p>
@@ -136,7 +152,7 @@
   </section>
 
   <!-- SECTION 4: KOTAK UPI PRICING -->
-  <section id="pricing" class="max-w-4xl mx-auto px-4 pb-24 text-center">
+  <section id="pricing" class="relative z-10 max-w-4xl mx-auto px-4 pb-24 text-center">
     <div class="sovereign-pod rounded-3xl p-8 border border-[#00f0ff]/40 space-y-4">
       <h2 class="text-2xl font-extrabold text-white">Kotak Bank Direct UPI Plan (Starts at ₹50)</h2>
       <p class="text-xs text-slate-300">Default UPI ID: <b class="text-emerald-300">7820847387@kotakbank</b></p>
@@ -192,7 +208,7 @@
     </div>
   </div>
 
-  <!-- STABLE JAVASCRIPT ENGINE -->
+  <!-- JAVASCRIPT ENGINE -->
   <script>
     (function() {
       var FOUNDER_WHATSAPP = "917820847387";
@@ -243,8 +259,64 @@
         setTimeout(function() { b.classList.add("hidden"); }, 2500);
       }
 
+      function initNeuralCanvasBackground() {
+        var canvas = document.getElementById("neuralCanvas");
+        if (!canvas) return;
+        var ctx = canvas.getContext("2d");
+        var w = canvas.width = window.innerWidth;
+        var h = canvas.height = window.innerHeight;
+
+        window.addEventListener("resize", function() {
+          w = canvas.width = window.innerWidth;
+          h = canvas.height = window.innerHeight;
+        });
+
+        var particles = [];
+        for (var i = 0; i < 55; i++) {
+          particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.8,
+            vy: (Math.random() - 0.5) * 0.8,
+            r: Math.random() * 2 + 1
+          });
+        }
+
+        function animNeural() {
+          ctx.clearRect(0, 0, w, h);
+          ctx.fillStyle = "rgba(0, 240, 255, 0.4)";
+          ctx.strokeStyle = "rgba(112, 0, 255, 0.15)";
+          ctx.lineWidth = 1;
+
+          for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > w) p.vx *= -1;
+            if (p.y < 0 || p.y > h) p.vy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+
+            for (var j = i + 1; j < particles.length; j++) {
+              var p2 = particles[j];
+              var dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+              if (dist < 130) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+              }
+            }
+          }
+          requestAnimationFrame(animNeural);
+        }
+        animNeural();
+      }
+
       function renderUI() {
         var sBox = document.getElementById("scenesList");
+        if (!sBox) return;
         sBox.innerHTML = "";
         currentProject.scenes.forEach(function(sc, idx) {
           var node = document.createElement("div");
@@ -325,6 +397,7 @@
       }
 
       window.addEventListener("DOMContentLoaded", function() {
+        initNeuralCanvasBackground();
         renderToolGrids();
         renderUI();
 
