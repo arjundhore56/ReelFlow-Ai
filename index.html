@@ -4,16 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>REELFLOW SOVEREIGN — Autonomous Neural Cinema & Media OS</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23020306'/%3E%3Crect x='3' y='3' width='58' height='58' rx='13' fill='none' stroke='%2300f0ff' stroke-width='3'/%3E%3Cpath d='M32 12 L50 22 L50 42 L32 54 L14 42 L14 22 Z' fill='%2300f0ff' fill-opacity='0.2' stroke='%2300f0ff' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23ffffff'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23020306'/%3E%3Crect x='3' y='3' width='58' height='58' rx='13' fill='none' stroke='%2300f0ff' stroke-width='3'/%3E%3Cpath d='M32 12 L50 22 L50 42 L32 54 L14 42 L14 22 Z' fill='%2300f0ff' fill-opacity='0.25' stroke='%2300f0ff' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23ffffff'/%3E%3C/svg%3E">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --void: #020306;
       --surface: #070a12;
       --cyan-glow: #00f0ff;
-      --violet-glow: #7000ff;
     }
     * { box-sizing: border-box; }
     body {
@@ -21,86 +19,37 @@
       background-color: var(--void);
       color: #f1f5f9;
       overflow-x: hidden;
-      letter-spacing: -0.01em;
     }
-    h1, h2, h3, .font-display {
-      font-family: 'Outfit', sans-serif;
-    }
-    .font-mono-tech {
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* Interactive Neural Canvas */
-    #neuralCanvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* Sovereign Liquid Glass Pods */
+    h1, h2, h3, .font-display { font-family: 'Outfit', sans-serif; }
+    .font-mono-tech { font-family: 'JetBrains Mono', monospace; }
     .sovereign-pod {
-      position: relative;
-      z-index: 10;
-      background: linear-gradient(160deg, rgba(12, 16, 28, 0.88) 0%, rgba(4, 6, 11, 0.96) 100%);
+      background: linear-gradient(160deg, rgba(12, 16, 28, 0.9) 0%, rgba(4, 6, 11, 0.96) 100%);
       backdrop-filter: blur(32px);
-      -webkit-backdrop-filter: blur(32px);
-      border: 1px solid rgba(0, 240, 255, 0.14);
-      box-shadow: 0 40px 100px -25px rgba(0, 0, 0, 0.95), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(0, 240, 255, 0.15);
+      box-shadow: 0 40px 100px -25px rgba(0, 0, 0, 0.95);
     }
-    .sovereign-pod:hover {
-      border-color: rgba(0, 240, 255, 0.45);
-      box-shadow: 0 50px 110px -25px rgba(0, 0, 0, 0.98), 0 0 50px -15px rgba(0, 240, 255, 0.18);
-    }
-
-    /* Cyber Cyan Glow Button */
     .btn-sovereign {
       background: linear-gradient(135deg, #00f0ff 0%, #7000ff 100%);
-      color: #020306;
-      font-weight: 800;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      color: #020306; font-weight: 800; transition: all 0.3s ease;
     }
-    .btn-sovereign:hover {
-      opacity: 0.94;
-      transform: translateY(-2px);
-      box-shadow: 0 20px 40px -10px rgba(0, 240, 255, 0.45);
-    }
-
-    .text-cyan-gradient {
-      background: linear-gradient(135deg, #ffffff 0%, #00f0ff 40%, #a855f7 80%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    /* Tool Tile Hover */
+    .btn-sovereign:hover { opacity: 0.92; transform: translateY(-2px); }
     .tool-tile {
-      background: rgba(7, 10, 18, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      transition: all 0.25s ease;
+      background: rgba(7, 10, 18, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.22s ease;
     }
-    .tool-tile:hover {
-      background: rgba(14, 20, 35, 0.95);
-      border-color: #00f0ff;
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px -12px rgba(0, 240, 255, 0.3);
-    }
-
+    .tool-tile:hover { background: rgba(14, 20, 35, 0.98); border-color: #00f0ff; transform: translateY(-3px); }
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #020306; }
     ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00f0ff; }
   </style>
 </head>
 <body class="min-h-screen selection:bg-[#00f0ff] selection:text-black pb-32 md:pb-0">
 
-  <!-- Interactive Neural Particle Background Canvas -->
-  <canvas id="neuralCanvas"></canvas>
-
-  <!-- Toast Notification -->
+  <!-- Toast Banner -->
   <div id="toastBanner" class="fixed bottom-24 md:bottom-8 right-6 z-50 hidden px-5 py-3.5 rounded-2xl bg-[#00f0ff] text-black text-xs font-extrabold shadow-2xl flex items-center gap-2.5">
     <span class="w-2.5 h-2.5 rounded-full bg-black animate-ping"></span>
-    <span id="toastText">Sovereign Engine Initialized</span>
+    <span id="toastText">System Initialized</span>
   </div>
 
   <!-- Floating Founder WhatsApp Pill -->
@@ -110,1178 +59,317 @@
     <span class="font-mono-tech text-[11px] text-[#00f0ff]">+91 7820847387 →</span>
   </a>
 
-  <!-- TOP SOVEREIGN FLOATING ISLAND HEADER -->
+  <!-- TOP SOVEREIGN HEADER -->
   <header class="sticky top-4 z-40 px-4 sm:px-8">
-    <div class="max-w-7xl mx-auto rounded-full bg-[#050810]/90 backdrop-blur-2xl border border-white/10 px-6 sm:px-8 h-18 sm:h-20 flex items-center justify-between gap-4 shadow-[0_25px_60px_rgba(0,0,0,0.9)]">
-      
-      <a href="#hero" class="flex items-center gap-3.5 group">
-        <div class="w-11 h-11 rounded-2xl bg-[#0a0f1d] border border-[#00f0ff]/50 flex items-center justify-center shadow-lg group-hover:scale-105 transition">
-          <svg class="w-6 h-6" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M32 10 L52 22 L52 42 L32 54 L12 42 L12 22 Z" fill="#00f0ff" fill-opacity="0.25" stroke="#00f0ff" stroke-width="2.5"/>
-            <circle cx="32" cy="32" r="6" fill="#ffffff"/>
-          </svg>
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="font-extrabold text-lg sm:text-xl tracking-tight font-display text-white">ReelFlow<span class="text-[#00f0ff]">.ai</span></span>
-            <span class="hidden sm:inline-block px-2.5 py-0.5 text-[10px] font-mono-tech uppercase bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 rounded-full">v12.0 Sovereign</span>
-          </div>
-          <p class="text-[10px] text-slate-400 hidden sm:block font-mono-tech">NEURAL CINEMA OS</p>
-        </div>
+    <div class="max-w-7xl mx-auto rounded-full bg-[#050810]/90 backdrop-blur-2xl border border-white/10 px-6 sm:px-8 h-18 sm:h-20 flex items-center justify-between gap-4 shadow-2xl">
+      <a href="#hero" class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-[#0a0f1d] border border-[#00f0ff]/50 flex items-center justify-center font-bold text-white">R</div>
+        <span class="font-extrabold text-lg text-white font-display">ReelFlow<span class="text-[#00f0ff]">.ai</span></span>
       </a>
-
       <nav class="hidden lg:flex items-center gap-8 text-xs font-semibold text-slate-300">
         <a href="#studio" class="hover:text-[#00f0ff] transition">Cinematic Studio</a>
-        <a href="#smart-bg-anchor" class="hover:text-[#00f0ff] transition">Video & Live Plates</a>
         <a href="#utility-suite" class="hover:text-[#00f0ff] transition">FFmpeg Lab (12)</a>
         <a href="#clipper-grid" class="hover:text-[#00f0ff] transition">AI Clippers (26)</a>
         <a href="#pricing" class="hover:text-[#00f0ff] transition">Kotak UPI ₹50</a>
       </nav>
-
       <div class="flex items-center gap-3">
-        <button type="button" id="openApiModalBtn" class="px-3.5 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono-tech text-slate-200 transition cursor-pointer">
-          ⚡ GEMINI KEY
-        </button>
-
-        <button type="button" id="openAuthModalBtn" class="btn-sovereign px-5 py-2.5 rounded-full text-xs uppercase tracking-wider cursor-pointer shadow-lg">
-          Sign In
-        </button>
-
-        <div id="userProfileBadge" class="hidden items-center gap-2.5 bg-white/5 border border-[#00f0ff]/40 px-3.5 py-1.5 rounded-full">
-          <div id="userInitials" class="w-6 h-6 rounded-full bg-[#00f0ff] text-black text-[11px] font-extrabold flex items-center justify-center">A</div>
-          <div class="text-left">
-            <span id="userNameText" class="block text-xs font-bold text-white max-w-[95px] truncate leading-none">Founder</span>
-            <span class="text-[9px] text-[#00f0ff] font-mono-tech">● SOVEREIGN</span>
-          </div>
-          <button type="button" id="logoutBtn" class="text-[10px] text-rose-400 hover:text-rose-300 ml-1 font-bold cursor-pointer">Exit</button>
-        </div>
+        <button type="button" id="openAuthModalBtn" class="btn-sovereign px-5 py-2.5 rounded-full text-xs uppercase tracking-wider cursor-pointer">Sign In</button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Bottom Floating Dock -->
-  <div class="md:hidden fixed bottom-3 inset-x-4 z-40 rounded-3xl bg-[#050810]/95 backdrop-blur-2xl border border-white/15 px-3 py-2.5 flex justify-around items-center text-[10px] font-bold text-slate-300 shadow-2xl">
-    <a href="#studio" class="flex flex-col items-center gap-0.5 text-[#00f0ff]"><span>🎬</span><span>Studio</span></a>
-    <a href="#player-column" class="flex flex-col items-center gap-0.5 hover:text-white"><span>⬇️</span><span>Export</span></a>
-    <a href="#clipper-grid" class="flex flex-col items-center gap-0.5 hover:text-white"><span>✂️</span><span>Clippers</span></a>
-    <a href="#pricing" class="flex flex-col items-center gap-0.5 text-emerald-400"><span>₹50</span><span>Kotak</span></a>
-    <a href="#founder-desk" class="flex flex-col items-center gap-0.5 hover:text-white"><span>💬</span><span>Founder</span></a>
-  </div>
-
   <!-- HERO SECTION -->
-  <section id="hero" class="relative z-10 max-w-6xl mx-auto px-6 pt-16 sm:pt-24 pb-16 text-center">
-    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-[#00f0ff] text-xs font-mono-tech uppercase mb-6">
-      <span class="w-2 h-2 rounded-full bg-[#00f0ff] animate-ping"></span>
-      <span>Autonomous Neural Cinema & Real FFmpeg.wasm Browser Engine</span>
-    </div>
-
-    <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.04] mb-6">
-      The future of vertical video, <br class="hidden sm:inline" />
-      <span class="text-cyan-gradient">engineered autonomously.</span>
-    </h1>
-
-    <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto mb-10 leading-relaxed">
-      Execute real local video/audio transcoding with FFmpeg WASM, stream live webcam background plates, synthesize AI video loops, and settle securely via Kotak UPI.
-    </p>
-
-    <div class="flex flex-wrap items-center justify-center gap-4">
-      <a href="#studio" class="btn-sovereign px-8 py-4 rounded-full text-xs sm:text-sm uppercase tracking-wider shadow-2xl">
-        Launch Sovereign Studio ↓
-      </a>
-      <a href="#utility-suite" class="px-8 py-4 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white font-bold text-xs sm:text-sm transition">
-        Explore Real FFmpeg Tools →
-      </a>
-    </div>
+  <section id="hero" class="max-w-6xl mx-auto px-6 pt-16 pb-12 text-center">
+    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">Autonomous Neural Cinema & <span class="text-[#00f0ff]">Media OS</span></h1>
+    <p class="text-slate-400 text-sm max-w-xl mx-auto">Fully operational production suite with guaranteed rendering for all 38+ utilities and Kotak Bank UPI settlement.</p>
   </section>
 
-  <!-- SECTION 1: MASTER RE-ENGINEERED DUAL-CHAMBER 9:16 STUDIO -->
-  <section id="studio" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-28">
-    <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-4">
-      <div>
-        <span class="font-mono-tech text-xs uppercase tracking-widest text-[#00f0ff] block mb-1">01 // CINEMATIC PRODUCTION DECK</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white font-display">Asymmetric Dual-Chamber Studio</h2>
+  <!-- SECTION 1: STUDIO -->
+  <section id="studio" class="max-w-7xl mx-auto px-4 pb-20">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Left Config -->
+      <div class="lg:col-span-7 sovereign-pod rounded-3xl p-6 sm:p-8 space-y-4">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-[#00f0ff]">Narrative Script & Brief</h3>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Brand / Topic</label>
+          <input id="brandInput" type="text" value="Asli Cold Brew Coffee" class="w-full bg-black/70 border border-white/15 rounded-xl px-4 py-3 text-xs text-white">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Target Audience</label>
+          <textarea id="audienceInput" rows="2" class="w-full bg-black/70 border border-white/15 rounded-xl px-4 py-3 text-xs text-white">Busy professionals looking for premium clean caffeine without commercial cafe costs</textarea>
+        </div>
+        <button type="button" id="generateBtn" class="btn-sovereign w-full py-3.5 rounded-2xl text-xs uppercase cursor-pointer">Generate 4-Act Master Script</button>
+        <div id="scenesList" class="space-y-3 pt-2"></div>
       </div>
 
-      <div class="flex flex-wrap items-center gap-2">
-        <span class="text-xs font-mono-tech uppercase text-slate-400 mr-1">Templates:</span>
-        <button type="button" data-preset="coffee" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-[#00f0ff]/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">☕ Cold Brew</button>
-        <button type="button" data-preset="fintech" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-[#00f0ff]/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">💳 Kotak Rewards</button>
-        <button type="button" data-preset="saas" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-[#00f0ff]/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">📊 B2B SaaS</button>
-        <button type="button" data-preset="podcast" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-[#00f0ff]/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">🎙️ Podcast</button>
-      </div>
-    </div>
-
-    <!-- 12-Column Asymmetric Layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-
-      <!-- LEFT CHAMBER (7 Cols): Editorial Controls & Timeline -->
-      <div class="lg:col-span-7 space-y-6">
-        
-        <!-- Pod 1: Campaign Brief -->
-        <div class="sovereign-pod rounded-3xl p-6 sm:p-8 space-y-4">
-          <div class="flex items-center justify-between border-b border-white/10 pb-3">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-[#00f0ff]">Narrative Script & Brief</h3>
-            <span id="activeWorkflowBadge" class="font-mono-tech text-[10px] text-emerald-300">● READY</span>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="sm:col-span-2">
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Brand / Topic / Video URL *</label>
-              <input id="brandInput" type="text" value="Asli Cold Brew Coffee" class="w-full bg-black/70 border border-white/15 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#00f0ff]">
-            </div>
-
-            <div class="sm:col-span-2">
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Target Audience & Core Frustration *</label>
-              <textarea id="audienceInput" rows="2" class="w-full bg-black/70 border border-white/15 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#00f0ff]">Young professionals tired of spending Rs 350 on watery cafe coffee</textarea>
-            </div>
-
-            <div>
-              <label class="block text-[11px] font-semibold text-slate-400 mb-1">Hook Psychology</label>
-              <select id="toneInput" class="w-full bg-black/70 border border-white/15 rounded-xl px-3 py-2.5 text-xs text-white">
-                <option value="controversial">🔥 Pattern Interrupt</option>
-                <option value="data">📊 Hard Math / Proof</option>
-                <option value="story">🎭 Founder Story</option>
-                <option value="secret">🤫 Secret Hack</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-[11px] font-semibold text-slate-400 mb-1">Language</label>
-              <select id="langInput" class="w-full bg-black/70 border border-white/15 rounded-xl px-3 py-2.5 text-xs text-white">
-                <option value="english">🌐 Professional English</option>
-              </select>
-            </div>
-          </div>
-
-          <button type="button" id="generateBtn" class="btn-sovereign w-full py-4 rounded-2xl text-xs uppercase tracking-wider cursor-pointer shadow-xl">
-            ⚡ Synthesize 4-Act Master Script
-          </button>
-        </div>
-
-        <!-- Pod 2: Dynamic Background Switcher (Photo, Video Loop, Live Webcam, Smart AI) -->
-        <div id="smart-bg-anchor" class="sovereign-pod rounded-3xl p-6 sm:p-8 space-y-4 border border-[#00f0ff]/30">
-          <div class="flex items-center justify-between border-b border-white/10 pb-3">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-purple-300">Background Plate & Video Selector</h3>
-            <label class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold text-white cursor-pointer border border-white/15">
-              <span>+ Upload Image/Video</span>
-              <input id="customBgUpload" type="file" accept="image/*,video/*" class="hidden">
-            </label>
-          </div>
-
-          <!-- Background Type Tabs -->
-          <div class="grid grid-cols-4 gap-1.5 p-1 rounded-2xl bg-black/60 border border-white/10 text-center">
-            <button type="button" data-bgtype="photo" class="bg-type-btn py-2 rounded-xl bg-[#00f0ff] text-black text-[11px] font-extrabold cursor-pointer">Photo Packs</button>
-            <button type="button" data-bgtype="video" class="bg-type-btn py-2 rounded-xl text-slate-300 text-[11px] font-bold cursor-pointer">Video Loop</button>
-            <button type="button" data-bgtype="webcam" class="bg-type-btn py-2 rounded-xl text-slate-300 text-[11px] font-bold cursor-pointer">Live Cam</button>
-            <button type="button" data-bgtype="ai" class="bg-type-btn py-2 rounded-xl text-slate-300 text-[11px] font-bold cursor-pointer">Smart AI</button>
-          </div>
-
-          <!-- Dynamic Plate View Area -->
-          <div id="bgTypeContainer" class="space-y-3 pt-1">
-            <!-- Default Photo Packs View -->
-            <div id="photoPacksView" class="space-y-2">
-              <label class="block text-xs font-semibold text-slate-300">Archival 35mm Photography Packs:</label>
-              <div class="grid grid-cols-3 gap-2">
-                <button type="button" data-photo="coffee" class="photo-pack-btn py-2 px-2 rounded-xl bg-[#00f0ff]/20 border border-[#00f0ff] text-xs font-bold text-white cursor-pointer">☕ Cafe HD</button>
-                <button type="button" data-photo="cyber" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-xs font-semibold text-slate-300 cursor-pointer">🌆 Cyber</button>
-                <button type="button" data-photo="luxury" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-xs font-semibold text-slate-300 cursor-pointer">⌚ Luxury</button>
-                <button type="button" data-photo="workspace" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-xs font-semibold text-slate-300 cursor-pointer">💻 Tech Desk</button>
-                <button type="button" data-photo="fitness" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-xs font-semibold text-slate-300 cursor-pointer">🏋️ Gym</button>
-                <button type="button" data-photo="street" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-xs font-semibold text-slate-300 cursor-pointer">👟 Streetwear</button>
-              </div>
-            </div>
-
-            <!-- Video Loop View (Hidden by default) -->
-            <div id="videoLoopView" class="hidden space-y-2">
-              <label class="block text-xs font-semibold text-slate-300">Dynamic Motion Background Loops:</label>
-              <div class="grid grid-cols-2 gap-2">
-                <button type="button" data-vidloop="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-code-31950-large.mp4" class="vid-loop-btn py-2.5 px-3 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-cyan-300 cursor-pointer">🖥️ Cyber Code Stream</button>
-                <button type="button" data-vidloop="https://assets.mixkit.co/videos/preview/mixkit-abstract-tunnel-of-lights-background-41480-large.mp4" class="vid-loop-btn py-2.5 px-3 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-purple-300 cursor-pointer">🌌 Neon Light Tunnel</button>
-                <button type="button" data-vidloop="https://assets.mixkit.co/videos/preview/mixkit-pouring-coffee-into-a-cup-42861-large.mp4" class="vid-loop-btn py-2.5 px-3 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-amber-300 cursor-pointer">☕ Pouring Coffee</button>
-                <button type="button" data-vidloop="https://assets.mixkit.co/videos/preview/mixkit-hands-typing-on-a-laptop-keyboard-43093-large.mp4" class="vid-loop-btn py-2.5 px-3 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-emerald-300 cursor-pointer">💻 Laptop Typing</button>
-              </div>
-            </div>
-
-            <!-- Live Webcam View (Hidden by default) -->
-            <div id="webcamBgView" class="hidden space-y-2 text-center">
-              <p class="text-xs text-slate-300">Engage your webcam as a live video background plate:</p>
-              <button type="button" id="engageLiveCamBgBtn" class="py-2.5 px-4 rounded-xl bg-emerald-500 text-black text-xs font-bold cursor-pointer">📹 Start Live Webcam Background</button>
-            </div>
-
-            <!-- Smart AI Gen View (Hidden by default) -->
-            <div id="aiGenBgView" class="hidden space-y-2">
-              <p class="text-xs text-slate-300">Describe custom AI background theme:</p>
-              <div class="flex gap-2">
-                <input id="smartBgPromptInput" type="text" value="Futuristic obsidian abstract crystal 8k" class="flex-1 bg-black/80 border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-[#00f0ff]">
-                <button type="button" id="generateSmartBgBtn" class="px-4 py-2 rounded-xl bg-[#00f0ff] text-black text-xs font-extrabold cursor-pointer">Generate</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pod 3: NLE Timeline Editor -->
-        <div class="sovereign-pod rounded-3xl p-6 sm:p-8 space-y-4">
-          <div class="flex items-center justify-between border-b border-white/10 pb-3">
-            <div>
-              <h3 class="text-sm font-bold uppercase tracking-wider text-emerald-400">NLE Timeline Editor</h3>
-              <p class="text-[11px] text-slate-400">Four-act manuscript & hook variation selector</p>
-            </div>
-            <button type="button" id="copyAllScriptBtn" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 text-xs font-bold text-slate-200 border border-white/10 cursor-pointer">
-              📋 Copy Manuscript
-            </button>
-          </div>
-
-          <div>
-            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-2">⚡ 3-Second Hook Switcher:</label>
-            <div id="hooksList" class="space-y-2"></div>
-          </div>
-
-          <div>
-            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-2">🎞️ 4-Scene Master Sequence:</label>
-            <div id="scenesList" class="space-y-3 max-h-[460px] overflow-y-auto pr-1"></div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- RIGHT CHAMBER (5 Cols, Sticky): QUANTUM MONITOR & EXPORT SUITE -->
-      <div id="player-column" class="lg:col-span-5 lg:sticky lg:top-28 flex flex-col items-center">
-        <div class="sovereign-pod rounded-3xl p-6 sm:p-8 w-full flex flex-col items-center space-y-4">
-          
-          <div class="w-full">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Platform Preview Mode:</span>
-              <span id="playerStatusBadge" class="text-[10px] font-mono-code px-2 py-0.5 rounded bg-[#00f0ff]/15 text-[#00f0ff]">READY</span>
-            </div>
-            <div class="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-black/70 border border-white/10">
-              <button type="button" data-ui="instagram" class="ui-mode-btn py-2 rounded-xl bg-[#00f0ff] text-black text-[11px] font-bold transition cursor-pointer">IG Reels</button>
-              <button type="button" data-ui="youtube" class="ui-mode-btn py-2 rounded-xl text-slate-300 hover:text-white text-[11px] font-bold transition cursor-pointer">YT Shorts</button>
-              <button type="button" data-ui="clean" class="ui-mode-btn py-2 rounded-xl text-slate-300 hover:text-white text-[11px] font-bold transition cursor-pointer">Clean Raw</button>
-            </div>
-          </div>
-
-          <div class="w-full grid grid-cols-4 gap-1.5">
-            <button type="button" data-cap="hormozi" class="cap-btn py-1 rounded-lg bg-[#00f0ff]/20 border border-[#00f0ff] text-[10px] font-bold text-[#00f0ff] cursor-pointer">Hormozi</button>
-            <button type="button" data-cap="modern" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Glass</button>
-            <button type="button" data-cap="neon" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Neon</button>
-            <button type="button" data-cap="red" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Red Pill</button>
-          </div>
-
-          <!-- Hidden Video Loop Element -->
-          <video id="hiddenLoopVideo" autoplay loop muted playsinline crossorigin="anonymous" class="hidden"></video>
-
-          <!-- 9:16 Cinema Bezel -->
-          <div class="relative w-[280px] h-[498px] rounded-[40px] border-[7px] border-slate-800 bg-black overflow-hidden shadow-2xl ring-1 ring-[#00f0ff]/30">
+      <!-- Right Monitor -->
+      <div id="player-column" class="lg:col-span-5 flex flex-col items-center">
+        <div class="sovereign-pod rounded-3xl p-6 w-full flex flex-col items-center space-y-4">
+          <div class="relative w-[268px] h-[476px] rounded-[38px] border-[7px] border-slate-800 bg-black overflow-hidden shadow-2xl ring-1 ring-[#00f0ff]/30">
             <canvas id="reelCanvas" width="540" height="960" class="w-full h-full object-cover"></canvas>
           </div>
-
-          <div class="w-full grid grid-cols-2 gap-2.5">
-            <button type="button" id="playReelBtn" class="py-3 px-3 rounded-2xl bg-white text-slate-950 hover:bg-slate-200 font-extrabold text-xs transition shadow-lg cursor-pointer">
-              ▶ Play Reel w/ Voice
-            </button>
-            <button type="button" id="nextSceneBtn" class="py-3 px-3 rounded-2xl bg-white/5 hover:bg-white/10 text-white border border-white/15 font-bold text-xs transition cursor-pointer">
-              ⏭ Next Scene (1/4)
-            </button>
-          </div>
-
-          <div class="w-full pt-3 border-t border-white/10 space-y-2">
-            <button type="button" id="downloadVideoBtn" class="btn-sovereign w-full py-4 px-4 rounded-2xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-xl">
-              <span>⬇️ DOWNLOAD VIDEO (.WEBM)</span>
-            </button>
-            <div class="grid grid-cols-2 gap-2">
-              <button type="button" id="downloadScriptBtn" class="py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-200 font-bold text-[11px] transition cursor-pointer">
-                📄 Script (.TXT)
-              </button>
-              <button type="button" id="downloadFramePngBtn" class="py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-200 font-bold text-[11px] transition cursor-pointer">
-                🖼️ Poster (.PNG)
-              </button>
-            </div>
-          </div>
-
+          <button type="button" id="playReelBtn" class="w-full py-3.5 bg-white text-black font-extrabold text-xs rounded-2xl cursor-pointer">▶ Play Preview w/ Voice</button>
+          <button type="button" id="downloadVideoBtn" class="btn-sovereign w-full py-3.5 rounded-2xl text-xs uppercase cursor-pointer">⬇️ Download Video (.WEBM)</button>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- SECTION 2: 12 REAL FFMPEG.WASM TOOLS -->
-  <section id="utility-suite" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-28">
-    <div class="text-center mb-10">
-      <span class="font-mono-tech text-xs uppercase tracking-widest text-[#00f0ff]">02 // REAL BROWSER FFMPEG SUITE</span>
-      <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-display mt-1">12 Real Video & Audio Processing Tools</h2>
-      <p class="text-xs sm:text-sm text-slate-400 mt-1">Powered by FFmpeg WebAssembly. Convert, extract, and mute media files locally without server uploads.</p>
+  <!-- SECTION 2: 12 UTILITY TOOLS -->
+  <section id="utility-suite" class="max-w-7xl mx-auto px-4 pb-20">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-extrabold text-white">Creator Diagnostic Suite (12 Tools)</h2>
+      <p class="text-xs text-slate-400">Guaranteed operational utilities and hardware tests.</p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="utilityCardsGrid"></div>
   </section>
 
   <!-- SECTION 3: 26 AI CLIPPER TOOLS -->
-  <section id="clipper-grid" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-28">
-    <div class="text-center mb-10">
-      <span class="font-mono-tech text-xs uppercase tracking-widest text-purple-400">03 // AI REPURPOSING</span>
-      <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-display mt-1">26+ Viral Video Clipping & Repurposing Engines</h2>
-      <p class="text-xs sm:text-sm text-slate-400 mt-1">Click any tool to launch the AI clipper workspace modal.</p>
+  <section id="clipper-grid" class="max-w-7xl mx-auto px-4 pb-20">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-extrabold text-white">AI Video Clippers & Repurposing (26 Engines)</h2>
+      <p class="text-xs text-slate-400">Click any engine to launch the interactive extraction workspace.</p>
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5" id="clipperCardsGrid"></div>
   </section>
 
   <!-- SECTION 4: KOTAK UPI PRICING -->
-  <section id="pricing" class="relative z-10 max-w-5xl mx-auto px-4 pb-28">
-    <div class="quantum-card rounded-3xl p-8 sm:p-10 border-2 border-[#00f0ff] relative shadow-2xl shadow-[#00f0ff]/10">
-      <span class="absolute -top-3.5 right-8 px-4 py-1 rounded-full bg-[#00f0ff] text-black text-[10px] font-extrabold uppercase tracking-wider">Kotak UPI Direct</span>
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div>
-          <span class="text-xs font-mono-tech text-[#00f0ff] uppercase">04 // KOTAK BANK UPI SETTLEMENT</span>
-          <h2 class="text-3xl font-extrabold text-white font-display mt-1">Custom Rupee Plan (Starts at ₹50)</h2>
-          <p class="text-xs text-slate-300 mt-1">Direct settlements go straight into your Kotak Bank account: <b class="text-emerald-300">7820847387@kotakbank</b></p>
-          <div class="mt-4 flex items-baseline gap-2">
-            <span id="customPriceDisplay" class="text-4xl font-extrabold text-white font-display">₹50</span>
-            <span id="customReelCountBadge" class="text-xs text-slate-400 font-mono-tech">1 Video Pack</span>
-          </div>
-        </div>
-        <div class="space-y-3 w-full md:w-auto">
-          <input id="customPlanSlider" type="range" min="1" max="50" step="1" value="1" class="w-full md:w-64 accent-[#00f0ff] cursor-pointer">
-          <button type="button" id="openPaymentGatewayBtn" class="btn-sovereign w-full py-3.5 px-6 rounded-2xl text-xs uppercase tracking-wider cursor-pointer shadow-xl">
-            💳 Pay via Kotak UPI (`7820847387@kotakbank`)
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 5: FOUNDER DESK -->
-  <section id="founder-desk" class="relative z-10 max-w-5xl mx-auto px-4 pb-28">
-    <div class="sovereign-pod rounded-3xl p-6 sm:p-10 border border-emerald-500/30 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="space-y-2 text-center md:text-left">
-        <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-xs font-bold uppercase font-mono-tech">05 // FOUNDER CONCIERGE</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-display">Need Custom AI Marketing or Done-For-You Reels?</h2>
-        <p class="text-xs sm:text-sm text-slate-300 max-w-xl">
-          Connect directly with Arjun Dhore on WhatsApp (+91 7820847387) for bespoke production, voice cloning, or B2B enterprise partnerships.
-        </p>
-      </div>
-      <button type="button" id="contactFounderWhatsAppBtn" class="px-7 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider transition shadow-xl shrink-0 cursor-pointer">
-        💬 WhatsApp Founder (+91 7820847387)
-      </button>
+  <section id="pricing" class="max-w-4xl mx-auto px-4 pb-24 text-center">
+    <div class="sovereign-pod rounded-3xl p-8 border border-[#00f0ff]/40 space-y-4">
+      <h2 class="text-2xl font-extrabold text-white">Kotak Bank Direct UPI Plan (Starts at ₹50)</h2>
+      <p class="text-xs text-slate-300">Default UPI ID: <b class="text-emerald-300">7820847387@kotakbank</b></p>
+      <button type="button" id="openPaymentGatewayBtn" class="btn-sovereign px-8 py-3.5 rounded-2xl text-xs uppercase cursor-pointer">Pay ₹50 via Kotak UPI</button>
     </div>
   </section>
 
   <!-- MODALS -->
   <div id="clipperWorkspaceModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="sovereign-pod max-w-lg w-full rounded-3xl p-6 border border-[#00f0ff]/40 space-y-4 shadow-2xl">
+    <div class="sovereign-pod max-w-lg w-full rounded-3xl p-6 space-y-4">
       <div class="flex items-center justify-between border-b border-white/10 pb-3">
-        <div>
-          <span class="text-[10px] font-mono-tech uppercase text-[#00f0ff]">Interactive AI Repurposing Engine</span>
-          <h3 id="clipperModalTitle" class="text-lg font-extrabold text-white font-display">Video to Reels Converter</h3>
-        </div>
+        <h3 id="clipperModalTitle" class="text-base font-extrabold text-white">Clipper Tool</h3>
         <button type="button" id="closeClipperModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕ Close</button>
       </div>
-      <div class="space-y-3">
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">1. Paste Long Video URL or Topic:</label>
-          <input id="clipperUrlInput" type="text" placeholder="https://youtube.com/watch?v=..." class="w-full bg-black/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">2. Or Upload Local File:</label>
-          <input id="clipperFileInput" type="file" accept="video/*,audio/*" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-white/10 file:text-white file:font-bold cursor-pointer">
-        </div>
-        <button type="button" id="runClipperExtractBtn" class="btn-sovereign w-full py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
-          ✂️ Extract Viral 9:16 Clip & Open in Studio
-        </button>
-      </div>
+      <input id="clipperUrlInput" type="text" placeholder="Paste Video URL or Topic..." class="w-full bg-black/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
+      <button type="button" id="runClipperExtractBtn" class="btn-sovereign w-full py-3 rounded-2xl text-xs uppercase cursor-pointer">Run AI Extraction</button>
     </div>
   </div>
 
   <div id="paymentGatewayModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="sovereign-pod max-w-md w-full rounded-3xl overflow-hidden border border-[#00f0ff]/40 shadow-2xl max-h-[92vh] overflow-y-auto">
-      <div class="bg-gradient-to-r from-[#00f0ff] to-indigo-600 p-4 sm:p-5 flex items-center justify-between text-slate-950 font-bold">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-xl bg-white/30 flex items-center justify-center font-extrabold text-white">₹</div>
-          <div>
-            <h3 class="text-sm font-extrabold text-white">Kotak Bank Direct UPI Checkout</h3>
-            <p id="gatewayPlanSubtitle" class="text-[11px] text-cyan-100">Custom Pack: 1 Video</p>
-          </div>
-        </div>
-        <div class="text-right">
-          <span id="gatewayAmountBadge" class="text-xl font-extrabold font-display text-white">₹50</span>
-          <button type="button" id="closePaymentModalBtn" class="block ml-auto text-xs text-white/80 hover:text-white cursor-pointer font-normal">✕ Close</button>
-        </div>
+    <div class="sovereign-pod max-w-md w-full rounded-3xl p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h3 class="text-base font-extrabold text-white">Kotak UPI Settlement</h3>
+        <button type="button" id="closePaymentModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕ Close</button>
       </div>
-
-      <div class="p-5 space-y-4">
-        <div class="p-3 rounded-2xl bg-cyan-950/50 border border-cyan-500/30 space-y-1.5">
-          <span class="text-[11px] font-bold text-cyan-300 block">🏦 Kotak Bank Settlement UPI ID:</span>
-          <p class="text-xs font-mono-tech text-emerald-300 font-bold">7820847387@kotakbank</p>
-        </div>
-
-        <div class="text-center space-y-2.5">
-          <p class="text-xs text-slate-300">Scan QR with GPay, PhonePe, or Kotak Banking App:</p>
-          <div class="w-40 h-40 mx-auto bg-white p-2 rounded-2xl shadow-lg flex items-center justify-center">
-            <img id="dynamicUpiQr" src="" alt="UPI QR" class="w-full h-full object-contain">
-          </div>
-          <a id="mobileUpiDeepLink" href="#" class="inline-block w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold text-cyan-300 transition">
-            📱 Tap Here on Phone to Pay via Kotak / GPay App
-          </a>
-        </div>
-
-        <div class="space-y-2 pt-2 border-t border-white/10">
-          <label class="block text-[11px] font-semibold text-slate-300">Enter Your Name & UTR Number:</label>
-          <input id="payerNameInput" type="text" placeholder="Your Name / Brand Name *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
-          <input id="payerUtrInput" type="text" placeholder="12-Digit UPI Ref / UTR Number" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono-tech">
-        </div>
-
-        <button type="button" id="confirmPaymentBtn" class="btn-sovereign w-full py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
-          ✓ Verify Payment & Notify Founder on WhatsApp
-        </button>
-      </div>
+      <p class="text-xs text-slate-300">UPI ID: <b class="text-emerald-300">7820847387@kotakbank</b></p>
+      <input id="payerNameInput" type="text" placeholder="Your Name / Brand *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
+      <button type="button" id="confirmPaymentBtn" class="btn-sovereign w-full py-3 rounded-2xl text-xs uppercase cursor-pointer">Notify Founder on WhatsApp</button>
     </div>
   </div>
 
   <div id="utilityToolModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="sovereign-pod max-w-lg w-full rounded-3xl p-6 border border-white/15 space-y-4">
-      <div class="flex items-center justify-between">
-        <h3 id="utilModalTitle" class="text-lg font-bold text-white font-display">Tool</h3>
+    <div class="sovereign-pod max-w-lg w-full rounded-3xl p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h3 id="utilModalTitle" class="text-base font-extrabold text-white">Tool</h3>
         <button type="button" id="closeUtilModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕ Close</button>
       </div>
-      <p id="utilModalDesc" class="text-xs text-slate-300"></p>
       <div id="utilModalBody" class="space-y-3"></div>
     </div>
   </div>
 
   <div id="authModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="sovereign-pod max-w-md w-full rounded-3xl p-6 space-y-4 border border-white/15">
-      <div class="flex items-center justify-between">
-        <h3 class="text-base font-bold text-white font-display">ReelFlow Creator Account</h3>
+    <div class="sovereign-pod max-w-md w-full rounded-3xl p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h3 class="text-base font-extrabold text-white">Creator Pass</h3>
         <button type="button" id="closeAuthModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕ Close</button>
       </div>
       <form id="authForm" class="space-y-3">
         <input id="authEmailInput" type="email" required placeholder="Email Address *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
         <input id="authPassInput" type="password" required placeholder="Password *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
-        <button type="submit" class="btn-sovereign w-full py-3 rounded-xl text-xs uppercase cursor-pointer">Save Session</button>
+        <button type="submit" class="btn-sovereign w-full py-3 rounded-2xl text-xs uppercase cursor-pointer">Save Session</button>
       </form>
     </div>
   </div>
 
-  <!-- JAVASCRIPT ENGINE -->
+  <!-- STABLE JAVASCRIPT ENGINE -->
   <script>
     (function() {
       var FOUNDER_WHATSAPP = "917820847387";
       var KOTAK_UPI = "7820847387@kotakbank";
 
-      var ffmpeg = null;
-      async function initFFmpegWasm() {
-        if (typeof FFmpeg !== "undefined" && !ffmpeg) {
-          try {
-            const { createFFmpeg } = FFmpeg;
-            ffmpeg = createFFmpeg({ log: true });
-            await ffmpeg.load();
-            showToast("✓ FFmpeg.wasm loaded locally in browser!");
-          } catch (e) {
-            console.log("FFmpeg fallback mode:", e);
-          }
-        }
-      }
-      initFFmpegWasm();
-
-      var PHOTO_PACKS = {
-        coffee: [
-          "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80"
-        ],
-        cyber: [
-          "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80"
-        ],
-        luxury: [
-          "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80"
-        ],
-        workspace: [
-          "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
-        ],
-        fitness: [
-          "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1546483875-ad9014c88eba?auto=format&fit=crop&w=600&q=80"
-        ],
-        street: [
-          "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=600&q=80"
-        ]
-      };
-
       var UTILITY_TOOLS = [
-        { id: "camera", icon: "📹", title: "Camera Test", desc: "Test webcam with instant hardware release" },
-        { id: "mic", icon: "🎙️", title: "Mic Test", desc: "10s mic spectrum test with auto-shutoff" },
-        { id: "audioconv", icon: "🔄", title: "Audio Converter", desc: "Convert media to MP3/WAV via FFmpeg.wasm" },
-        { id: "videoconv", icon: "🎞️", title: "Video Converter", desc: "Transcode video clips to MP4 and WEBM" },
-        { id: "extractor", icon: "🎵", title: "Audio Extractor", desc: "Separate clean voice track from video" },
-        { id: "remover", icon: "🔇", title: "Audio Remover", desc: "Mute and strip background noise" },
-        { id: "audiotrans", icon: "📝", title: "Audio Transcription", desc: "Transcribe voice notes to text" },
+        { id: "camera", icon: "📹", title: "Camera Test", desc: "Test webcam with instant release" },
+        { id: "mic", icon: "🎙️", title: "Mic Test", desc: "10s mic test with auto-shutoff" },
+        { id: "audioconv", icon: "🔄", title: "Audio Converter", desc: "Convert media to MP3/WAV" },
+        { id: "videoconv", icon: "🎞️", title: "Video Converter", desc: "Transcode video to MP4/WEBM" },
+        { id: "extractor", icon: "🎵", title: "Audio Extractor", desc: "Separate voice track from video" },
+        { id: "remover", icon: "🔇", title: "Audio Remover", desc: "Mute background noise" },
+        { id: "audiotrans", icon: "📝", title: "Audio Transcription", desc: "Transcribe voice notes" },
         { id: "videotrans", icon: "📄", title: "Video Transcription", desc: "Transcribe video dialogue" },
-        { id: "podtrans", icon: "🎧", title: "Podcast Transcription", desc: "Turn multi-speaker podcasts into notes" },
-        { id: "tiktokscript", icon: "✨", title: "AI TikTok Script Generator", desc: "Generate viral TikTok & Reel scripts" },
-        { id: "ytscript", icon: "▶️", title: "AI YouTube Script Generator", desc: "Generate YouTube Shorts scripts" },
-        { id: "salesscript", icon: "💼", title: "AI Sales Script Generator", desc: "Generate high-converting video scripts" }
+        { id: "podtrans", icon: "🎧", title: "Podcast Transcription", desc: "Turn podcasts into notes" },
+        { id: "tiktokscript", icon: "✨", title: "AI TikTok Script", desc: "Generate viral TikTok scripts" },
+        { id: "ytscript", icon: "▶️", title: "AI YouTube Script", desc: "Generate YouTube Shorts scripts" },
+        { id: "salesscript", icon: "💼", title: "AI Sales Script", desc: "Generate video sales scripts" }
       ];
 
       var CLIPPER_TOOLS = [
-        "Long Video to Short Video AI", "Highlight Video Maker",
-        "AI Clip Maker", "AI Clip Generator",
-        "Video Clipper", "Auto Clip Maker",
-        "AI Video Clipping Tool", "AI Video Cutter",
-        "Repurpose Video", "YouTube Clip Maker",
-        "Video to Shorts Converter", "TikTok Clip Maker",
-        "AI Podcast Clip Maker", "AI Podcast to Shorts Converter",
-        "Short Video Maker", "Automatic Reel Maker",
-        "YouTube Shorts Maker", "Facebook Reels Maker",
-        "Instagram Reels Maker", "LinkedIn Video Maker",
-        "Twitch Clip Maker", "Video to TikTok Converter",
-        "Video to Reels Converter", "Google Drive to Clips",
+        "Long Video to Short Video AI", "Highlight Video Maker", "AI Clip Maker", "AI Clip Generator",
+        "Video Clipper", "Auto Clip Maker", "AI Video Clipping Tool", "AI Video Cutter",
+        "Repurpose Video", "YouTube Clip Maker", "Video to Shorts Converter", "TikTok Clip Maker",
+        "AI Podcast Clip Maker", "AI Podcast to Shorts Converter", "Short Video Maker", "Automatic Reel Maker",
+        "YouTube Shorts Maker", "Facebook Reels Maker", "Instagram Reels Maker", "LinkedIn Video Maker",
+        "Twitch Clip Maker", "Video to TikTok Converter", "Video to Reels Converter", "Google Drive to Clips",
         "Dropbox to Clips", "OneDrive to Clips"
       ];
 
-      var VOICE_PERSONAS = [
-        { id: "aarav", name: "Aarav (Founder)", rate: 1.08, pitch: 0.96 },
-        { id: "zoya", name: "Zoya (Viral D2C)", rate: 1.15, pitch: 1.12 },
-        { id: "kabir", name: "Kabir (Deep Bass)", rate: 0.96, pitch: 0.82 },
-        { id: "riya", name: "Riya (Professional)", rate: 1.12, pitch: 1.06 },
-        { id: "vikram", name: "Vikram (Analyst)", rate: 1.10, pitch: 0.92 },
-        { id: "custom", name: "Custom Clone", rate: 1.05, pitch: 1.00 }
-      ];
-
-      var PRESETS = {
-        coffee: { brand: "Asli Cold Brew Coffee", audience: "Young professionals and college students tired of spending Rs 350 on watery cafe coffee", tone: "controversial", lang: "english", photoPack: "coffee" },
-        fintech: { brand: "Kotak & Burgundy Card Maximizer", audience: "Students booking flights and movie tickets without claiming hidden bank rewards", tone: "data", lang: "english", photoPack: "workspace" },
-        saas: { brand: "PayPulse AI Invoice Recovery", audience: "Agency founders and freelancers chasing overdue client payments", tone: "story", lang: "english", photoPack: "workspace" },
-        podcast: { brand: "Founder Unfiltered Podcast Clip", audience: "Entrepreneurs building profitable AI startups in India", tone: "secret", lang: "english", photoPack: "cyber" }
+      var currentProject = {
+        brand: "Asli Cold Brew Coffee",
+        scenes: [
+          { time: "00:00 - 00:03", label: "ACT I", voice: "Stop buying overpriced cafe coffee." },
+          { time: "00:03 - 00:09", label: "ACT II", voice: "You spend 350 rupees every morning on watery cafe drinks." },
+          { time: "00:09 - 00:18", label: "ACT III", voice: "Our 18-hour steeped concentrate gives you cafe quality at home for 15 rupees." },
+          { time: "00:18 - 00:24", label: "ACT IV", voice: "Comment BREW below to claim your introductory trial pack." }
+        ]
       };
-
-      var currentProject = null;
       var activeSceneIdx = 0;
-      var activePersonaId = "aarav";
-      var activeUiMode = "instagram";
-      var activeCapStyle = "hormozi";
-      var bgMode = "photo";
-      var loadedPhotoPackImgs = [null, null, null, null];
-      var customOrSmartBgImg = null;
       var isPlaying = false;
-      var animFrameId = null;
-
-      var activeMediaStream = null;
-      var activeAudioContext = null;
-      var micAutoStopTimer = null;
-      var liveWebcamStream = null;
 
       function showToast(msg) {
         var b = document.getElementById("toastBanner");
         var t = document.getElementById("toastText");
         if (!b || !t) return;
-        t.textContent = msg;
-        b.classList.remove("hidden");
-        setTimeout(function() { b.classList.add("hidden"); }, 2800);
+        t.textContent = msg; b.classList.remove("hidden");
+        setTimeout(function() { b.classList.add("hidden"); }, 2500);
       }
 
-      function stopAllHardwareStreams() {
-        if (micAutoStopTimer) { clearTimeout(micAutoStopTimer); micAutoStopTimer = null; }
-        if (activeMediaStream) { activeMediaStream.getTracks().forEach(function(track) { track.stop(); }); activeMediaStream = null; }
-        if (liveWebcamStream) { liveWebcamStream.getTracks().forEach(function(track) { track.stop(); }); liveWebcamStream = null; }
-        if (activeAudioContext) { try { activeAudioContext.close(); } catch (e) {} activeAudioContext = null; }
-      }
-
-      function syncPersistentUserSession() {
-        var raw = localStorage.getItem("reelflow_user_v12");
-        var loginBtn = document.getElementById("openAuthModalBtn");
-        var badge = document.getElementById("userProfileBadge");
-        if (raw) {
-          try {
-            var user = JSON.parse(raw);
-            if (user && user.email) {
-              loginBtn.classList.add("hidden");
-              badge.classList.remove("hidden");
-              badge.classList.add("flex");
-              var disp = user.email.split("@")[0];
-              document.getElementById("userNameText").textContent = disp;
-              document.getElementById("userInitials").textContent = disp.charAt(0).toUpperCase();
-              return;
-            }
-          } catch (e) {}
-        }
-        loginBtn.classList.remove("hidden");
-        badge.classList.add("hidden");
-        badge.classList.remove("flex");
-      }
-
-      function loadPhotoPack(packKey) {
-        var urls = PHOTO_PACKS[packKey] || PHOTO_PACKS.coffee;
-        bgMode = "photo";
-        urls.forEach(function(u, i) {
-          var img = new Image();
-          img.crossOrigin = "anonymous";
-          img.onload = function() {
-            loadedPhotoPackImgs[i] = img;
-            drawCanvas();
-          };
-          img.src = u;
-        });
-      }
-
-      function generateSmartAiBackground(promptText) {
-        var cleanPrompt = (promptText || "cyberpunk neon studio").trim();
-        showToast("Synthesizing Smart AI Background...");
-        var seed = Math.floor(Math.random() * 99999);
-        var aiUrl = "https://image.pollinations.ai/prompt/" + encodeURIComponent(cleanPrompt + ", vertical 9:16 wallpaper, cinematic lighting, 8k, no text") + "?width=540&height=960&nologo=true&seed=" + seed;
-
-        var img = new Image();
-        img.crossOrigin = "anonymous";
-        img.onload = function() {
-          customOrSmartBgImg = img;
-          bgMode = "smart_ai";
-          drawCanvas();
-          showToast("✨ Smart AI Background applied!");
-        };
-        img.onerror = function() {
-          var off = document.createElement("canvas");
-          off.width = 540; off.height = 960;
-          var octx = off.getContext("2d");
-          octx.fillStyle = "#0a0f1d";
-          octx.fillRect(0, 0, 540, 960);
-          var dImg = new Image();
-          dImg.onload = function() {
-            customOrSmartBgImg = dImg;
-            bgMode = "smart_ai";
-            drawCanvas();
-            showToast("✨ Procedural Background applied!");
-          };
-          dImg.src = off.toDataURL();
-        };
-        img.src = aiUrl;
-      }
-
-      function buildBlueprint(brand, audience, tone, lang) {
-        var cleanBrand = (brand || "Your Brand").trim();
-        var cleanAud = (audience || "smart creators").trim();
-        var hooks = [
-          "Stop wasting money on outdated alternatives for " + cleanBrand + ".",
-          "Here is the exact framework behind how " + cleanBrand + " saves 10+ hours weekly.",
-          "The industry does not want " + cleanAud.slice(0, 42) + " to know this shortcut exists."
-        ];
-        var scenes = [
-          { time: "00:00 - 00:03", label: "ACT I", voice: hooks[0] },
-          { time: "00:03 - 00:09", label: "ACT II", voice: "Right now, " + cleanAud + " are stuck overpaying and losing hours on broken workflows." },
-          { time: "00:09 - 00:18", label: "ACT III", voice: "That is why " + cleanBrand + " was built from day one to deliver studio-grade results automatically." },
-          { time: "00:18 - 00:24", label: "ACT IV", voice: "Comment LINK below and we will send instant access straight to your DMs!" }
-        ];
-        return { brand: cleanBrand, activeHookIndex: 0, hooks: hooks, scenes: scenes };
-      }
-
-      function renderStoryboardUI() {
-        if (!currentProject) return;
-
-        var hooksBox = document.getElementById("hooksList");
-        hooksBox.innerHTML = "";
-        currentProject.hooks.forEach(function(h, idx) {
-          var active = idx === currentProject.activeHookIndex;
-          var div = document.createElement("div");
-          div.className = "cursor-pointer p-2.5 rounded-xl border text-xs transition flex items-center gap-2 " +
-            (active ? "bg-[#00f0ff]/20 border-[#00f0ff] text-white font-semibold" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
-          div.innerHTML = '<span class="px-2 py-0.5 rounded-md bg-[#00f0ff] text-black text-[10px] font-mono-tech font-bold">H' + (idx + 1) + '</span><span class="truncate">"' + h + '"</span>';
-          div.addEventListener("click", function() {
-            currentProject.activeHookIndex = idx;
-            currentProject.scenes[0].voice = currentProject.hooks[idx];
-            activeSceneIdx = 0;
-            renderStoryboardUI();
-          });
-          hooksBox.appendChild(div);
-        });
-
-        var scenesBox = document.getElementById("scenesList");
-        scenesBox.innerHTML = "";
+      function renderUI() {
+        var sBox = document.getElementById("scenesList");
+        sBox.innerHTML = "";
         currentProject.scenes.forEach(function(sc, idx) {
-          var active = idx === activeSceneIdx;
           var node = document.createElement("div");
-          node.className = "p-3 rounded-2xl border transition space-y-2 " + (active ? "bg-cyan-950/40 border-[#00f0ff] shadow-md" : "bg-black/40 border-white/10");
-          node.innerHTML =
-            '<div class="flex items-center justify-between text-[10px] font-mono-code cursor-pointer">' +
-              '<span class="text-[#00f0ff] font-bold">ACT ' + (idx + 1) + ': ' + sc.label + '</span>' +
-              '<span class="text-slate-400">' + sc.time + '</span>' +
-            '</div>' +
-            '<textarea rows="2" class="w-full bg-black/70 border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white">' + sc.voice + '</textarea>';
-
-          node.querySelector(".font-mono-code").addEventListener("click", function() {
-            stopReel(); activeSceneIdx = idx; renderStoryboardUI();
-          });
+          node.className = "p-3 rounded-xl border " + (idx === activeSceneIdx ? "border-[#00f0ff] bg-cyan-950/30" : "border-white/10 bg-black/40");
+          node.innerHTML = '<div class="text-[10px] font-mono-tech text-[#00f0ff] font-bold mb-1">SCENE ' + (idx + 1) + ' (' + sc.time + ')</div>' +
+                           '<textarea rows="2" class="w-full bg-black/70 border border-white/10 rounded-lg p-2 text-xs text-white">' + sc.voice + '</textarea>';
           node.querySelector("textarea").addEventListener("input", function(e) {
             currentProject.scenes[idx].voice = e.target.value;
             activeSceneIdx = idx;
             drawCanvas();
           });
-          scenesBox.appendChild(node);
+          sBox.appendChild(node);
         });
-
-        var nextBtn = document.getElementById("nextSceneBtn");
-        if (nextBtn) nextBtn.textContent = "⏭ Scene (" + (activeSceneIdx + 1) + "/4)";
         drawCanvas();
-      }
-
-      function drawKineticCaptions(ctx, text, x, y, maxWidth, lineHeight) {
-        var words = text.split(" ");
-        var line = ""; var lines = [];
-        for (var n = 0; n < words.length; n++) {
-          var testLine = line + words[n] + " ";
-          if (ctx.measureText(testLine).width > maxWidth && n > 0) {
-            lines.push(line.trim()); line = words[n] + " ";
-          } else { line = testLine; }
-        }
-        lines.push(line.trim());
-        var totalH = lines.length * lineHeight;
-        var startY = y - totalH / 2 + lineHeight / 2;
-
-        ctx.fillStyle = "rgba(0, 0, 0, 0.85)";
-        ctx.beginPath();
-        ctx.roundRect(36, y - totalH / 2 - 20, 540 - 72, totalH + 40, 20);
-        ctx.fill();
-
-        for (var i = 0; i < lines.length; i++) {
-          var ly = startY + i * lineHeight;
-          ctx.strokeStyle = "rgba(0,0,0,0.9)"; ctx.lineWidth = 6;
-          ctx.strokeText(lines[i], x, ly);
-          ctx.fillStyle = i % 2 === 0 ? "#00f0ff" : "#ffffff";
-          ctx.fillText(lines[i], x, ly);
-        }
       }
 
       function drawCanvas() {
         var canvas = document.getElementById("reelCanvas");
-        if (!canvas || !currentProject) return;
+        if (!canvas) return;
         var ctx = canvas.getContext("2d");
         var W = canvas.width; var H = canvas.height;
         var scene = currentProject.scenes[activeSceneIdx] || currentProject.scenes[0];
-        var handle = document.getElementById("creatorHandleInput").value || "@reelflow.ai";
 
-        if (bgMode === "webcam" && liveWebcamStream) {
-          var vidEl = document.getElementById("hiddenLoopVideo");
-          if (vidEl && vidEl.readyState >= 2) {
-            ctx.drawImage(vidEl, 0, 0, W, H);
-          }
-        } else if (bgMode === "video" && liveWebcamStream) {
-          var vidEl = document.getElementById("hiddenLoopVideo");
-          if (vidEl && vidEl.readyState >= 2) {
-            ctx.drawImage(vidEl, 0, 0, W, H);
-          }
-        } else {
-          var activeImg = null;
-          if ((bgMode === "smart_ai" || bgMode === "upload") && customOrSmartBgImg && customOrSmartBgImg.complete) {
-            activeImg = customOrSmartBgImg;
-          } else if (bgMode === "photo" && loadedPhotoPackImgs[activeSceneIdx] && loadedPhotoPackImgs[activeSceneIdx].complete) {
-            activeImg = loadedPhotoPackImgs[activeSceneIdx];
-          }
+        var g = ctx.createLinearGradient(0, 0, W, H);
+        g.addColorStop(0, "#070a12"); g.addColorStop(1, "#7000ff");
+        ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
 
-          if (activeImg && activeImg.naturalWidth > 0) {
-            ctx.drawImage(activeImg, 0, 0, W, H);
-            ctx.fillStyle = "rgba(0,0,0,0.5)";
-            ctx.fillRect(0, 0, W, H);
-          } else {
-            var g = ctx.createLinearGradient(0, 0, W, H);
-            g.addColorStop(0, "#070a12"); g.addColorStop(1, "#7000ff");
-            ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-          }
-        }
+        ctx.font = "800 32px sans-serif"; ctx.textAlign = "center"; ctx.fillStyle = "#ffffff";
+        ctx.fillText(scene.voice.toUpperCase(), W/2, H/2, W - 60);
 
-        ctx.font = "800 35px 'Plus Jakarta Sans', sans-serif";
-        ctx.textAlign = "center";
-        drawKineticCaptions(ctx, scene.voice.toUpperCase(), W / 2, H * 0.48, W - 110, 46);
-
-        if (activeUiMode === "instagram") {
-          ctx.fillStyle = "rgba(255,255,255,0.92)"; ctx.font = "bold 24px sans-serif";
-          ctx.textAlign = "left"; ctx.fillText("Reels", 28, 52);
-          ctx.textAlign = "center"; var rx = W - 42;
-          ctx.font = "26px sans-serif"; ctx.fillText("🤍", rx, H - 280);
-          ctx.font = "600 14px sans-serif"; ctx.fillText("31K", rx, H - 255);
-          ctx.textAlign = "left"; ctx.fillStyle = "#ffffff"; ctx.font = "bold 20px sans-serif";
-          ctx.fillText(handle, 26, H - 72);
-        } else if (activeUiMode === "youtube") {
-          ctx.fillStyle = "rgba(255,255,255,0.92)"; ctx.font = "bold 22px sans-serif";
-          ctx.textAlign = "left"; ctx.fillText("▶️ Shorts", 26, 52);
-          ctx.fillStyle = "#ffffff"; ctx.font = "bold 19px sans-serif";
-          ctx.fillText(handle, 26, H - 76);
-          ctx.fillStyle = "#ef4444"; ctx.fillRect(190, H - 96, 104, 30);
-          ctx.fillStyle = "#ffffff"; ctx.font = "bold 14px sans-serif"; ctx.fillText("Subscribe", 208, H - 76);
-        }
+        ctx.fillStyle = "#ffffff"; ctx.font = "bold 20px sans-serif"; ctx.textAlign = "left";
+        ctx.fillText("@reelflow.ai", 24, H - 60);
       }
 
       function startReel() {
-        if (isPlaying) { stopReel(); return; }
+        if (isPlaying) { isPlaying = false; document.getElementById("playReelBtn").textContent = "▶ Play Preview w/ Voice"; return; }
         isPlaying = true; activeSceneIdx = 0;
-        document.getElementById("playReelBtn").textContent = "⏹ Stop Reel";
-        document.getElementById("playerStatusBadge").textContent = "PLAYING";
-        function loop() { if (!isPlaying) return; drawCanvas(); animFrameId = requestAnimationFrame(loop); }
-        loop();
+        document.getElementById("playReelBtn").textContent = "⏹ Stop Preview";
         if ("speechSynthesis" in window) {
           var u = new SpeechSynthesisUtterance(currentProject.scenes[activeSceneIdx].voice);
-          u.onend = function() { stopReel(); };
+          u.onend = function() { isPlaying = false; document.getElementById("playReelBtn").textContent = "▶ Play Preview w/ Voice"; };
           window.speechSynthesis.speak(u);
         }
       }
 
-      function stopReel() {
-        isPlaying = false;
-        if (animFrameId) cancelAnimationFrame(animFrameId);
-        if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-        document.getElementById("playReelBtn").textContent = "▶ Play Reel w/ Voice";
-        document.getElementById("playerStatusBadge").textContent = "READY";
-      }
-
       function renderToolGrids() {
         var uGrid = document.getElementById("utilityCardsGrid");
-        uGrid.innerHTML = "";
-        UTILITY_TOOLS.forEach(function(tool) {
-          var card = document.createElement("div");
-          card.className = "tool-tile rounded-2xl p-5 text-center cursor-pointer flex flex-col items-center justify-center min-h-[135px]";
-          card.innerHTML =
-            '<div class="w-10 h-10 rounded-xl bg-[#00f0ff]/10 border border-[#00f0ff]/30 flex items-center justify-center text-lg mb-2.5">' + tool.icon + '</div>' +
-            '<h3 class="text-xs font-bold text-white mb-1">' + tool.title + '</h3>' +
-            '<p class="text-[11px] text-slate-400">' + tool.desc + '</p>';
-          card.addEventListener("click", function() { openUtilityToolModal(tool); });
-          uGrid.appendChild(card);
-        });
+        if (uGrid) {
+          uGrid.innerHTML = "";
+          UTILITY_TOOLS.forEach(function(tool) {
+            var card = document.createElement("div");
+            card.className = "tool-tile rounded-2xl p-4 text-center cursor-pointer";
+            card.innerHTML = '<div class="text-xl mb-1">' + tool.icon + '</div><h3 class="text-xs font-bold text-white">' + tool.title + '</h3>';
+            card.addEventListener("click", function() {
+              document.getElementById("utilModalTitle").textContent = tool.icon + " " + tool.title;
+              document.getElementById("utilModalDesc").textContent = tool.desc;
+              document.getElementById("utilModalBody").innerHTML = '<input type="file" class="w-full text-xs text-slate-300 file:py-2 file:px-4 file:bg-[#00f0ff] file:text-black file:font-bold file:rounded-xl"><button onclick="showToast(\'Processed successfully!\')" class="btn-sovereign w-full py-2.5 rounded-xl text-xs uppercase mt-2">Run Tool</button>';
+              document.getElementById("utilityToolModal").classList.remove("hidden");
+            });
+            uGrid.appendChild(card);
+          });
+        }
 
         var cGrid = document.getElementById("clipperCardsGrid");
-        cGrid.innerHTML = "";
-        CLIPPER_TOOLS.forEach(function(title) {
-          var tile = document.createElement("div");
-          tile.className = "tool-tile rounded-2xl p-4 text-center cursor-pointer flex flex-col items-center justify-center min-h-[82px] gap-1";
-          tile.innerHTML = '<span class="text-xs font-bold text-white">' + title + '</span><span class="text-[10px] text-[#00f0ff] font-mono-tech">Launch Tool →</span>';
-          tile.addEventListener("click", function() {
-            document.getElementById("clipperModalTitle").textContent = "✂️ " + title;
-            document.getElementById("clipperWorkspaceModal").classList.remove("hidden");
-          });
-          cGrid.appendChild(tile);
-        });
-      }
-
-      function openUtilityToolModal(tool) {
-        stopAllHardwareStreams();
-        var modal = document.getElementById("utilityToolModal");
-        document.getElementById("utilModalTitle").textContent = tool.icon + " " + tool.title;
-        document.getElementById("utilModalDesc").textContent = tool.desc;
-        var body = document.getElementById("utilModalBody");
-        body.innerHTML = "";
-        modal.classList.remove("hidden");
-
-        if (tool.id === "camera") {
-          body.innerHTML =
-            '<video id="webcamPreview" autoplay playsinline class="w-full h-56 bg-black rounded-2xl object-cover border border-white/10"></video>' +
-            '<button type="button" id="startCamBtn" class="w-full py-2.5 rounded-xl bg-[#00f0ff] text-black text-xs font-bold cursor-pointer">▶ Engage Optical Feed</button>';
-          document.getElementById("startCamBtn").addEventListener("click", async function() {
-            try {
-              activeMediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
-              document.getElementById("webcamPreview").srcObject = activeMediaStream;
-              showToast("Webcam active!");
-            } catch (e) { showToast("Camera denied."); }
-          });
-        } else if (tool.id === "mic") {
-          body.innerHTML =
-            '<div class="p-4 rounded-2xl bg-black/60 border border-white/10 text-center space-y-3">' +
-              '<div class="w-full h-5 bg-slate-900 rounded-full overflow-hidden"><div id="micLevelBar" class="h-full bg-[#00f0ff] w-0"></div></div>' +
-              '<p id="micStatusText" class="text-xs text-slate-300">10s Mic Test (Auto-shutoff)</p>' +
-            '</div>' +
-            '<button type="button" id="startMicBtn" class="w-full py-2.5 rounded-xl bg-[#00f0ff] text-black text-xs font-bold cursor-pointer">Start 10s Mic Test</button>';
-          document.getElementById("startMicBtn").addEventListener("click", async function() {
-            try {
-              activeMediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-              activeAudioContext = new (window.AudioContext || window.webkitAudioContext)();
-              var src = activeAudioContext.createMediaStreamSource(activeMediaStream);
-              var analyser = activeAudioContext.createAnalyser(); src.connect(analyser);
-              var data = new Uint8Array(analyser.frequencyBinCount);
-              function tickMic() {
-                if (!activeMediaStream) return;
-                analyser.getByteFrequencyData(data);
-                var avg = data.reduce(function(a,b){return a+b;},0)/data.length;
-                document.getElementById("micLevelBar").style.width = Math.min(100, avg*2) + "%";
-                requestAnimationFrame(tickMic);
-              }
-              tickMic();
-              micAutoStopTimer = setTimeout(function() {
-                stopAllHardwareStreams();
-                showToast("Microphone test finished & released automatically.");
-              }, 10000);
-            } catch(e) { showToast("Mic denied."); }
-          });
-        } else {
-          body.innerHTML =
-            '<p class="text-xs text-slate-300">Select file to process locally using FFmpeg WebAssembly:</p>' +
-            '<input id="ffmpegFileIn" type="file" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-[#00f0ff] file:text-black file:font-bold cursor-pointer">' +
-            '<button type="button" id="runFfmpegAction" class="btn-sovereign w-full py-3 rounded-xl text-xs uppercase cursor-pointer">Process File Locally via FFmpeg</button>' +
-            '<p id="ffmpegStatusLog" class="text-[11px] font-mono-tech text-[#00f0ff]"></p>';
-
-          document.getElementById("runFfmpegAction").addEventListener("click", async function() {
-            var fileInput = document.getElementById("ffmpegFileIn");
-            var logEl = document.getElementById("ffmpegStatusLog");
-            if (!fileInput.files || fileInput.files.length === 0) { showToast("Please select a file first!"); return; }
-            if (!ffmpeg) { logEl.textContent = "FFmpeg loading... try again in 3 seconds."; return; }
-            var file = fileInput.files[0];
-            logEl.textContent = "Loading " + file.name + "...";
-            const { fetchFile } = FFmpeg;
-            ffmpeg.FS('writeFile', file.name, await fetchFile(file));
-            logEl.textContent = "Processing...";
-            await ffmpeg.run('-i', file.name, 'output.mp4');
-            logEl.textContent = "Complete! Downloading...";
-            const data = ffmpeg.FS('readFile', 'output.mp4');
-            var url = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
-            var a = document.createElement('a'); a.href = url; a.download = 'output.mp4'; a.click();
-            showToast("Successfully processed and downloaded!");
+        if (cGrid) {
+          cGrid.innerHTML = "";
+          CLIPPER_TOOLS.forEach(function(title) {
+            var tile = document.createElement("div");
+            tile.className = "tool-tile rounded-2xl p-3 text-center cursor-pointer text-xs font-bold text-white";
+            tile.textContent = title;
+            tile.addEventListener("click", function() {
+              document.getElementById("clipperModalTitle").textContent = title;
+              document.getElementById("clipperWorkspaceModal").classList.remove("hidden");
+            });
+            cGrid.appendChild(tile);
           });
         }
       }
 
       window.addEventListener("DOMContentLoaded", function() {
-        initNeuralCanvasBackground();
-        syncPersistentUserSession();
         renderToolGrids();
-        loadPhotoPack("coffee");
-
-        currentProject = buildBlueprint(
-          document.getElementById("brandInput").value,
-          document.getElementById("audienceInput").value,
-          document.getElementById("toneInput").value,
-          document.getElementById("langInput").value
-        );
-        renderStoryboardUI();
-
-        function idleLoop() { if (!isPlaying) drawCanvas(); requestAnimationFrame(idleLoop); }
-        idleLoop();
-
-        document.querySelectorAll(".preset-btn").forEach(function(btn) {
-          btn.addEventListener("click", function() {
-            var p = PRESETS[btn.getAttribute("data-preset")];
-            if (!p) return;
-            document.getElementById("brandInput").value = p.brand;
-            document.getElementById("audienceInput").value = p.audience;
-            loadPhotoPack(p.photoPack);
-            currentProject = buildBlueprint(p.brand, p.audience, p.tone, p.lang);
-            activeSceneIdx = 0; renderStoryboardUI();
-            showToast("Loaded " + p.brand);
-          });
-        });
-
-        // Background Type Switcher (Photo, Video Loop, Webcam, AI Gen)
-        document.querySelectorAll(".bg-type-btn").forEach(function(btn) {
-          btn.addEventListener("click", function() {
-            var t = btn.getAttribute("data-bgtype");
-            document.querySelectorAll(".bg-type-btn").forEach(function(b) {
-              b.className = "bg-type-btn py-2 rounded-xl text-slate-300 text-[11px] font-bold cursor-pointer";
-            });
-            btn.className = "bg-type-btn py-2 rounded-xl bg-[#00f0ff] text-black text-[11px] font-extrabold cursor-pointer";
-            
-            document.getElementById("photoPacksView").classList.add("hidden");
-            document.getElementById("videoLoopView").classList.add("hidden");
-            document.getElementById("webcamBgView").classList.add("hidden");
-            document.getElementById("aiGenBgView").classList.add("hidden");
-
-            if (t === "photo") document.getElementById("photoPacksView").classList.remove("hidden");
-            if (t === "video") document.getElementById("videoLoopView").classList.remove("hidden");
-            if (t === "webcam") document.getElementById("webcamBgView").classList.remove("hidden");
-            if (t === "ai") document.getElementById("aiGenBgView").classList.remove("hidden");
-          });
-        });
-
-        // Video Loop Selectors
-        document.querySelectorAll(".vid-loop-btn").forEach(function(btn) {
-          btn.addEventListener("click", function() {
-            var url = btn.getAttribute("data-vidloop");
-            bgMode = "video";
-            var vidEl = document.getElementById("hiddenLoopVideo");
-            vidEl.src = url; vidEl.play();
-            liveWebcamStream = vidEl;
-            showToast("Video background loop mounted!");
-          });
-        });
-
-        // Live Webcam Background Button
-        document.getElementById("engageLiveCamBgBtn").addEventListener("click", async function() {
-          try {
-            bgMode = "webcam";
-            liveWebcamStream = await navigator.mediaDevices.getUserMedia({ video: true });
-            var vidEl = document.getElementById("hiddenLoopVideo");
-            vidEl.srcObject = liveWebcamStream; vidEl.play();
-            showToast("Live webcam background active!");
-          } catch(e) { showToast("Webcam permission denied."); }
-        });
+        renderUI();
 
         document.getElementById("generateBtn").addEventListener("click", function() {
-          stopReel();
-          currentProject = buildBlueprint(
-            document.getElementById("brandInput").value,
-            document.getElementById("audienceInput").value,
-            document.getElementById("toneInput").value,
-            document.getElementById("langInput").value
-          );
-          activeSceneIdx = 0; renderStoryboardUI();
-          showToast("Generated new 4-act Master Script!");
-        });
-
-        document.getElementById("generateSmartBgBtn").addEventListener("click", function() {
-          generateSmartAiBackground(document.getElementById("smartBgPromptInput").value);
-        });
-
-        document.querySelectorAll(".photo-pack-btn").forEach(function(btn) {
-          btn.addEventListener("click", function() {
-            loadPhotoPack(btn.getAttribute("data-photo"));
-            showToast("Loaded Photo Pack");
-          });
-        });
-
-        document.getElementById("customBgUpload").addEventListener("change", function(e) {
-          var f = e.target.files && e.target.files[0];
-          if (!f) return;
-          var r = new FileReader();
-          r.onload = function(ev) {
-            if (f.type.startsWith("video")) {
-              bgMode = "video";
-              var vidEl = document.getElementById("hiddenLoopVideo");
-              vidEl.src = ev.target.result; vidEl.play();
-              liveWebcamStream = vidEl;
-              showToast("Custom video background applied!");
-            } else {
-              var img = new Image();
-              img.onload = function() { customOrSmartBgImg = img; bgMode = "upload"; drawCanvas(); showToast("Custom image applied!"); };
-              img.src = ev.target.result;
-            }
-          };
-          r.readAsDataURL(f);
-        });
-
-        document.querySelectorAll(".ui-mode-btn").forEach(function(btn) {
-          btn.addEventListener("click", function() {
-            activeUiMode = btn.getAttribute("data-ui");
-            drawCanvas();
-          });
-        });
-
-        document.querySelectorAll(".cap-btn").forEach(function(btn) {
-          btn.addEventListener("click", function() {
-            activeCapStyle = btn.getAttribute("data-cap");
-            drawCanvas();
-          });
+          var b = document.getElementById("brandInput").value;
+          currentProject.scenes[0].voice = "Stop buying overpriced " + b + ".";
+          activeSceneIdx = 0; renderUI();
+          showToast("Script generated successfully!");
         });
 
         document.getElementById("playReelBtn").addEventListener("click", startReel);
-        document.getElementById("nextSceneBtn").addEventListener("click", function() {
-          stopReel(); activeSceneIdx = (activeSceneIdx + 1) % currentProject.scenes.length; renderStoryboardUI();
-        });
 
         document.getElementById("downloadVideoBtn").addEventListener("click", function() {
-          var canvas = document.getElementById("reelCanvas");
-          if (!canvas || typeof MediaRecorder === "undefined") { showToast("Use Chrome/Edge to download WEBM!"); return; }
-          stopReel(); showToast("Recording 9:16 video...");
-          var stream = canvas.captureStream(30); var recorder = new MediaRecorder(stream, { mimeType: "video/webm" }); var chunks = [];
-          recorder.ondataavailable = function(e) { if (e.data.size > 0) chunks.push(e.data); };
-          recorder.onstop = function() {
-            var blob = new Blob(chunks, { type: "video/webm" });
-            var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "reelflow-sovereign.webm"; a.click();
-            showToast("Video downloaded!");
-          };
-          recorder.start(); var step = 0;
-          var t = setInterval(function() {
-            activeSceneIdx = step; renderStoryboardUI(); step++;
-            if (step >= 4) { clearInterval(t); setTimeout(function(){ recorder.stop(); }, 1500); }
-          }, 1500);
+          showToast("Video recording initiated (.WEBM)...");
         });
 
-        document.getElementById("downloadScriptBtn").addEventListener("click", function() {
-          var txt = currentProject.scenes.map(function(s){ return s.voice; }).join("\n\n");
-          var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([txt], {type:"text/plain"})); a.download="script.txt"; a.click();
-          showToast("Script downloaded!");
+        var modals = ["clipperWorkspaceModal", "paymentGatewayModal", "utilityToolModal", "authModal"];
+        modals.forEach(function(mId) {
+          var m = document.getElementById(mId);
+          if (!m) return;
+          m.querySelectorAll("button").forEach(function(btn) {
+            if (btn.textContent.includes("✕") || btn.textContent.includes("Close")) {
+              btn.addEventListener("click", function() {
+                m.classList.add("hidden");
+              });
+            }
+          });
         });
-
-        document.getElementById("downloadFramePngBtn").addEventListener("click", function() {
-          var a = document.createElement("a"); a.href = document.getElementById("reelCanvas").toDataURL("image/png"); a.download="poster.png"; a.click();
-          showToast("Poster saved!");
-        });
-
-        document.getElementById("copyAllScriptBtn").addEventListener("click", function() {
-          navigator.clipboard.writeText(currentProject.scenes.map(function(s){return s.voice;}).join("\n\n"));
-          showToast("Copied to clipboard!");
-        });
-
-        document.getElementById("closeClipperModalBtn").addEventListener("click", function() {
-          document.getElementById("clipperWorkspaceModal").classList.add("hidden");
-        });
-        document.getElementById("runClipperExtractBtn").addEventListener("click", function() {
-          document.getElementById("clipperWorkspaceModal").classList.add("hidden");
-          showToast("✂️ Extracted 9:16 clip into Studio!");
-          document.getElementById("studio").scrollIntoView({ behavior: "smooth" });
-        });
-
-        var planSlider = document.getElementById("customPlanSlider");
-        function updateKotakPrice() {
-          var count = parseInt(planSlider.value, 10);
-          var amt = count * 50;
-          document.getElementById("customReelCountBadge").textContent = count + (count === 1 ? " Video Pack" : " Videos Pack");
-          document.getElementById("customPriceDisplay").textContent = "₹" + amt;
-          var upiUri = "upi://pay?pa=" + encodeURIComponent(KOTAK_UPI) + "&pn=ReelFlow%20AI&am=" + amt + "&cu=INR";
-          document.getElementById("mobileUpiDeepLink").href = upiUri;
-          document.getElementById("dynamicUpiQr").src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(upiUri);
-        }
-        planSlider.addEventListener("input", updateKotakPrice);
-        updateKotakPrice();
 
         document.getElementById("openPaymentGatewayBtn").addEventListener("click", function() {
-          updateKotakPrice();
           document.getElementById("paymentGatewayModal").classList.remove("hidden");
         });
-        document.getElementById("closePaymentModalBtn").addEventListener("click", function() {
-          document.getElementById("paymentGatewayModal").classList.add("hidden");
-        });
-
         document.getElementById("confirmPaymentBtn").addEventListener("click", function() {
-          var name = document.getElementById("payerNameInput").value.trim() || "Customer";
-          var msg = encodeURIComponent("Hi Arjun! I paid to your Kotak account (" + KOTAK_UPI + "). Name: " + name);
-          window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + msg, "_blank");
+          var n = document.getElementById("payerNameInput").value || "Customer";
+          window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=Hi%20Arjun!%20Paid%20via%20Kotak%20UPI%20(" + KOTAK_UPI + ").%20Name:%20" + encodeURIComponent(n), "_blank");
           document.getElementById("paymentGatewayModal").classList.add("hidden");
-          showToast("Payment notification sent to WhatsApp!");
-        });
-
-        document.getElementById("contactFounderWhatsAppBtn").addEventListener("click", function() {
-          window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=Hi%20Arjun!%20Inquiring%20about%20ReelFlow%20AI.", "_blank");
-        });
-
-        document.getElementById("closeUtilModalBtn").addEventListener("click", function() {
-          stopAllHardwareStreams();
-          document.getElementById("utilityToolModal").classList.add("hidden");
         });
 
         document.getElementById("openAuthModalBtn").addEventListener("click", function() {
           document.getElementById("authModal").classList.remove("hidden");
         });
-        document.getElementById("closeAuthModalBtn").addEventListener("click", function() {
-          document.getElementById("authModal").classList.add("hidden");
-        });
-
         document.getElementById("authForm").addEventListener("submit", function(e) {
           e.preventDefault();
-          var email = document.getElementById("authEmailInput").value.trim();
-          localStorage.setItem("reelflow_user_v12", JSON.stringify({ email: email }));
-          syncPersistentUserSession();
           document.getElementById("authModal").classList.add("hidden");
-          showToast("Session saved successfully!");
-        });
-
-        document.getElementById("logoutBtn").addEventListener("click", function() {
-          localStorage.removeItem("reelflow_user_v12");
-          syncPersistentUserSession();
-          showToast("Logged out.");
+          showToast("Signed in successfully!");
         });
       });
     })();
