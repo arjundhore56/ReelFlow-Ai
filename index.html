@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>REELFLOW AI — Autonomous Short-Form Video & Quantum Suite</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='qg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='50%25' stop-color='%23818cf8'/%3E%3Cstop offset='100%25' stop-color='%23f472b6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%23030407'/%3E%3Crect x='3' y='3' width='58' height='58' rx='13' fill='none' stroke='url(%23qg)' stroke-width='3.5'/%3E%3Cpath d='M32 12 L50 22 L50 42 L32 54 L14 42 L14 22 Z' fill='url(%23qg)' fill-opacity='0.25' stroke='url(%23qg)' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%2338bdf8'/%3E%3C/svg%3E">
+  <title>REELFLOW SOVEREIGN — Autonomous Neural Cinema & Media OS</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23020306'/%3E%3Crect x='3' y='3' width='58' height='58' rx='13' fill='none' stroke='%2300f0ff' stroke-width='3'/%3E%3Cpath d='M32 12 L50 22 L50 42 L32 54 L14 42 L14 22 Z' fill='%2300f0ff' fill-opacity='0.2' stroke='%2300f0ff' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23ffffff'/%3E%3C/svg%3E">
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FFmpeg.wasm for 100% Real Browser Video & Audio Processing -->
   <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-core: #030407;
-      --accent-cyan: #38bdf8;
-      --accent-indigo: #818cf8;
-      --accent-pink: #f472b6;
+      --void: #020306;
+      --surface: #070a12;
+      --cyan-glow: #00f0ff;
+      --violet-glow: #7000ff;
     }
     * { box-sizing: border-box; }
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-core);
-      color: #f8fafc;
+      background-color: var(--void);
+      color: #f1f5f9;
       overflow-x: hidden;
+      letter-spacing: -0.01em;
     }
     h1, h2, h3, .font-display {
       font-family: 'Outfit', sans-serif;
@@ -30,7 +30,7 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Interactive Neural Particle Background Canvas */
+    /* Interactive Neural Canvas */
     #neuralCanvas {
       position: fixed;
       inset: 0;
@@ -38,124 +38,120 @@
       pointer-events: none;
     }
 
-    /* Quantum Glass Panels */
-    .quantum-card {
+    /* Sovereign Liquid Glass Pods */
+    .sovereign-pod {
       position: relative;
       z-index: 10;
-      background: linear-gradient(155deg, rgba(13, 17, 28, 0.88) 0%, rgba(5, 7, 12, 0.96) 100%);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.9), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      background: linear-gradient(160deg, rgba(12, 16, 28, 0.88) 0%, rgba(4, 6, 11, 0.96) 100%);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      border: 1px solid rgba(0, 240, 255, 0.14);
+      box-shadow: 0 40px 100px -25px rgba(0, 0, 0, 0.95), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .quantum-card:hover {
-      border-color: rgba(56, 189, 248, 0.4);
-      box-shadow: 0 40px 90px -20px rgba(0, 0, 0, 0.95), 0 0 40px -10px rgba(56, 189, 248, 0.15);
+    .sovereign-pod:hover {
+      border-color: rgba(0, 240, 255, 0.45);
+      box-shadow: 0 50px 110px -25px rgba(0, 0, 0, 0.98), 0 0 50px -15px rgba(0, 240, 255, 0.18);
     }
 
-    /* Quantum Glow Button */
-    .btn-quantum {
-      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #f472b6 100%);
-      color: #030407;
+    /* Cyber Cyan Glow Button */
+    .btn-sovereign {
+      background: linear-gradient(135deg, #00f0ff 0%, #7000ff 100%);
+      color: #020306;
       font-weight: 800;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .btn-quantum:hover {
-      opacity: 0.92;
+    .btn-sovereign:hover {
+      opacity: 0.94;
       transform: translateY(-2px);
-      box-shadow: 0 15px 35px -8px rgba(56, 189, 248, 0.5);
+      box-shadow: 0 20px 40px -10px rgba(0, 240, 255, 0.45);
     }
 
-    .text-quantum-gradient {
-      background: linear-gradient(135deg, #ffffff 0%, #38bdf8 35%, #818cf8 70%, #f472b6 100%);
+    .text-cyan-gradient {
+      background: linear-gradient(135deg, #ffffff 0%, #00f0ff 40%, #a855f7 80%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     /* Tool Tile Hover */
     .tool-tile {
-      background: rgba(9, 12, 20, 0.85);
+      background: rgba(7, 10, 18, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.07);
       transition: all 0.25s ease;
     }
     .tool-tile:hover {
-      background: rgba(18, 24, 38, 0.95);
-      border-color: var(--accent-cyan);
+      background: rgba(14, 20, 35, 0.95);
+      border-color: #00f0ff;
       transform: translateY(-4px);
-      box-shadow: 0 15px 35px -10px rgba(56, 189, 248, 0.25);
+      box-shadow: 0 20px 40px -12px rgba(0, 240, 255, 0.3);
     }
 
     ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #030407; }
+    ::-webkit-scrollbar-track { background: #020306; }
     ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+    ::-webkit-scrollbar-thumb:hover { background: #00f0ff; }
   </style>
 </head>
-<body class="min-h-screen selection:bg-cyan-400 selection:text-black pb-28 md:pb-0">
+<body class="min-h-screen selection:bg-[#00f0ff] selection:text-black pb-32 md:pb-0">
 
   <!-- Interactive Neural Particle Background Canvas -->
   <canvas id="neuralCanvas"></canvas>
 
   <!-- Toast Notification -->
-  <div id="toastBanner" class="fixed bottom-24 md:bottom-8 right-6 z-50 hidden px-5 py-3.5 rounded-2xl bg-cyan-400 text-black text-xs font-extrabold shadow-2xl flex items-center gap-2.5">
+  <div id="toastBanner" class="fixed bottom-24 md:bottom-8 right-6 z-50 hidden px-5 py-3.5 rounded-2xl bg-[#00f0ff] text-black text-xs font-extrabold shadow-2xl flex items-center gap-2.5">
     <span class="w-2.5 h-2.5 rounded-full bg-black animate-ping"></span>
-    <span id="toastText">Quantum Engine Ready</span>
+    <span id="toastText">Sovereign Engine Initialized</span>
   </div>
 
   <!-- Floating Founder WhatsApp Pill -->
-  <a href="https://wa.me/917820847387?text=Hi%20Arjun!%20Testing%20ReelFlow%20AI%20Masterpiece%20Edition." target="_blank" class="hidden md:flex fixed bottom-7 left-7 z-40 items-center gap-3 px-5 py-3 rounded-full bg-[#070b14]/90 hover:bg-[#0f172a] border border-cyan-400/40 backdrop-blur-2xl text-cyan-300 text-xs font-bold shadow-2xl transition group">
-    <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+  <a href="https://wa.me/917820847387?text=Hi%20Arjun!%20Inquiring%20about%20ReelFlow%20Sovereign." target="_blank" class="hidden md:flex fixed bottom-7 left-7 z-40 items-center gap-3 px-5 py-3 rounded-full bg-[#070a12]/90 hover:bg-[#0f172a] border border-[#00f0ff]/40 backdrop-blur-2xl text-[#00f0ff] text-xs font-bold shadow-2xl transition group">
+    <span class="w-2.5 h-2.5 rounded-full bg-[#00f0ff] animate-ping"></span>
     <span>Founder Concierge</span>
-    <span class="font-mono-tech text-[11px] text-cyan-300">+91 7820847387 →</span>
+    <span class="font-mono-tech text-[11px] text-[#00f0ff]">+91 7820847387 →</span>
   </a>
 
-  <!-- TOP FLOATING GLASS HEADER -->
+  <!-- TOP SOVEREIGN FLOATING ISLAND HEADER -->
   <header class="sticky top-4 z-40 px-4 sm:px-8">
-    <div class="max-w-7xl mx-auto rounded-full bg-[#060913]/85 backdrop-blur-2xl border border-white/10 px-5 sm:px-8 h-18 sm:h-20 flex items-center justify-between gap-4 shadow-[0_20px_60px_rgba(0,0,0,0.85)]">
+    <div class="max-w-7xl mx-auto rounded-full bg-[#050810]/90 backdrop-blur-2xl border border-white/10 px-6 sm:px-8 h-18 sm:h-20 flex items-center justify-between gap-4 shadow-[0_25px_60px_rgba(0,0,0,0.9)]">
       
-      <!-- Brand Logo -->
       <a href="#hero" class="flex items-center gap-3.5 group">
-        <div class="w-11 h-11 rounded-2xl bg-[#0b101d] border border-cyan-400/40 flex items-center justify-center shadow-lg group-hover:scale-105 transition">
-          <svg class="w-7 h-7" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M32 10 L52 22 L52 42 L32 54 L12 42 L12 22 Z" fill="#38bdf8" fill-opacity="0.2" stroke="#38bdf8" stroke-width="2.5"/>
-            <circle cx="32" cy="32" r="7" fill="#818cf8"/>
+        <div class="w-11 h-11 rounded-2xl bg-[#0a0f1d] border border-[#00f0ff]/50 flex items-center justify-center shadow-lg group-hover:scale-105 transition">
+          <svg class="w-6 h-6" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 10 L52 22 L52 42 L32 54 L12 42 L12 22 Z" fill="#00f0ff" fill-opacity="0.25" stroke="#00f0ff" stroke-width="2.5"/>
+            <circle cx="32" cy="32" r="6" fill="#ffffff"/>
           </svg>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="font-extrabold text-lg sm:text-xl tracking-tight font-display text-white">ReelFlow<span class="text-cyan-400">.ai</span></span>
-            <span class="hidden sm:inline-block px-2.5 py-0.5 text-[10px] font-mono-tech uppercase bg-cyan-400/10 text-cyan-300 border border-cyan-400/30 rounded-full">v11.0 Masterpiece</span>
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight font-display text-white">ReelFlow<span class="text-[#00f0ff]">.ai</span></span>
+            <span class="hidden sm:inline-block px-2.5 py-0.5 text-[10px] font-mono-tech uppercase bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 rounded-full">v12.0 Sovereign</span>
           </div>
-          <p class="text-[10px] text-slate-400 hidden sm:block font-mono-tech">NEURAL CINEMA & FFMPEG WASM</p>
+          <p class="text-[10px] text-slate-400 hidden sm:block font-mono-tech">NEURAL CINEMA OS</p>
         </div>
       </a>
 
-      <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-8 text-xs font-semibold text-slate-300">
-        <a href="#studio" class="hover:text-cyan-400 transition">9:16 Studio</a>
-        <a href="#smart-bg-anchor" class="hover:text-cyan-400 transition">Smart AI Backgrounds</a>
-        <a href="#utility-suite" class="hover:text-cyan-400 transition">FFmpeg Tools (12)</a>
-        <a href="#clipper-grid" class="hover:text-cyan-400 transition">AI Clippers (26)</a>
-        <a href="#pricing" class="hover:text-cyan-400 transition">₹50 Kotak Plan</a>
+        <a href="#studio" class="hover:text-[#00f0ff] transition">Cinematic Studio</a>
+        <a href="#smart-bg-anchor" class="hover:text-[#00f0ff] transition">Video & Live Plates</a>
+        <a href="#utility-suite" class="hover:text-[#00f0ff] transition">FFmpeg Lab (12)</a>
+        <a href="#clipper-grid" class="hover:text-[#00f0ff] transition">AI Clippers (26)</a>
+        <a href="#pricing" class="hover:text-[#00f0ff] transition">Kotak UPI ₹50</a>
       </nav>
 
-      <!-- Right Controls -->
       <div class="flex items-center gap-3">
         <button type="button" id="openApiModalBtn" class="px-3.5 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono-tech text-slate-200 transition cursor-pointer">
           ⚡ GEMINI KEY
         </button>
 
-        <button type="button" id="openAuthModalBtn" class="btn-quantum px-5 py-2.5 rounded-full text-xs uppercase tracking-wider cursor-pointer shadow-lg">
+        <button type="button" id="openAuthModalBtn" class="btn-sovereign px-5 py-2.5 rounded-full text-xs uppercase tracking-wider cursor-pointer shadow-lg">
           Sign In
         </button>
 
-        <!-- Logged In Badge -->
-        <div id="userProfileBadge" class="hidden items-center gap-2.5 bg-white/5 border border-cyan-400/40 px-3.5 py-1.5 rounded-full">
-          <div id="userInitials" class="w-6 h-6 rounded-full bg-cyan-400 text-black text-[11px] font-extrabold flex items-center justify-center">A</div>
+        <div id="userProfileBadge" class="hidden items-center gap-2.5 bg-white/5 border border-[#00f0ff]/40 px-3.5 py-1.5 rounded-full">
+          <div id="userInitials" class="w-6 h-6 rounded-full bg-[#00f0ff] text-black text-[11px] font-extrabold flex items-center justify-center">A</div>
           <div class="text-left">
             <span id="userNameText" class="block text-xs font-bold text-white max-w-[95px] truncate leading-none">Founder</span>
-            <span class="text-[9px] text-cyan-300 font-mono-tech">● ACTIVE</span>
+            <span class="text-[9px] text-[#00f0ff] font-mono-tech">● SOVEREIGN</span>
           </div>
           <button type="button" id="logoutBtn" class="text-[10px] text-rose-400 hover:text-rose-300 ml-1 font-bold cursor-pointer">Exit</button>
         </div>
@@ -164,8 +160,8 @@
   </header>
 
   <!-- Mobile Bottom Floating Dock -->
-  <div class="md:hidden fixed bottom-3 inset-x-4 z-40 rounded-3xl bg-[#060913]/95 backdrop-blur-2xl border border-white/15 px-3 py-2.5 flex justify-around items-center text-[10px] font-bold text-slate-300 shadow-2xl">
-    <a href="#studio" class="flex flex-col items-center gap-0.5 text-cyan-400"><span>🎬</span><span>Studio</span></a>
+  <div class="md:hidden fixed bottom-3 inset-x-4 z-40 rounded-3xl bg-[#050810]/95 backdrop-blur-2xl border border-white/15 px-3 py-2.5 flex justify-around items-center text-[10px] font-bold text-slate-300 shadow-2xl">
+    <a href="#studio" class="flex flex-col items-center gap-0.5 text-[#00f0ff]"><span>🎬</span><span>Studio</span></a>
     <a href="#player-column" class="flex flex-col items-center gap-0.5 hover:text-white"><span>⬇️</span><span>Export</span></a>
     <a href="#clipper-grid" class="flex flex-col items-center gap-0.5 hover:text-white"><span>✂️</span><span>Clippers</span></a>
     <a href="#pricing" class="flex flex-col items-center gap-0.5 text-emerald-400"><span>₹50</span><span>Kotak</span></a>
@@ -174,23 +170,23 @@
 
   <!-- HERO SECTION -->
   <section id="hero" class="relative z-10 max-w-6xl mx-auto px-6 pt-16 sm:pt-24 pb-16 text-center">
-    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-xs font-mono-tech uppercase mb-6">
-      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-      <span>Autonomous Neural Cinema & Real FFmpeg.wasm Engine</span>
+    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-[#00f0ff] text-xs font-mono-tech uppercase mb-6">
+      <span class="w-2 h-2 rounded-full bg-[#00f0ff] animate-ping"></span>
+      <span>Autonomous Neural Cinema & Real FFmpeg.wasm Browser Engine</span>
     </div>
 
     <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.04] mb-6">
-      Future of vertical video, <br class="hidden sm:inline" />
-      <span class="text-quantum-gradient">powered by quantum AI.</span>
+      The future of vertical video, <br class="hidden sm:inline" />
+      <span class="text-cyan-gradient">engineered autonomously.</span>
     </h1>
 
     <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto mb-10 leading-relaxed">
-      Process real video/audio files right in your browser with FFmpeg WebAssembly, generate smart AI scene backgrounds, test hardware safely, and settle instantly via Kotak UPI.
+      Execute real local video/audio transcoding with FFmpeg WASM, stream live webcam background plates, synthesize AI video loops, and settle securely via Kotak UPI.
     </p>
 
     <div class="flex flex-wrap items-center justify-center gap-4">
-      <a href="#studio" class="btn-quantum px-8 py-4 rounded-full text-xs sm:text-sm uppercase tracking-wider shadow-2xl">
-        Launch Quantum Studio ↓
+      <a href="#studio" class="btn-sovereign px-8 py-4 rounded-full text-xs sm:text-sm uppercase tracking-wider shadow-2xl">
+        Launch Sovereign Studio ↓
       </a>
       <a href="#utility-suite" class="px-8 py-4 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white font-bold text-xs sm:text-sm transition">
         Explore Real FFmpeg Tools →
@@ -198,151 +194,140 @@
     </div>
   </section>
 
-  <!-- SECTION 1: WORKSPACE STUDIO -->
+  <!-- SECTION 1: MASTER RE-ENGINEERED DUAL-CHAMBER 9:16 STUDIO -->
   <section id="studio" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-28">
     <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-4">
       <div>
-        <span class="font-mono-tech text-xs uppercase tracking-widest text-cyan-400 block mb-1">01 // PRODUCTION SUITE</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white font-display">Interactive 9:16 Studio</h2>
+        <span class="font-mono-tech text-xs uppercase tracking-widest text-[#00f0ff] block mb-1">01 // CINEMATIC PRODUCTION DECK</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white font-display">Asymmetric Dual-Chamber Studio</h2>
       </div>
 
       <div class="flex flex-wrap items-center gap-2">
         <span class="text-xs font-mono-tech uppercase text-slate-400 mr-1">Templates:</span>
-        <button type="button" data-preset="coffee" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">☕ Cold Brew</button>
-        <button type="button" data-preset="fintech" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">💳 Kotak Rewards</button>
-        <button type="button" data-preset="saas" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">📊 B2B SaaS</button>
-        <button type="button" data-preset="podcast" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">🎙️ Podcast</button>
+        <button type="button" data-preset="coffee" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-[#00f0ff]/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">☕ Cold Brew</button>
+        <button type="button" data-preset="fintech" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-[#00f0ff]/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">💳 Kotak Rewards</button>
+        <button type="button" data-preset="saas" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-[#00f0ff]/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">📊 B2B SaaS</button>
+        <button type="button" data-preset="podcast" class="preset-btn px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-[#00f0ff]/20 border border-white/10 text-xs font-semibold text-white transition cursor-pointer">🎙️ Podcast</button>
       </div>
     </div>
 
-    <!-- 12-Column Grid -->
+    <!-- 12-Column Asymmetric Layout -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-      <!-- LEFT COLUMN (4 Cols): Brief + Smart Background Generator + Voices -->
-      <div class="lg:col-span-4 space-y-6">
+      <!-- LEFT CHAMBER (7 Cols): Editorial Controls & Timeline -->
+      <div class="lg:col-span-7 space-y-6">
         
-        <!-- Pod 1 -->
-        <div class="quantum-card rounded-3xl p-6 space-y-4">
+        <!-- Pod 1: Campaign Brief -->
+        <div class="sovereign-pod rounded-3xl p-6 sm:p-8 space-y-4">
           <div class="flex items-center justify-between border-b border-white/10 pb-3">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-cyan-400">Campaign & Script Brief</h3>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-[#00f0ff]">Narrative Script & Brief</h3>
             <span id="activeWorkflowBadge" class="font-mono-tech text-[10px] text-emerald-300">● READY</span>
           </div>
 
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Brand / Topic / Video URL *</label>
-            <input id="brandInput" type="text" value="Asli Cold Brew Coffee" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400">
-          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Brand / Topic / Video URL *</label>
+              <input id="brandInput" type="text" value="Asli Cold Brew Coffee" class="w-full bg-black/70 border border-white/15 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#00f0ff]">
+            </div>
 
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Target Audience & Pain Point *</label>
-            <textarea id="audienceInput" rows="2" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400">Young professionals tired of spending Rs 350 on watery cafe coffee</textarea>
-          </div>
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Target Audience & Core Frustration *</label>
+              <textarea id="audienceInput" rows="2" class="w-full bg-black/70 border border-white/15 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#00f0ff]">Young professionals tired of spending Rs 350 on watery cafe coffee</textarea>
+            </div>
 
-          <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="block text-[11px] font-semibold text-slate-400 mb-1">Hook Style</label>
-              <select id="toneInput" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
+              <label class="block text-[11px] font-semibold text-slate-400 mb-1">Hook Psychology</label>
+              <select id="toneInput" class="w-full bg-black/70 border border-white/15 rounded-xl px-3 py-2.5 text-xs text-white">
                 <option value="controversial">🔥 Pattern Interrupt</option>
                 <option value="data">📊 Hard Math / Proof</option>
                 <option value="story">🎭 Founder Story</option>
                 <option value="secret">🤫 Secret Hack</option>
               </select>
             </div>
+
             <div>
-              <label class="block text-[11px] font-semibold text-slate-400 mb-1">Language Vibe</label>
-              <select id="langInput" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
+              <label class="block text-[11px] font-semibold text-slate-400 mb-1">Language</label>
+              <select id="langInput" class="w-full bg-black/70 border border-white/15 rounded-xl px-3 py-2.5 text-xs text-white">
                 <option value="english">🌐 Professional English</option>
-                <option value="hinglish">🇮🇳 Viral Hinglish</option>
               </select>
             </div>
           </div>
 
-          <button type="button" id="generateBtn" class="btn-quantum w-full py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
-            ⚡ Synthesize 4-Scene Script
+          <button type="button" id="generateBtn" class="btn-sovereign w-full py-4 rounded-2xl text-xs uppercase tracking-wider cursor-pointer shadow-xl">
+            ⚡ Synthesize 4-Act Master Script
           </button>
         </div>
 
-        <!-- Pod 2: Smart AI Backgrounds & HD Photo Packs -->
-        <div id="smart-bg-anchor" class="quantum-card rounded-3xl p-6 space-y-4 border border-cyan-500/30">
+        <!-- Pod 2: Dynamic Background Switcher (Photo, Video Loop, Live Webcam, Smart AI) -->
+        <div id="smart-bg-anchor" class="sovereign-pod rounded-3xl p-6 sm:p-8 space-y-4 border border-[#00f0ff]/30">
           <div class="flex items-center justify-between border-b border-white/10 pb-3">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-indigo-300">Smart Background Studio</h3>
-            <label class="px-3 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-[11px] font-bold text-white cursor-pointer border border-white/15">
-              <span>+ Upload</span>
-              <input id="customBgUpload" type="file" accept="image/*" class="hidden">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-purple-300">Background Plate & Video Selector</h3>
+            <label class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold text-white cursor-pointer border border-white/15">
+              <span>+ Upload Image/Video</span>
+              <input id="customBgUpload" type="file" accept="image/*,video/*" class="hidden">
             </label>
           </div>
 
-          <div class="p-3.5 rounded-2xl bg-black/70 border border-cyan-500/30 space-y-2">
-            <label class="block text-[11px] font-bold text-cyan-200">✨ Smart AI Background Generator</label>
-            <div class="flex gap-2">
-              <input id="smartBgPromptInput" type="text" value="Cinematic cyberpunk cafe neon reflections 8k" class="flex-1 bg-black border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
-              <button type="button" id="generateSmartBgBtn" class="px-3.5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-extrabold cursor-pointer">
-                Generate
-              </button>
-            </div>
+          <!-- Background Type Tabs -->
+          <div class="grid grid-cols-4 gap-1.5 p-1 rounded-2xl bg-black/60 border border-white/10 text-center">
+            <button type="button" data-bgtype="photo" class="bg-type-btn py-2 rounded-xl bg-[#00f0ff] text-black text-[11px] font-extrabold cursor-pointer">Photo Packs</button>
+            <button type="button" data-bgtype="video" class="bg-type-btn py-2 rounded-xl text-slate-300 text-[11px] font-bold cursor-pointer">Video Loop</button>
+            <button type="button" data-bgtype="webcam" class="bg-type-btn py-2 rounded-xl text-slate-300 text-[11px] font-bold cursor-pointer">Live Cam</button>
+            <button type="button" data-bgtype="ai" class="bg-type-btn py-2 rounded-xl text-slate-300 text-[11px] font-bold cursor-pointer">Smart AI</button>
           </div>
 
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-2">HD Photography Packs</label>
-            <div class="grid grid-cols-3 gap-1.5">
-              <button type="button" data-photo="coffee" class="photo-pack-btn py-2 px-2 rounded-xl bg-cyan-500/20 border border-cyan-400 text-[11px] font-bold text-white cursor-pointer">☕ Cafe</button>
-              <button type="button" data-photo="cyber" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">🌆 Cyber</button>
-              <button type="button" data-photo="luxury" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">⌚ Luxury</button>
-              <button type="button" data-photo="workspace" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">💻 Tech</button>
-              <button type="button" data-photo="fitness" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">🏋️ Gym</button>
-              <button type="button" data-photo="street" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-[11px] font-semibold text-slate-300 cursor-pointer">👟 Street</button>
+          <!-- Dynamic Plate View Area -->
+          <div id="bgTypeContainer" class="space-y-3 pt-1">
+            <!-- Default Photo Packs View -->
+            <div id="photoPacksView" class="space-y-2">
+              <label class="block text-xs font-semibold text-slate-300">Archival 35mm Photography Packs:</label>
+              <div class="grid grid-cols-3 gap-2">
+                <button type="button" data-photo="coffee" class="photo-pack-btn py-2 px-2 rounded-xl bg-[#00f0ff]/20 border border-[#00f0ff] text-xs font-bold text-white cursor-pointer">☕ Cafe HD</button>
+                <button type="button" data-photo="cyber" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-xs font-semibold text-slate-300 cursor-pointer">🌆 Cyber</button>
+                <button type="button" data-photo="luxury" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-xs font-semibold text-slate-300 cursor-pointer">⌚ Luxury</button>
+                <button type="button" data-photo="workspace" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-xs font-semibold text-slate-300 cursor-pointer">💻 Tech Desk</button>
+                <button type="button" data-photo="fitness" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-xs font-semibold text-slate-300 cursor-pointer">🏋️ Gym</button>
+                <button type="button" data-photo="street" class="photo-pack-btn py-2 px-2 rounded-xl bg-black/60 border border-white/10 text-xs font-semibold text-slate-300 cursor-pointer">👟 Streetwear</button>
+              </div>
             </div>
-          </div>
 
-          <div class="grid grid-cols-3 gap-2 pt-1 items-center">
-            <div>
-              <label class="block text-[10px] text-slate-400 mb-1">Color 1</label>
-              <input id="customColor1" type="color" value="#0f172a" class="w-full h-8 rounded bg-transparent border border-white/15 cursor-pointer">
+            <!-- Video Loop View (Hidden by default) -->
+            <div id="videoLoopView" class="hidden space-y-2">
+              <label class="block text-xs font-semibold text-slate-300">Dynamic Motion Background Loops:</label>
+              <div class="grid grid-cols-2 gap-2">
+                <button type="button" data-vidloop="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-code-31950-large.mp4" class="vid-loop-btn py-2.5 px-3 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-cyan-300 cursor-pointer">🖥️ Cyber Code Stream</button>
+                <button type="button" data-vidloop="https://assets.mixkit.co/videos/preview/mixkit-abstract-tunnel-of-lights-background-41480-large.mp4" class="vid-loop-btn py-2.5 px-3 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-purple-300 cursor-pointer">🌌 Neon Light Tunnel</button>
+                <button type="button" data-vidloop="https://assets.mixkit.co/videos/preview/mixkit-pouring-coffee-into-a-cup-42861-large.mp4" class="vid-loop-btn py-2.5 px-3 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-amber-300 cursor-pointer">☕ Pouring Coffee</button>
+                <button type="button" data-vidloop="https://assets.mixkit.co/videos/preview/mixkit-hands-typing-on-a-laptop-keyboard-43093-large.mp4" class="vid-loop-btn py-2.5 px-3 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-emerald-300 cursor-pointer">💻 Laptop Typing</button>
+              </div>
             </div>
-            <div>
-              <label class="block text-[10px] text-slate-400 mb-1">Color 2</label>
-              <input id="customColor2" type="color" value="#38bdf8" class="w-full h-8 rounded bg-transparent border border-white/15 cursor-pointer">
-            </div>
-            <div>
-              <label class="block text-[10px] text-slate-400 mb-1">@Handle</label>
-              <input id="creatorHandleInput" type="text" value="@reelflow.ai" class="w-full bg-black/60 border border-white/15 rounded-lg px-2 py-1 text-[11px] text-white">
-            </div>
-          </div>
-        </div>
 
-        <!-- Pod 3: Voice Lab -->
-        <div class="quantum-card rounded-3xl p-6 space-y-4">
-          <div class="flex items-center justify-between border-b border-white/10 pb-3">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-purple-400">Neural Voice Studio</h3>
-            <button type="button" id="sampleVoiceBtn" class="px-3 py-1 rounded-lg bg-purple-500/20 border border-purple-400/30 text-[11px] font-bold text-purple-200 cursor-pointer">
-              🔊 Audition
-            </button>
-          </div>
-          <div id="voicePersonaGrid" class="grid grid-cols-2 gap-2"></div>
-          <div class="grid grid-cols-2 gap-3 pt-1">
-            <div>
-              <div class="flex justify-between text-[10px] text-slate-400 mb-1"><span>Speed</span><span id="rateLabel" class="font-mono-tech text-white">1.08x</span></div>
-              <input id="voiceRate" type="range" min="0.75" max="1.35" step="0.05" value="1.08" class="w-full accent-cyan-400 cursor-pointer">
+            <!-- Live Webcam View (Hidden by default) -->
+            <div id="webcamBgView" class="hidden space-y-2 text-center">
+              <p class="text-xs text-slate-300">Engage your webcam as a live video background plate:</p>
+              <button type="button" id="engageLiveCamBgBtn" class="py-2.5 px-4 rounded-xl bg-emerald-500 text-black text-xs font-bold cursor-pointer">📹 Start Live Webcam Background</button>
             </div>
-            <div>
-              <div class="flex justify-between text-[10px] text-slate-400 mb-1"><span>Pitch</span><span id="pitchLabel" class="font-mono-tech text-white">1.00</span></div>
-              <input id="voicePitch" type="range" min="0.7" max="1.3" step="0.05" value="1.00" class="w-full accent-indigo-400 cursor-pointer">
+
+            <!-- Smart AI Gen View (Hidden by default) -->
+            <div id="aiGenBgView" class="hidden space-y-2">
+              <p class="text-xs text-slate-300">Describe custom AI background theme:</p>
+              <div class="flex gap-2">
+                <input id="smartBgPromptInput" type="text" value="Futuristic obsidian abstract crystal 8k" class="flex-1 bg-black/80 border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-[#00f0ff]">
+                <button type="button" id="generateSmartBgBtn" class="px-4 py-2 rounded-xl bg-[#00f0ff] text-black text-xs font-extrabold cursor-pointer">Generate</button>
+              </div>
             </div>
           </div>
         </div>
 
-      </div>
-
-      <!-- CENTER COLUMN (4 Cols): NLE TIMELINE EDITOR -->
-      <div class="lg:col-span-4 space-y-6">
-        <div class="quantum-card rounded-3xl p-6 space-y-5">
+        <!-- Pod 3: NLE Timeline Editor -->
+        <div class="sovereign-pod rounded-3xl p-6 sm:p-8 space-y-4">
           <div class="flex items-center justify-between border-b border-white/10 pb-3">
             <div>
               <h3 class="text-sm font-bold uppercase tracking-wider text-emerald-400">NLE Timeline Editor</h3>
-              <p class="text-[11px] text-slate-400">Live script editing & scene preview</p>
+              <p class="text-[11px] text-slate-400">Four-act manuscript & hook variation selector</p>
             </div>
             <button type="button" id="copyAllScriptBtn" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 text-xs font-bold text-slate-200 border border-white/10 cursor-pointer">
-              📋 Copy
+              📋 Copy Manuscript
             </button>
           </div>
 
@@ -353,36 +338,40 @@
 
           <div>
             <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-2">🎞️ 4-Scene Master Sequence:</label>
-            <div id="scenesList" class="space-y-3 max-h-[500px] overflow-y-auto pr-1"></div>
+            <div id="scenesList" class="space-y-3 max-h-[460px] overflow-y-auto pr-1"></div>
           </div>
         </div>
+
       </div>
 
-      <!-- RIGHT COLUMN (4 Cols): 9:16 MONITOR & DOWNLOAD SUITE -->
-      <div id="player-column" class="lg:col-span-4 flex flex-col items-center">
-        <div class="quantum-card rounded-3xl p-6 w-full flex flex-col items-center space-y-4">
+      <!-- RIGHT CHAMBER (5 Cols, Sticky): QUANTUM MONITOR & EXPORT SUITE -->
+      <div id="player-column" class="lg:col-span-5 lg:sticky lg:top-28 flex flex-col items-center">
+        <div class="sovereign-pod rounded-3xl p-6 sm:p-8 w-full flex flex-col items-center space-y-4">
           
           <div class="w-full">
             <div class="flex items-center justify-between mb-1.5">
               <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Platform Preview Mode:</span>
-              <span id="playerStatusBadge" class="text-[10px] font-mono-code px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300">READY</span>
+              <span id="playerStatusBadge" class="text-[10px] font-mono-code px-2 py-0.5 rounded bg-[#00f0ff]/15 text-[#00f0ff]">READY</span>
             </div>
-            <div class="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-black/60 border border-white/10">
-              <button type="button" data-ui="instagram" class="ui-mode-btn py-2 rounded-xl bg-cyan-400 text-black text-[11px] font-bold transition cursor-pointer">IG Reels</button>
+            <div class="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-black/70 border border-white/10">
+              <button type="button" data-ui="instagram" class="ui-mode-btn py-2 rounded-xl bg-[#00f0ff] text-black text-[11px] font-bold transition cursor-pointer">IG Reels</button>
               <button type="button" data-ui="youtube" class="ui-mode-btn py-2 rounded-xl text-slate-300 hover:text-white text-[11px] font-bold transition cursor-pointer">YT Shorts</button>
               <button type="button" data-ui="clean" class="ui-mode-btn py-2 rounded-xl text-slate-300 hover:text-white text-[11px] font-bold transition cursor-pointer">Clean Raw</button>
             </div>
           </div>
 
           <div class="w-full grid grid-cols-4 gap-1.5">
-            <button type="button" data-cap="hormozi" class="cap-btn py-1 rounded-lg bg-cyan-400/20 border border-cyan-400 text-[10px] font-bold text-cyan-300 cursor-pointer">Hormozi</button>
+            <button type="button" data-cap="hormozi" class="cap-btn py-1 rounded-lg bg-[#00f0ff]/20 border border-[#00f0ff] text-[10px] font-bold text-[#00f0ff] cursor-pointer">Hormozi</button>
             <button type="button" data-cap="modern" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Glass</button>
             <button type="button" data-cap="neon" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Neon</button>
             <button type="button" data-cap="red" class="cap-btn py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-slate-300 cursor-pointer">Red Pill</button>
           </div>
 
+          <!-- Hidden Video Loop Element -->
+          <video id="hiddenLoopVideo" autoplay loop muted playsinline crossorigin="anonymous" class="hidden"></video>
+
           <!-- 9:16 Cinema Bezel -->
-          <div class="relative w-[268px] h-[476px] rounded-[38px] border-[7px] border-slate-800 bg-black overflow-hidden shadow-2xl ring-1 ring-cyan-400/30">
+          <div class="relative w-[280px] h-[498px] rounded-[40px] border-[7px] border-slate-800 bg-black overflow-hidden shadow-2xl ring-1 ring-[#00f0ff]/30">
             <canvas id="reelCanvas" width="540" height="960" class="w-full h-full object-cover"></canvas>
           </div>
 
@@ -396,7 +385,7 @@
           </div>
 
           <div class="w-full pt-3 border-t border-white/10 space-y-2">
-            <button type="button" id="downloadVideoBtn" class="btn-quantum w-full py-3.5 px-4 rounded-2xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-xl">
+            <button type="button" id="downloadVideoBtn" class="btn-sovereign w-full py-4 px-4 rounded-2xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-xl">
               <span>⬇️ DOWNLOAD VIDEO (.WEBM)</span>
             </button>
             <div class="grid grid-cols-2 gap-2">
@@ -415,10 +404,10 @@
     </div>
   </section>
 
-  <!-- SECTION 2: 12 REAL FFMPEG.WASM & HARDWARE TOOLS -->
+  <!-- SECTION 2: 12 REAL FFMPEG.WASM TOOLS -->
   <section id="utility-suite" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-28">
     <div class="text-center mb-10">
-      <span class="font-mono-tech text-xs uppercase tracking-widest text-cyan-400">02 // REAL BROWSER FFMPEG SUITE</span>
+      <span class="font-mono-tech text-xs uppercase tracking-widest text-[#00f0ff]">02 // REAL BROWSER FFMPEG SUITE</span>
       <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-display mt-1">12 Real Video & Audio Processing Tools</h2>
       <p class="text-xs sm:text-sm text-slate-400 mt-1">Powered by FFmpeg WebAssembly. Convert, extract, and mute media files locally without server uploads.</p>
     </div>
@@ -435,85 +424,33 @@
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5" id="clipperCardsGrid"></div>
   </section>
 
-  <!-- SECTION 4: KOTAK BANK UPI & ₹50 CUSTOM PLAN -->
+  <!-- SECTION 4: KOTAK UPI PRICING -->
   <section id="pricing" class="relative z-10 max-w-5xl mx-auto px-4 pb-28">
-    <div class="text-center mb-10">
-      <span class="px-3 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-xs font-mono-tech uppercase">04 // KOTAK BANK UPI SETTLEMENT</span>
-      <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-display mt-3">Start Free or Custom Plan Starting at ₹50</h2>
-      <p class="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto mt-1">Direct UPI QR settlements go straight into your <b>Kotak Bank account (`7820847387@kotakbank`)</b>.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-      
-      <!-- Free Sandbox -->
-      <div class="quantum-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-white/10">
+    <div class="quantum-card rounded-3xl p-8 sm:p-10 border-2 border-[#00f0ff] relative shadow-2xl shadow-[#00f0ff]/10">
+      <span class="absolute -top-3.5 right-8 px-4 py-1 rounded-full bg-[#00f0ff] text-black text-[10px] font-extrabold uppercase tracking-wider">Kotak UPI Direct</span>
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <div class="flex items-center justify-between">
-            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold">Sandbox Trial</span>
-            <span class="text-xs font-mono-tech text-cyan-400">Active</span>
+          <span class="text-xs font-mono-tech text-[#00f0ff] uppercase">04 // KOTAK BANK UPI SETTLEMENT</span>
+          <h2 class="text-3xl font-extrabold text-white font-display mt-1">Custom Rupee Plan (Starts at ₹50)</h2>
+          <p class="text-xs text-slate-300 mt-1">Direct settlements go straight into your Kotak Bank account: <b class="text-emerald-300">7820847387@kotakbank</b></p>
+          <div class="mt-4 flex items-baseline gap-2">
+            <span id="customPriceDisplay" class="text-4xl font-extrabold text-white font-display">₹50</span>
+            <span id="customReelCountBadge" class="text-xs text-slate-400 font-mono-tech">1 Video Pack</span>
           </div>
-          <div class="mt-5 mb-2 flex items-baseline gap-2">
-            <span class="text-4xl sm:text-5xl font-extrabold text-white font-display">₹0</span>
-            <span class="text-xs text-slate-400">/ Perpetual Trial</span>
-          </div>
-          <p class="text-xs text-slate-400 mb-6">Test smart AI backgrounds, 6 voices, and WebM video downloads right now.</p>
-          <ul class="text-xs text-slate-200 space-y-3 mb-8">
-            <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span>3 Free 9:16 Video Downloads (.WEBM)</span></li>
-            <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span>Smart AI Text-to-Background Generator</span></li>
-            <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span>Instagram Reels & YouTube Shorts Previews</span></li>
-            <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span>All 38+ FFmpeg & Clipper Utilities</span></li>
-          </ul>
         </div>
-        <a href="#studio" class="w-full py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-extrabold text-xs uppercase tracking-wider text-center border border-white/15 transition">
-          Launch Free Studio →
-        </a>
-      </div>
-
-      <!-- Kotak UPI Plan -->
-      <div class="quantum-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-2 border-cyan-400 relative shadow-2xl shadow-cyan-400/10">
-        <span class="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-cyan-400 text-black text-[10px] font-extrabold uppercase tracking-wider">Kotak UPI Direct</span>
-        <div>
-          <div class="flex items-center justify-between">
-            <span class="px-3 py-1 rounded-full bg-cyan-400/20 text-cyan-300 text-xs font-bold">Custom Rupee Builder</span>
-            <span id="customReelCountBadge" class="text-xs font-mono-tech text-amber-300 font-bold">1 Video Pack</span>
-          </div>
-
-          <div class="mt-5 mb-4 flex items-baseline gap-2">
-            <span id="customPriceDisplay" class="text-4xl sm:text-5xl font-extrabold text-white font-display">₹50</span>
-            <span class="text-xs text-slate-400">/ instant pack</span>
-          </div>
-
-          <div class="p-4 rounded-2xl bg-black/60 border border-white/10 mb-5 space-y-2">
-            <div class="flex justify-between text-xs font-semibold">
-              <span class="text-slate-300">Slide to choose video credits:</span>
-              <span id="sliderVideosLabel" class="text-cyan-400 font-mono-tech">1 Video (₹50)</span>
-            </div>
-            <input id="customPlanSlider" type="range" min="1" max="50" step="1" value="1" class="w-full accent-cyan-400 cursor-pointer">
-            <div class="flex justify-between text-[10px] text-slate-500 font-mono-tech">
-              <span>1 Video (₹50)</span>
-              <span>15 Videos (₹750)</span>
-              <span>50 Videos (₹2,500)</span>
-            </div>
-          </div>
-
-          <ul class="text-xs text-slate-200 space-y-2.5 mb-6">
-            <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span>1080p Watermark-Free Video & Voice Renders</span></li>
-            <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span>Unlimited Smart AI Custom Backgrounds</span></li>
-            <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span>Direct Kotak UPI Settlement (`7820847387@kotakbank`)</span></li>
-          </ul>
+        <div class="space-y-3 w-full md:w-auto">
+          <input id="customPlanSlider" type="range" min="1" max="50" step="1" value="1" class="w-full md:w-64 accent-[#00f0ff] cursor-pointer">
+          <button type="button" id="openPaymentGatewayBtn" class="btn-sovereign w-full py-3.5 px-6 rounded-2xl text-xs uppercase tracking-wider cursor-pointer shadow-xl">
+            💳 Pay via Kotak UPI (`7820847387@kotakbank`)
+          </button>
         </div>
-
-        <button type="button" id="openPaymentGatewayBtn" class="btn-quantum w-full py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer shadow-xl">
-          💳 Pay ₹50+ via Kotak UPI Gateway
-        </button>
       </div>
-
     </div>
   </section>
 
   <!-- SECTION 5: FOUNDER DESK -->
   <section id="founder-desk" class="relative z-10 max-w-5xl mx-auto px-4 pb-28">
-    <div class="quantum-card rounded-3xl p-6 sm:p-10 border border-emerald-500/30 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="sovereign-pod rounded-3xl p-6 sm:p-10 border border-emerald-500/30 flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="space-y-2 text-center md:text-left">
         <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-xs font-bold uppercase font-mono-tech">05 // FOUNDER CONCIERGE</span>
         <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-display">Need Custom AI Marketing or Done-For-You Reels?</h2>
@@ -527,15 +464,15 @@
     </div>
   </section>
 
-  <!-- MODALS (Clipper, Kotak UPI Gateway, Utility, Auth, Gemini) -->
+  <!-- MODALS -->
   <div id="clipperWorkspaceModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="quantum-card max-w-lg w-full rounded-3xl p-6 border border-cyan-500/40 space-y-4 shadow-2xl">
+    <div class="sovereign-pod max-w-lg w-full rounded-3xl p-6 border border-[#00f0ff]/40 space-y-4 shadow-2xl">
       <div class="flex items-center justify-between border-b border-white/10 pb-3">
         <div>
-          <span class="text-[10px] font-mono-tech uppercase text-cyan-400">Interactive AI Repurposing Engine</span>
+          <span class="text-[10px] font-mono-tech uppercase text-[#00f0ff]">Interactive AI Repurposing Engine</span>
           <h3 id="clipperModalTitle" class="text-lg font-extrabold text-white font-display">Video to Reels Converter</h3>
         </div>
-        <button type="button" id="closeClipperModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
+        <button type="button" id="closeClipperModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕ Close</button>
       </div>
       <div class="space-y-3">
         <div>
@@ -546,17 +483,16 @@
           <label class="block text-xs font-semibold text-slate-300 mb-1">2. Or Upload Local File:</label>
           <input id="clipperFileInput" type="file" accept="video/*,audio/*" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-white/10 file:text-white file:font-bold cursor-pointer">
         </div>
-        <button type="button" id="runClipperExtractBtn" class="btn-quantum w-full py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
+        <button type="button" id="runClipperExtractBtn" class="btn-sovereign w-full py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
           ✂️ Extract Viral 9:16 Clip & Open in Studio
         </button>
       </div>
     </div>
   </div>
 
-  <!-- KOTAK UPI GATEWAY MODAL (Pre-set with 7820847387@kotakbank) -->
   <div id="paymentGatewayModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="quantum-card max-w-md w-full rounded-3xl overflow-hidden border border-cyan-400/40 shadow-2xl max-h-[92vh] overflow-y-auto">
-      <div class="bg-gradient-to-r from-cyan-500 to-indigo-600 p-4 sm:p-5 flex items-center justify-between text-slate-950 font-bold">
+    <div class="sovereign-pod max-w-md w-full rounded-3xl overflow-hidden border border-[#00f0ff]/40 shadow-2xl max-h-[92vh] overflow-y-auto">
+      <div class="bg-gradient-to-r from-[#00f0ff] to-indigo-600 p-4 sm:p-5 flex items-center justify-between text-slate-950 font-bold">
         <div class="flex items-center gap-2.5">
           <div class="w-8 h-8 rounded-xl bg-white/30 flex items-center justify-center font-extrabold text-white">₹</div>
           <div>
@@ -573,11 +509,11 @@
       <div class="p-5 space-y-4">
         <div class="p-3 rounded-2xl bg-cyan-950/50 border border-cyan-500/30 space-y-1.5">
           <span class="text-[11px] font-bold text-cyan-300 block">🏦 Kotak Bank Settlement UPI ID:</span>
-          <p id="activeMerchantUpiLabel" class="text-xs font-mono-tech text-emerald-300 font-bold">7820847387@kotakbank</p>
+          <p class="text-xs font-mono-tech text-emerald-300 font-bold">7820847387@kotakbank</p>
         </div>
 
         <div class="text-center space-y-2.5">
-          <p class="text-xs text-slate-300">Scan QR with GPay, PhonePe, Paytm, or Kotak Banking App:</p>
+          <p class="text-xs text-slate-300">Scan QR with GPay, PhonePe, or Kotak Banking App:</p>
           <div class="w-40 h-40 mx-auto bg-white p-2 rounded-2xl shadow-lg flex items-center justify-center">
             <img id="dynamicUpiQr" src="" alt="UPI QR" class="w-full h-full object-contain">
           </div>
@@ -592,7 +528,7 @@
           <input id="payerUtrInput" type="text" placeholder="12-Digit UPI Ref / UTR Number" class="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono-tech">
         </div>
 
-        <button type="button" id="confirmPaymentBtn" class="btn-quantum w-full py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
+        <button type="button" id="confirmPaymentBtn" class="btn-sovereign w-full py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer">
           ✓ Verify Payment & Notify Founder on WhatsApp
         </button>
       </div>
@@ -600,10 +536,10 @@
   </div>
 
   <div id="utilityToolModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="quantum-card max-w-lg w-full rounded-3xl p-6 border border-white/15 space-y-4">
+    <div class="sovereign-pod max-w-lg w-full rounded-3xl p-6 border border-white/15 space-y-4">
       <div class="flex items-center justify-between">
         <h3 id="utilModalTitle" class="text-lg font-bold text-white font-display">Tool</h3>
-        <button type="button" id="closeUtilModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
+        <button type="button" id="closeUtilModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕ Close</button>
       </div>
       <p id="utilModalDesc" class="text-xs text-slate-300"></p>
       <div id="utilModalBody" class="space-y-3"></div>
@@ -611,42 +547,24 @@
   </div>
 
   <div id="authModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="quantum-card max-w-md w-full rounded-3xl p-6 space-y-4 border border-white/15">
+    <div class="sovereign-pod max-w-md w-full rounded-3xl p-6 space-y-4 border border-white/15">
       <div class="flex items-center justify-between">
         <h3 class="text-base font-bold text-white font-display">ReelFlow Creator Account</h3>
-        <button type="button" id="closeAuthModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
-      </div>
-      <div class="grid grid-cols-2 gap-2 p-1 rounded-xl bg-black/60 border border-white/10">
-        <button type="button" id="tabLoginBtn" class="py-2 rounded-lg bg-cyan-400 text-black text-xs font-bold cursor-pointer">Login</button>
-        <button type="button" id="tabRegisterBtn" class="py-2 rounded-lg text-slate-400 text-xs font-bold cursor-pointer">Register</button>
+        <button type="button" id="closeAuthModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕ Close</button>
       </div>
       <form id="authForm" class="space-y-3">
-        <input id="authNameInput" type="text" placeholder="Your Full Name *" class="hidden w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
         <input id="authEmailInput" type="email" required placeholder="Email Address *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
         <input id="authPassInput" type="password" required placeholder="Password *" class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white">
-        <button type="submit" class="btn-quantum w-full py-3 rounded-xl text-xs uppercase cursor-pointer">Save Session & Continue →</button>
+        <button type="submit" class="btn-sovereign w-full py-3 rounded-xl text-xs uppercase cursor-pointer">Save Session</button>
       </form>
     </div>
   </div>
 
-  <div id="apiModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="quantum-card max-w-md w-full rounded-3xl p-6 space-y-4 border border-white/15">
-      <div class="flex items-center justify-between">
-        <h3 class="text-base font-bold text-white">⚡ Connect Gemini Key</h3>
-        <button type="button" id="closeApiModalBtn" class="text-slate-400 hover:text-white text-sm cursor-pointer">✕</button>
-      </div>
-      <input id="geminiKeyInput" type="password" placeholder="AIzaSy..." class="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white font-mono-tech">
-      <div class="flex justify-end">
-        <button type="button" id="saveApiKeyBtn" class="btn-quantum px-4 py-2 rounded-xl text-xs cursor-pointer">Save Key</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- JAVASCRIPT ENGINE (FFmpeg.wasm + Neural Canvas + Kotak UPI) -->
+  <!-- JAVASCRIPT ENGINE -->
   <script>
     (function() {
       var FOUNDER_WHATSAPP = "917820847387";
-      var KOTAK_UPI_DEFAULT = "7820847387@kotakbank";
+      var KOTAK_UPI = "7820847387@kotakbank";
 
       var ffmpeg = null;
       async function initFFmpegWasm() {
@@ -763,6 +681,7 @@
       var activeMediaStream = null;
       var activeAudioContext = null;
       var micAutoStopTimer = null;
+      var liveWebcamStream = null;
 
       function showToast(msg) {
         var b = document.getElementById("toastBanner");
@@ -774,22 +693,14 @@
       }
 
       function stopAllHardwareStreams() {
-        if (micAutoStopTimer) {
-          clearTimeout(micAutoStopTimer);
-          micAutoStopTimer = null;
-        }
-        if (activeMediaStream) {
-          activeMediaStream.getTracks().forEach(function(track) { track.stop(); });
-          activeMediaStream = null;
-        }
-        if (activeAudioContext) {
-          try { activeAudioContext.close(); } catch (e) {}
-          activeAudioContext = null;
-        }
+        if (micAutoStopTimer) { clearTimeout(micAutoStopTimer); micAutoStopTimer = null; }
+        if (activeMediaStream) { activeMediaStream.getTracks().forEach(function(track) { track.stop(); }); activeMediaStream = null; }
+        if (liveWebcamStream) { liveWebcamStream.getTracks().forEach(function(track) { track.stop(); }); liveWebcamStream = null; }
+        if (activeAudioContext) { try { activeAudioContext.close(); } catch (e) {} activeAudioContext = null; }
       }
 
       function syncPersistentUserSession() {
-        var raw = localStorage.getItem("reelflow_user_v11");
+        var raw = localStorage.getItem("reelflow_user_v12");
         var loginBtn = document.getElementById("openAuthModalBtn");
         var badge = document.getElementById("userProfileBadge");
         if (raw) {
@@ -799,7 +710,7 @@
               loginBtn.classList.add("hidden");
               badge.classList.remove("hidden");
               badge.classList.add("flex");
-              var disp = user.name || user.email.split("@")[0];
+              var disp = user.email.split("@")[0];
               document.getElementById("userNameText").textContent = disp;
               document.getElementById("userInitials").textContent = disp.charAt(0).toUpperCase();
               return;
@@ -857,61 +768,6 @@
         img.src = aiUrl;
       }
 
-      function initNeuralCanvasBackground() {
-        var canvas = document.getElementById("neuralCanvas");
-        if (!canvas) return;
-        var ctx = canvas.getContext("2d");
-        var w = canvas.width = window.innerWidth;
-        var h = canvas.height = window.innerHeight;
-
-        window.addEventListener("resize", function() {
-          w = canvas.width = window.innerWidth;
-          h = canvas.height = window.innerHeight;
-        });
-
-        var particles = [];
-        for (var i = 0; i < 55; i++) {
-          particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.8,
-            vy: (Math.random() - 0.5) * 0.8,
-            r: Math.random() * 2 + 1
-          });
-        }
-
-        function animNeural() {
-          ctx.clearRect(0, 0, w, h);
-          ctx.fillStyle = "rgba(56, 189, 248, 0.4)";
-          ctx.strokeStyle = "rgba(129, 140, 248, 0.12)";
-          ctx.lineWidth = 1;
-
-          for (var i = 0; i < particles.length; i++) {
-            var p = particles[i];
-            p.x += p.vx; p.y += p.vy;
-            if (p.x < 0 || p.x > w) p.vx *= -1;
-            if (p.y < 0 || p.y > h) p.vy *= -1;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fill();
-
-            for (var j = i + 1; j < particles.length; j++) {
-              var p2 = particles[j];
-              var dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-              if (dist < 130) {
-                ctx.beginPath();
-                ctx.moveTo(p.x, p.y);
-                ctx.lineTo(p2.x, p2.y);
-                ctx.stroke();
-              }
-            }
-          }
-          requestAnimationFrame(animNeural);
-        }
-        animNeural();
-      }
-
       function buildBlueprint(brand, audience, tone, lang) {
         var cleanBrand = (brand || "Your Brand").trim();
         var cleanAud = (audience || "smart creators").trim();
@@ -921,36 +777,12 @@
           "The industry does not want " + cleanAud.slice(0, 42) + " to know this shortcut exists."
         ];
         var scenes = [
-          { time: "00:00 - 00:03", label: "HOOK", voice: hooks[0] },
-          { time: "00:03 - 00:09", label: "PROBLEM", voice: "Right now, " + cleanAud + " are stuck overpaying and losing hours on broken workflows." },
-          { time: "00:09 - 00:18", label: "SOLUTION", voice: "That is why " + cleanBrand + " was built from day one to deliver studio-grade results automatically." },
-          { time: "00:18 - 00:24", label: "CTA", voice: "Comment LINK below and we will send instant access straight to your DMs!" }
+          { time: "00:00 - 00:03", label: "ACT I", voice: hooks[0] },
+          { time: "00:03 - 00:09", label: "ACT II", voice: "Right now, " + cleanAud + " are stuck overpaying and losing hours on broken workflows." },
+          { time: "00:09 - 00:18", label: "ACT III", voice: "That is why " + cleanBrand + " was built from day one to deliver studio-grade results automatically." },
+          { time: "00:18 - 00:24", label: "ACT IV", voice: "Comment LINK below and we will send instant access straight to your DMs!" }
         ];
         return { brand: cleanBrand, activeHookIndex: 0, hooks: hooks, scenes: scenes };
-      }
-
-      function renderVoiceGrid() {
-        var grid = document.getElementById("voicePersonaGrid");
-        if (!grid) return;
-        grid.innerHTML = "";
-        VOICE_PERSONAS.forEach(function(p) {
-          var active = p.id === activePersonaId;
-          var btn = document.createElement("button");
-          btn.type = "button";
-          btn.className = "p-2 rounded-xl border text-left transition cursor-pointer " +
-            (active ? "bg-cyan-500/30 border-cyan-400 text-white font-bold" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
-          btn.innerHTML = '<div class="text-xs truncate">🎙️ ' + p.name + '</div>';
-          btn.addEventListener("click", function() {
-            activePersonaId = p.id;
-            document.getElementById("voiceRate").value = String(p.rate);
-            document.getElementById("voicePitch").value = String(p.pitch);
-            document.getElementById("rateLabel").textContent = p.rate.toFixed(2) + "x";
-            document.getElementById("pitchLabel").textContent = p.pitch.toFixed(2);
-            renderVoiceGrid();
-            drawCanvas();
-          });
-          grid.appendChild(btn);
-        });
       }
 
       function renderStoryboardUI() {
@@ -962,8 +794,8 @@
           var active = idx === currentProject.activeHookIndex;
           var div = document.createElement("div");
           div.className = "cursor-pointer p-2.5 rounded-xl border text-xs transition flex items-center gap-2 " +
-            (active ? "bg-cyan-500/25 border-cyan-400 text-white font-semibold" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
-          div.innerHTML = '<span class="px-2 py-0.5 rounded-md bg-cyan-400 text-black text-[10px] font-mono-tech font-bold">H' + (idx + 1) + '</span><span class="truncate">"' + h + '"</span>';
+            (active ? "bg-[#00f0ff]/20 border-[#00f0ff] text-white font-semibold" : "bg-black/40 border-white/10 text-slate-300 hover:border-white/25");
+          div.innerHTML = '<span class="px-2 py-0.5 rounded-md bg-[#00f0ff] text-black text-[10px] font-mono-tech font-bold">H' + (idx + 1) + '</span><span class="truncate">"' + h + '"</span>';
           div.addEventListener("click", function() {
             currentProject.activeHookIndex = idx;
             currentProject.scenes[0].voice = currentProject.hooks[idx];
@@ -978,10 +810,10 @@
         currentProject.scenes.forEach(function(sc, idx) {
           var active = idx === activeSceneIdx;
           var node = document.createElement("div");
-          node.className = "p-3 rounded-2xl border transition space-y-2 " + (active ? "bg-indigo-950/40 border-cyan-400 shadow-md" : "bg-black/40 border-white/10");
+          node.className = "p-3 rounded-2xl border transition space-y-2 " + (active ? "bg-cyan-950/40 border-[#00f0ff] shadow-md" : "bg-black/40 border-white/10");
           node.innerHTML =
             '<div class="flex items-center justify-between text-[10px] font-mono-code cursor-pointer">' +
-              '<span class="text-cyan-300 font-bold">SCENE ' + (idx + 1) + ': ' + sc.label + '</span>' +
+              '<span class="text-[#00f0ff] font-bold">ACT ' + (idx + 1) + ': ' + sc.label + '</span>' +
               '<span class="text-slate-400">' + sc.time + '</span>' +
             '</div>' +
             '<textarea rows="2" class="w-full bg-black/70 border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white">' + sc.voice + '</textarea>';
@@ -1015,18 +847,16 @@
         var totalH = lines.length * lineHeight;
         var startY = y - totalH / 2 + lineHeight / 2;
 
-        if (activeCapStyle === "hormozi" || activeCapStyle === "modern" || activeCapStyle === "red") {
-          ctx.fillStyle = activeCapStyle === "red" ? "rgba(225, 29, 72, 0.9)" : "rgba(0, 0, 0, 0.85)";
-          ctx.beginPath();
-          ctx.roundRect(36, y - totalH / 2 - 20, 540 - 72, totalH + 40, 20);
-          ctx.fill();
-        }
+        ctx.fillStyle = "rgba(0, 0, 0, 0.85)";
+        ctx.beginPath();
+        ctx.roundRect(36, y - totalH / 2 - 20, 540 - 72, totalH + 40, 20);
+        ctx.fill();
 
         for (var i = 0; i < lines.length; i++) {
           var ly = startY + i * lineHeight;
           ctx.strokeStyle = "rgba(0,0,0,0.9)"; ctx.lineWidth = 6;
           ctx.strokeText(lines[i], x, ly);
-          ctx.fillStyle = i % 2 === 0 ? "#38bdf8" : "#ffffff";
+          ctx.fillStyle = i % 2 === 0 ? "#00f0ff" : "#ffffff";
           ctx.fillText(lines[i], x, ly);
         }
       }
@@ -1039,23 +869,33 @@
         var scene = currentProject.scenes[activeSceneIdx] || currentProject.scenes[0];
         var handle = document.getElementById("creatorHandleInput").value || "@reelflow.ai";
 
-        var activeImg = null;
-        if ((bgMode === "smart_ai" || bgMode === "upload") && customOrSmartBgImg && customOrSmartBgImg.complete) {
-          activeImg = customOrSmartBgImg;
-        } else if (bgMode === "photo" && loadedPhotoPackImgs[activeSceneIdx] && loadedPhotoPackImgs[activeSceneIdx].complete) {
-          activeImg = loadedPhotoPackImgs[activeSceneIdx];
-        }
-
-        if (activeImg && activeImg.naturalWidth > 0) {
-          ctx.drawImage(activeImg, 0, 0, W, H);
-          ctx.fillStyle = "rgba(0,0,0,0.55)";
-          ctx.fillRect(0, 0, W, H);
+        if (bgMode === "webcam" && liveWebcamStream) {
+          var vidEl = document.getElementById("hiddenLoopVideo");
+          if (vidEl && vidEl.readyState >= 2) {
+            ctx.drawImage(vidEl, 0, 0, W, H);
+          }
+        } else if (bgMode === "video" && liveWebcamStream) {
+          var vidEl = document.getElementById("hiddenLoopVideo");
+          if (vidEl && vidEl.readyState >= 2) {
+            ctx.drawImage(vidEl, 0, 0, W, H);
+          }
         } else {
-          var g = ctx.createLinearGradient(0, 0, W, H);
-          g.addColorStop(0, document.getElementById("customColor1").value);
-          g.addColorStop(1, document.getElementById("customColor2").value);
-          ctx.fillStyle = g;
-          ctx.fillRect(0, 0, W, H);
+          var activeImg = null;
+          if ((bgMode === "smart_ai" || bgMode === "upload") && customOrSmartBgImg && customOrSmartBgImg.complete) {
+            activeImg = customOrSmartBgImg;
+          } else if (bgMode === "photo" && loadedPhotoPackImgs[activeSceneIdx] && loadedPhotoPackImgs[activeSceneIdx].complete) {
+            activeImg = loadedPhotoPackImgs[activeSceneIdx];
+          }
+
+          if (activeImg && activeImg.naturalWidth > 0) {
+            ctx.drawImage(activeImg, 0, 0, W, H);
+            ctx.fillStyle = "rgba(0,0,0,0.5)";
+            ctx.fillRect(0, 0, W, H);
+          } else {
+            var g = ctx.createLinearGradient(0, 0, W, H);
+            g.addColorStop(0, "#070a12"); g.addColorStop(1, "#7000ff");
+            ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+          }
         }
 
         ctx.font = "800 35px 'Plus Jakarta Sans', sans-serif";
@@ -1080,31 +920,18 @@
         }
       }
 
-      function speakText(text, onDone) {
-        if ("speechSynthesis" in window) {
-          window.speechSynthesis.cancel();
-          var u = new SpeechSynthesisUtterance(text);
-          u.rate = parseFloat(document.getElementById("voiceRate").value) || 1.08;
-          u.pitch = parseFloat(document.getElementById("voicePitch").value) || 1.0;
-          u.onend = function() { if (onDone) onDone(); };
-          u.onerror = function() { if (onDone) onDone(); };
-          window.speechSynthesis.speak(u);
-        } else { setTimeout(function() { if (onDone) onDone(); }, 3000); }
-      }
-
       function startReel() {
         if (isPlaying) { stopReel(); return; }
         isPlaying = true; activeSceneIdx = 0;
         document.getElementById("playReelBtn").textContent = "⏹ Stop Reel";
         document.getElementById("playerStatusBadge").textContent = "PLAYING";
         function loop() { if (!isPlaying) return; drawCanvas(); animFrameId = requestAnimationFrame(loop); }
-        loop(); playStep(0);
-      }
-
-      function playStep(idx) {
-        if (!isPlaying || idx >= currentProject.scenes.length) { stopReel(); return; }
-        activeSceneIdx = idx; renderStoryboardUI();
-        speakText(currentProject.scenes[idx].voice, function() { if (isPlaying) playStep(idx + 1); });
+        loop();
+        if ("speechSynthesis" in window) {
+          var u = new SpeechSynthesisUtterance(currentProject.scenes[activeSceneIdx].voice);
+          u.onend = function() { stopReel(); };
+          window.speechSynthesis.speak(u);
+        }
       }
 
       function stopReel() {
@@ -1122,7 +949,7 @@
           var card = document.createElement("div");
           card.className = "tool-tile rounded-2xl p-5 text-center cursor-pointer flex flex-col items-center justify-center min-h-[135px]";
           card.innerHTML =
-            '<div class="w-10 h-10 rounded-xl bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center text-lg mb-2.5">' + tool.icon + '</div>' +
+            '<div class="w-10 h-10 rounded-xl bg-[#00f0ff]/10 border border-[#00f0ff]/30 flex items-center justify-center text-lg mb-2.5">' + tool.icon + '</div>' +
             '<h3 class="text-xs font-bold text-white mb-1">' + tool.title + '</h3>' +
             '<p class="text-[11px] text-slate-400">' + tool.desc + '</p>';
           card.addEventListener("click", function() { openUtilityToolModal(tool); });
@@ -1134,7 +961,7 @@
         CLIPPER_TOOLS.forEach(function(title) {
           var tile = document.createElement("div");
           tile.className = "tool-tile rounded-2xl p-4 text-center cursor-pointer flex flex-col items-center justify-center min-h-[82px] gap-1";
-          tile.innerHTML = '<span class="text-xs font-bold text-white">' + title + '</span><span class="text-[10px] text-cyan-400 font-mono-tech">Launch Tool →</span>';
+          tile.innerHTML = '<span class="text-xs font-bold text-white">' + title + '</span><span class="text-[10px] text-[#00f0ff] font-mono-tech">Launch Tool →</span>';
           tile.addEventListener("click", function() {
             document.getElementById("clipperModalTitle").textContent = "✂️ " + title;
             document.getElementById("clipperWorkspaceModal").classList.remove("hidden");
@@ -1155,10 +982,7 @@
         if (tool.id === "camera") {
           body.innerHTML =
             '<video id="webcamPreview" autoplay playsinline class="w-full h-56 bg-black rounded-2xl object-cover border border-white/10"></video>' +
-            '<div class="grid grid-cols-2 gap-2">' +
-              '<button type="button" id="startCamBtn" class="py-2.5 rounded-xl bg-cyan-500 text-black text-xs font-bold cursor-pointer">▶ Start</button>' +
-              '<button type="button" id="stopCamBtn" class="py-2.5 rounded-xl bg-rose-600 text-white text-xs font-bold cursor-pointer">⏹ Stop</button>' +
-            '</div>';
+            '<button type="button" id="startCamBtn" class="w-full py-2.5 rounded-xl bg-[#00f0ff] text-black text-xs font-bold cursor-pointer">▶ Engage Optical Feed</button>';
           document.getElementById("startCamBtn").addEventListener("click", async function() {
             try {
               activeMediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -1166,16 +990,13 @@
               showToast("Webcam active!");
             } catch (e) { showToast("Camera denied."); }
           });
-          document.getElementById("stopCamBtn").addEventListener("click", function() {
-            stopAllHardwareStreams(); document.getElementById("webcamPreview").srcObject = null; showToast("Webcam stopped.");
-          });
         } else if (tool.id === "mic") {
           body.innerHTML =
             '<div class="p-4 rounded-2xl bg-black/60 border border-white/10 text-center space-y-3">' +
-              '<div class="w-full h-5 bg-slate-900 rounded-full overflow-hidden"><div id="micLevelBar" class="h-full bg-cyan-400 w-0"></div></div>' +
+              '<div class="w-full h-5 bg-slate-900 rounded-full overflow-hidden"><div id="micLevelBar" class="h-full bg-[#00f0ff] w-0"></div></div>' +
               '<p id="micStatusText" class="text-xs text-slate-300">10s Mic Test (Auto-shutoff)</p>' +
             '</div>' +
-            '<button type="button" id="startMicBtn" class="w-full py-2.5 rounded-xl bg-cyan-500 text-black text-xs font-bold cursor-pointer">Start 10s Mic Test</button>';
+            '<button type="button" id="startMicBtn" class="w-full py-2.5 rounded-xl bg-[#00f0ff] text-black text-xs font-bold cursor-pointer">Start 10s Mic Test</button>';
           document.getElementById("startMicBtn").addEventListener("click", async function() {
             try {
               activeMediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -1200,9 +1021,9 @@
         } else {
           body.innerHTML =
             '<p class="text-xs text-slate-300">Select file to process locally using FFmpeg WebAssembly:</p>' +
-            '<input id="ffmpegFileIn" type="file" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-cyan-500 file:text-black file:font-bold cursor-pointer">' +
-            '<button type="button" id="runFfmpegAction" class="btn-quantum w-full py-3 rounded-xl text-xs uppercase cursor-pointer">Process File Locally via FFmpeg</button>' +
-            '<p id="ffmpegStatusLog" class="text-[11px] font-mono-tech text-cyan-300"></p>';
+            '<input id="ffmpegFileIn" type="file" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-[#00f0ff] file:text-black file:font-bold cursor-pointer">' +
+            '<button type="button" id="runFfmpegAction" class="btn-sovereign w-full py-3 rounded-xl text-xs uppercase cursor-pointer">Process File Locally via FFmpeg</button>' +
+            '<p id="ffmpegStatusLog" class="text-[11px] font-mono-tech text-[#00f0ff]"></p>';
 
           document.getElementById("runFfmpegAction").addEventListener("click", async function() {
             var fileInput = document.getElementById("ffmpegFileIn");
@@ -1227,7 +1048,6 @@
       window.addEventListener("DOMContentLoaded", function() {
         initNeuralCanvasBackground();
         syncPersistentUserSession();
-        renderVoiceGrid();
         renderToolGrids();
         loadPhotoPack("coffee");
 
@@ -1255,6 +1075,50 @@
           });
         });
 
+        // Background Type Switcher (Photo, Video Loop, Webcam, AI Gen)
+        document.querySelectorAll(".bg-type-btn").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            var t = btn.getAttribute("data-bgtype");
+            document.querySelectorAll(".bg-type-btn").forEach(function(b) {
+              b.className = "bg-type-btn py-2 rounded-xl text-slate-300 text-[11px] font-bold cursor-pointer";
+            });
+            btn.className = "bg-type-btn py-2 rounded-xl bg-[#00f0ff] text-black text-[11px] font-extrabold cursor-pointer";
+            
+            document.getElementById("photoPacksView").classList.add("hidden");
+            document.getElementById("videoLoopView").classList.add("hidden");
+            document.getElementById("webcamBgView").classList.add("hidden");
+            document.getElementById("aiGenBgView").classList.add("hidden");
+
+            if (t === "photo") document.getElementById("photoPacksView").classList.remove("hidden");
+            if (t === "video") document.getElementById("videoLoopView").classList.remove("hidden");
+            if (t === "webcam") document.getElementById("webcamBgView").classList.remove("hidden");
+            if (t === "ai") document.getElementById("aiGenBgView").classList.remove("hidden");
+          });
+        });
+
+        // Video Loop Selectors
+        document.querySelectorAll(".vid-loop-btn").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            var url = btn.getAttribute("data-vidloop");
+            bgMode = "video";
+            var vidEl = document.getElementById("hiddenLoopVideo");
+            vidEl.src = url; vidEl.play();
+            liveWebcamStream = vidEl;
+            showToast("Video background loop mounted!");
+          });
+        });
+
+        // Live Webcam Background Button
+        document.getElementById("engageLiveCamBgBtn").addEventListener("click", async function() {
+          try {
+            bgMode = "webcam";
+            liveWebcamStream = await navigator.mediaDevices.getUserMedia({ video: true });
+            var vidEl = document.getElementById("hiddenLoopVideo");
+            vidEl.srcObject = liveWebcamStream; vidEl.play();
+            showToast("Live webcam background active!");
+          } catch(e) { showToast("Webcam permission denied."); }
+        });
+
         document.getElementById("generateBtn").addEventListener("click", function() {
           stopReel();
           currentProject = buildBlueprint(
@@ -1264,7 +1128,7 @@
             document.getElementById("langInput").value
           );
           activeSceneIdx = 0; renderStoryboardUI();
-          showToast("Generated new 4-scene Reel!");
+          showToast("Generated new 4-act Master Script!");
         });
 
         document.getElementById("generateSmartBgBtn").addEventListener("click", function() {
@@ -1283,9 +1147,17 @@
           if (!f) return;
           var r = new FileReader();
           r.onload = function(ev) {
-            var img = new Image();
-            img.onload = function() { customOrSmartBgImg = img; bgMode = "upload"; drawCanvas(); showToast("Custom image applied!"); };
-            img.src = ev.target.result;
+            if (f.type.startsWith("video")) {
+              bgMode = "video";
+              var vidEl = document.getElementById("hiddenLoopVideo");
+              vidEl.src = ev.target.result; vidEl.play();
+              liveWebcamStream = vidEl;
+              showToast("Custom video background applied!");
+            } else {
+              var img = new Image();
+              img.onload = function() { customOrSmartBgImg = img; bgMode = "upload"; drawCanvas(); showToast("Custom image applied!"); };
+              img.src = ev.target.result;
+            }
           };
           r.readAsDataURL(f);
         });
@@ -1317,7 +1189,7 @@
           recorder.ondataavailable = function(e) { if (e.data.size > 0) chunks.push(e.data); };
           recorder.onstop = function() {
             var blob = new Blob(chunks, { type: "video/webm" });
-            var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "reelflow-master.webm"; a.click();
+            var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "reelflow-sovereign.webm"; a.click();
             showToast("Video downloaded!");
           };
           recorder.start(); var step = 0;
@@ -1358,10 +1230,7 @@
           var amt = count * 50;
           document.getElementById("customReelCountBadge").textContent = count + (count === 1 ? " Video Pack" : " Videos Pack");
           document.getElementById("customPriceDisplay").textContent = "₹" + amt;
-          document.getElementById("sliderVideosLabel").textContent = count + " Videos (₹" + amt + ")";
-          document.getElementById("gatewayPlanSubtitle").textContent = "Custom Pack: " + count + " Videos";
-          document.getElementById("gatewayAmountBadge").textContent = "₹" + amt;
-          var upiUri = "upi://pay?pa=" + encodeURIComponent("7820847387@kotakbank") + "&pn=ReelFlow%20AI&am=" + amt + "&cu=INR";
+          var upiUri = "upi://pay?pa=" + encodeURIComponent(KOTAK_UPI) + "&pn=ReelFlow%20AI&am=" + amt + "&cu=INR";
           document.getElementById("mobileUpiDeepLink").href = upiUri;
           document.getElementById("dynamicUpiQr").src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(upiUri);
         }
@@ -1378,8 +1247,7 @@
 
         document.getElementById("confirmPaymentBtn").addEventListener("click", function() {
           var name = document.getElementById("payerNameInput").value.trim() || "Customer";
-          var amt = document.getElementById("gatewayAmountBadge").textContent;
-          var msg = encodeURIComponent("Hi Arjun! I paid " + amt + " to your Kotak account (7820847387@kotakbank). Name: " + name);
+          var msg = encodeURIComponent("Hi Arjun! I paid to your Kotak account (" + KOTAK_UPI + "). Name: " + name);
           window.open("https://wa.me/" + FOUNDER_WHATSAPP + "?text=" + msg, "_blank");
           document.getElementById("paymentGatewayModal").classList.add("hidden");
           showToast("Payment notification sent to WhatsApp!");
@@ -1400,39 +1268,20 @@
         document.getElementById("closeAuthModalBtn").addEventListener("click", function() {
           document.getElementById("authModal").classList.add("hidden");
         });
-        document.getElementById("tabRegisterBtn").addEventListener("click", function() {
-          document.getElementById("authNameInput").classList.remove("hidden");
-        });
-        document.getElementById("tabLoginBtn").addEventListener("click", function() {
-          document.getElementById("authNameInput").classList.add("hidden");
-        });
 
         document.getElementById("authForm").addEventListener("submit", function(e) {
           e.preventDefault();
           var email = document.getElementById("authEmailInput").value.trim();
-          var name = document.getElementById("authNameInput").value.trim() || email.split("@")[0];
-          localStorage.setItem("reelflow_user_v11", JSON.stringify({ name: name, email: email }));
+          localStorage.setItem("reelflow_user_v12", JSON.stringify({ email: email }));
           syncPersistentUserSession();
           document.getElementById("authModal").classList.add("hidden");
-          showToast("Welcome " + name + "!");
+          showToast("Session saved successfully!");
         });
 
         document.getElementById("logoutBtn").addEventListener("click", function() {
-          localStorage.removeItem("reelflow_user_v11");
+          localStorage.removeItem("reelflow_user_v12");
           syncPersistentUserSession();
           showToast("Logged out.");
-        });
-
-        document.getElementById("openApiModalBtn").addEventListener("click", function() {
-          document.getElementById("apiModal").classList.add("hidden");
-          document.getElementById("apiModal").classList.remove("hidden"); // toggles
-        });
-        document.getElementById("closeApiModalBtn").addEventListener("click", function() {
-          document.getElementById("apiModal").classList.add("hidden");
-        });
-        document.getElementById("saveApiKeyBtn").addEventListener("click", function() {
-          document.getElementById("apiModal").classList.add("hidden");
-          showToast("Gemini key saved!");
         });
       });
     })();
